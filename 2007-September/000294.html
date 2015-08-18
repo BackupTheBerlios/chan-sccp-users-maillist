@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Please can we co-ordinate improvements to	chan_sccp/7914 woes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Please%20can%20we%20co-ordinate%20improvements%20to%0A%09chan_sccp/7914%20woes&In-Reply-To=%3C1506718.1190845705456.JavaMail.root%40mail.linkdc.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000293.html">
+   <LINK REL="Next"  HREF="000295.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Please can we co-ordinate improvements to	chan_sccp/7914 woes</H1>
+    <B>Martin Sutherland</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Please%20can%20we%20co-ordinate%20improvements%20to%0A%09chan_sccp/7914%20woes&In-Reply-To=%3C1506718.1190845705456.JavaMail.root%40mail.linkdc.co.uk%3E"
+       TITLE="[Chan-sccp-users] Please can we co-ordinate improvements to	chan_sccp/7914 woes">martin at linkdc.co.uk
+       </A><BR>
+    <I>Thu Sep 27 00:28:25 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000293.html">[Chan-sccp-users] Shared lines implementation
+</A></li>
+        <LI>Next message: <A HREF="000295.html">[Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#294">[ date ]</a>
+              <a href="thread.html#294">[ thread ]</a>
+              <a href="subject.html#294">[ subject ]</a>
+              <a href="author.html#294">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear List Members,
+
+I know that there are several members out there kindly providing web space for the latest chan_sccp, and amendments have been made here and there. I am now very confused about which version contains the most trusted fixes and what those fixes are. It would be fantastic if we could all agree on which is the best version and have a definitive list of changes made since 20060408. The Asterisk 1.2 version that I have found the best is 20070620 which was emailed to me by <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">dmitry at makuha.kiev.ua</A> back in July. I am about to try Asterisk 1.4 but simply don't know if all the changes made in 20070620 are incorporated into the current Asterisk 1.4 version.
+
+I have however had problems which all seem to stem from using 7914 side-cars. I have two 7960 phones with two 7914s each. For some reason the 7960s behave differently with 7914s attached. One real problem concerned having dial timeouts or invalid extensions. Either the phone or chan_sccp does not detect the hangup message after the handset is put down after a redial tone (and the number dialled remains on the display). When the phone is picked up again, the channel/line is still active and nothing works. Re-setting the phone then caused Asterisk to die, presumably because a phone is registering but still has an active channel. Even worse, Asterisk doesn't actually exit, but is stuck in memory and requires a server re-boot to fix. I managed to patch my version in the off-hook event to detect a channel/line in the redial state and issue a on-hook message. The user just finds that nothing happens and needs to on-hook and then off-hook again and saves an Asterisk crash. Note that this problem&#160; does not happen if the 7914 is disconnected!
+
+Is there anyone else out there using 7914s with 7960s? I have 7940s, 7960s and one 7961 with different versions of sccp and my protocol version on the server is still set to 3. Should this be set to 4? What firmware is working best out there on 7960/7940 and 7941/7961?
+
+I have recently purchased a used 1721 router with Call Manager Express loaded so that I can capture packets between the router and handset, but understanding sccp packets is going to be tough for me.
+
+I look forward to any comments.
+
+Regards,
+
+Martin
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070926/af2aaedb/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070926/af2aaedb/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000293.html">[Chan-sccp-users] Shared lines implementation
+</A></li>
+	<LI>Next message: <A HREF="000295.html">[Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#294">[ date ]</a>
+              <a href="thread.html#294">[ thread ]</a>
+              <a href="subject.html#294">[ subject ]</a>
+              <a href="author.html#294">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

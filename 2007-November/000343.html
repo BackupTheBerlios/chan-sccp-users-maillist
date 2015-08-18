@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Success with Asterisk 1.4.13 with	chan_sccp-20071009-DD and two small fixes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Success%20with%20Asterisk%201.4.13%20with%0A%09chan_sccp-20071009-DD%20and%20two%20small%20fixes&In-Reply-To=%3CC589E3AA-7EB0-4778-8CA0-A208603D00CF%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000344.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Success with Asterisk 1.4.13 with	chan_sccp-20071009-DD and two small fixes</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Success%20with%20Asterisk%201.4.13%20with%0A%09chan_sccp-20071009-DD%20and%20two%20small%20fixes&In-Reply-To=%3CC589E3AA-7EB0-4778-8CA0-A208603D00CF%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Success with Asterisk 1.4.13 with	chan_sccp-20071009-DD and two small fixes">davidded at davidded.de
+       </A><BR>
+    <I>Thu Nov  1 10:26:34 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000344.html">[Chan-sccp-users] Success with Asterisk 1.4.13 with	chan_sccp-20071009-DD and two small fixes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#343">[ date ]</a>
+              <a href="thread.html#343">[ thread ]</a>
+              <a href="subject.html#343">[ subject ]</a>
+              <a href="author.html#343">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Frank,
+
+thank you very much - We'll do that asap. It seems to me that you've  
+brought us a big step forward towards a preliminary release on the  
+sourceforge project website, which hopefully will yield us even more  
+fixes and also new problems we don't even know yet ;-)
+
+Well, but seriously, there are still some minor issues with the  
+directories lists, which we haven't identified yet. I found that  
+sometimes calls don't get registered in the lists at all, but this  
+seems rather minor to me. Also, internal ringing cadences don't seem  
+to work any more, which is annoying to me as I need it.
+
+@Marcello: Could you please merge these two fixes if you have the  
+time? Please use my last posted tree as the base version.
+
+Regards,
+-David.
+
+On 31.10.2007, at 16:24, Frank Segtrop wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I can confirm that Asterisk 1.4.13 works very well with
+</I>&gt;<i> chan_sccp-20071009-DD, except for blind transfers and GPickUps.
+</I>&gt;<i>
+</I>&gt;<i> The blind transfer crashes can be fixed with this small patch of
+</I>&gt;<i> sccp_channel.c:
+</I>&gt;<i>
+</I>&gt;<i> --- chan_sccp-20071009-DD/sccp_channel.c        2007-10-02
+</I>&gt;<i> 18:33:20.000000000 +0200
+</I>&gt;<i> +++ chan_sccp-20071009-DD-mod/sccp_channel.c    2007-10-25
+</I>&gt;<i> 10:28:37.365078170 +0100
+</I>&gt;<i> @@ -888,10 +888,18 @@
+</I>&gt;<i>
+</I>&gt;<i>         }
+</I>&gt;<i>
+</I>&gt;<i> -       ast_queue_hangup(peer-&gt;owner);
+</I>&gt;<i> +        ast_mutex_lock(&amp;d-&gt;lock);
+</I>&gt;<i> +        if (peer-&gt;owner)
+</I>&gt;<i> +                ast_queue_hangup(peer-&gt;owner);
+</I>&gt;<i> +        else {
+</I>&gt;<i> +                sccp_log(1)(VERBOSE_PREFIX_3 &quot;Peer owner disappeared!
+</I>&gt;<i> Can't free ressources\n&quot;);
+</I>&gt;<i> +                ast_mutex_unlock(&amp;d-&gt;lock);
+</I>&gt;<i> +                return;
+</I>&gt;<i> +        }
+</I>&gt;<i> +
+</I>&gt;<i>         ast_mutex_unlock(&amp;transferee-&gt;lock);
+</I>&gt;<i>
+</I>&gt;<i> -       ast_mutex_lock(&amp;d-&gt;lock);
+</I>&gt;<i> +       //ast_mutex_lock(&amp;d-&gt;lock);
+</I>&gt;<i>         d-&gt;transfer_channel = NULL;
+</I>&gt;<i>         ast_mutex_unlock(&amp;d-&gt;lock);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> GPickUp crashes as well, this hack fixes that for me:
+</I>&gt;<i>
+</I>&gt;<i> --- chan_sccp-20071009-DD/sccp_pbx.c    2007-10-04  
+</I>&gt;<i> 18:18:14.000000000 +0200
+</I>&gt;<i> +++ chan_sccp-20071009-DD-mod/sccp_pbx.c        2007-10-25
+</I>&gt;<i> 18:05:42.910102970 +0100
+</I>&gt;<i> @@ -728,9 +728,10 @@
+</I>&gt;<i>         uint8_t res_exten = 0, res_wait = 0, res_timeout = 0;
+</I>&gt;<i>
+</I>&gt;<i>         /*sccp_log(1)( VERBOSE_PREFIX_3 &quot;CS_AST_CHANNEL_PVT: %s\n&quot;,
+</I>&gt;<i> chan-&gt;tech_pvt);*/
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i>         c = CS_AST_CHANNEL_PVT(chan);
+</I>&gt;<i> -       if (!c) {
+</I>&gt;<i> +       if (!c || !c-&gt;device || !c-&gt;device-&gt;id) {
+</I>&gt;<i>                 /* let's go out as soon as possibile */
+</I>&gt;<i>                 if (!ast_test_flag(chan, AST_FLAG_ZOMBIE)) {
+</I>&gt;<i>                         ast_log(LOG_ERROR, &quot;SCCP: return from the dial
+</I>&gt;<i> thread. No sccp channel available for %s\n&quot;, (chan) ? chan-&gt;name :
+</I>&gt;<i> &quot;(null)&quot;);
+</I>&gt;<i> @@ -741,6 +742,19 @@
+</I>&gt;<i>                 }
+</I>&gt;<i>                 return NULL;
+</I>&gt;<i>         }
+</I>&gt;<i> +
+</I>&gt;<i> +       if (strncmp(c-&gt;device-&gt;id,&quot;SEP&quot;,3)!=0 &amp;&amp;
+</I>&gt;<i> strncmp(c-&gt;device-&gt;id,&quot;ATA&quot;,3)!=0) {
+</I>&gt;<i> +                if (!ast_test_flag(chan, AST_FLAG_ZOMBIE)) {
+</I>&gt;<i> +                        sccp_log(1)( VERBOSE_PREFIX_3 &quot;SCCP: return
+</I>&gt;<i> from the dial thread. No sccp channel available for %s\n&quot;, (chan) ?
+</I>&gt;<i> chan-&gt;name : &quot;(null)&quot;);
+</I>&gt;<i> +                        if (chan)
+</I>&gt;<i> +                                ast_hangup(chan);
+</I>&gt;<i> +                } else {
+</I>&gt;<i> +                        sccp_log(1)( VERBOSE_PREFIX_3 &quot;SCCP: return
+</I>&gt;<i> from the dial thread. No sccp channel available for zombie\n&quot;);
+</I>&gt;<i> +                }
+</I>&gt;<i> +                return NULL;
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +       }
+</I>&gt;<i>
+</I>&gt;<i>         /* this is an outgoung call */
+</I>&gt;<i>         ast_mutex_lock(&amp;c-&gt;lock);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> With these two fixes, there are no more deadlocks or segfaults at all.
+</I>&gt;<i> David and Marcello, if you like, you can add any of these fixes into
+</I>&gt;<i> your code.
+</I>&gt;<i>
+</I>&gt;<i> Thanks!
+</I>&gt;<i>
+</I>&gt;<i> --Frank
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000344.html">[Chan-sccp-users] Success with Asterisk 1.4.13 with	chan_sccp-20071009-DD and two small fixes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#343">[ date ]</a>
+              <a href="thread.html#343">[ thread ]</a>
+              <a href="subject.html#343">[ subject ]</a>
+              <a href="author.html#343">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

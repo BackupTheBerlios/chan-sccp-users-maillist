@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Improving the BLF function on 7914/7961
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Improving%20the%20BLF%20function%20on%207914/7961&In-Reply-To=%3C179C4E92-B4AC-4BB3-85ED-72D6D38429FF%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000189.html">
+   <LINK REL="Next"  HREF="000208.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Improving the BLF function on 7914/7961</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Improving%20the%20BLF%20function%20on%207914/7961&In-Reply-To=%3C179C4E92-B4AC-4BB3-85ED-72D6D38429FF%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Improving the BLF function on 7914/7961">davidded at davidded.de
+       </A><BR>
+    <I>Wed Jul 25 01:10:07 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000189.html">[Chan-sccp-users] Improving the BLF function on 7914/7961
+</A></li>
+        <LI>Next message: <A HREF="000208.html">[Chan-sccp-users] Improving the BLF function on 7914/7961
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#221">[ date ]</a>
+              <a href="thread.html#221">[ thread ]</a>
+              <a href="subject.html#221">[ subject ]</a>
+              <a href="author.html#221">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Marcello,
+
+I'm very keen to have a look at this patch. Actually I'm also very  
+interested about improving the BLF function, and I believe the key is  
+in using shared lines. But that's another story.
+
+Actually, Anthony and I already restarted the project. But in spite  
+of the promises we made, neither of us seemed to have enough time to  
+work on it again. This is mainly for three reasons:
+
+1. We didn't make it to create a new release, containing all known  
+good patches yet. That has to be done to start on a solid basis. We  
+wanted to have this ready to ease the transition to a 1.4 fork. In  
+spite of this course, we mainly examined some patches which already  
+made it to 1.4. Without many results at the beginning, there is  
+little motivation to proceed.  We should push this work to make it  
+more tempting to improve.
+
+2. Not enough people on this list are aware of the new project on  
+sourceforge. There's another list that we should make more use of:
+
+<A HREF="http://sourceforge.net/projects/chan-sccp-b/">http://sourceforge.net/projects/chan-sccp-b/</A>
+
+3. Anthony and I hadn't probably haven't had enough time (Sounds like  
+the usual excuse).
+
+Chan_sccp is a great and very usable piece of work by Sergio, which  
+is far too usable and promising to let it wither of old age. Only the  
+compatibility to new firmware versions and devices (like the 7936  
+conference station, for instance), can retain its usability, however.
+
+What do you think?
+
+
+Kind regards,
+-David
+
+
+On 19.07.2007, at 14:44, Marcello Ceschia wrote:
+
+&gt;<i> I started implementing a version which can tranfer calls without  
+</I>&gt;<i> answering the call.
+</I>&gt;<i>
+</I>&gt;<i> Unfortunately the version have some bugs and within the last 2  
+</I>&gt;<i> month I had no time to continuing the project.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Would be great if we can restart the chan_sccp-project.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  Marcello
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Von: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:chan-sccp- 
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">users-bounces at lists.berlios.de</A>] Im Auftrag von Martin Sutherland
+</I>&gt;<i> Gesendet: Donnerstag, 19. Juli 2007 13:45
+</I>&gt;<i> An: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Betreff: [Chan-sccp-users] Improving the BLF function on 7914/7961
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Dear list members,
+</I>&gt;<i>
+</I>&gt;<i> I would like to improve the BLF function in chan_sccp. At the  
+</I>&gt;<i> moment, the use of the lights is very basic.
+</I>&gt;<i>
+</I>&gt;<i> For example:
+</I>&gt;<i>
+</I>&gt;<i> If a key is defined as a directory number, then
+</I>&gt;<i>
+</I>&gt;<i> No light - phone not plugged in or has DND or agent not logged in
+</I>&gt;<i> Green light - available to take a call, not on DND, agent logged in
+</I>&gt;<i> Flashing green - ringing
+</I>&gt;<i> Amber - in use but not private
+</I>&gt;<i> Amber flashing - in use but call placed on hold
+</I>&gt;<i> Red - in use but private
+</I>&gt;<i> Red flashing - in use but call placed on hold
+</I>&gt;<i>
+</I>&gt;<i> If a key is defined as a line then - not sure
+</I>&gt;<i>
+</I>&gt;<i> What would also be nice is to allow the operator to send an  
+</I>&gt;<i> incoming call direct to the recipients voicemail eg. I'm sorry xxxx  
+</I>&gt;<i> is on the phone/holiday/ill, would you like to leave a message on  
+</I>&gt;<i> his/hers voicemail? This no doubt requires some Asterisk handling too.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i>
+</I>&gt;<i> Martin
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000189.html">[Chan-sccp-users] Improving the BLF function on 7914/7961
+</A></li>
+	<LI>Next message: <A HREF="000208.html">[Chan-sccp-users] Improving the BLF function on 7914/7961
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#221">[ date ]</a>
+              <a href="thread.html#221">[ thread ]</a>
+              <a href="subject.html#221">[ subject ]</a>
+              <a href="author.html#221">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

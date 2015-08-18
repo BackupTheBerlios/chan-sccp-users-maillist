@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Mute causes hang-up
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Mute%20causes%20hang-up&In-Reply-To=%3C9F0B86FBE62A2A4C865F31B36F7F67480700C163%40SFMAIL1.Gibsondunn.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000155.html">
+   <LINK REL="Next"  HREF="000157.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Mute causes hang-up</H1>
+    <B>Smith, Douglas D.</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Mute%20causes%20hang-up&In-Reply-To=%3C9F0B86FBE62A2A4C865F31B36F7F67480700C163%40SFMAIL1.Gibsondunn.net%3E"
+       TITLE="[Chan-sccp-users] Mute causes hang-up">DSmith at gibsondunn.com
+       </A><BR>
+    <I>Sat May 12 18:43:07 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000155.html">[Chan-sccp-users] GUI for Asterisk - follow up
+</A></li>
+        <LI>Next message: <A HREF="000157.html">[Chan-sccp-users] asterisk crash, dead device
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Whenever I use the mute button on my 7970 phone (8.2-2SR1S, but it
+happened with earlier firmware as well) about 20 seconds later the line
+hangs up.
+
+running trixbox 2.2 (asterisk 1.2.18) and the most recent build of
+chan_sccp.
+
+Rlevant section from the asterisk log follows.  The first entry is the
+last digit input before pushing the mute button
+
+May 11 08:29:31 VERBOSE[16839] logger.c:     -- SEP00112032C70A: Cisco
+Digit: 00000001 (1) on line 2
+May 11 08:29:40 DEBUG[16843] chan_iax2.c: Peer lastms 90, historicms 90,
+maxms 2000 May 11 08:30:21 DEBUG[16843] chan_iax2.c: Peer lastms 89,
+historicms 89, maxms 2000 May 11 08:30:22 DEBUG[16841] chan_sip.c:
+Stopping retransmission on
+'<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">4ec15ea326f6d64c2c0bd7c266255e92 at 192.168.1.50</A>' of Request 102: Match
+Found May 11 08:30:23 DEBUG[17369] manager.c: Manager received command
+'Command'
+May 11 08:30:23 DEBUG[17369] manager.c: Manager received command
+'Command'
+May 11 08:30:23 DEBUG[17369] manager.c: Manager received command
+'Command'
+May 11 08:30:34 DEBUG[16843] chan_iax2.c: Immediately destroying 4,
+having received hangup May 11 08:30:34 DEBUG[18906] channel.c: Didn't
+get a frame from channel:
+IAX2/VP-IAX2-B-4
+May 11 08:30:34 DEBUG[18906] channel.c: Bridge stops bridging channels
+SCCP/2-0000000a and IAX2/VP-IAX2-B-4 May 11 08:30:34 DEBUG[18906]
+chan_iax2.c: We're hanging up
+IAX2/VP-IAX2-B-4 now...
+May 11 08:30:34 DEBUG[18906] chan_iax2.c: Really destroying
+IAX2/VP-IAX2-B-4 now...
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Hungup
+'IAX2/VP-IAX2-B-4'
+May 11 08:30:34 DEBUG[18906] app_dial.c: Exiting with DIALSTATUS=ANSWER.
+May 11 08:30:34 VERBOSE[18906] logger.c:   == Spawn extension
+(macro-dialout-trunk, s, 20) exited non-zero on 'SCCP/2-0000000a' in
+macro 'dialout-trunk'
+May 11 08:30:34 VERBOSE[18906] logger.c:   == Spawn extension
+(macro-dialout-trunk, s, 20) exited non-zero on 'SCCP/2-0000000a'
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+Macro(&quot;SCCP/2-0000000a&quot;, &quot;hangupcall&quot;) in new stack
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+ResetCDR(&quot;SCCP/2-0000000a&quot;, &quot;w&quot;) in new stack May 11 08:30:34
+DEBUG[18906] cdr_addon_mysql.c: cdr_mysql: inserting a CDR record.
+May 11 08:30:34 DEBUG[18906] cdr_addon_mysql.c: cdr_mysql: SQL command
+as follows: INSERT INTO cdr
+(calldate,clid,src,dst,dcontext,channel,dstchannel,lastapp,lastdata,dura
+tion,billsec,disposition,amaflags,accountcode,uniqueid) VALUES
+('2007-05-11 08:29:04','\&quot;\&quot;Doug Smith\&quot;
+&lt;4153938390&gt;','4153938390','14153938220','from-internal',
+'SCCP/2-0000000a','IAX2/VP-IAX2-B-4','ResetCDR','w',90,84,'ANSWERED',3,'
+','1178897340.28')
+May 11 08:30:34 DEBUG[18906] app_macro.c: Executed application: ResetCDR
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+NoCDR(&quot;SCCP/2-0000000a&quot;, &quot;&quot;) in new stack May 11 08:30:34 NOTICE[18906]
+cdr.c: CDR on channel 'SCCP/2-0000000a'
+not posted
+May 11 08:30:34 NOTICE[18906] cdr.c: CDR on channel 'SCCP/2-0000000a'
+lacks end
+May 11 08:30:34 DEBUG[18906] app_macro.c: Executed application: NoCDR
+May 11 08:30:34 DEBUG[18906] pbx.c: Expression result is '1'
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+GotoIf(&quot;SCCP/2-0000000a&quot;, &quot;1?skiprg&quot;) in new stack
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Goto
+(macro-hangupcall,s,6)
+May 11 08:30:34 DEBUG[18906] app_macro.c: Executed application: GotoIf
+May 11 08:30:34 DEBUG[18906] pbx.c: Expression result is '1'
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+GotoIf(&quot;SCCP/2-0000000a&quot;, &quot;1?theend&quot;) in new stack
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Goto
+(macro-hangupcall,s,9)
+May 11 08:30:34 DEBUG[18906] app_macro.c: Executed application: GotoIf
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+Wait(&quot;SCCP/2-0000000a&quot;, &quot;5&quot;) in new stack May 11 08:30:39 DEBUG[18906]
+app_macro.c: Executed application: Wait
+May 11 08:30:39 VERBOSE[18906] logger.c:     -- Executing
+Hangup(&quot;SCCP/2-0000000a&quot;, &quot;&quot;) in new stack
+May 11 08:30:39 VERBOSE[18906] logger.c:   == Spawn extension
+(macro-hangupcall, s, 10) exited non-zero on 'SCCP/2-0000000a' in macro
+'hangupcall'
+May 11 08:30:39 VERBOSE[18906] logger.c:   == Spawn extension
+(macro-hangupcall, s, 10) exited non-zero on 'SCCP/2-0000000a'
+May 11 08:30:39 VERBOSE[18906] logger.c:     -- SCCP: Asterisk request
+to hangup channel SCCP/2-0000000a
+May 11 08:30:39 VERBOSE[16839] logger.c:     -- SEP00112032C70A:
+Statistics from 14153938220 callid: 10 Packets sent: 613 rcvd: 4314
+lost: 0 jitter: 0 latency: 0
+May 11 08:30:39 DEBUG[16839] db.c: Unable to find key 'timeout' in
+family 'SCCP/message'
+May 11 08:30:39 DEBUG[16839] db.c: Unable to find key 'text' in family
+'SCCP/message'
+May 11 08:30:40 DEBUG[16843] chan_iax2.c: Peer lastms 89, historicms 89,
+maxms 2000
+
+Any help would be much appreciated.  
+
+&quot;MMS &lt;Gibsondunn.net&gt;&quot; made the following annotations.
+------------------------------------------------------------------------
+------
+
+This message may contain confidential and privileged information.  If it
+has been sent to you in error, please reply to advise the sender of the
+error and then immediately delete this message.
+========================================================================
+======
+
+
+==============================================================================
+
+This message may contain confidential and privileged information.  If it has been sent to you in error, please reply to advise the sender of the error and then immediately delete this message.
+==============================================================================
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000155.html">[Chan-sccp-users] GUI for Asterisk - follow up
+</A></li>
+	<LI>Next message: <A HREF="000157.html">[Chan-sccp-users] asterisk crash, dead device
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

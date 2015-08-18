@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] An Excellent GUI for Asterisk 1.2.x with full	support for chan_sccp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20An%20Excellent%20GUI%20for%20Asterisk%201.2.x%20with%20full%0A%09support%20for%20chan_sccp&In-Reply-To=%3C4478654.1178915816699.JavaMail.root%40mail.linkdc.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000153.html">
+   <LINK REL="Next"  HREF="000155.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] An Excellent GUI for Asterisk 1.2.x with full	support for chan_sccp</H1>
+    <B>Martin Sutherland</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20An%20Excellent%20GUI%20for%20Asterisk%201.2.x%20with%20full%0A%09support%20for%20chan_sccp&In-Reply-To=%3C4478654.1178915816699.JavaMail.root%40mail.linkdc.co.uk%3E"
+       TITLE="[Chan-sccp-users] An Excellent GUI for Asterisk 1.2.x with full	support for chan_sccp">martin at linkdc.co.uk
+       </A><BR>
+    <I>Fri May 11 22:36:56 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000153.html">[Chan-sccp-users] CP 7906
+</A></li>
+        <LI>Next message: <A HREF="000155.html">[Chan-sccp-users] GUI for Asterisk - follow up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#154">[ date ]</a>
+              <a href="thread.html#154">[ thread ]</a>
+              <a href="subject.html#154">[ subject ]</a>
+              <a href="author.html#154">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear chan_sccp experts/users,
+ 
+I know that much of recent contributions to this list concern the move to Asterisk 1.4, but for those that are quite happy to stay on 1.2.x and are looking for an excellent GUI then I have found just the thing. I discovered it when researching a potential 200-300 handset Asterisk system incorporating two call centres. The client definitely wanted to manage the system in house, so I went looking for GUIs. I tried the one from Digium (very basic - couldn't even allow multiple phones to ring without using queues!), trixbox (a bit of a mess) etc and came across a product called ScopServ written by a French Canadian company. At the time, it had very limited support for chan_sccp, but I have worked with them for the past few months and now the support is excellent. It will generate the SEP&lt;MAC&gt;.cnf.xml files in the tftpboot folder, write the sccp.conf complete with support for 7914s and non standard dial commands to do paging and distinctive ring selection etc. 
+ 
+The really big difference with this package is that the GUI covers all aspects of the server and includes easy to use firewall config, DHCP server config, updates to Asterisk, config of Digium/Sangoma hardware etc. They have just re-written the ACD real time display window to use AJAX which allows a fully configurable display that that could be projected onto a wall and of course includes good CDR reporting and export. Installation from bare bones couldn't be easier. Download the ISO of CentOS Server and install, add a few entries to the yum.conf and do a yum install and everything else is automatic and managed through the GUI such as detecting analogue/digital cards, backup of Asterisk/voicemail/CDR, providing a web interface for users to manage their voicemail and follow-me settings...
+ 
+The product also includes SpanDSP to allow for reception/transmission of faxes, automatic provisioning of many popular SIP handsets etc. I never really appreciated how powerful Asterisk was until all the options were easily seen. To be honest, unlike some others that subscribe to this list, hand rolling Asterisk configurations was hard work and customer changes were a nightmare. As you can tell, I am very impressed with this software and it knocks the socks off Digium's efforts (remember they said that creating a GUI would only limit the functions of Asterisk!). I know that you like using Cisco handsets with the native protocol to give traditional PBX functionality, but this choice is a real problem in terms of GUI support.
+ 
+Please have a look at www.scopserv.com. (don't be put off by the impression that they only sell hardware appliances - they do sell the software only for loading on your own hardware). You can request an evaluation key so that you can try it out. Unfortunately this software is not open source or free, but I think this is a sacrifice worth accepting when you see what has been acheived. Prices start at &#8364;795 for 25 users/1 tenant with an annual renewal of &#8364;199. Within the UK, I am very happy to come and demo a server complete with a Digium TE110P single span ISDN30, Digium FXO/FXS card and some Cisco 7960/7914 handsets.
+ 
+Hopefully I won't be struck off this list for promoting a paid for product, but I just had to share my discovery.
+ 
+Martin Sutherland
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070511/afe20eaa/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070511/afe20eaa/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000153.html">[Chan-sccp-users] CP 7906
+</A></li>
+	<LI>Next message: <A HREF="000155.html">[Chan-sccp-users] GUI for Asterisk - follow up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#154">[ date ]</a>
+              <a href="thread.html#154">[ thread ]</a>
+              <a href="subject.html#154">[ subject ]</a>
+              <a href="author.html#154">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

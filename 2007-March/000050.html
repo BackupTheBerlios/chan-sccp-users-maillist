@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] SCCP Phone through NAT
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20SCCP%20Phone%20through%20NAT&In-Reply-To=%3C709401c76028%247507eb00%244400000a%40phil%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000049.html">
+   <LINK REL="Next"  HREF="000051.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] SCCP Phone through NAT</H1>
+    <B>(&#164;Phil&#164;)</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20SCCP%20Phone%20through%20NAT&In-Reply-To=%3C709401c76028%247507eb00%244400000a%40phil%3E"
+       TITLE="[Chan-sccp-users] SCCP Phone through NAT">phil at ingineerix.com
+       </A><BR>
+    <I>Tue Mar  6 20:48:47 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000049.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+        <LI>Next message: <A HREF="000051.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>SCCP works behind NAT, but not all NATs!
+
+A simple Linux router will not forward packets correctly after a few calls. 
+I don't know why.
+
+A modern Linksys router will.
+
+That same router running DD-WRT will as well (Linux!)
+
+The must be something peculiar about the way it allocates ports, because it 
+always seems to work for a little while once asterisk is started, then you 
+lose the inbound voice path after several calls.  (using either the Linux 
+router or any of a handful of cheap WiFi routers)
+
+Interestingly, an older (pre-Cisco buyout) Linksys router will also not work 
+properly.  Hmm.  ;-)
+
+-Phil
+----- Original Message ----- 
+From: &quot;Patrick Mowry&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">pmowry at getgds.com</A>&gt;
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Sent: Tuesday, March 06, 2007 11:26 AM
+Subject: [Chan-sccp-users] SCCP Phone through NAT
+
+
+&gt;<i> Hello,
+</I>&gt;<i>  I noticed in the release notes for chan_sccp that NAT support was
+</I>&gt;<i> added awhile back.  Now I have an actual use for it.  I cannot setup a
+</I>&gt;<i> VPN between two sites since neither side has a static IP.
+</I>&gt;<i>
+</I>&gt;<i> So I wanted to setup Asterisk with ports forwarded from the local
+</I>&gt;<i> firewall to be connected to by a 7940 behind a DSL router, also doing
+</I>&gt;<i> NAT.  I would configured the phone to connect to a hostname (using
+</I>&gt;<i> dyndns.org I assume) and have the SCCP ports forwarded to it as well
+</I>&gt;<i> since I only need one phone at the remote site.
+</I>&gt;<i>
+</I>&gt;<i> Anyone ever try something like this?
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i>
+</I>&gt;<i> -Patrick
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000049.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+	<LI>Next message: <A HREF="000051.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Shared lines
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Shared%20lines&In-Reply-To=%3C000901c7d04a%24e461a3f0%24ad24ebd0%24%40Ceschia%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000237.html">
+   <LINK REL="Next"  HREF="000239.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Shared lines</H1>
+    <B>Marcello Ceschia</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Shared%20lines&In-Reply-To=%3C000901c7d04a%24e461a3f0%24ad24ebd0%24%40Ceschia%40gmx.net%3E"
+       TITLE="[Chan-sccp-users] Shared lines">Marcello.Ceschia at gmx.net
+       </A><BR>
+    <I>Fri Jul 27 14:37:27 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000237.html">[Chan-sccp-users] Shared lines
+</A></li>
+        <LI>Next message: <A HREF="000239.html">[Chan-sccp-users] Confusion between Group pickup and parking
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#238">[ date ]</a>
+              <a href="thread.html#238">[ thread ]</a>
+              <a href="subject.html#238">[ subject ]</a>
+              <a href="author.html#238">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think it could be a hold-feature but no parking-feature.
+Why should everyone hint a parking position? 
+Also with the shared-line-feature it is not posible, because the device/line
+lose the ownership of the parked channel.
+
+
+ Marcello
+
+
+-----Urspr&#252;ngliche Nachricht-----
+Von: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] Im Auftrag von Steve J.
+Walker
+Gesendet: Freitag, 27. Juli 2007 12:57
+An: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Betreff: Re: [Chan-sccp-users] Shared lines
+
+Hi,
+
+It is a shame when you park a call that the hint() cannot be monitored
+for the park number so going to a phone that monitors the hint() for the
+line can see the parked call number.
+
+Might be something of use to extend park(), I assume that the hint() if
+sccp's internal can be updated to suit?
+
+But yes your right people can be stupid when it comes to something as
+simple as remembering the number they just heard! You would not believe
+the mess we had here going from 9 for a line to direct dialling once we
+moved to * and SCCP! So many call logs with 9 this and 9 that in them!
+
+Regards,
+
+Steve 
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>[mailto:chan-sccp-users-
+&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">bounces at lists.berlios.de</A>] On Behalf Of Paul
+</I>&gt;<i> Sent: 27 July 2007 11:55
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] Shared lines
+</I>&gt;<i> 
+</I>&gt;<i> The idea was to have it work like a key system instead of remembering
+</I>&gt;<i> park
+</I>&gt;<i> extensions. You'd be surprised at how unbelievably stupid some old
+</I>&gt;<i> women
+</I>&gt;<i> are.
+</I>&gt;<i> 
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of Sergio
+</I>&gt;<i> Chersovani
+</I>&gt;<i> Sent: Friday, July 27, 2007 4:05 AM
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] Shared lines
+</I>&gt;<i> 
+</I>&gt;<i> Paul R ha scritto:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; One thing they would like to be able to do is place a call on hold
+</I>&gt;<i> and
+</I>&gt;<i> &gt; pick it up at any phone
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> This is the park feature
+</I>&gt;<i> 
+</I>&gt;<i> Sergio
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000237.html">[Chan-sccp-users] Shared lines
+</A></li>
+	<LI>Next message: <A HREF="000239.html">[Chan-sccp-users] Confusion between Group pickup and parking
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#238">[ date ]</a>
+              <a href="thread.html#238">[ thread ]</a>
+              <a href="subject.html#238">[ subject ]</a>
+              <a href="author.html#238">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

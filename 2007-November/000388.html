@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Various
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Various&In-Reply-To=%3C7536E718-D35C-44A1-84DD-FBE99DA5FBB9%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000387.html">
+   <LINK REL="Next"  HREF="000368.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Various</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Various&In-Reply-To=%3C7536E718-D35C-44A1-84DD-FBE99DA5FBB9%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Various">davidded at davidded.de
+       </A><BR>
+    <I>Fri Nov 16 22:17:05 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000387.html">[Chan-sccp-users] Various
+</A></li>
+        <LI>Next message: <A HREF="000368.html">[Chan-sccp-users] 7970 Hints
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#388">[ date ]</a>
+              <a href="thread.html#388">[ thread ]</a>
+              <a href="subject.html#388">[ subject ]</a>
+              <a href="author.html#388">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Kelly,
+
+On 16.11.2007, at 22:53, Kelly Opal wrote:
+
+&gt;<i> Hi
+</I>&gt;<i>     Well I installed the new sccp driver.First thing I found  
+</I>&gt;<i> (minor) was
+</I>&gt;<i> that in chan_sccp.c line 224 there needs to be an else if statement  
+</I>&gt;<i> instead
+</I>&gt;<i> of an if statement. The if began on line 222. That fixed the inside  
+</I>&gt;<i> ringer
+</I>&gt;<i> problem.
+</I>
+Thank you very much! I was desperately looking for a fix to that.
+
+&gt;<i> Then all was good until I tried to transfer to anther phone (blind
+</I>&gt;<i> transfer).
+</I>Well, there really seems to be a problem with transfer. I think the  
+merge must have messed something up, we shall urgently work at this.
+
+&gt;<i> It killed asterisk, sent all of my sip phones (gxp2000 horrible
+</I>&gt;<i> phones) into some kind of loop. I had to reboot everything but the  
+</I>&gt;<i> 7960
+</I>&gt;<i> never came back up.
+</I>Hmm, this doesn't sound good. Have you pulled the power yet? I hope  
+your phone starts working again...
+
+&gt;<i> My build was
+</I>&gt;<i>     make clean
+</I>&gt;<i>     make
+</I>&gt;<i>     make install
+</I>&gt;<i>
+</I>&gt;<i>     I noticed there is a patch directory. I know this is a stupid  
+</I>&gt;<i> question,
+</I>&gt;<i> but just to be safe. Do I need to apply those patch's or are they  
+</I>&gt;<i> just there
+</I>&gt;<i> to show what has already been applied.
+</I>
+Not a stupid question at all. This directory contains patches Sergio  
+originally supplied with his releases. I gues Marcello just kept it  
+when he created the archive for the release.
+
+&gt;<i> As I get more info on the crash I will post it.
+</I>
+Already many thanks in advance,
+-David.
+
+&gt;<i>
+</I>&gt;<i> Thanks
+</I>&gt;<i>
+</I>&gt;<i> Kelly
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Martin Sutherland&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">martin at linkdc.co.uk</A>&gt;
+</I>&gt;<i> To: &quot;chan-sccp-users&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;<i> Sent: Thursday, November 08, 2007 5:29 AM
+</I>&gt;<i> Subject: [Chan-sccp-users] Various
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> David,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Many thanks for your reply to my email.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> If you give me your address, then I'll send off the router.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Latest version of chan_sccp - Are you saying that berlios has the  
+</I>&gt;&gt;<i> latest
+</I>&gt;&gt;<i> version for
+</I>&gt;&gt;<i> Asterisk 1.2 and your tree is the latest version for 1.4? I'm getting
+</I>&gt;&gt;<i> confused about
+</I>&gt;&gt;<i> this. I appreciate that you want to have one tree for 1.2/1.4  
+</I>&gt;&gt;<i> which is a
+</I>&gt;&gt;<i> good thing,
+</I>&gt;&gt;<i> but I'll take your source as a 1.4 only solution at the moment. Which
+</I>&gt;&gt;<i> fixes do you
+</I>&gt;&gt;<i> think are missing from your tree?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> My contribution recently submitted was a fix for the 7960+7914  
+</I>&gt;&gt;<i> lost hangup
+</I>&gt;&gt;<i> event
+</I>&gt;&gt;<i> after a re-dial/invalid extension, but it sounds like no one else  
+</I>&gt;&gt;<i> has had
+</I>&gt;&gt;<i> this problem?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Can anyone recommend firmware versions for 7941/7961 (fairly hard  
+</I>&gt;&gt;<i> to work
+</I>&gt;&gt;<i> out what the
+</I>&gt;&gt;<i> version number is from the filenames!). As you say, there seems to be
+</I>&gt;&gt;<i> little point in using
+</I>&gt;&gt;<i> the latest firmware unless you are actually working with Call  
+</I>&gt;&gt;<i> Manager.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Timezones - My server's clock is on UTC/GMT and correctly changes the
+</I>&gt;&gt;<i> local time for DST.
+</I>&gt;&gt;<i> As you say, I thought 7940/7960s just take the local time via sccp  
+</I>&gt;&gt;<i> and
+</I>&gt;&gt;<i> also take the date
+</I>&gt;&gt;<i> format from sccp messages. The 7941/7961/7970/7971 etc seem to pay  
+</I>&gt;&gt;<i> more
+</I>&gt;&gt;<i> attention to the
+</I>&gt;&gt;<i> config files. I'll try specifying the correct time zone in the config
+</I>&gt;&gt;<i> files as you suggest.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Regards,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Martin
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Chan-sccp-users mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000387.html">[Chan-sccp-users] Various
+</A></li>
+	<LI>Next message: <A HREF="000368.html">[Chan-sccp-users] 7970 Hints
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#388">[ date ]</a>
+              <a href="thread.html#388">[ thread ]</a>
+              <a href="subject.html#388">[ subject ]</a>
+              <a href="author.html#388">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

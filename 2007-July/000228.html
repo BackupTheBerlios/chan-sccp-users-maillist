@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] To Sergio's Attention: About New Protocol
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20To%20Sergio%27s%20Attention%3A%20About%20New%20Protocol&In-Reply-To=%3C46A89ECD.6030506%40c-net.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000227.html">
+   <LINK REL="Next"  HREF="000229.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] To Sergio's Attention: About New Protocol</H1>
+    <B>Sergio Chersovani</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20To%20Sergio%27s%20Attention%3A%20About%20New%20Protocol&In-Reply-To=%3C46A89ECD.6030506%40c-net.it%3E"
+       TITLE="[Chan-sccp-users] To Sergio's Attention: About New Protocol">mlists at c-net.it
+       </A><BR>
+    <I>Thu Jul 26 15:17:01 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000227.html">[Chan-sccp-users] To Sergio's Attention: About New Protocol
+</A></li>
+        <LI>Next message: <A HREF="000229.html">[Chan-sccp-users] To Sergio's Attention: About New Protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#228">[ date ]</a>
+              <a href="thread.html#228">[ thread ]</a>
+              <a href="subject.html#228">[ subject ]</a>
+              <a href="author.html#228">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Federico Santulli ha scritto:
+&gt;<i> <A HREF="http://bugs.digium.com/view.php?id=10291">http://bugs.digium.com/view.php?id=10291</A>
+</I>&gt;<i> <A HREF="http://bugs.digium.com/view.php?id=9887">http://bugs.digium.com/view.php?id=9887</A>
+</I>&gt;<i>   
+</I>
+la maggior parte delle patch qui incluse sono state prese dal chan_sccp 
+dopo che avevo risistemato la struttura dei pacchetti facendo 
+analizzando i cap di CCM
+
+mi pare che non abbiano aggiunto nulla di nuovo na questa sera controllo 
+meglio
+
+I punti deboli di chan_sccp sono l'hangup e lo start_channel
+
+lo start_channel l'ho strutturato cos&#236; perch&#232; il chan_skinny genera un 
+nuovo processo per ogni telefono registrato... poco scalabile in una 
+contesto di gran numero di telefoni
+
+il chan_sccp invece genera nuovi processi solo per le nuove chiamate
+
+
+L'hangup &#232; un problema di asterisk. Quel codice non &#232; mai stato 
+abbastanza stabile e preciso. parlo della ast_hangup
+
+Ci vuole qualche idea su queste funzioni
+
+Sergio
+
+P.S.: ti avviso che tutte le patch che generi per chan_sccp te le 
+ritroverai anche nel chan_skinny, hanno la brutta abitudine di scopiazzare
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000227.html">[Chan-sccp-users] To Sergio's Attention: About New Protocol
+</A></li>
+	<LI>Next message: <A HREF="000229.html">[Chan-sccp-users] To Sergio's Attention: About New Protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#228">[ date ]</a>
+              <a href="thread.html#228">[ thread ]</a>
+              <a href="subject.html#228">[ subject ]</a>
+              <a href="author.html#228">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

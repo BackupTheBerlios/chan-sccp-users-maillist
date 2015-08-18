@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] I've finally had to give up with chan_sccp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20I%27ve%20finally%20had%20to%20give%20up%20with%20chan_sccp&In-Reply-To=%3C468CABA8.90605%40planet-ic.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000216.html">
+   <LINK REL="Next"  HREF="000165.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] I've finally had to give up with chan_sccp</H1>
+    <B>Sebastian Lehn</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20I%27ve%20finally%20had%20to%20give%20up%20with%20chan_sccp&In-Reply-To=%3C468CABA8.90605%40planet-ic.de%3E"
+       TITLE="[Chan-sccp-users] I've finally had to give up with chan_sccp">lehn at planet-ic.de
+       </A><BR>
+    <I>Thu Jul  5 10:28:24 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000216.html">[Chan-sccp-users] I've finally had to give up with chan_sccp
+</A></li>
+        <LI>Next message: <A HREF="000165.html">[Chan-sccp-users] 7914 Hints and Night Day Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#166">[ date ]</a>
+              <a href="thread.html#166">[ thread ]</a>
+              <a href="subject.html#166">[ subject ]</a>
+              <a href="author.html#166">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Martin,
+
+we are using almost two years Asterisk 1.2.x and chan_sccp-20060408 + 2 patches
+with 21 Cisco 7960 + one 7961 phones.
+
+I have build our chan_sccp version with the following create_config.sh options:
+
+- without PARK functions
+- with    PICKUP
+
+Transfer, gpickup, meetme and queues works to 99,8 percent fine. Rarely the asterisk
+crashes. With an workaround-script to restart the asterisk is up again after 20 seconds
+with all phones.
+
+Which arch is your asterisk server? We supports different asterisks and have problems
+on x86_64 Systems. On i686 it works fine.
+
+
+Regards,
+
+Sebastian
+
+
+Martin Sutherland schrieb:
+&gt;<i> Dear list members,
+</I>&gt;<i>  
+</I>&gt;<i> After a year of struggling for a year in an office with 24 Cisco
+</I>&gt;<i> 7940s/chan_sccp-20060408 + 2 patches/Asterisk 1.2.x, I've finally had to
+</I>&gt;<i> convert the phones to SIP. I really didn't want to do this but even with
+</I>&gt;<i> the latest Asterisk 1.2.x I was getting messages about deadlocks being
+</I>&gt;<i> avoided and the whole system ceasing to work until re-boot. The problems
+</I>&gt;<i> are always connected with transferring calls.
+</I>&gt;<i>  
+</I>&gt;<i> I was using P00307020400 firmware on the handsets, Asterisk 1.2.18,
+</I>&gt;<i> chan_sccp-20060408 + 2 patches. Perhaps I should have changed the
+</I>&gt;<i> protocolversion in sccp.conf, but there is a limit to how much messing
+</I>&gt;<i> around you can do in a live office environment.
+</I>&gt;<i>  
+</I>&gt;<i> Changing to SIP has had some real downsides. Instead of using Cisco
+</I>&gt;<i> 9714s, I now have to buy Polycom IP601 phones + sidecars, blind
+</I>&gt;<i> transfers seem to result in dead silence, sometimes phones don't seem to
+</I>&gt;<i> know when the other end has hung up etc.
+</I>&gt;<i>  
+</I>&gt;<i> Is there anyone out there still using Asterisk 1.2.x with chan_sccp in a
+</I>&gt;<i> typical environment where incoming calls are answered by one or two
+</I>&gt;<i> people and then transferred as needed?
+</I>&gt;<i>  
+</I>&gt;<i> Unless I am mistaken, all development of chan_sccp has been aimed at
+</I>&gt;<i> compatability with Asterisk 1.4.x and the forum is now in german which I
+</I>&gt;<i> find hard to understand.
+</I>&gt;<i>  
+</I>&gt;<i> Thank you for all your comments.
+</I>&gt;<i>  
+</I>&gt;<i> Martin
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+-- 
+//
+// IT- &amp; Software-Systemhaus, Internet Service und Web Agentur
+//
+// Sebastian Lehn, Netzwerkadministrator, LPIC-2, MCSA MESSAGING
+// PLANET IC GmbH, Haus 4, Hagenower Strasse 73, 19061 Schwerin
+// Registergericht Schwerin HRB 6762, Gesch&#228;ftsf&#252;hrer Andreas Scher
+// Telefon 0385 30200 200, Telefax 0385 30200 190, Internet www.planet-ic.de
+//
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000216.html">[Chan-sccp-users] I've finally had to give up with chan_sccp
+</A></li>
+	<LI>Next message: <A HREF="000165.html">[Chan-sccp-users] 7914 Hints and Night Day Mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#166">[ date ]</a>
+              <a href="thread.html#166">[ thread ]</a>
+              <a href="subject.html#166">[ subject ]</a>
+              <a href="author.html#166">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

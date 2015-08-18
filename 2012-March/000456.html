@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> No subject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.10.1331727724.29954.chan-sccp-users%40lists.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000454.html">
+   <LINK REL="Next"  HREF="000046.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>No subject</H1>
+    <B></B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.10.1331727724.29954.chan-sccp-users%40lists.berlios.de%3E"
+       TITLE="No subject">
+       </A><BR>
+    <I>Wed Mar 14 13:21:59 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000454.html">No subject
+</A></li>
+        <LI>Next message: <A HREF="000046.html">No subject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#456">[ date ]</a>
+              <a href="thread.html#456">[ thread ]</a>
+              <a href="subject.html#456">[ subject ]</a>
+              <a href="author.html#456">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>lines setup when it registers, the sccp debug 10 should show how many
+lines sccp &quot;thinks&quot; you should have vs what you are using.
+
+Do you see anything using &quot;sccp debug 10&quot; as the console when it
+registers?
+
+-- conf --
+
+type        = 7921
+description = 7921WiFi
+autologin   = 801
+speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">805,805,805 at from-internal</A>
+speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">806,806,806 at from-internal</A>
+private     = off
+device =&gt; SEPetcetcetc
+
+line =&gt; 801
+id            = 801
+pin           = 1234
+label         = 801
+description   = Tech WiFi
+context       = from-internal
+callwaiting   = 1
+incominglimit = 2
+mailbox       = 801
+vmnum         = *97
+cid_name      = Tech WiFi
+cid_num       = 801
+line =&gt; 801
+
+Regards,
+
+Steve
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf
+</I>&gt;<i> Of OCG Technical Support
+</I>&gt;<i> Sent: 12 September 2008 20:22
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: [Chan-sccp-users] 7921 max lines &amp; speed dials
+</I>&gt;<i>
+</I>&gt;<i> I'm setting up a Cisco 7921 and now want to add a second line
+</I>&gt;<i> to the phone.
+</I>&gt;<i> In my SCCP.conf file I have:
+</I>&gt;<i> autologin   = 235,299
+</I>&gt;<i>
+</I>&gt;<i> However, on reloading SCCP the phone fails to login to the
+</I>&gt;<i> second line with this error:
+</I>&gt;<i> [Sep 12 12:46:49] WARNING[12224]: sccp_actions.c:185
+</I>&gt;<i> sccp_handle_register:
+</I>&gt;<i> SEP001BD457F8B1: Failed to autolog into 299: Max available
+</I>&gt;<i> lines phone limit reached 299
+</I>&gt;<i>
+</I>&gt;<i> How do I set the max number of lines?  As well, I want to add
+</I>&gt;<i> speed dials to the phone, but they don't appear on the phone.
+</I>&gt;<i>  I have added lines like
+</I>&gt;<i> this:
+</I>&gt;<i> speeddial   = 123,test
+</I>&gt;<i> speeddial   = 260,Bob
+</I>&gt;<i>
+</I>&gt;<i> in the [device] section for my 7921, but the speed dials do
+</I>&gt;<i> NOT appear on the menu (click right from the main screen).
+</I>&gt;<i> Am I missing something obvious here?
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i> MD
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000454.html">No subject
+</A></li>
+	<LI>Next message: <A HREF="000046.html">No subject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#456">[ date ]</a>
+              <a href="thread.html#456">[ thread ]</a>
+              <a href="subject.html#456">[ subject ]</a>
+              <a href="author.html#456">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

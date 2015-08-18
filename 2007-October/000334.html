@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Crash with after lot of registrations
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Crash%20with%20after%20lot%20of%20registrations&In-Reply-To=%3CDF73378C-01FB-486F-8AF5-1744D98294D7%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000333.html">
+   <LINK REL="Next"  HREF="000335.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Crash with after lot of registrations</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Crash%20with%20after%20lot%20of%20registrations&In-Reply-To=%3CDF73378C-01FB-486F-8AF5-1744D98294D7%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Crash with after lot of registrations">davidded at davidded.de
+       </A><BR>
+    <I>Wed Oct 17 21:46:37 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000333.html">[Chan-sccp-users] Crash with after lot of registrations
+</A></li>
+        <LI>Next message: <A HREF="000335.html">[Chan-sccp-users] Crash with after lot of registrations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#334">[ date ]</a>
+              <a href="thread.html#334">[ thread ]</a>
+              <a href="subject.html#334">[ subject ]</a>
+              <a href="author.html#334">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Steven,
+
+we'd like to help you with your problem, however, the attached log  
+doesn't provide enough information.
+
+Maybe you should send us your full log if you have that activated in  
+the config; if you don't know how to create a full log, please let us  
+know. Btw, from the supplied log it doesn't really look like a crash.
+
+What would be really helpful is a gdb trace of the crashing asterisk.  
+Please stop asterisk to that end, and run it manually  as following:
+
+ &gt; gdb asterisk
+(gdb) set args -vvvvvf
+(gdb) run
+
+Please provide a backtrace (just type bt at the gdb prompt).
+
+Regards,
+-David.
+
+On 17.10.2007, at 21:14, Steven Lam, KeenServer wrote:
+
+&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> I upscaled a chan_sccp configuration to about 60 devices,  
+</I>&gt;<i> everything works as it should.
+</I>&gt;<i> There is one small problem, when a lot of devices register within  
+</I>&gt;<i> something like one or two seconds asterisk crashes :-(
+</I>&gt;<i> If they register spread over say 5 seconds, there is no problem.
+</I>&gt;<i>
+</I>&gt;<i> You can generate this behavior by killing a perfectly working  
+</I>&gt;<i> asterisk and restart immediately.
+</I>&gt;<i>
+</I>&gt;<i> Atached is the sccp.conf and the output of the console... (crash.log)
+</I>&gt;<i> I have been traying to find the problem but i'm stuck.
+</I>&gt;<i>
+</I>&gt;<i> Could it be the machine is low on memory?? a cat /proc/meminfo  
+</I>&gt;<i> tells me:
+</I>&gt;<i> MemTotal:       255844 kB
+</I>&gt;<i> MemFree:          4088 kB
+</I>&gt;<i> Buffers:        223208 kB
+</I>&gt;<i> Cached:           8812 kB
+</I>&gt;<i> SwapCached:          0 kB
+</I>&gt;<i> Active:          11976 kB
+</I>&gt;<i> Inactive:       225188 kB
+</I>&gt;<i> HighTotal:           0 kB
+</I>&gt;<i> HighFree:            0 kB
+</I>&gt;<i> LowTotal:       255844 kB
+</I>&gt;<i> LowFree:          4088 kB
+</I>&gt;<i> SwapTotal:           0 kB
+</I>&gt;<i> SwapFree:            0 kB
+</I>&gt;<i> Dirty:               0 kB
+</I>&gt;<i> Writeback:           0 kB
+</I>&gt;<i> Mapped:           8824 kB
+</I>&gt;<i> Slab:             8312 kB
+</I>&gt;<i> CommitLimit:    127920 kB
+</I>&gt;<i> Committed_AS:     9232 kB
+</I>&gt;<i> PageTables:        276 kB
+</I>&gt;<i> VmallocTotal:   778216 kB
+</I>&gt;<i> VmallocUsed:      5692 kB
+</I>&gt;<i> VmallocChunk:   772160 kB
+</I>&gt;<i>
+</I>&gt;<i> All help is welkom.
+</I>&gt;<i>
+</I>&gt;<i> Steven.&lt;crash.log&gt;&lt;sccp.conf&gt;_________________________________________ 
+</I>&gt;<i> ______
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000333.html">[Chan-sccp-users] Crash with after lot of registrations
+</A></li>
+	<LI>Next message: <A HREF="000335.html">[Chan-sccp-users] Crash with after lot of registrations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#334">[ date ]</a>
+              <a href="thread.html#334">[ thread ]</a>
+              <a href="subject.html#334">[ subject ]</a>
+              <a href="author.html#334">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] asterisk crash, dead device
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20asterisk%20crash%2C%20dead%20device&In-Reply-To=%3CA2EDF27F-E52B-41B1-BB59-E60C5F39E7F9%40reda-systems.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000156.html">
+   <LINK REL="Next"  HREF="000158.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] asterisk crash, dead device</H1>
+    <B>Daniel Schlager</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20asterisk%20crash%2C%20dead%20device&In-Reply-To=%3CA2EDF27F-E52B-41B1-BB59-E60C5F39E7F9%40reda-systems.at%3E"
+       TITLE="[Chan-sccp-users] asterisk crash, dead device">ml at reda-systems.at
+       </A><BR>
+    <I>Wed May 16 12:14:58 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000156.html">[Chan-sccp-users] Mute causes hang-up
+</A></li>
+        <LI>Next message: <A HREF="000158.html">[Chan-sccp-users] asterisk crash, dead device
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#157">[ date ]</a>
+              <a href="thread.html#157">[ thread ]</a>
+              <a href="subject.html#157">[ subject ]</a>
+              <a href="author.html#157">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+asterisk crash after dead device message from sccp_socket.c
+
+Asterisk 1.2.13 + chan_sccp version 20060408
+
+ &gt; 30 Cisco 7970G in the office
++ 3 Cisco 7970G behind a Cisco PIX (VPN tunneling)
+
+sometimes but not always if the vpn tunnel disconnects i can see that  
+entry in
+/var/log/asterisk/messages
+
+Apr 16 13:05:42 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+Apr 16 13:09:33 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+Apr 16 13:11:06 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-357
+Apr 16 13:12:28 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+Apr 16 13:16:44 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-369
+Apr 16 13:17:06 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-370
+Apr 16 13:18:17 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+Apr 16 13:19:53 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-372
+Apr 16 13:19:54 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-372
+Apr 16 13:21:06 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+
+after that the asterisk remove all phones (not only the dead one)!!!
+
+asterisk*CLI&gt; sccp show lines
+asterisk*CLI&gt;
+NAME             DEVICE           MWI  Chs  Active Channel
+================ ================ ==== ====  
+=================================================
+
+^^ is empty
+
+the only way to get asterisk running is to reboot the server.
+
+i didn't understand that because we have an office with about 6  
+phones (same hardware, same software &amp; configuration) and no problems  
+since over 6 months but in the big office with over 30 phones, the  
+system is crashing sometimes every day!! i think chan_sccp are  
+getting very instable if there are more phones connected
+
+has anyone the same problem and can help me?
+
+
+thanks
+
+Daniel
+
+
+-
+Mit freundlichen Gr&#252;&#223;en,
+Daniel Schlager
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070516/43995469/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070516/43995469/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000156.html">[Chan-sccp-users] Mute causes hang-up
+</A></li>
+	<LI>Next message: <A HREF="000158.html">[Chan-sccp-users] asterisk crash, dead device
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#157">[ date ]</a>
+              <a href="thread.html#157">[ thread ]</a>
+              <a href="subject.html#157">[ subject ]</a>
+              <a href="author.html#157">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

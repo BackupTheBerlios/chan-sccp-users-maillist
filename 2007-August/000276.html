@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Latest chan-sccp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Latest%20chan-sccp&In-Reply-To=%3CF3F77C7BD63C8C488186EE2E5BC5110655B0E9%40lhu01.llg.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000275.html">
+   <LINK REL="Next"  HREF="000277.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Latest chan-sccp</H1>
+    <B>Marcus Robichon</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Latest%20chan-sccp&In-Reply-To=%3CF3F77C7BD63C8C488186EE2E5BC5110655B0E9%40lhu01.llg.de%3E"
+       TITLE="[Chan-sccp-users] Latest chan-sccp">m.robichon at llg.de
+       </A><BR>
+    <I>Wed Aug 22 10:19:13 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000275.html">[Chan-sccp-users] Latest chan-sccp
+</A></li>
+        <LI>Next message: <A HREF="000277.html">[Chan-sccp-users] Latest chan-sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#276">[ date ]</a>
+              <a href="thread.html#276">[ thread ]</a>
+              <a href="subject.html#276">[ subject ]</a>
+              <a href="author.html#276">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Remco,
+
+we also use Kirk Dect IP 600 with chan_sccp. We do not have this problem.
+All connections from Kirk come from one IP, but this is handled correctly in
+Asterisk. I believe this has something to do with the firmware of Kirk. We
+have other big problems with Kirk which were majorly fixed by upgrading the
+firmware to version 6.00 dvl-sr1 IP1200[07-60600.07], Bootcode[365], HW[10]
+16384/16384. You can download this firmware at Kirk webpage.
+
+We tried skinny protocol and it is enough for Kirk DECT solution, because
+all the major advantages of chan_sccp are not included in the Kirk
+distribution.
+
+Try the new firmware, if you did not already run it.
+
+Kind regards
+
+Marcus Robichon
+ 
+Lab Logistics Group GmbH
+-----Urspr&#252;ngliche Nachricht-----
+Von: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] Im Auftrag von Remco
+Barendse
+Gesendet: Mittwoch, 22. August 2007 08:53
+An: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-b-discussion at lists.sourceforge.net</A>
+Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Betreff: [Chan-sccp-users] Latest chan-sccp
+
+Hi all!!
+
+During the last few months i have seen some talks about patches, fixes and 
+updates to chan-sccp(b). There was even some discussion about 
+consolidating them, is there a version available anywhere that has all the 
+fixes included?
+
+I am still on Asterisk 1.2.24 and don't need any special features, just 
+place and receive calls.
+
+My current problem with chan-sccp is that i am using a Kirk Dect IP 600 
+V2 with SCCP. The Kirk seems to work, i can register handsets to it and 
+they can make outgoing calls. I am using the handsets at home, so i want 
+to ring all handsets when a call comes in. Only 5 handsets ring, the 
+other 6 stay silent, always the same handsets stay silent.
+
+I believe my setup is different from most people on this list, because 
+registration of all handsets (lines / devices) will come from one single 
+ip address only.
+
+Most people will use normal phones, and i guess not more than 1 - 3 
+registrations per phone.
+
+Can anyone confirm this problem?
+
+Would i be better off using built in skinny now of Asterisk 1.2 or 1.4 or 
+should chan-sccp still work for me?. There were some other messages of 
+people on the list using the Kirk, but also with only a few handsets.
+
+I assume that the issue in chan-sccp would be minor, if anyone would be 
+willing to fix it for a reasonable fee i would also be interested in that.
+
+Thanks all!!
+Remco
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070822/c66c95bb/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070822/c66c95bb/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000275.html">[Chan-sccp-users] Latest chan-sccp
+</A></li>
+	<LI>Next message: <A HREF="000277.html">[Chan-sccp-users] Latest chan-sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#276">[ date ]</a>
+              <a href="thread.html#276">[ thread ]</a>
+              <a href="subject.html#276">[ subject ]</a>
+              <a href="author.html#276">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

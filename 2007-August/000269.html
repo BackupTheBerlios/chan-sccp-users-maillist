@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] chan_sccp and Big Endian
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%20Big%20Endian&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E8A%40THEBRAIN1.drs.ca%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000268.html">
+   <LINK REL="Next"  HREF="000270.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] chan_sccp and Big Endian</H1>
+    <B>Zuber, Jonathan</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%20Big%20Endian&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E8A%40THEBRAIN1.drs.ca%3E"
+       TITLE="[Chan-sccp-users] chan_sccp and Big Endian">jzuber at drs.ca
+       </A><BR>
+    <I>Thu Aug  2 20:48:28 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000268.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+        <LI>Next message: <A HREF="000270.html">[Chan-sccp-users]  Nagios Plugin
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#269">[ date ]</a>
+              <a href="thread.html#269">[ thread ]</a>
+              <a href="subject.html#269">[ subject ]</a>
+              <a href="author.html#269">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>And just to mention that this is INSTEAD of what I mentioned about changing
+a value in sccp_protocol.h   that was just something that worked in the
+meantime for the 7970 - however it caused problems with the 7960 which is
+why I looked for another option.
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From:	Zuber, Jonathan [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>]
+</I>&gt;<i> Sent:	Thursday, August 02, 2007 2:33 PM
+</I>&gt;<i> To:	'<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>'
+</I>&gt;<i> Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+</I>&gt;<i> 
+</I>&gt;<i> Ok as I said yesterday I had found a workaround, but now I believe I found
+</I>&gt;<i> a
+</I>&gt;<i> fix - if anyone else could test it on different phones and let me know.  I
+</I>&gt;<i> have it working for the 7960/70/71 on both a BIG endian and a LITTLE
+</I>&gt;<i> endian
+</I>&gt;<i> server:
+</I>&gt;<i> 
+</I>&gt;<i> in sccp_actions.c:
+</I>&gt;<i> 
+</I>&gt;<i> around line 525:
+</I>&gt;<i> 
+</I>&gt;<i> change this:
+</I>&gt;<i> 
+</I>&gt;<i> uint8_t lineNumber = letohs(r-&gt;msg.LineStatReqMessage.lel_lineNumber);
+</I>&gt;<i> 
+</I>&gt;<i> to this:
+</I>&gt;<i> 
+</I>&gt;<i> uint8_t lineNumber = letohl(r-&gt;msg.LineStatReqMessage.lel_lineNumber);
+</I>&gt;<i> 
+</I>&gt;<i> yes that is only a 1 letter change (sooo simple!!!)  but what is happening
+</I>&gt;<i> is that it is only swapping 2 bytes of a 4 byte value with the 's' there,
+</I>&gt;<i> and with the 'l' it is swapping all 4 bytes (swapping for little &gt; big
+</I>&gt;<i> endian conversion), then it is only taking the 1 byte of info (the uint8_t
+</I>&gt;<i> lineNumber is a 1 byte value), which with the wrong swap was grapping
+</I>&gt;<i> bogus
+</I>&gt;<i> info!
+</I>&gt;<i> 
+</I>&gt;<i> Thanks all for your suggestions the past couple of weeks!
+</I>&gt;<i> 
+</I>&gt;<i> Jonathan Zuber
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; -----Original Message-----
+</I>&gt;<i> &gt; From:	Lacy Moore - Aspendora [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">aspendora at gmail.com</A>]
+</I>&gt;<i> &gt; Sent:	Thursday, August 02, 2007 11:55 AM
+</I>&gt;<i> &gt; To:	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Glad you found, at least partially, the cause.  I got tied up and wasn't
+</I>&gt;<i> &gt; able to get back with you regarding the error.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;  
+</I>&gt;<i> &gt; On 8/1/07, Zuber, Jonathan &lt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>&gt;&gt;
+</I>&gt;<i> wrote: 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 	Ok, so I think I finally found the problem that has been holding me
+</I>&gt;<i> &gt; up for
+</I>&gt;<i> &gt; 	the past couple weeks; the TFTPBOOT server I was using was BIG
+</I>&gt;<i> &gt; endian 
+</I>&gt;<i> &gt; 	format.  Well I guess I could be wrong, but I ended up taking a
+</I>&gt;<i> &gt; regular PC
+</I>&gt;<i> &gt; 	and setting an asterisk server up on there (Little endian), and all
+</I>&gt;<i> &gt; the same
+</I>&gt;<i> &gt; 	files that were not working now worked!
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	Basically what was happening is that I could not 'dial' out, I could
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 	speedial, no problem, but dialing would not connect.
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	When the phone connects with asterisk, it gives the following error:
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number:
+</I>&gt;<i> &gt; SEPXXXXXXXXXXXX:
+</I>&gt;<i> &gt; 	requested a line configuration for unknown line 0 
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	This was causing me to have no line to connect the phone to the
+</I>&gt;<i> &gt; asterisk
+</I>&gt;<i> &gt; 	server.  I started noticing it might be a problem with the lines
+</I>&gt;<i> &gt; when I
+</I>&gt;<i> &gt; 	tried to 'autolog' into 3 different lines, and got 3 of the above
+</I>&gt;<i> &gt; messages. 
+</I>&gt;<i> &gt; 	I double, triple, quadruple, etc etc.... checked my configs and all
+</I>&gt;<i> &gt; seemed
+</I>&gt;<i> &gt; 	well (and in fact was), yet nothing worked.
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	I was having this error with the Cisco 7970 and 7971 IP phones.
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	Don't know yet if there is a fix for this, I am going to keep
+</I>&gt;<i> &gt; looking into 
+</I>&gt;<i> &gt; 	it to see if it is 100% for sure the BIG Endian vs Little Endian
+</I>&gt;<i> &gt; that is
+</I>&gt;<i> &gt; 	causing the problem.
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	Any feedback would be awesome!
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 	_______________________________________________
+</I>&gt;<i> &gt; 	Chan-sccp-users mailing list 
+</I>&gt;<i> &gt; 	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;<i> &gt; 	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>&gt; 
+</I>&gt;<i> &gt; 	
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; -- 
+</I>&gt;<i> &gt; Lacy Moore
+</I>&gt;<i> &gt; Somewhere I wish I wasn't  &lt;&lt; File: ATT422449.txt &gt;&gt; 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000268.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+	<LI>Next message: <A HREF="000270.html">[Chan-sccp-users]  Nagios Plugin
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#269">[ date ]</a>
+              <a href="thread.html#269">[ thread ]</a>
+              <a href="subject.html#269">[ subject ]</a>
+              <a href="author.html#269">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

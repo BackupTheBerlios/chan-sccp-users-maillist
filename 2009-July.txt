@@ -1,0 +1,25 @@
+From jnicco-annan at mps-gh.com  Fri Jul  3 13:41:46 2009
+From: jnicco-annan at mps-gh.com (Joel Nicco-Annan)
+Date: Fri, 3 Jul 2009 11:41:46 -0000
+Subject: [Chan-sccp-users] Document to Implement SCCP on Asterisk
+Message-ID: <ECC2ABC5EA02F042871B8B84F5BEFA8BE3918B@EXMAIL.mps-gh.com>
+
+Hello Guys,
+
+ 
+
+I will be very gratefully if I can get a document to allow me register a
+Cisco SCCP 79XX phone to Trixbox 2.6.2
+
+ 
+
+Thanks 
+
+ 
+
+Joel
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090703/7d5e98c9/attachment.html>
+

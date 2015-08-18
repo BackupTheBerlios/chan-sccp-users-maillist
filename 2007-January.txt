@@ -1,0 +1,2286 @@
+From kelly at eriecoast.com  Wed Jan  3 22:40:18 2007
+From: kelly at eriecoast.com (Kelly Opal)
+Date: Wed, 03 Jan 2007 16:40:18 -0500
+Subject: [Chan-sccp-users] 7961 + 7914
+Message-ID: <1167860418.26951.2.camel@voip.eriecoast.com>
+
+Hi
+	Does anyone have a working SEP<Mac>.cnf.xml file for a 7961 with the
+7914 side car. I can't seem to get it right and the phone looks up at
+least 4 times a week.
+
+Thanks For the help
+
+Kelly
+
+
+
+From andreas.schlager at ict-visions.at  Wed Jan  3 22:53:34 2007
+From: andreas.schlager at ict-visions.at (Andreas Schlager)
+Date: Wed, 03 Jan 2007 22:53:34 +0100
+Subject: [Chan-sccp-users] 7961 + 7914
+In-Reply-To: <1167860418.26951.2.camel@voip.eriecoast.com>
+References: <1167860418.26951.2.camel@voip.eriecoast.com>
+Message-ID: <459C25DE.9000605@ict-visions.at>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Kelly Opal schrieb:
+> Hi
+> 	Does anyone have a working SEP<Mac>.cnf.xml file for a 7961 with the
+> 7914 side car. I can't seem to get it right and the phone looks up at
+> least 4 times a week.
+> 
+> Thanks For the help
+> 
+> Kelly
+
+
+Hi Kelly,
+
+look at the following config-file. It's designed for a 7970. Watch out
+for the two "addOnModule" Sections. You need one for each 7914 exp. units.
+There's a good description at http://www.voip-info.org for this one.
+
+hth.
+
+Regards,
+
+- -Andreas.
+
+- -------------
+<device>
+ <sshUserId>root</sshUserId>
+ <sshPassword>xyz</sshPassword>
+ <devicePool>
+  <name>Default</name>
+  <dateTimeSetting>
+   <name>CMLocal</name>
+   <dateTemplate>D.M.Y</dateTemplate>
+   <timeZone>W. Europe Standard/Daylight Time</timeZone>
+  </dateTimeSetting>
+  <callManagerGroup>
+   <members>
+    <member  priority="0">
+     <callManager>
+      <ports>
+       <ethernetPhonePort>2000</ethernetPhonePort>
+      </ports>
+      <processNodeName>192.168.103.2</processNodeName>
+     </callManager>
+    </member>
+   </members>
+  </callManagerGroup>
+  <srstInfo>
+   <name>Enable</name>
+   <srstOption>Enable</srstOption>
+   <userModifiable>true</userModifiable>
+   <ipAddr1>192.168.103.2</ipAddr1>
+   <port1>2000</port1>
+   <ipAddr2></ipAddr2>
+   <port2>2000</port2>
+   <ipAddr3></ipAddr3>
+   <port3>2000</port3>
+  </srstInfo>
+  <mlppDomainId>-1</mlppDomainId>
+  <mlppIndicationStatus>Default</mlppIndicationStatus>
+  <preemption>Default</preemption>
+ </devicePool>
+ <loadInformation>SCCP70.8-0-4SR1S</loadInformation>
+ <addOnModules>
+  <addOnModule idx="1">
+   <loadInformation>S00105000200</loadInformation>
+  </addOnModule>
+  <addOnModule idx="2">
+   <loadInformation>S00105000200</loadInformation>
+  </addOnModule>
+ </addOnModules>
+ <vendorConfig>
+  <disableSpeaker>false</disableSpeaker>
+  <disableSpeakerAndHeadset>false</disableSpeakerAndHeadset>
+  <forwardingDelay>1</forwardingDelay>
+  <pcPort>0</pcPort>
+  <settingsAccess>1</settingsAccess>
+  <garp>0</garp>
+  <voiceVlanAccess>0</voiceVlanAccess>
+  <videoCapability>1</videoCapability>
+  <autoSelectLineEnable>0</autoSelectLineEnable>
+  <webAccess>0</webAccess>
+  <daysDisplayNotActive>1,7</daysDisplayNotActive>
+  <displayOnTime>07:00</displayOnTime>
+  <displayOnDuration>11:30</displayOnDuration>
+  <displayIdleTimeout>01:00</displayIdleTimeout>
+ </vendorConfig>
+ <versionStamp></versionStamp>
+ <userLocale>
+  <name>German_Germany</name>
+  <langCode>de</langCode>
+  <winCharSet>utf-8</winCharSet>
+ </userLocale>
+ <networkLocale>Austria</networkLocale>
+ <networkLocaleInfo>
+  <name>Austria</name>
+ </networkLocaleInfo>
+ <deviceSecurityMode>0</deviceSecurityMode>
+ <idleTimeout>0</idleTimeout>
+ <authenticationURL>http://192.168.103.2:8080/authorization</authenticationURL>
+ <directoryURL>http://192.168.103.2/directory_hypoxi/xml/index.php</directoryURL>
+ <idleURL></idleURL>
+ <informationURL></informationURL>
+ <messagesURL></messagesURL>
+ <proxyServerURL></proxyServerURL>
+ <servicesURL></servicesURL>
+ <dscpForSCCPPhoneConfig>96</dscpForSCCPPhoneConfig>
+ <dscpForSCCPPhoneServices>0</dscpForSCCPPhoneServices>
+ <dscpForCm2Dvce>96</dscpForCm2Dvce>
+</device>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFFnCXe5xn1PeU7yzsRAn09AJ43grYT1oQK3+Fx+SU4qZQ3HttkhQCfZbA/
+srLKaWTqmWvNlxw5OgUStd4=
+=rmDK
+-----END PGP SIGNATURE-----
+
+
+From jayrworthington at gmail.com  Fri Jan  5 11:04:04 2007
+From: jayrworthington at gmail.com (Jay R. Worthington)
+Date: Fri, 5 Jan 2007 11:04:04 +0100
+Subject: [Chan-sccp-users] Bounty
+Message-ID: <710bae00701050204g23397f63l1273d07149b5379f@mail.gmail.com>
+
+Hi
+
+in a last attempt to get a working, usable SCCP channel for asterisk 1.4,
+i'm offering two bountys:
+
+
+1. $100 USD (PayPal)
+
+- patch against chan_sccp 20060408
+- GPL (obviously)
+
+
+2. $500 USD (PayPal)
+
+- patch against chan_skinny from asterisk 1.4
+- properly disclamed to digium for inclusion in the official asterisk svn
+- includes all features of chan_sccp
+
+
+The first one should be pretty easy, the loader work has already been done
+and is available at
+https://svn.sourceforge.net/svnroot/pbxcc/modules/chan_sccp, so it's just
+the rtp stuff that has to be done. I guess a look at how the changes where
+done to chan_skinny would help. Bounty can be collected after i've done the
+first successfull call (without crash ;-)).
+
+The second one will be much harder, you more-or-less have to rebuild all
+features from scratch, based on chan_skinny. Technically, i dont care how it
+is done, if someone can convince/bribe Sergio to disclame his patches you
+can safe a lot of time and work. Bounty can be collected after inclusion in
+the digium svn with all features of chan_sccp.
+
+If you wish to collect the second bounty, please contact me in advance.
+
+Jay....
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070105/23955038/attachment.html>
+
+From dgm at sec-u-dis.net  Fri Jan  5 13:52:26 2007
+From: dgm at sec-u-dis.net (Dietmar G. Matzke)
+Date: Fri, 05 Jan 2007 13:52:26 +0100
+Subject: [Chan-sccp-users] Bounty
+In-Reply-To: <710bae00701050204g23397f63l1273d07149b5379f@mail.gmail.com>
+Message-ID: <C1C4089A.42E5%dgm@sec-u-dis.net>
+
+Hi
+
+we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to keep/get
+SCCP alive for the community and us.
+
+Thus, we will DOUBLE Jay?s bountys by  offering additional honeypots:
+
+For solution 1): 100 USD
+
+For solution 2): 500 USD (OUR PREFERENCE)
+
+Conditions: As mentioned by Jay!
+
+Dietmar
+
+
+Am 05.01.2007 11:04 Uhr schrieb "Jay R. Worthington" unter
+<jayrworthington at gmail.com>:
+
+> Hi
+> 
+> in a last attempt to get a working, usable SCCP channel for asterisk 1.4, i'm
+> offering two bountys:
+> 
+> 
+> 1. $100 USD (PayPal)
+> 
+> - patch against chan_sccp 20060408
+> - GPL (obviously)
+> 
+> 
+> 2. $500 USD (PayPal)
+> 
+> - patch against chan_skinny from asterisk 1.4
+> - properly disclamed to digium for inclusion in the official asterisk svn
+> - includes all features of chan_sccp
+> 
+> 
+> The first one should be pretty easy, the loader work has already been done and
+> is available at https://svn.sourceforge.net/svnroot/pbxcc/modules/chan_sccp,
+> so it's just the rtp stuff that has to be done. I guess a look at how the
+> changes where done to chan_skinny would help. Bounty can be collected after
+> i've done the first successfull call (without crash ;-)).
+> 
+> The second one will be much harder, you more-or-less have to rebuild all
+> features from scratch, based on chan_skinny. Technically, i dont care how it
+> is done, if someone can convince/bribe Sergio to disclame his patches you can
+> safe a lot of time and work. Bounty can be collected after inclusion in the
+> digium svn with all features of chan_sccp.
+> 
+> If you wish to collect the second bounty, please contact me in advance.
+> 
+> Jay....
+> 
+> 
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070105/6fbe7df9/attachment.html>
+
+From kelly at eriecoast.com  Fri Jan  5 15:06:41 2007
+From: kelly at eriecoast.com (Kelly Opal)
+Date: Fri, 5 Jan 2007 09:06:41 -0500
+Subject: [Chan-sccp-users] 7961 + 7914
+References: <1167860418.26951.2.camel@voip.eriecoast.com>
+	<459C25DE.9000605@ict-visions.at>
+Message-ID: <00eb01c730d2$b955c5a0$0dcc8143@eriecoast.com>
+
+Hi Andreas.
+    That worked perfect.
+
+Thank You
+
+Kelly
+
+----- Original Message ----- 
+From: "Andreas Schlager" <andreas.schlager at ict-visions.at>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Wednesday, January 03, 2007 4:53 PM
+Subject: Re: [Chan-sccp-users] 7961 + 7914
+
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Kelly Opal schrieb:
+>> Hi
+>> Does anyone have a working SEP<Mac>.cnf.xml file for a 7961 with the
+>> 7914 side car. I can't seem to get it right and the phone looks up at
+>> least 4 times a week.
+>>
+>> Thanks For the help
+>>
+>> Kelly
+>
+>
+> Hi Kelly,
+>
+> look at the following config-file. It's designed for a 7970. Watch out
+> for the two "addOnModule" Sections. You need one for each 7914 exp. units.
+> There's a good description at http://www.voip-info.org for this one.
+>
+> hth.
+>
+> Regards,
+>
+> - -Andreas.
+>
+> - -------------
+> <device>
+> <sshUserId>root</sshUserId>
+> <sshPassword>xyz</sshPassword>
+> <devicePool>
+>  <name>Default</name>
+>  <dateTimeSetting>
+>   <name>CMLocal</name>
+>   <dateTemplate>D.M.Y</dateTemplate>
+>   <timeZone>W. Europe Standard/Daylight Time</timeZone>
+>  </dateTimeSetting>
+>  <callManagerGroup>
+>   <members>
+>    <member  priority="0">
+>     <callManager>
+>      <ports>
+>       <ethernetPhonePort>2000</ethernetPhonePort>
+>      </ports>
+>      <processNodeName>192.168.103.2</processNodeName>
+>     </callManager>
+>    </member>
+>   </members>
+>  </callManagerGroup>
+>  <srstInfo>
+>   <name>Enable</name>
+>   <srstOption>Enable</srstOption>
+>   <userModifiable>true</userModifiable>
+>   <ipAddr1>192.168.103.2</ipAddr1>
+>   <port1>2000</port1>
+>   <ipAddr2></ipAddr2>
+>   <port2>2000</port2>
+>   <ipAddr3></ipAddr3>
+>   <port3>2000</port3>
+>  </srstInfo>
+>  <mlppDomainId>-1</mlppDomainId>
+>  <mlppIndicationStatus>Default</mlppIndicationStatus>
+>  <preemption>Default</preemption>
+> </devicePool>
+> <loadInformation>SCCP70.8-0-4SR1S</loadInformation>
+> <addOnModules>
+>  <addOnModule idx="1">
+>   <loadInformation>S00105000200</loadInformation>
+>  </addOnModule>
+>  <addOnModule idx="2">
+>   <loadInformation>S00105000200</loadInformation>
+>  </addOnModule>
+> </addOnModules>
+> <vendorConfig>
+>  <disableSpeaker>false</disableSpeaker>
+>  <disableSpeakerAndHeadset>false</disableSpeakerAndHeadset>
+>  <forwardingDelay>1</forwardingDelay>
+>  <pcPort>0</pcPort>
+>  <settingsAccess>1</settingsAccess>
+>  <garp>0</garp>
+>  <voiceVlanAccess>0</voiceVlanAccess>
+>  <videoCapability>1</videoCapability>
+>  <autoSelectLineEnable>0</autoSelectLineEnable>
+>  <webAccess>0</webAccess>
+>  <daysDisplayNotActive>1,7</daysDisplayNotActive>
+>  <displayOnTime>07:00</displayOnTime>
+>  <displayOnDuration>11:30</displayOnDuration>
+>  <displayIdleTimeout>01:00</displayIdleTimeout>
+> </vendorConfig>
+> <versionStamp></versionStamp>
+> <userLocale>
+>  <name>German_Germany</name>
+>  <langCode>de</langCode>
+>  <winCharSet>utf-8</winCharSet>
+> </userLocale>
+> <networkLocale>Austria</networkLocale>
+> <networkLocaleInfo>
+>  <name>Austria</name>
+> </networkLocaleInfo>
+> <deviceSecurityMode>0</deviceSecurityMode>
+> <idleTimeout>0</idleTimeout>
+> <authenticationURL>http://192.168.103.2:8080/authorization</authenticationURL>
+> <directoryURL>http://192.168.103.2/directory_hypoxi/xml/index.php</directoryURL>
+> <idleURL></idleURL>
+> <informationURL></informationURL>
+> <messagesURL></messagesURL>
+> <proxyServerURL></proxyServerURL>
+> <servicesURL></servicesURL>
+> <dscpForSCCPPhoneConfig>96</dscpForSCCPPhoneConfig>
+> <dscpForSCCPPhoneServices>0</dscpForSCCPPhoneServices>
+> <dscpForCm2Dvce>96</dscpForCm2Dvce>
+> </device>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.6 (GNU/Linux)
+> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+>
+> iD8DBQFFnCXe5xn1PeU7yzsRAn09AJ43grYT1oQK3+Fx+SU4qZQ3HttkhQCfZbA/
+> srLKaWTqmWvNlxw5OgUStd4=
+> =rmDK
+> -----END PGP SIGNATURE-----
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+
+From davidded at davidded.de  Fri Jan  5 15:20:53 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Fri, 5 Jan 2007 15:20:53 +0100
+Subject: [Chan-sccp-users] Bounty
+In-Reply-To: <C1C4089A.42E5%dgm@sec-u-dis.net>
+References: <C1C4089A.42E5%dgm@sec-u-dis.net>
+Message-ID: <C69E4743-5821-4BB5-8BCF-984F9004981D@davidded.de>
+
+Hi,
+
+I'd like to contribute to solution 1, i.e. porting chan_sccp to  
+Asterisk 1.4. Not only as of usability and features, but also in  
+terms of compatibility, I have experienced chan_sccp to be the more  
+mature implementation. The chan_skinny implementation on the other  
+hand, will most likely survive on its own, as it's in the * svn.  
+Saving chan_skinny for the future would be my concern.
+
+However, I'd have to get an overview of the work to be done before  
+accepting the bounty, and I will most likely have the time to do so  
+by next week. Earlier today, Jay R. said, there was only some work  
+with the RTP code left, but I understand that asterisk 1.4 has a much  
+different api than 1.2. Could anybody fill me in on what to do to get  
+something from 1.2 simply to compile in 1.4?
+
+
+Kind regards,
+-David
+
+
+On 05.01.2007, at 13:52, Dietmar G. Matzke wrote:
+
+> Hi
+>
+> we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to  
+> keep/get SCCP alive for the community and us.
+>
+> Thus, we will DOUBLE Jay?s bountys by  offering additional honeypots:
+>
+> For solution 1): 100 USD
+>
+> For solution 2): 500 USD (OUR PREFERENCE)
+>
+> Conditions: As mentioned by Jay!
+>
+> Dietmar
+>
+>
+> Am 05.01.2007 11:04 Uhr schrieb "Jay R. Worthington" unter  
+> <jayrworthington at gmail.com>:
+>
+>> Hi
+>>
+>> in a last attempt to get a working, usable SCCP channel for  
+>> asterisk 1.4, i'm offering two bountys:
+>>
+>>
+>> 1. $100 USD (PayPal)
+>>
+>> - patch against chan_sccp 20060408
+>> - GPL (obviously)
+>>
+>>
+>> 2. $500 USD (PayPal)
+>>
+>> - patch against chan_skinny from asterisk 1.4
+>> - properly disclamed to digium for inclusion in the official  
+>> asterisk svn
+>> - includes all features of chan_sccp
+>>
+>>
+>> The first one should be pretty easy, the loader work has already  
+>> been done and is available at https://svn.sourceforge.net/svnroot/ 
+>> pbxcc/modules/chan_sccp, so it's just the rtp stuff that has to be  
+>> done. I guess a look at how the changes where done to chan_skinny  
+>> would help. Bounty can be collected after i've done the first  
+>> successfull call (without crash ;-)).
+>>
+>> The second one will be much harder, you more-or-less have to  
+>> rebuild all features from scratch, based on chan_skinny.  
+>> Technically, i dont care how it is done, if someone can convince/ 
+>> bribe Sergio to disclame his patches you can safe a lot of time  
+>> and work. Bounty can be collected after inclusion in the digium  
+>> svn with all features of chan_sccp.
+>>
+>> If you wish to collect the second bounty, please contact me in  
+>> advance.
+>>
+>> Jay....
+>>
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/pkcs7-signature
+Size: 2109 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070105/48ca0aa9/attachment.bin>
+
+From m.robichon at llg.de  Fri Jan  5 18:21:36 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Fri, 5 Jan 2007 18:21:36 +0100
+Subject: [Chan-sccp-users] Bounty
+In-Reply-To: <C1C4089A.42E5%dgm@sec-u-dis.net>
+Message-ID: <20070105171935.43E3535D0002@fry.quadrolab.de>
+
+Hi,
+
+ 
+
+we are using chan_sccp with * 1.2.14, 35 Cisco phones and it works quite
+well. Why should we change to Asterisk 1.4. I can not find any reason at
+this time. Awaiting that chan_skinny is developing with all the features of
+chan_sccp is the most common way for us. 
+
+ 
+
+Can someone explain the main difference between both Asterisk versions? We
+are likely to support the chan_sccp as well as the chan_skinny solution, but
+it has to work. 
+ and even more the code should under GPL afterwards.
+
+ 
+
+We are also a German company and paying via Paypal is not the problem, but
+getting an invoice :-)
+
+ 
+
+Have a nice day, 
+
+ 
+
+Awaiting your comments
+
+ 
+
+Marcus
+
+ 
+
+ 
+
+  _____  
+
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Dietmar G.
+Matzke
+Gesendet: Freitag, 5. Januar 2007 13:52
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Bounty
+
+ 
+
+Hi
+
+we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to keep/get
+SCCP alive for the community and us.
+
+Thus, we will DOUBLE Jay?s bountys by  offering additional honeypots:
+
+For solution 1): 100 USD
+
+For solution 2): 500 USD (OUR PREFERENCE)
+
+Conditions: As mentioned by Jay!
+
+Dietmar
+
+
+Am 05.01.2007 11:04 Uhr schrieb "Jay R. Worthington" unter
+<jayrworthington at gmail.com>:
+
+Hi
+
+in a last attempt to get a working, usable SCCP channel for asterisk 1.4,
+i'm offering two bountys:
+
+
+1. $100 USD (PayPal)
+
+- patch against chan_sccp 20060408
+- GPL (obviously)
+
+
+2. $500 USD (PayPal) 
+
+- patch against chan_skinny from asterisk 1.4
+- properly disclamed to digium for inclusion in the official asterisk svn
+- includes all features of chan_sccp
+
+
+The first one should be pretty easy, the loader work has already been done
+and is available at
+https://svn.sourceforge.net/svnroot/pbxcc/modules/chan_sccp, so it's just
+the rtp stuff that has to be done. I guess a look at how the changes where
+done to chan_skinny would help. Bounty can be collected after i've done the
+first successfull call (without crash ;-)). 
+
+The second one will be much harder, you more-or-less have to rebuild all
+features from scratch, based on chan_skinny. Technically, i dont care how it
+is done, if someone can convince/bribe Sergio to disclame his patches you
+can safe a lot of time and work. Bounty can be collected after inclusion in
+the digium svn with all features of chan_sccp. 
+
+If you wish to collect the second bounty, please contact me in advance.
+
+Jay....
+
+  _____  
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070105/d8967836/attachment.html>
+
+From davidded at davidded.de  Sat Jan  6 04:50:07 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sat, 6 Jan 2007 04:50:07 +0100
+Subject: [Chan-sccp-users] Bounty
+In-Reply-To: <20070105171935.43E3535D0002@fry.quadrolab.de>
+References: <20070105171935.43E3535D0002@fry.quadrolab.de>
+Message-ID: <3C673BDA-F2F8-4E9B-89D9-22ECFFA72B21@davidded.de>
+
+Hi,
+
+I am using * 1.2.13-BRIstuffed-0.3.0-PRE-1v with the florz patch  
+serving several patched hfc-s cards, about 10 cisco phones, a few  
+isdn phones, an agfeo as32 pbx, and finally some snom phones. For me,  
+a transition to 1.4 will be of interest as soon as all the bristuff- 
+related stuff has been ported to 1.4 as well.
+
+I'm sure there are many other people around relying on bristuff.
+
+There are several disagreements among developers as how to integrate  
+the Line paradigm into the asterisk architecture, some would like to  
+adopt the paradigm, some not. I'd like to do a mixture of both,  
+making things even more complicated.
+
+In this light, I think it'd be vital for _multiple_ implentations of  
+sccp to survive, one of which being under GPL resolving some of the  
+"political" issues mentioned above. Anyways I doubt that chan_skinny  
+will soon come close to the functionality and robustness of chan_sccp.
+
+
+We should start porting chan_sccp 1.4 early to make sure the project  
+will stay alive in the future, but only for this reason (or for a  
+bounty, as it was offered). Beyond that, my concern is about  
+implementing more native features of the cisco phones, like shared  
+lines, direct transfer between calls, dynamic logon/logoff with  
+configuration of line-keys, speeddial etc.
+
+By the way: Anyone here with a 7936 he/she got working? I have one  
+myself, however with the usual problem not being able to hangup after  
+a few calls, and a lousy sound quality. It seems to me that there are  
+dsp profiles to be uploaded to the station which are not present in  
+the factory defaults.
+
+I'd be curious to hear about your experiences, also in the "real"  
+cisco world with a call-manager.
+
+
+Regards,
+-David
+
+
+On 05.01.2007, at 18:21, Marcus Robichon wrote:
+
+> Hi,
+>
+>
+>
+> we are using chan_sccp with * 1.2.14, 35 Cisco phones and it works  
+> quite well. Why should we change to Asterisk 1.4. I can not find  
+> any reason at this time. Awaiting that chan_skinny is developing  
+> with all the features of chan_sccp is the most common way for us.
+>
+>
+>
+> Can someone explain the main difference between both Asterisk  
+> versions? We are likely to support the chan_sccp as well as the  
+> chan_skinny solution, but it has to work. ? and even more the code  
+> should under GPL afterwards.
+>
+>
+>
+> We are also a German company and paying via Paypal is not the  
+> problem, but getting an invoice J
+>
+>
+>
+> Have a nice day,
+>
+>
+>
+> Awaiting your comments
+>
+>
+>
+> Marcus
+>
+>
+>
+>
+>
+> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp- 
+> users-bounces at lists.berlios.de] Im Auftrag von Dietmar G. Matzke
+> Gesendet: Freitag, 5. Januar 2007 13:52
+> An: chan-sccp-users at lists.berlios.de
+> Betreff: Re: [Chan-sccp-users] Bounty
+>
+>
+>
+> Hi
+>
+> we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to  
+> keep/get SCCP alive for the community and us.
+>
+> Thus, we will DOUBLE Jay?s bountys by  offering additional honeypots:
+>
+> For solution 1): 100 USD
+>
+> For solution 2): 500 USD (OUR PREFERENCE)
+>
+> Conditions: As mentioned by Jay!
+>
+> Dietmar
+>
+>
+> Am 05.01.2007 11:04 Uhr schrieb "Jay R. Worthington" unter  
+> <jayrworthington at gmail.com>:
+>
+> Hi
+>
+> in a last attempt to get a working, usable SCCP channel for  
+> asterisk 1.4, i'm offering two bountys:
+>
+>
+> 1. $100 USD (PayPal)
+>
+> - patch against chan_sccp 20060408
+> - GPL (obviously)
+>
+>
+> 2. $500 USD (PayPal)
+>
+> - patch against chan_skinny from asterisk 1.4
+> - properly disclamed to digium for inclusion in the official  
+> asterisk svn
+> - includes all features of chan_sccp
+>
+>
+> The first one should be pretty easy, the loader work has already  
+> been done and is available at https://svn.sourceforge.net/svnroot/ 
+> pbxcc/modules/chan_sccp, so it's just the rtp stuff that has to be  
+> done. I guess a look at how the changes where done to chan_skinny  
+> would help. Bounty can be collected after i've done the first  
+> successfull call (without crash ;-)).
+>
+> The second one will be much harder, you more-or-less have to  
+> rebuild all features from scratch, based on chan_skinny.  
+> Technically, i dont care how it is done, if someone can convince/ 
+> bribe Sergio to disclame his patches you can safe a lot of time and  
+> work. Bounty can be collected after inclusion in the digium svn  
+> with all features of chan_sccp.
+>
+> If you wish to collect the second bounty, please contact me in  
+> advance.
+>
+> Jay....
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/pkcs7-signature
+Size: 2109 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070106/95ae6560/attachment.bin>
+
+From drhodes at deakin.edu.au  Sat Jan  6 04:45:44 2007
+From: drhodes at deakin.edu.au (David Rhodes)
+Date: Sat, 06 Jan 2007 14:45:44 +1100
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+Message-ID: <459F1B68.5040801@deakin.edu.au>
+
+Hi,
+
+I have a working chan_sccp with Asterisk 1.4.0. I have posted my patch
+is posted at https://developer.berlios.de/patch/index.php.  It is
+against the svn (which is why it is such a small patch :). I only have a
+limited setup to test against, so please beware, but so far so good :)
+
+As for why?  Well me, I want more integration with the other channels
+(gtalk etc).., so 1.4.0 is a natural progression and have the ability to
+break this one :)
+If it was prod I would probably hold off. 
+
+Oh, and I went to chan_skinny initially with 1.4.0, but didn't want to
+spend time converting the configs. (too lazy?)
+
+Regards
+
+David
+
+
+
+Hi,
+
+ 
+
+we are using chan_sccp with * 1.2.14, 35 Cisco phones and it works quite
+well. Why should we change to Asterisk 1.4. I can not find any reason at
+this time. Awaiting that chan_skinny is developing with all the features of
+chan_sccp is the most common way for us. 
+
+ 
+
+Can someone explain the main difference between both Asterisk versions? We
+are likely to support the chan_sccp as well as the chan_skinny solution, but
+it has to work. 
+ and even more the code should under GPL afterwards.
+
+ 
+
+We are also a German company and paying via Paypal is not the problem, but
+getting an invoice :-)
+
+ 
+
+Have a nice day, 
+
+ 
+
+Awaiting your comments
+
+ 
+
+Marcus
+
+ 
+
+ 
+
+  _____  
+
+Von: chan-sccp-users-bounces at lists.berlios.de <https://lists.berlios.de/mailman/listinfo/chan-sccp-users>
+[mailto:chan-sccp-users-bounces at lists.berlios.de <https://lists.berlios.de/mailman/listinfo/chan-sccp-users>] Im Auftrag von Dietmar G.
+Matzke
+Gesendet: Freitag, 5. Januar 2007 13:52
+An: chan-sccp-users at lists.berlios.de <https://lists.berlios.de/mailman/listinfo/chan-sccp-users>
+Betreff: Re: [Chan-sccp-users] Bounty
+
+ 
+
+Hi
+
+we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to keep/get
+SCCP alive for the community and us.
+
+Thus, we will DOUBLE Jay?s bountys by  offering additional honeypots:
+
+For solution 1): 100 USD
+
+For solution 2): 500 USD (OUR PREFERENCE)
+
+Conditions: As mentioned by Jay!
+
+Dietmar
+
+
+Am 05.01.2007 11:04 Uhr schrieb "Jay R. Worthington" unter
+<jayrworthington at gmail.com <https://lists.berlios.de/mailman/listinfo/chan-sccp-users>>:
+
+Hi
+
+in a last attempt to get a working, usable SCCP channel for asterisk 1.4,
+i'm offering two bountys:
+
+
+1. $100 USD (PayPal)
+
+- patch against chan_sccp 20060408
+- GPL (obviously)
+
+
+2. $500 USD (PayPal) 
+
+- patch against chan_skinny from asterisk 1.4
+- properly disclamed to digium for inclusion in the official asterisk svn
+- includes all features of chan_sccp
+
+
+The first one should be pretty easy, the loader work has already been done
+and is available at
+https://svn.sourceforge.net/svnroot/pbxcc/modules/chan_sccp, so it's just
+the rtp stuff that has to be done. I guess a look at how the changes where
+done to chan_skinny would help. Bounty can be collected after i've done the
+first successfull call (without crash ;-)). 
+
+The second one will be much harder, you more-or-less have to rebuild all
+features from scratch, based on chan_skinny. Technically, i dont care how it
+is done, if someone can convince/bribe Sergio to disclame his patches you
+can safe a lot of time and work. Bounty can be collected after inclusion in
+the digium svn with all features of chan_sccp. 
+
+If you wish to collect the second bounty, please contact me in advance.
+
+Jay....
+
+  _____  
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de <https://lists.berlios.de/mailman/listinfo/chan-sccp-users>
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070105/d8967836/attachment-0001.html 
+
+------------------------------------------------------------------------
+
+    * Previous message: [Chan-sccp-users] Bounty <002841.html>
+    * *Messages sorted by:* [ date ] <date.html#2842> [ thread ]
+      <thread.html#2842> [ subject ] <subject.html#2842> [ author ]
+      <author.html#2842>
+
+
+-- 
+David Rhodes,  Network Unit Leader
+Information Technology Services Division
+Deakin University Waterfront Campus Victoria 3217 Australia
+Phone:   03 5227 8912 International: +61 3 52278912
+Fax:     03 5227 8866 International: +61 3 5227 8866
+E-mail:  david.rhodes at deakin.edu.au
+Website: http://www.deakin.edu.au
+Deakin University CRICOS Provider Code 00113B (Vic)
+
+Important Notice: The contents of this email transmission, including any attachments, are intended solely for the named addressee and are confidential; any unauthorised use, reproduction or storage of the contents and any attachments is expressly prohibited. If you have received this transmission in error, please delete it and any attachments from your system immediately and advise the sender by return email or telephone. Deakin University does not warrant that this email and any attachments are error or virus free. 
+
+
+From davidded at davidded.de  Sat Jan  6 05:53:13 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sat, 6 Jan 2007 05:53:13 +0100
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+In-Reply-To: <459F1B68.5040801@deakin.edu.au>
+References: <459F1B68.5040801@deakin.edu.au>
+Message-ID: <70F496E7-C160-44DD-8082-314A41859D99@davidded.de>
+
+Hi,
+
+well, if your patch works fine, this sounds very promising. Go and  
+collect your bounty ;-)
+
+But seriously, we should test your patch and once its stability  
+confirmed, contact Sergio about how to proceed integrating the code  
+with the berlios svn and opening another branch for 1.4. We'd  
+probably also want to merge the few but important fixes against the  
+latest chan_sccp to the svn.
+
+I understand that Sergio hasn't had much time for chan_sccp as of  
+late, and it might be possible that he wouldn't want to manage the  
+project any longer. Does anybody know something more specific about  
+his current state?
+
+I would be willing to continue the project administration or at least  
+help Sergio, and I would be happy about anybody working towards the  
+same end joining me in that effort.
+
+Kind regards,
+-David.
+
+
+On Jan 6, 2007, at 4:45 AM, David Rhodes wrote:
+
+> Hi,
+>
+> I have a working chan_sccp with Asterisk 1.4.0. I have posted my patch
+> is posted at https://developer.berlios.de/patch/index.php.  It is
+> against the svn (which is why it is such a small patch :). I only  
+> have a
+> limited setup to test against, so please beware, but so far so good :)
+>
+> As for why?  Well me, I want more integration with the other channels
+> (gtalk etc).., so 1.4.0 is a natural progression and have the  
+> ability to
+> break this one :)
+> If it was prod I would probably hold off.
+>
+> Oh, and I went to chan_skinny initially with 1.4.0, but didn't want to
+> spend time converting the configs. (too lazy?)
+>
+> Regards
+>
+> David
+>
+>
+>
+> Hi,
+>
+>
+>
+> we are using chan_sccp with * 1.2.14, 35 Cisco phones and it works  
+> quite
+> well. Why should we change to Asterisk 1.4. I can not find any  
+> reason at
+> this time. Awaiting that chan_skinny is developing with all the  
+> features of
+> chan_sccp is the most common way for us.
+>
+>
+>
+> Can someone explain the main difference between both Asterisk  
+> versions? We
+> are likely to support the chan_sccp as well as the chan_skinny  
+> solution, but
+> it has to work.
+>  and even more the code should under GPL afterwards.
+>
+>
+>
+> We are also a German company and paying via Paypal is not the  
+> problem, but
+> getting an invoice :-)
+>
+>
+>
+> Have a nice day,
+>
+>
+>
+> Awaiting your comments
+>
+>
+>
+> Marcus
+>
+>
+>
+>
+>
+>   _____
+>
+> Von: chan-sccp-users-bounces at lists.berlios.de <https:// 
+> lists.berlios.de/mailman/listinfo/chan-sccp-users>
+> [mailto:chan-sccp-users-bounces at lists.berlios.de <https:// 
+> lists.berlios.de/mailman/listinfo/chan-sccp-users>] Im Auftrag von  
+> Dietmar G.
+> Matzke
+> Gesendet: Freitag, 5. Januar 2007 13:52
+> An: chan-sccp-users at lists.berlios.de <https://lists.berlios.de/ 
+> mailman/listinfo/chan-sccp-users>
+> Betreff: Re: [Chan-sccp-users] Bounty
+>
+>
+>
+> Hi
+>
+> we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to  
+> keep/get
+> SCCP alive for the community and us.
+>
+> Thus, we will DOUBLE Jay?s bountys by  offering additional honeypots:
+>
+> For solution 1): 100 USD
+>
+> For solution 2): 500 USD (OUR PREFERENCE)
+>
+> Conditions: As mentioned by Jay!
+>
+> Dietmar
+>
+>
+> Am 05.01.2007 11:04 Uhr schrieb "Jay R. Worthington" unter
+> <jayrworthington at gmail.com <https://lists.berlios.de/mailman/ 
+> listinfo/chan-sccp-users>>:
+>
+> Hi
+>
+> in a last attempt to get a working, usable SCCP channel for  
+> asterisk 1.4,
+> i'm offering two bountys:
+>
+>
+> 1. $100 USD (PayPal)
+>
+> - patch against chan_sccp 20060408
+> - GPL (obviously)
+>
+>
+> 2. $500 USD (PayPal)
+>
+> - patch against chan_skinny from asterisk 1.4
+> - properly disclamed to digium for inclusion in the official  
+> asterisk svn
+> - includes all features of chan_sccp
+>
+>
+> The first one should be pretty easy, the loader work has already  
+> been done
+> and is available at
+> https://svn.sourceforge.net/svnroot/pbxcc/modules/chan_sccp, so  
+> it's just
+> the rtp stuff that has to be done. I guess a look at how the  
+> changes where
+> done to chan_skinny would help. Bounty can be collected after i've  
+> done the
+> first successfull call (without crash ;-)).
+>
+> The second one will be much harder, you more-or-less have to  
+> rebuild all
+> features from scratch, based on chan_skinny. Technically, i dont  
+> care how it
+> is done, if someone can convince/bribe Sergio to disclame his  
+> patches you
+> can safe a lot of time and work. Bounty can be collected after  
+> inclusion in
+> the digium svn with all features of chan_sccp.
+>
+> If you wish to collect the second bounty, please contact me in  
+> advance.
+>
+> Jay....
+>
+>   _____
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de <https://lists.berlios.de/ 
+> mailman/listinfo/chan-sccp-users>
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>
+>
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: https://lists.berlios.de/pipermail/chan-sccp-users/attachments/ 
+> 20070105/d8967836/attachment-0001.html
+>
+> ---------------------------------------------------------------------- 
+> --
+>
+>     * Previous message: [Chan-sccp-users] Bounty <002841.html>
+>     * *Messages sorted by:* [ date ] <date.html#2842> [ thread ]
+>       <thread.html#2842> [ subject ] <subject.html#2842> [ author ]
+>       <author.html#2842>
+>
+>
+> -- 
+> David Rhodes,  Network Unit Leader
+> Information Technology Services Division
+> Deakin University Waterfront Campus Victoria 3217 Australia
+> Phone:   03 5227 8912 International: +61 3 52278912
+> Fax:     03 5227 8866 International: +61 3 5227 8866
+> E-mail:  david.rhodes at deakin.edu.au
+> Website: http://www.deakin.edu.au
+> Deakin University CRICOS Provider Code 00113B (Vic)
+>
+> Important Notice: The contents of this email transmission,  
+> including any attachments, are intended solely for the named  
+> addressee and are confidential; any unauthorised use, reproduction  
+> or storage of the contents and any attachments is expressly  
+> prohibited. If you have received this transmission in error, please  
+> delete it and any attachments from your system immediately and  
+> advise the sender by return email or telephone. Deakin University  
+> does not warrant that this email and any attachments are error or  
+> virus free.
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From anthony.p.shaw at gmail.com  Mon Jan  8 13:21:52 2007
+From: anthony.p.shaw at gmail.com (Anthony Shaw)
+Date: Mon, 8 Jan 2007 12:21:52 +0000
+Subject: [Chan-sccp-users]  chan_sccp and asterisk 1.4.0
+Message-ID: <C094F249-28C3-425C-A21C-43C2AD7E5B99@gmail.com>
+
+Hi David,
+
+I would be willing to help on some of the contributions, esp towards  
+having this working with 1.4. Whilst there are tons of C developers  
+out there who would love to contribute, its the politics and overhead  
+that puts people off. If you, or someone, sets up another branch of  
+chan_sccp for 1.4.0 then count me in as well. I have the setup to  
+hand as well as an asterisk 'expert'.
+
+Best Regards
+Anthony
+
+
+From davidded at davidded.de  Mon Jan  8 13:45:13 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Mon, 8 Jan 2007 13:45:13 +0100
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+In-Reply-To: <C094F249-28C3-425C-A21C-43C2AD7E5B99@gmail.com>
+References: <C094F249-28C3-425C-A21C-43C2AD7E5B99@gmail.com>
+Message-ID: <F2CC5E17-1206-4576-96A9-9B3CCB60C94F@davidded.de>
+
+Hi Anthony,
+
+I'd be happy to count on you for the future development of chan_sccp,  
+esp. for * 1.4. However, there are a number of small yet imho  
+important patches for chan_sccp; thus I believe, we should first  
+think about adopting some new patches into a new branch. Based on  
+this new branch we should then create the 1.4 branch. Otherwise, we  
+might be doing this in the aftermath. What do you think?
+
+
+Kind Regards,
+-David
+
+
+On 08.01.2007, at 13:21, Anthony Shaw wrote:
+
+> Hi David,
+>
+> I would be willing to help on some of the contributions, esp towards
+> having this working with 1.4. Whilst there are tons of C developers
+> out there who would love to contribute, its the politics and overhead
+> that puts people off. If you, or someone, sets up another branch of
+> chan_sccp for 1.4.0 then count me in as well. I have the setup to
+> hand as well as an asterisk 'expert'.
+>
+> Best Regards
+> Anthony
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/pkcs7-signature
+Size: 2109 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070108/7ee25373/attachment.bin>
+
+From dgm at sec-u-dis.net  Mon Jan  8 14:01:05 2007
+From: dgm at sec-u-dis.net (Dietmar G. Matzke)
+Date: Mon, 08 Jan 2007 14:01:05 +0100
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+In-Reply-To: <F2CC5E17-1206-4576-96A9-9B3CCB60C94F@davidded.de>
+Message-ID: <C1C7FF21.44A0%dgm@sec-u-dis.net>
+
+Hi David,
+hi Antony,
+
+count on us (Joerg and Dietmar) for a new branch too.
+
+Time to get rid of the semi-dead status at chan_sccp which prevents from
+using this pretty good stuff for production since a couple of month.
+
+Regards
+
+Dietmar
+
+PS: Sorry Sergio, but you invited a lot of people to come with you on your
+journey to running sccp implementation. They traveled with you for a long
+time and had a fairly good trip. But then you stopped and decided to sit
+down in the middle of nowhere. Thats not the kind of journey they like. So,
+the decided to take it on their own...
+
+
+Am 08.01.2007 13:45 Uhr schrieb "David Dederscheck" unter
+<davidded at davidded.de>:
+
+> Hi Anthony,
+> 
+> I'd be happy to count on you for the future development of chan_sccp,
+> esp. for * 1.4. However, there are a number of small yet imho
+> important patches for chan_sccp; thus I believe, we should first
+> think about adopting some new patches into a new branch. Based on
+> this new branch we should then create the 1.4 branch. Otherwise, we
+> might be doing this in the aftermath. What do you think?
+> 
+> 
+> Kind Regards,
+> -David
+> 
+> 
+> On 08.01.2007, at 13:21, Anthony Shaw wrote:
+> 
+>> Hi David,
+>> 
+>> I would be willing to help on some of the contributions, esp towards
+>> having this working with 1.4. Whilst there are tons of C developers
+>> out there who would love to contribute, its the politics and overhead
+>> that puts people off. If you, or someone, sets up another branch of
+>> chan_sccp for 1.4.0 then count me in as well. I have the setup to
+>> hand as well as an asterisk 'expert'.
+>> 
+>> Best Regards
+>> Anthony
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From jayrworthington at gmail.com  Mon Jan  8 15:05:11 2007
+From: jayrworthington at gmail.com (Jay R. Worthington)
+Date: Mon, 8 Jan 2007 15:05:11 +0100
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+In-Reply-To: <70F496E7-C160-44DD-8082-314A41859D99@davidded.de>
+References: <459F1B68.5040801@deakin.edu.au>
+	<70F496E7-C160-44DD-8082-314A41859D99@davidded.de>
+Message-ID: <710bae00701080605h6df7094u66feed7b36ffecc2@mail.gmail.com>
+
+Hi David,
+
+2007/1/6, David Dederscheck <davidded at davidded.de>:
+>
+> well, if your patch works fine, this sounds very promising. Go and
+> collect your bounty ;-)
+
+
+yup, as soon as i have his account-id, he's getting paid, i've already
+contacted him ;-)
+
+
+But seriously, we should test your patch and once its stability
+
+
+Agreed. I've allready done 10 calls with it, all the basic functions work,
+with some minor problems:
+
+- compile with PARK=y fails
+- Pickup does not work even if compiled in (the Softkey does not show up)
+- Setting an _alert-info does not work at all
+
+Can someone confirm this? The last might be some other change in
+asterisk...?
+
+
+confirmed, contact Sergio about how to proceed integrating the code
+> with the berlios svn and opening another branch for 1.4. We'd
+> probably also want to merge the few but important fixes against the
+> latest chan_sccp to the svn.
+
+
+I have no idea who really has access to the sourceforge-svn,
+but it would be great if this person could give commit access to anyone
+who want's it, currently someone that wants to use chan_sccp with asterisk
+1.4 need's to be able to do svn checkouts and apply various patches, thats
+way to complicated for many...
+
+sergio clearly stated that he don't want to use a public svn/cvs repository,
+so
+i guess we won't get any help from him anyway...
+
+
+I understand that Sergio hasn't had much time for chan_sccp as of
+> late, and it might be possible that he wouldn't want to manage the
+> project any longer. Does anybody know something more specific about
+> his current state?
+
+
+well, IMHO thats the whole problem. Noone knows what he's up to, and he
+'aint tellin' :-(
+
+
+I would be willing to continue the project administration or at least
+> help Sergio, and I would be happy about anybody working towards the
+> same end joining me in that effort.
+>
+
+
+At least we now have a version that basicly works with asterisk 1.4, i'm
+sure the small
+problems i described will be corrected by someone in time. If you want to
+take the lead,
+just go for it :-D
+
+Executive Summary: :-D It's alive (again)! :-D
+
+
+Regards,
+
+Jay.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070108/1f182c14/attachment.html>
+
+From mrobichon at llg.de  Mon Jan  8 17:11:40 2007
+From: mrobichon at llg.de (Marcus Robichon)
+Date: Mon, 8 Jan 2007 17:11:40 +0100
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+In-Reply-To: <710bae00701080605h6df7094u66feed7b36ffecc2@mail.gmail.com>
+Message-ID: <20070108160935.BA5092A38FE5@fry.quadrolab.de>
+
+Hi all,
+
+ 
+
+where I can test the new version? I would like to be of any help even if I
+am not a programmer, but I have whole company working on Asterisk using
+chan_sccp and I can easily check all phones in a test environment. 
+
+ 
+
+Marcus 
+
+ 
+
+ 
+
+  _____  
+
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Jay R.
+Worthington
+Gesendet: Montag, 8. Januar 2007 15:05
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+
+ 
+
+Hi David,
+
+2007/1/6, David Dederscheck <davidded at davidded.de>:
+
+well, if your patch works fine, this sounds very promising. Go and
+collect your bounty ;-)
+
+
+yup, as soon as i have his account-id, he's getting paid, i've already
+contacted him ;-)
+ 
+
+ 
+
+But seriously, we should test your patch and once its stability
+
+
+Agreed. I've allready done 10 calls with it, all the basic functions work, 
+with some minor problems:
+
+- compile with PARK=y fails
+- Pickup does not work even if compiled in (the Softkey does not show up)
+- Setting an _alert-info does not work at all
+
+Can someone confirm this? The last might be some other change in
+asterisk...? 
+ 
+
+ 
+
+confirmed, contact Sergio about how to proceed integrating the code
+with the berlios svn and opening another branch for 1.4. We'd
+probably also want to merge the few but important fixes against the
+latest chan_sccp to the svn.
+
+
+I have no idea who really has access to the sourceforge-svn,
+but it would be great if this person could give commit access to anyone 
+who want's it, currently someone that wants to use chan_sccp with asterisk
+1.4 need's to be able to do svn checkouts and apply various patches, thats
+way to complicated for many...
+
+sergio clearly stated that he don't want to use a public svn/cvs repository,
+so 
+i guess we won't get any help from him anyway...
+ 
+
+ 
+
+I understand that Sergio hasn't had much time for chan_sccp as of 
+late, and it might be possible that he wouldn't want to manage the
+project any longer. Does anybody know something more specific about
+his current state?
+
+
+well, IMHO thats the whole problem. Noone knows what he's up to, and he
+'aint tellin' :-( 
+
+ 
+
+I would be willing to continue the project administration or at least
+help Sergio, and I would be happy about anybody working towards the 
+same end joining me in that effort.
+
+
+
+At least we now have a version that basicly works with asterisk 1.4, i'm
+sure the small
+problems i described will be corrected by someone in time. If you want to
+take the lead, 
+just go for it :-D
+
+
+Executive Summary: :-D It's alive (again)! :-D
+
+
+
+Regards,
+
+Jay.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070108/df14b662/attachment.html>
+
+From gthornton at networksgroup.com  Mon Jan  8 19:18:32 2007
+From: gthornton at networksgroup.com (Geoff Thornton)
+Date: Mon, 8 Jan 2007 13:18:32 -0500
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+References: <C094F249-28C3-425C-A21C-43C2AD7E5B99@gmail.com>
+Message-ID: <E07E47757BCAD74AA3D994F694447B55011CDE@nwmail2.hubbardsupply.com>
+
+I would also be willing to contribute code for future chan_sccp
+development.  I had some 1.4BETA patches I was working on, but was
+focusing more on native bridged call (conference) functions.  Not
+knowing whether to work with the chan_sccp or chan_skinny development
+has been (as was stated by previous others) has been a real drag.  I had
+pretty much stopped writing code until either some clear direction
+emerged.
+
+I would love to get this work incorporated into the asterisk dev
+project, but I assume the same issues would bite whomever takes over the
+project (i.e. multiple past contributors = disclaimer difficulty).
+
+Sincerely,
+
+
+--Geoff Thornton
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Anthony
+Shaw
+Sent: Monday, January 08, 2007 7:22 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+
+Hi David,
+
+I would be willing to help on some of the contributions, esp towards  
+having this working with 1.4. Whilst there are tons of C developers  
+out there who would love to contribute, its the politics and overhead  
+that puts people off. If you, or someone, sets up another branch of  
+chan_sccp for 1.4.0 then count me in as well. I have the setup to  
+hand as well as an asterisk 'expert'.
+
+Best Regards
+Anthony
+
+
+
+From anthony.p.shaw at gmail.com  Mon Jan  8 19:56:28 2007
+From: anthony.p.shaw at gmail.com (Anthony Shaw)
+Date: Mon, 8 Jan 2007 18:56:28 +0000
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+In-Reply-To: <E07E47757BCAD74AA3D994F694447B55011CDE@nwmail2.hubbardsupply.com>
+References: <C094F249-28C3-425C-A21C-43C2AD7E5B99@gmail.com>
+	<E07E47757BCAD74AA3D994F694447B55011CDE@nwmail2.hubbardsupply.com>
+Message-ID: <9D204B2A-945B-4551-9C51-CCCE818FAC12@gmail.com>
+
+Hi Geoff,
+
+I've setup a branch on sourceforge, within a couple of days this  
+should be activated, we can setup the SVN repo and start work on the  
+TODO list. Basically we need some experienced users of SCCP and the  
+existing channel. Also access to a range of Cisco 79xx phones would  
+be ideal. Especially those of you who are experiencing the bugs  
+crashing asterisk, we'll specifically need people to setup debugging/ 
+strace sessions to post to the group.
+I am in no way taking this upon myself though, before I steal  
+someone's thunder, we just think it would be a good idea to start a  
+branch seeming as the community is more active than the project :-)
+So far 3 other users want to contribute, so this should kick off  
+quite quickly. We will set this up however (as you mentioned) to  
+spread the overall responsibility amongst a few users to stop the  
+same thing happening.
+
+Regards,
+Anthony
+
+On 8 Jan 2007, at 18:18, Geoff Thornton wrote:
+
+> I would also be willing to contribute code for future chan_sccp
+> development.  I had some 1.4BETA patches I was working on, but was
+> focusing more on native bridged call (conference) functions.  Not
+> knowing whether to work with the chan_sccp or chan_skinny development
+> has been (as was stated by previous others) has been a real drag.   
+> I had
+> pretty much stopped writing code until either some clear direction
+> emerged.
+>
+> I would love to get this work incorporated into the asterisk dev
+> project, but I assume the same issues would bite whomever takes  
+> over the
+> project (i.e. multiple past contributors = disclaimer difficulty).
+>
+> Sincerely,
+>
+>
+> --Geoff Thornton
+>
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Anthony
+> Shaw
+> Sent: Monday, January 08, 2007 7:22 AM
+> To: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+>
+> Hi David,
+>
+> I would be willing to help on some of the contributions, esp towards
+> having this working with 1.4. Whilst there are tons of C developers
+> out there who would love to contribute, its the politics and overhead
+> that puts people off. If you, or someone, sets up another branch of
+> chan_sccp for 1.4.0 then count me in as well. I have the setup to
+> hand as well as an asterisk 'expert'.
+>
+> Best Regards
+> Anthony
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From martin.bene at icomedias.com  Mon Jan  8 22:41:58 2007
+From: martin.bene at icomedias.com (Martin Bene)
+Date: Mon, 8 Jan 2007 22:41:58 +0100
+Subject: [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+In-Reply-To: <9D204B2A-945B-4551-9C51-CCCE818FAC12@gmail.com>
+Message-ID: <FA095C015271B64E99B197937712FD020F2F7804@freedom.grz.icomedias.com>
+
+Hi,
+
+Thanks a lot for continuing the chan_sccp projekt; 
+
+> Basically we need some experienced 
+> users of SCCP and the existing channel. Also access to a 
+> range of Cisco 79xx phones would be ideal. 
+
+A test-installation with 7920, 7940, 7941 and 7970 phones is available,
+I'd be happy to test updates/fixes.
+
+Bye, Martin
+
+
+From anthony.p.shaw at gmail.com  Tue Jan  9 00:23:38 2007
+From: anthony.p.shaw at gmail.com (Anthony Shaw)
+Date: Mon, 8 Jan 2007 23:23:38 +0000
+Subject: [Chan-sccp-users] New branch project
+Message-ID: <C4D7D8A2-4B41-427D-B3F9-B500DE42347E@gmail.com>
+
+Hi,
+
+A new project has been setup on sourceforge now, for those of you  
+whom asked to contribute if you could register on SourceForge and  
+email me your usernames so I can add you as a project developer.  
+Anyone wanting to help in administration can also do so if you let me  
+know.
+As the branch project no longer relates to this mailing list I won't  
+post updates here.
+
+Regards,
+Anthony
+
+
+
+
+From anthony.p.shaw at gmail.com  Tue Jan  9 01:28:08 2007
+From: anthony.p.shaw at gmail.com (Anthony Shaw)
+Date: Tue, 9 Jan 2007 00:28:08 +0000
+Subject: [Chan-sccp-users]  New branch project
+Message-ID: <DFC5394D-6498-48A8-873A-2898C40DEB73@gmail.com>
+
+Hi,
+
+The project is at http://sourceforge.net/projects/chan-sccp-b/
+
+Thanks,
+Anthony
+
+
+From aspendora at gmail.com  Tue Jan  9 02:51:24 2007
+From: aspendora at gmail.com (Lacy Moore - Aspendora)
+Date: Mon, 8 Jan 2007 19:51:24 -0600
+Subject: [Chan-sccp-users] New branch project
+In-Reply-To: <DFC5394D-6498-48A8-873A-2898C40DEB73@gmail.com>
+References: <DFC5394D-6498-48A8-873A-2898C40DEB73@gmail.com>
+Message-ID: <56a990d20701081751wa218987y9c6339dc0d11a6a9@mail.gmail.com>
+
+Will there be a mailing list setup on sourceforge?
+
+On 1/8/07, Anthony Shaw <anthony.p.shaw at gmail.com> wrote:
+>
+> Hi,
+>
+> The project is at http://sourceforge.net/projects/chan-sccp-b/
+>
+> Thanks,
+> Anthony
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070108/3acbadeb/attachment.html>
+
+From anthony.p.shaw at gmail.com  Tue Jan  9 03:00:27 2007
+From: anthony.p.shaw at gmail.com (Anthony Shaw)
+Date: Tue, 9 Jan 2007 02:00:27 +0000
+Subject: [Chan-sccp-users] New branch project
+In-Reply-To: <56a990d20701081751wa218987y9c6339dc0d11a6a9@mail.gmail.com>
+References: <DFC5394D-6498-48A8-873A-2898C40DEB73@gmail.com>
+	<56a990d20701081751wa218987y9c6339dc0d11a6a9@mail.gmail.com>
+Message-ID: <61869C13-BD4C-4B0C-9EAD-4A806E892531@gmail.com>
+
+Hi Lacy,
+
+I've setup 2 mailing lists, one for discussion and one for releases,  
+there is also a forum
+the mailing list is here
+http://lists.sourceforge.net/mailman/listinfo/chan-sccp-b-discussion
+and
+http://lists.sourceforge.net/mailman/listinfo/chan-sccp-b-releases
+It may take another 24 to setup though (waiting for sourceforge)
+
+Best Regards,
+Anthony
+
+On 9 Jan 2007, at 01:51, Lacy Moore - Aspendora wrote:
+
+> Will there be a mailing list setup on sourceforge?
+>
+> On 1/8/07, Anthony Shaw <anthony.p.shaw at gmail.com> wrote:
+> Hi,
+>
+> The project is at http://sourceforge.net/projects/chan-sccp-b/
+>
+> Thanks,
+> Anthony
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>
+>
+> -- 
+> Lacy Moore
+> Somewhere I wish I wasn't
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070109/d086712a/attachment.html>
+
+From dgm at sec-u-dis.net  Fri Jan  5 13:01:20 2007
+From: dgm at sec-u-dis.net (Dietmar G. Matzke)
+Date: Fri, 5 Jan 2007 13:01:20 +0100
+Subject: [Chan-sccp-users] Bounty
+In-Reply-To: <710bae00701050204g23397f63l1273d07149b5379f@mail.gmail.com>
+Message-ID: <C1C3FCA0.42DC%dgm@sec-u-dis.net>
+
+Hi
+
+we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to keep/get
+SCCP alive for the community and us.
+
+Thus, we will DOUBLE Jay?s bountys by  offering additional honeypots:
+
+For solution 1): 100 USD
+
+For solution 2): 500 USD (OUR PREFERENCE)
+
+Conditions: As mentioned by Jay!
+
+Dietmar
+
+
+Am 05.01.2007 11:04 Uhr schrieb "Jay R. Worthington" unter
+<jayrworthington at gmail.com>:
+
+> Hi
+> 
+> in a last attempt to get a working, usable SCCP channel for asterisk 1.4, i'm
+> offering two bountys:
+> 
+> 
+> 1. $100 USD (PayPal)
+> 
+> - patch against chan_sccp 20060408
+> - GPL (obviously)
+> 
+> 
+> 2. $500 USD (PayPal)
+> 
+> - patch against chan_skinny from asterisk 1.4
+> - properly disclamed to digium for inclusion in the official asterisk svn
+> - includes all features of chan_sccp
+> 
+> 
+> The first one should be pretty easy, the loader work has already been done and
+> is available at https://svn.sourceforge.net/svnroot/pbxcc/modules/chan_sccp,
+> so it's just the rtp stuff that has to be done. I guess a look at how the
+> changes where done to chan_skinny would help. Bounty can be collected after
+> i've done the first successfull call (without crash ;-)).
+> 
+> The second one will be much harder, you more-or-less have to rebuild all
+> features from scratch, based on chan_skinny. Technically, i dont care how it
+> is done, if someone can convince/bribe Sergio to disclame his patches you can
+> safe a lot of time and work. Bounty can be collected after inclusion in the
+> digium svn with all features of chan_sccp.
+> 
+> If you wish to collect the second bounty, please contact me in advance.
+> 
+> Jay....
+> 
+> 
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070105/5a173eee/attachment.html>
+
+From drhodes at deakin.edu.au  Thu Jan 11 13:11:53 2007
+From: drhodes at deakin.edu.au (David Rhodes)
+Date: Thu, 11 Jan 2007 23:11:53 +1100
+Subject: [Chan-sccp-users] Chan-sccp-users Digest, Vol 7, Issue 5
+In-Reply-To: <mailman.738.1168272662.30659.chan-sccp-users@lists.berlios.de>
+References: <mailman.738.1168272662.30659.chan-sccp-users@lists.berlios.de>
+Message-ID: <45A62989.4060208@deakin.edu.au>
+
+Sorry about the delay replying.  Been playing with open 79XX dir. 
+
+> But seriously, we should test your patch and once its stability
+>   
+please..
+> Agreed. I've allready done 10 calls with it, all the basic functions work,
+> with some minor problems:
+>   
+Good stuff!
+> - compile with PARK=y fails
+>   
+I compile fine with PARK=y. What errors do you see?
+> - Pickup does not work even if compiled in (the Softkey does not show up)
+>   
+I get a group pickup (gpickup) softkey on a 7960.  Is it different to
+the pickup softkey you are after (is it the call pickup tag in sccp.conf?)
+What is the config entry which would bring up the latter.
+
+> - Setting an _alert-info does not work at all
+>   
+is this a call_back?.  ... learning, learning.....
+
+Let me know
+> Can someone confirm this? The last might be some other change in
+> asterisk...?
+>
+>
+> Regards,
+>
+> Jay.
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070108/1f182c14/attachment-0001.html 
+>
+> ------------------------------
+>
+>   
+
+
+From davidded at davidded.de  Thu Jan 11 13:24:09 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Thu, 11 Jan 2007 13:24:09 +0100
+Subject: [Chan-sccp-users] Chan-sccp-users Digest, Vol 7, Issue 5
+In-Reply-To: <45A62989.4060208@deakin.edu.au>
+References: <mailman.738.1168272662.30659.chan-sccp-users@lists.berlios.de>
+	<45A62989.4060208@deakin.edu.au>
+Message-ID: <527174C2-F482-438F-A196-E29A0D1180A8@davidded.de>
+
+Hi,
+
+On 11.01.2007, at 13:11, David Rhodes wrote:
+
+>> - Setting an _alert-info does not work at all
+>>
+> is this a call_back?.  ... learning, learning.....
+>
+> Let me know
+
+I can only confirm that ALERT_INFO (either set  via _ALERT_INFO or  
+without the trailing underscore) doesn't work for me, even with the  
+original chan_sccp2 (2006-04-28) with asterisk 1.2. However, setting  
+the ringer directly via ringer=something in the dial application  
+works fine.
+
+
+Cheers,
+-David.
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/pkcs7-signature
+Size: 2109 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070111/abf246d5/attachment.bin>
+
+From aspendora at gmail.com  Thu Jan 11 16:23:07 2007
+From: aspendora at gmail.com (Lacy Moore - Aspendora)
+Date: Thu, 11 Jan 2007 09:23:07 -0600
+Subject: [Chan-sccp-users] Chan-sccp-users Digest, Vol 7, Issue 5
+In-Reply-To: <527174C2-F482-438F-A196-E29A0D1180A8@davidded.de>
+References: <mailman.738.1168272662.30659.chan-sccp-users@lists.berlios.de>
+	<45A62989.4060208@deakin.edu.au>
+	<527174C2-F482-438F-A196-E29A0D1180A8@davidded.de>
+Message-ID: <56a990d20701110723u3cad855fuc150370185c52620@mail.gmail.com>
+
+On 1/11/07, David Dederscheck <davidded at davidded.de> wrote:
+>
+> I can only confirm that ALERT_INFO (either set  via _ALERT_INFO or
+> without the trailing underscore) doesn't work for me, even with the
+> original chan_sccp2 (2006-04-28) with asterisk 1.2. However, setting
+> the ringer directly via ringer=something in the dial application
+> works fine.
+
+
+I think ALERT_INFO only works with SIP devices.  chan_sccp has other ways to
+signal different ringtones and auto answer.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070111/f0d656dc/attachment.html>
+
+From mueller at intertrend.de  Thu Jan 11 17:04:16 2007
+From: mueller at intertrend.de (Carsten Mueller)
+Date: Thu, 11 Jan 2007 17:04:16 +0100
+Subject: [Chan-sccp-users] Chan-sccp-users Digest, Vol 7, Issue 5
+In-Reply-To: <56a990d20701110723u3cad855fuc150370185c52620@mail.gmail.co
+ m>
+References: <mailman.738.1168272662.30659.chan-sccp-users@lists.berlios.de>
+	<45A62989.4060208@deakin.edu.au>
+	<527174C2-F482-438F-A196-E29A0D1180A8@davidded.de>
+	<56a990d20701110723u3cad855fuc150370185c52620@mail.gmail.com>
+Message-ID: <7.0.0.16.2.20070111170303.04529d98@intertrend.de>
+
+And which are the other ways?
+How can I set a ringtone for a configured line on a 7970?
+
+At 16:23 11.01.2007, you wrote:
+>On 1/11/07, David Dederscheck 
+><<mailto:davidded at davidded.de>davidded at davidded.de> wrote:
+>I can only confirm that ALERT_INFO (either set  via _ALERT_INFO or
+>without the trailing underscore) doesn't work for me, even with the
+>original chan_sccp2 (2006-04-28) with asterisk 1.2. However, setting
+>the ringer directly via ringer=something in the dial application
+>works fine.
+>
+>
+>I think ALERT_INFO only works with SIP devices.  chan_sccp has other 
+>ways to signal different ringtones and auto answer.
+>
+>
+>_______________________________________________
+>Chan-sccp-users mailing list
+>Chan-sccp-users at lists.berlios.de
+>https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From mike at tubby.org  Thu Jan 11 18:02:34 2007
+From: mike at tubby.org (Mike Tubby)
+Date: Thu, 11 Jan 2007 17:02:34 -0000
+Subject: [Chan-sccp-users] Chan-sccp-users Digest, Vol 7, Issue 5
+References: <mailman.738.1168272662.30659.chan-sccp-users@lists.berlios.de><45A62989.4060208@deakin.edu.au><527174C2-F482-438F-A196-E29A0D1180A8@davidded.de>
+	<56a990d20701110723u3cad855fuc150370185c52620@mail.gmail.com>
+Message-ID: <002e01c735a2$4d05fa80$6401a8c0@int.thorcom.com>
+
+From: Lacy Moore - Aspendora 
+  To: chan-sccp-users at lists.berlios.de 
+  Sent: Thursday, January 11, 2007 3:23 PM
+  Subject: Re: [Chan-sccp-users] Chan-sccp-users Digest, Vol 7, Issue 5
+
+
+  On 1/11/07, David Dederscheck <davidded at davidded.de> wrote: 
+    I can only confirm that ALERT_INFO (either set  via _ALERT_INFO or
+    without the trailing underscore) doesn't work for me, even with the 
+    original chan_sccp2 (2006-04-28) with asterisk 1.2. However, setting
+    the ringer directly via ringer=something in the dial application
+    works fine.
+
+  I think ALERT_INFO only works with SIP devices.  chan_sccp has other ways to signal different ringtones and auto answer.
+
+   
+  That's what I thought too...  ALERT_INFO (or more precisely _ALERT_INFO) causes a SIP channel to add the 'alert info' header to the outgoing invite to the SIP device...
+
+
+  Mike
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070111/bedecde1/attachment.html>
+
+From aspendora at gmail.com  Thu Jan 11 19:28:52 2007
+From: aspendora at gmail.com (Lacy Moore - Aspendora)
+Date: Thu, 11 Jan 2007 12:28:52 -0600
+Subject: [Chan-sccp-users] Chan-sccp-users Digest, Vol 7, Issue 5
+In-Reply-To: <7.0.0.16.2.20070111170303.04529d98@intertrend.de>
+References: <mailman.738.1168272662.30659.chan-sccp-users@lists.berlios.de>
+	<45A62989.4060208@deakin.edu.au>
+	<527174C2-F482-438F-A196-E29A0D1180A8@davidded.de>
+	<56a990d20701110723u3cad855fuc150370185c52620@mail.gmail.com>
+	<7.0.0.16.2.20070111170303.04529d98@intertrend.de>
+Message-ID: <56a990d20701111028w5f5bdff5o9dc5af7b4fa38d34@mail.gmail.com>
+
+On 1/11/07, Carsten Mueller <mueller at intertrend.de> wrote:
+>
+> And which are the other ways?
+> How can I set a ringtone for a configured line on a 7970?
+
+
+Ok, here is an example:
+
+exten => s,1,Dial(SCCP/101/aa1w)
+
+This will cause the phone to autoanswer, but only the caller can talk (1
+way).  Change aa1w to aa2w and you can have a two way conversation.
+
+You can also use ringer= instead, such as:
+
+ exten => s,1,Dial(SCCP/101/ringer=inside)
+
+WIll ring with the inside tone.  You can use inside, feature, silent, and
+urgent.  It defaults to outside.  I just noticed this in the code, it
+appears you can use 1w or 2w instead of aa1w and aa2w.  I might be reading
+that wrong, though.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070111/a939aafa/attachment.html>
+
+From mithraen at freesource.info  Thu Jan 11 21:30:24 2007
+From: mithraen at freesource.info (Denis Smirnov)
+Date: Thu, 11 Jan 2007 23:30:24 +0300
+Subject: [Chan-sccp-users] New branch project
+In-Reply-To: <C4D7D8A2-4B41-427D-B3F9-B500DE42347E@gmail.com>
+References: <C4D7D8A2-4B41-427D-B3F9-B500DE42347E@gmail.com>
+Message-ID: <20070111203024.GC23082@localhost.localdomain>
+
+On Mon, Jan 08, 2007 at 11:23:38PM +0000, Anthony Shaw wrote:
+
+AS> A new project has been setup on sourceforge now, for those of you  
+AS> whom asked to contribute if you could register on SourceForge and  
+AS> email me your usernames so I can add you as a project developer.  
+AS> Anyone wanting to help in administration can also do so if you let me  
+AS> know.
+AS> As the branch project no longer relates to this mailing list I won't  
+AS> post updates here.
+
+seiros.
+
+I support pbxcc project at sf.net, where now partialy adopted for 1.4
+chan_sccp. I remove this from pbxcc after that.
+
+-- 
+? ?????????, ?????
+
+http://freesource.info
+----------------------------------------------------------------------------
+??????? ???????? ????-??????-???.
+		-- ldv in sisyphus@
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Digital signature
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070111/dd9d0a8a/attachment.pgp>
+
+From DSmith at gibsondunn.com  Thu Jan 25 19:51:19 2007
+From: DSmith at gibsondunn.com (Smith, Douglas D.)
+Date: Thu, 25 Jan 2007 10:51:19 -0800
+Subject: [Chan-sccp-users] Adding a Pause in a  speed dial
+Message-ID: <9F0B86FBE62A2A4C865F31B36F7F674806951D09@SFMAIL1.Gibsondunn.net>
+
+is there any way to do this?
+
+"MMS <Gibsondunn.net>" made the following annotations.
+------------------------------------------------------------------------------
+
+This message may contain confidential and privileged information.  If it has been sent to you in error, please reply to advise the sender of the error and then immediately delete this message.
+==============================================================================
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070125/57008e56/attachment.html>
+
+From shughes at nationsholdinggroup.com  Thu Jan 25 21:21:20 2007
+From: shughes at nationsholdinggroup.com (Hughes, Sam)
+Date: Thu, 25 Jan 2007 12:21:20 -0800
+Subject: [Chan-sccp-users] Adding a Pause in a  speed dial
+In-Reply-To: <9F0B86FBE62A2A4C865F31B36F7F674806951D09@SFMAIL1.Gibsondunn.net>
+Message-ID: <F7B2AB32C2D1574B98FB144C5E76A3F00549E8EC@svrlae2k3.nationsholdinggroup.com>
+
+I'm not sure if you can do it from a speeddial, but if you're calling an
+outside number you could set the extension the speeddial calls to insert
+pauses in the Dial() statement.
+
+ 
+
+So, if you needed to call 555-5555 and then go to option 2, you could
+have the following:
+
+ 
+
+555555,1,Dial(Zap/g1/5555555wwwwww2)
+
+ 
+
+________________________________
+
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Smith,
+Douglas D.
+Sent: Thursday, January 25, 2007 10:51 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] Adding a Pause in a speed dial
+
+ 
+
+is there any way to do this? 
+
+"MMS <Gibsondunn.net>" made the following annotations.
+------------------------------------------------------------------------
+------
+
+This message may contain confidential and privileged information. If it
+has been sent to you in error, please reply to advise the sender of the
+error and then immediately delete this message.
+========================================================================
+======
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070125/5de02caa/attachment.html>
+
+From aspendora at gmail.com  Fri Jan 26 03:37:53 2007
+From: aspendora at gmail.com (Lacy Moore - Aspendora)
+Date: Thu, 25 Jan 2007 20:37:53 -0600
+Subject: [Chan-sccp-users] Adding a Pause in a speed dial
+In-Reply-To: <F7B2AB32C2D1574B98FB144C5E76A3F00549E8EC@svrlae2k3.nationsholdinggroup.com>
+References: <9F0B86FBE62A2A4C865F31B36F7F674806951D09@SFMAIL1.Gibsondunn.net>
+	<F7B2AB32C2D1574B98FB144C5E76A3F00549E8EC@svrlae2k3.nationsholdinggroup.com>
+Message-ID: <56a990d20701251837x37a3cd3i9e2e198bc7fb58f9@mail.gmail.com>
+
+And, because text is accepted and passed on in speeddial, you could have the
+speeddial set to dial bank and then include:
+
+exten => bank,1,Dial(Zap/g1/5555555wwwww2)
+
+or something similar.  I guess even put in SpeedDial01 as the name and then
+use SpeedDial01 in your dial plan.
+
+
+
+On 1/25/07, Hughes, Sam <shughes at nationsholdinggroup.com> wrote:
+>
+>  I'm not sure if you can do it from a speeddial, but if you're calling an
+> outside number you could set the extension the speeddial calls to insert
+> pauses in the Dial() statement.
+>
+>
+>
+> So, if you needed to call 555-5555 and then go to option 2, you could have
+> the following:
+>
+>
+>
+> 555555,1,Dial(Zap/g1/5555555wwwwww2)
+>
+>
+>  ------------------------------
+>
+> *From:* chan-sccp-users-bounces at lists.berlios.de [mailto:
+> chan-sccp-users-bounces at lists.berlios.de] *On Behalf Of *Smith, Douglas D.
+> *Sent:* Thursday, January 25, 2007 10:51 AM
+> *To:* chan-sccp-users at lists.berlios.de
+> *Subject:* [Chan-sccp-users] Adding a Pause in a speed dial
+>
+>
+>
+> is there any way to do this?
+>
+> "MMS <Gibsondunn.net <http://gibsondunn.net/>>" made the following
+> annotations.
+>
+> ------------------------------------------------------------------------------
+>
+> This message may contain confidential and privileged information. If it
+> has been sent to you in error, please reply to advise the sender of the
+> error and then immediately delete this message.
+>
+> ==============================================================================
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>
+>
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070125/a3d949a4/attachment.html>
+

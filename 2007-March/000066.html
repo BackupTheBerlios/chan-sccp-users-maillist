@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] New DST error?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20New%20DST%20error%3F&In-Reply-To=%3C4C792A099259634C83F97067671B37FE02CA8AF3%40GDSEXC.gds.pri%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000067.html">
+   <LINK REL="Next"  HREF="000069.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] New DST error?</H1>
+    <B>Patrick Mowry</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20New%20DST%20error%3F&In-Reply-To=%3C4C792A099259634C83F97067671B37FE02CA8AF3%40GDSEXC.gds.pri%3E"
+       TITLE="[Chan-sccp-users] New DST error?">pmowry at getgds.com
+       </A><BR>
+    <I>Tue Mar 13 20:26:52 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000067.html">[Chan-sccp-users] New DST error?
+</A></li>
+        <LI>Next message: <A HREF="000069.html">[Chan-sccp-users] New DST error?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#66">[ date ]</a>
+              <a href="thread.html#66">[ thread ]</a>
+              <a href="subject.html#66">[ subject ]</a>
+              <a href="author.html#66">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>  For the 7970 the new DST rules are present in the following phone firmware releases: 8.0(4)SR3 and 8.2(1). Customers must download and implement these firmware loads..  But even then, it does not always work properly.  All the 7970's in my office worked fine, but a few customers have had issues.  I believe the Cisco bug ID is CSCsh12444 and will be fixed in firmware 8.2.2.  From the reports I've read, multiple reboots of the phone may be needed if just the firmware upgrade is not enough.
+
+The older phones like the 7940 and 7960 do not need a firware upgrade.  Details for the phones are at:
+
+<A HREF="http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice09186a00807d3d9e.shtml">http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice09186a00807d3d9e.shtml</A>
+
+-Patrick
+
+________________________________________
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of (&#164;Phil&#164;)
+Sent: Tuesday, March 13, 2007 2:11 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Thanks for the tips, but I rebooted the entire box.&#160; No changes.&#160;&#160; Test phone is a 7970, maybe there is something that needs updating in the Locale?
+&#160;
+-Phil
+----- Original Message ----- 
+From: Hughes, Sam 
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A> 
+Sent: Tuesday, March 13, 2007 11:58 AM
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Yeah, the phones get the time from the server.&#160; Many services only read from /etc/locatime on startup.&#160; Have you tried rebooting the server or restarting Asterisk?&#160; If the phones aren't receiving the tzoffset changes then sccp.conf hasn't been reloaded.
+
+________________________________________
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of (&#164;Phil&#164;)
+Sent: Tuesday, March 13, 2007 11:54 AM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: [Chan-sccp-users] New DST error?
+
+My asterisk (linux) server smoothly handled the new daylight savings time switchover, and has the correct time, but all the SCCP phones seem to have the time still &quot;stuck&quot; one hour earlier.&#160; Anyone else experiencing this?
+&#160;
+Doesn't the phone get it's time from the server?&#160;&#160; Reboots don't seem to effect it, nor does a temp fix by using the tzoffset configuration variable.
+&#160;
+-Phil
+________________________________________
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000067.html">[Chan-sccp-users] New DST error?
+</A></li>
+	<LI>Next message: <A HREF="000069.html">[Chan-sccp-users] New DST error?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#66">[ date ]</a>
+              <a href="thread.html#66">[ thread ]</a>
+              <a href="subject.html#66">[ subject ]</a>
+              <a href="author.html#66">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

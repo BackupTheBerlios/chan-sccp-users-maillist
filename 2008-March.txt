@@ -1,0 +1,37 @@
+From pmowry at getgds.com  Thu Mar 13 03:52:01 2008
+From: pmowry at getgds.com (Patrick Mowry)
+Date: Wed, 12 Mar 2008 21:52:01 -0500
+Subject: [Chan-sccp-users] Can you report to me your experiences with the
+	sccp driver?
+In-Reply-To: <75FED65405B63042BA25F3F6E9230C1F2B7666@msexch.bnsnet.co.uk>
+References: <75FED65405B63042BA25F3F6E9230C1F2B7666@msexch.bnsnet.co.uk>
+Message-ID: <4C792A099259634C83F97067671B37FE037B85E2@GDSEXC.gds.pri>
+
+If you can send me a list of the features you are using, plus the
+features you tried to use but failed.  Please send as much information
+at me as you can.
+
+Initially I'll post back some time next week a list of "supported
+features" with the current sccp drivers relative to Asterisk 1.2 and
+1.4, and against the SIP load with Asterisk.  After I get some agreement
+this list is accurate, I would like to post it to a wiki along with
+configuration examples for each feature.
+
+So if you can send me your asterisk and SCCP driver version at a
+minimum.  Then something as simple as transfer works for me but not
+ad-hoc conferencing would be fine.  Or if you are comfortable with
+sharing I'd like your phone load version, configuration examples and
+anything else you are willing to throw my way.
+
+I'll be digging through this list to start a rough draft.  But I figured
+if I could get fresh information from interested parties it may help
+save some time.
+
+Please send it to pmowry at getgds dot com instead of the list if you
+can.
+
+Thanks for your time,
+
+-Patrick
+
+

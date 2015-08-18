@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7921 Registration Problem
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20Registration%20Problem&In-Reply-To=%3C474ED32D.1000206%40natcotech.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000396.html">
+   <LINK REL="Next"  HREF="000398.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7921 Registration Problem</H1>
+    <B>Russ Woodman</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20Registration%20Problem&In-Reply-To=%3C474ED32D.1000206%40natcotech.com%3E"
+       TITLE="[Chan-sccp-users] 7921 Registration Problem">russ at natcotech.com
+       </A><BR>
+    <I>Thu Nov 29 15:56:45 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000396.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+        <LI>Next message: <A HREF="000398.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#397">[ date ]</a>
+              <a href="thread.html#397">[ thread ]</a>
+              <a href="subject.html#397">[ subject ]</a>
+              <a href="author.html#397">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+Unfortunately the higher SCCP debug level didn't real yield more
+information. Here is what repeats now:
+
+[Nov 29 08:54:12]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+[Nov 29 08:54:12]     -- SCCP: Using ip 205.167.xxx.xxx
+[Nov 29 08:54:14] WARNING[4433]: sccp_socket.c:54 sccp_read_data: SCCP:
+read() returned Bad address
+[Nov 29 08:54:14]     -- SCCP: Old session marked down
+[Nov 29 08:54:14]     -- SCCP: Killing Session 12.199.xxx.xxx
+
+This happens with a network that is P/NAT'd and one that isn't so it's
+not a problem with that. I can't find any documentation that leads to a
+solution either. I've checked the source code of sccp_socket.c where the
+error resides, but the error description and the reason for it are
+pretty cryptic to me.
+
+It seems like this must be something simple but so far I'm stuck.
+
+Regards,
+Russ
+
+David Dederscheck wrote:
+&gt;<i> Hi Russ,
+</I>&gt;<i>
+</I>&gt;<i> this looks strange to me. I'm not sure what causes it. Could you maybe  
+</I>&gt;<i> get me a bit more log output by typing &quot;sccp debug 10&quot; in the console  
+</I>&gt;<i> and then try to register again?
+</I>&gt;<i>
+</I>&gt;<i> Unfortunately I haven't such a phone at hand to try as well. I  
+</I>&gt;<i> remember, however, Marcus thinking about getting one himself. What  
+</I>&gt;<i> about it, Marcus?
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> -David.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 27.11.2007, at 20:54, Russ Woodman wrote:
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> Hi,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I have chan_sccp.so loaded in my Asterisk server, 1.4.7, and  
+</I>&gt;&gt;<i> configured.
+</I>&gt;&gt;<i> Everything loads up and looks good, but when my 7921 attempts to
+</I>&gt;&gt;<i> register with Asterisk, I get the following output from the Asterisk  
+</I>&gt;&gt;<i> server:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> [Nov 27 13:52:18]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+</I>&gt;&gt;<i> [Nov 27 13:52:18]     -- SCCP: Using ip 205.167.xxx.xxx
+</I>&gt;&gt;<i> [Nov 27 13:52:20] WARNING[4433]: sccp_socket.c:54 sccp_read_data:  
+</I>&gt;&gt;<i> SCCP:
+</I>&gt;&gt;<i> read() returned Bad address
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This information repeats and the phone never registers. Here is some
+</I>&gt;&gt;<i> information from SCCP:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ldhl-voip1*CLI&gt; sccp show devices
+</I>&gt;&gt;<i> ldhl-voip1*CLI&gt;
+</I>&gt;&gt;<i> NAME             ADDRESS         MAC              Reg. State
+</I>&gt;&gt;<i> ================ =============== ================ ==========
+</I>&gt;&gt;<i> Phone7905        --              SEP00119341E684  None
+</I>&gt;&gt;<i> Russ Woodman Wireless --              SEP001BD458240D  None
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Any help would be appreciated.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Regards,
+</I>&gt;&gt;<i> Russ
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> -- 
+</I>&gt;&gt;<i> Russ Woodman
+</I>&gt;&gt;<i> Systems Administrator
+</I>&gt;&gt;<i> NATCO Technologies
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Chan-sccp-users mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>   
+</I>
+-- 
+Russ Woodman
+Systems Administrator
+NATCO Technologies
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000396.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+	<LI>Next message: <A HREF="000398.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#397">[ date ]</a>
+              <a href="thread.html#397">[ thread ]</a>
+              <a href="subject.html#397">[ subject ]</a>
+              <a href="author.html#397">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

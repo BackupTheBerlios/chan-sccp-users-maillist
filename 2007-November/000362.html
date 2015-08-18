@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Various issues + Call for Patches
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Various%20issues%20%2B%20Call%20for%20Patches&In-Reply-To=%3C242E027B-8E34-4481-A224-16EAC8608A9C%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000361.html">
+   <LINK REL="Next"  HREF="000363.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Various issues + Call for Patches</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Various%20issues%20%2B%20Call%20for%20Patches&In-Reply-To=%3C242E027B-8E34-4481-A224-16EAC8608A9C%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Various issues + Call for Patches">davidded at davidded.de
+       </A><BR>
+    <I>Thu Nov  8 02:45:53 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000361.html">[Chan-sccp-users] Various issues
+</A></li>
+        <LI>Next message: <A HREF="000363.html">[Chan-sccp-users] Various issues + Call for Patches
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#362">[ date ]</a>
+              <a href="thread.html#362">[ thread ]</a>
+              <a href="subject.html#362">[ subject ]</a>
+              <a href="author.html#362">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Martin,
+
+On 07.11.2007, at 15:41, Martin Sutherland wrote:
+
+&gt;<i> Dear list members,
+</I>&gt;<i>
+</I>&gt;<i> Latest chan_sccp
+</I>
+do you mean the latest berlios release for 1.2 or the latest post on  
+this list?
+
+&gt;<i> - I nearly lost my biggest customer yesterday over phone system  
+</I>&gt;<i> reliability problems. I would be very grateful to know when it will  
+</I>&gt;<i> be possible to download the latest chan_sccp for Asterisk 1.4  
+</I>&gt;<i> complete with any known good patches - it really is critical that I  
+</I>&gt;<i> can move forward in the next two weeks. I know that some versions  
+</I>&gt;<i> have been attached to previous postings, but I am not really  
+</I>&gt;<i> confident of applying patches. What reason (perhaps only time) that  
+</I>&gt;<i> the current tree can not be released?
+</I>
+Well, of course it bails down to time. However, Marcello and I have  
+agreed that our initial release shall compile with both asterisk 1.2  
+and 1.4 so that future patches will only have to be applied against  
+one tree. Apart from that we're ready for a release.
+
+Beyond that we're still waiting for input by all the other commited  
+people who have created other versions of chan_sccp, especially those  
+working with asterisk 1.4. As we created a fork of the berlios  
+chan_sccp to bring this work forward, we don't want it merely to be  
+based on &quot;our stuff&quot; because we started it.
+
+So on this occasion again: Please submit your patches or tell about  
+your custom version of chan_sccp. We really with to re-unite all the  
+useful however &quot;stray&quot; patches and pieces of code out there. I know  
+how much work it is to actually identify the changes entered  
+quick&amp;dirty into one's own source tree, but it's definitely worth it.
+
+Attached to this mail is the most recent version of Marcello's and  
+mine joint work. I just added a feature that I had to unravel from my  
+own legacy 1.2 tree: Using the global option &quot;recorddigittimeoutchar  
+= on&quot;, the '#' to terminate variable-length numbers as they commonly  
+occur in European countries, is recorded to the call logs if it was  
+dialed at first. So redialing works without manual post-dialing the #  
+from the logs.
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: chan_sccp-asterisk-1.4-20071107.tar.gz
+Type: application/x-gzip
+Size: 97912 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071108/2bb71830/attachment.bin">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071108/2bb71830/attachment.bin</A>&gt;
+-------------- next part --------------
+&gt;<i> Phone firmware versions - Any chance we can get agreement on the  
+</I>&gt;<i> best firmware versions for the various models?
+</I>
+I have found that firmware version 7.2.2 works quite stable for the  
+7940 and 7960. Although the 8.0.4 version seems to be stable too, I  
+did not see a noticeable benefit in using this version. Please  
+correct me if I missed an important issue.
+
+Apart from that the most recent versions should be allright since we  
+solved the directories issues. If you get any trouble nevertheless,  
+just ask to the list what version is &quot;known good&quot; to the others members.
+
+&gt;<i>
+</I>&gt;<i> DST/locale settings - Can anyone explain what files are needed to  
+</I>&gt;<i> correctly localise Cisco phone 7940/7941/7960/7961 etc. During UK  
+</I>&gt;<i> DST time all my 7940/7960 phones showed the correct time and my  
+</I>&gt;<i> 7961 phone was 1 hour out. Now that DST has ended, all my  
+</I>&gt;<i> 7940/7960s are 1 hour out and 7961 is correct! I would like my 7961  
+</I>&gt;<i> to show the date in UK format eg. d/m/y as my 7940/7960 already do  
+</I>&gt;<i> (taken from sccp.conf). I know that there was a change in the way  
+</I>&gt;<i> locale settings are used between 7940/7960 series and 7941/7961  
+</I>&gt;<i> series. I have access to Cisco downloads.
+</I>
+AFAIK the 7940/60s don't get the timezone information whatsoever.  
+They just display the local time of the asterisk server, don't they?  
+So you should check your server for that issue.
+
+The 7941/61/70s all use the following settings for the timezone/ 
+display issue:
+
+     &lt;dateTimeSetting&gt;
+         &lt;name&gt;CMLocal&lt;/name&gt;
+         &lt;dateTemplate&gt;D.M.Y&lt;/dateTemplate&gt;
+         &lt;timeZone&gt;W. Europe Standard/Daylight Time&lt;/timeZone&gt;
+     &lt;/dateTimeSetting&gt;
+
+Insert this just with a valid timezone string insted of W. Europe...  
+before the &lt;callManagerGroup&gt; tag of your xml config. At the end of  
+this mail I have compiled a list of valid timezone entries from the  
+simplevoip wiki at <A HREF="http://voip-info.simplevoip.info/wiki/">http://voip-info.simplevoip.info/wiki/</A> 
+indexfff5cb0c28a9053c5a7e89e7cdc3d1f0.html? 
+comment_page=7&amp;page_id=3242&amp;maxComments=10&amp;comments_maxComments=10&amp;comme 
+nts_sort_mode=commentDate_desc&amp;comments_style=flat
+
+&gt;<i> Caller id when transferring calls - I have also noticed that  
+</I>&gt;<i> incoming caller id is lost when a call is transferred (assisted  
+</I>&gt;<i> transfer). My users would expect to see the details of the original  
+</I>&gt;<i> caller after the incoming call has been connected. I always thought  
+</I>&gt;<i> that this was one of the benefits of the sccp that the PBX can re- 
+</I>&gt;<i> write the display as necessary and thus change the info displayed?
+</I>
+Yes, but it also has to be implemented correctly, which was not so  
+easy at the time Sergio had to do it. He commented on that issue just  
+recently on the list. But I'm convinced that it's possible and not a  
+great deal of work to get the feature working as you request it.
+
+&gt;<i> Cisco router with CME 4 available - I am happy to donate a Cisco  
+</I>&gt;<i> 1721 router complete with CME 4 to anyone who can really use it to  
+</I>&gt;<i> further the cause of integration. This does list models 7941/7961  
+</I>&gt;<i> etc. I am happy to send this via courier to anywhere in Europe. I  
+</I>&gt;<i> purchased this to debug how the lights on 7914s are controlled to  
+</I>&gt;<i> allow more functionality in chan_sccp, but will propbably never get  
+</I>&gt;<i> the time to do this.
+</I>
+In fact, it would be very helpful to have such a router available to  
+get forward with the newer protocol versions and more advanced  
+features, which includes distinctive ringing, feature buttons,  
+conference calls and shared lines. We have observed that minor things  
+like the order of messages being sent can be important, which cannot  
+always be guessed easily.
+
+As Marcello and I currently don't have a CallManager at hand, and  
+also lack IT administrator friends who occasionally might record a  
+network trace, we could really use it to get on with the new  
+features. We would be very grateful to accept your offer.
+
+
+&gt;<i> UK PRI/ISDN30 settings - Is there anyone else in the UK using  
+</I>&gt;<i> Digium E1 cards with PRI/ISDN30 lines? I have had a recent issue  
+</I>&gt;<i> with one customer where customers ringing in were getting a busy  
+</I>&gt;<i> signal and yet Asterisk/Zaptel showed no issues. I guess I need to  
+</I>&gt;<i> debug PRI stuff, but this is fairly complex. I would be interested  
+</I>&gt;<i> to know what settings anyone else uses for:
+</I>&gt;<i>
+</I>&gt;<i> Timing source (I'm sure BT told me that the exchange should always  
+</I>&gt;<i> provide the timing source)
+</I>&gt;<i> Reset B channels: On or Off
+</I>&gt;<i> Distance from NTE
+</I>&gt;<i> Echo settings
+</I>
+I'm not using any PRI cards, but I use bristuff's hfc zaptel drivers  
+connected to bri ISDN PSTN. If the E1 card is the only device  
+connected to the PRI trunk, which seems like the only common  
+configuration one would use, I wouldn't expect such problems though.  
+Are you sure the busy signal at the customer's site wasn't due to  
+congestion of BT's network?
+
+&gt;<i>
+</I>&gt;<i> Many thanks.
+</I>&gt;<i>
+</I>&gt;<i> Martin
+</I>
+Regards,
+-David.
+
+&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+Edit &gt;&gt; The following time zones are also for the 7970 and can  
+replace UTC Standard/Daylight Time for your local time zone but must  
+be written precicely as follows including caps and punctuation (any  
+deviation from the following will result in the time being  
+automatically returned to UTC):
+
+Dateline Standard Time
+Samoa Standard Time
+Hawaiian Standard Time
+Alaskan Standard/Daylight Time
+Pacific Standard/Daylight Time
+Mountain Standard/Daylight Time
+US Mountain Standard Time
+Central Standard/Daylight Time
+Mexico Standard/Daylight Time
+Canada Central Standard Time
+SA Pacific Standard Time
+Eastern Standard/Daylight Time
+US Eastern Standard Time
+Atlantic Standard/Daylight Time
+SA Western Standard Time
+Newfoundland Standard/Daylight Time
+South America Standard/Daylight Time
+SA Eastern Standard Time
+Mid-Atlantic Standard/Daylight Time
+Azores Standard/Daylight Time
+GMT Standard/Daylight Time
+Greenwich Standard Time
+W. Europe Standard/Daylight Time
+GTB Standard/Daylight Time
+Egypt Standard/Daylight Time
+E. Europe Standard/Daylight Time
+Romance Standard/Daylight Time
+Central Europe Standard/Daylight Time
+South Africa Standard Time
+Jerusalem Standard/Daylight Time
+Saudi Arabia Standard Time
+Russian Standard/Daylight Time
+Iran Standard/Daylight Time
+Caucasus Standard/Daylight Time
+Arabian Standard Time
+Afghanistan Standard Time
+West Asia Standard Time
+Ekaterinburg Standard Time
+India Standard Time
+Central Asia Standard Time
+SE Asia Standard Time
+China Standard/Daylight Time
+Taipei Standard Time
+Tokyo Standard Time
+Cen. Australia Standard/Daylight Time
+AUS Central Standard Time
+E. Australia Standard Time
+AUS Eastern Standard/Daylight Time
+West Pacific Standard Time
+Tasmania Standard/Daylight Time
+Central Pacific Standard Time
+Fiji Standard Time
+New Zealand Standard/Daylight Time
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000361.html">[Chan-sccp-users] Various issues
+</A></li>
+	<LI>Next message: <A HREF="000363.html">[Chan-sccp-users] Various issues + Call for Patches
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#362">[ date ]</a>
+              <a href="thread.html#362">[ thread ]</a>
+              <a href="subject.html#362">[ subject ]</a>
+              <a href="author.html#362">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Connecting asterisk to CCM? Is it possible?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Connecting%20asterisk%20to%20CCM%3F%20Is%20it%20possible%3F&In-Reply-To=%3C56a990d20709131221n29106304gb5f2daab708cb5a6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000290.html">
+   <LINK REL="Next"  HREF="000292.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Connecting asterisk to CCM? Is it possible?</H1>
+    <B>Lacy Moore - Aspendora</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Connecting%20asterisk%20to%20CCM%3F%20Is%20it%20possible%3F&In-Reply-To=%3C56a990d20709131221n29106304gb5f2daab708cb5a6%40mail.gmail.com%3E"
+       TITLE="[Chan-sccp-users] Connecting asterisk to CCM? Is it possible?">aspendora at gmail.com
+       </A><BR>
+    <I>Thu Sep 13 21:21:11 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000290.html">[Chan-sccp-users] Connecting asterisk to CCM? Is it possible?
+</A></li>
+        <LI>Next message: <A HREF="000292.html">[Chan-sccp-users] Connecting asterisk to CCM? Is it possible?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#291">[ date ]</a>
+              <a href="thread.html#291">[ thread ]</a>
+              <a href="subject.html#291">[ subject ]</a>
+              <a href="author.html#291">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/13/07, Deon George &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">deon at wurley.net</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> Hope somebody can either set me straight or give me some tips...
+</I>&gt;<i>
+</I>&gt;<i> I have a Cisco Softphone (Cisco Communicator?) that I use to connect to
+</I>&gt;<i> work while I'm mobile (it enables me to call internal extensions and
+</I>&gt;<i> make land line calls from hotels, and from home, etc).
+</I>&gt;<i>
+</I>&gt;<i> I would like to use my home asterisk server to connect to the work CCM
+</I>&gt;<i> (as my softphone), so that when people call my softphone number, my
+</I>&gt;<i> asterisk server gets the call (and in turn rings my VOIP phones or
+</I>&gt;<i> leaves a message on my home voicemail).
+</I>&gt;<i>
+</I>&gt;<i> My reason for doing this is two fold:
+</I>&gt;<i>
+</I>&gt;<i> * I run linux, and the softphone is only windows - so I need to have a
+</I>&gt;<i> windows pc to make/receive calls. I want to avoid running windows just
+</I>&gt;<i> to use the office phone.
+</I>&gt;<i>
+</I>&gt;<i> * I want to be able to make and receive office internal calls using my
+</I>&gt;<i> phones at home:)
+</I>&gt;<i>
+</I>&gt;<i> I have no control over the CCM at work (dont even know how it is
+</I>&gt;<i> configured), but Im hoping  I can get all the config I need from the
+</I>&gt;<i> softphone.
+</I>&gt;<i>
+</I>&gt;<i> Is it possible?
+</I>&gt;<i>
+</I>&gt;<i> ...deon
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>
+I don't think so.  I was going to suggest kind of a hack, but since you have
+no access to CCM, it won't work.  The hack I was going to suggest was to use
+a Cisco ATA connected to CCM and some other ATA or analog card connected to
+the Asterisk server.  Not a pretty solution, though.  The other solution
+might be to use SIP between CCM and Asterisk.
+
+WHat you are looking for is a SCCP client for Asterisk.  chan-sccp would be
+considered a Skinny server, not a Skinny client.
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070913/977e73e2/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070913/977e73e2/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000290.html">[Chan-sccp-users] Connecting asterisk to CCM? Is it possible?
+</A></li>
+	<LI>Next message: <A HREF="000292.html">[Chan-sccp-users] Connecting asterisk to CCM? Is it possible?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#291">[ date ]</a>
+              <a href="thread.html#291">[ thread ]</a>
+              <a href="subject.html#291">[ subject ]</a>
+              <a href="author.html#291">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

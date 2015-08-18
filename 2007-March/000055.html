@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] SCCP Phone through NAT
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20SCCP%20Phone%20through%20NAT&In-Reply-To=%3C002201c76056%248de68fe0%240a01fe0a%40NEXXPORTIBM%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000054.html">
+   <LINK REL="Next"  HREF="000053.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] SCCP Phone through NAT</H1>
+    <B>Andrew Lee</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20SCCP%20Phone%20through%20NAT&In-Reply-To=%3C002201c76056%248de68fe0%240a01fe0a%40NEXXPORTIBM%3E"
+       TITLE="[Chan-sccp-users] SCCP Phone through NAT">andrew.lee at nexxient.com
+       </A><BR>
+    <I>Wed Mar  7 02:18:45 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000054.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+        <LI>Next message: <A HREF="000053.html">[Chan-sccp-users] Asterisk 1.4 and schan_sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I was able to get chan-sccp working via NAT where both sides were on Dynamic
+DNS. My setup consists of a mix of Linksys routers as well as a DLink
+routers! I think the trick is to correctly setup the port forwarding on the
+NAT in front of your asterisk server. My setup is essentially 79XX -&gt; NAT -&gt;
+Internet -&gt; NAT -&gt; Asterisk. Everything works fine and I can both receive
+and make outgoing calls without issue. My VM indicator light on my 79XX
+works fine in this setup as well.
+
+Firstly, I register my Linksys router that is in front of my asterisk server
+with DynDNS. This allows me to refer to my asterisk server as
+&quot;asterisk.dyndns.org&quot;. I then need to configure port forwarding on this
+router to forward the necessary ports to my internal asterisk server. There
+are essentially 3 port-forwarding configurations I need to make:
+
+- forward TCP on port 2000 (SCCP) to your internal asterisk server
+- forward your RTP UDP ports to your internal asterisk server (the RTP port
+range depends what you have configured in your rtp.conf file - rtpstart and
+rtpend values)
+
+The above two port forwarding rules are configured using the default
+port-range forwarding screen on the Linksys routers (this is the screen
+where you can specify the external port ranges i.e. 2000 to 2000 for SCCP or
+10000-15000 for RTP).
+
+The other port forward you need to do is for TFTP support on the 79XX series
+phones. I usually configure TFTP port forwarding via the UPNP forwarding
+screen instead of the default port-range forwarding screen (I just find it
+easier). To do this, simply click on the UPnP Forwarding button found at the
+bottom of the port-range forwarding screen and make sure the radio button is
+selected on UDP for TFTP protocol (69). Also fill in the IP address for your
+internal TFTP server (usually its installed on the same box as asterisk) and
+make sure you select the &quot;enable&quot; checkbox. Save your changes on your
+Linksys and you should be good to go from the router side of things.
+
+Finally, you need to setup a few settings under the [general] section in
+sccp.conf:
+
+localnet = 192.168.1.0/24  ; your local asterisk server network subnet
+externhost = asterisk.dyndns.org  ; this should be your DynDNS hostname to
+use in the RTP media stream
+externrefresh = 60  ; expire time in seconds for hostname
+
+After restarting asterisk, everything should be setup from the asterisk
+behind NAT side of things.
+
+To configure a 79XX phone that is behind a NAT router, all I had to do is
+specify the TFTP address for the 79XX to grab its SEPXX.cnf.xml file from -
+assuming you already have a properly configured SEPXX.cnf.xml file (in the
+sep file, refer to your DynDNS name in the processNodeName element instead
+of an IP address).
+
+I have this setup working with both a 79XX behind a cheap Linksys router as
+well as 79XX behind a cheap DLink router and it works fine. I did have to
+flash the DLink to the latest firmware to fix some earlier problem I had
+with getting TFTP to work through a NAT but other than that everything works
+for me (tm).
+
+Almost forgot, I couldn't get the default TFTP server that ships with Debian
+(atftp) working properly in this type of setup because it uses random ports
+to send back your TFTP SEPXX.cnf.xml file. In order to get TFTP to work via
+port forwarding and NAT, I had to use a java based TFTP program called
+fwtftpd which always answers using the same sourceport it listens on (i.e.
+port 69). I couldn't fine any other native Linux based TFTP server that
+offered this ability. 
+
+Andrew
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of Patrick Mowry
+Sent: March 6, 2007 5:04 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Re: [Chan-sccp-users] SCCP Phone through NAT
+
+Thanks,
+  I think I can put a Cisco 26xx at each side, but if I'm gonna do that
+I should see if I can get a VPN to work with the dynamic addressing.
+I'll play with both the VPN and firewall fixup configs to see what
+happens.
+
+-Patrick 
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of Mike
+Tubby
+Sent: Tuesday, March 06, 2007 2:08 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Re: [Chan-sccp-users] SCCP Phone through NAT
+
+The general problem with this set up is that you end up with either no
+audio 
+or one-way audio...
+
+SCCP is built on ASN.1 and is NAT encumbered, by this I mean that the
+SCCP 
+protocol (TCP/2000) conveys IP addresses/port numbers for the RTP stream
+to 
+setup inside the ASN.1 -- if you want this to work I think you'll need a
+
+Cisco router like the 837-K9 (or a dumb Etherner modem and a PIX
+firewall) 
+and have to use the &quot;protocol fixup skinny&quot; feature so that the
+router(or 
+pix) correctly modifies the SCCP payload data while in transit...
+
+Mike
+
+
+----- Original Message ----- 
+From: &quot;Patrick Mowry&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">pmowry at getgds.com</A>&gt;
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Sent: Tuesday, March 06, 2007 7:26 PM
+Subject: [Chan-sccp-users] SCCP Phone through NAT
+
+
+&gt;<i> Hello,
+</I>&gt;<i>  I noticed in the release notes for chan_sccp that NAT support was
+</I>&gt;<i> added awhile back.  Now I have an actual use for it.  I cannot setup a
+</I>&gt;<i> VPN between two sites since neither side has a static IP.
+</I>&gt;<i>
+</I>&gt;<i> So I wanted to setup Asterisk with ports forwarded from the local
+</I>&gt;<i> firewall to be connected to by a 7940 behind a DSL router, also doing
+</I>&gt;<i> NAT.  I would configured the phone to connect to a hostname (using
+</I>&gt;<i> dyndns.org I assume) and have the SCCP ports forwarded to it as well
+</I>&gt;<i> since I only need one phone at the remote site.
+</I>&gt;<i>
+</I>&gt;<i> Anyone ever try something like this?
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i>
+</I>&gt;<i> -Patrick
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000054.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+	<LI>Next message: <A HREF="000053.html">[Chan-sccp-users] Asterisk 1.4 and schan_sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

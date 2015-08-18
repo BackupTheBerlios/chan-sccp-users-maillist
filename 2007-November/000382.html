@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Chan-SCCP-B Release issued
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Chan-SCCP-B%20Release%20issued&In-Reply-To=%3C4739D290.4060608%40planet-ic.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000381.html">
+   <LINK REL="Next"  HREF="000376.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Chan-SCCP-B Release issued</H1>
+    <B>Sebastian Lehn</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Chan-SCCP-B%20Release%20issued&In-Reply-To=%3C4739D290.4060608%40planet-ic.de%3E"
+       TITLE="[Chan-sccp-users] Chan-SCCP-B Release issued">lehn at planet-ic.de
+       </A><BR>
+    <I>Tue Nov 13 17:36:32 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000381.html">[Chan-sccp-users] Chan-SCCP-B Release issued
+</A></li>
+        <LI>Next message: <A HREF="000376.html">[Chan-sccp-users] Chan-SCCP-B Release issued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#382">[ date ]</a>
+              <a href="thread.html#382">[ thread ]</a>
+              <a href="subject.html#382">[ subject ]</a>
+              <a href="author.html#382">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Steven,
+
+
+i've had the same problems like you at beginning of my tests. As my solution, see attached patch for
+create_config.sh
+
+My steps are:
+- make clean
+-- will delete config.h
+- make
+- make install
+
+Note: create_config.sh needs not to be executable, because it is called in makefile per
+sh ./create_config.sh
+
+I will test the release over the next days and send an extra report on this list.
+
+Sebastian
+
+Steven Lam, KeenSystems BV schrieb:
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> Here my first findings compiling/running on
+</I>&gt;<i> *1.2.14-BRIstuffed-0.3.0-PRE-1y:
+</I>&gt;<i> - create_config.sh included in the tar.gz is not executable
+</I>&gt;<i> - the tar.gz contains config.h so create_config.sh does not do anything
+</I>&gt;<i> - On line 49 of create_config.sh $REALTIME_USEABLE=0 should be
+</I>&gt;<i> REALTIME_USEABLE=0
+</I>&gt;<i> - I see the pickup patch from Frank Segtrop is applied, but group pickup
+</I>&gt;<i> still crashes my * :-(
+</I>&gt;<i> As soon as I solved my bt problem I'll send a full bt.
+</I>&gt;<i> 
+</I>&gt;<i> The testing continuous ;-)
+</I>&gt;<i> 
+</I>&gt;<i> Steven.
+</I>&gt;<i> 
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of David
+</I>&gt;<i> Dederscheck
+</I>&gt;<i> Sent: zondag 11 november 2007 20:58
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-b-discussion at lists.sourceforge.net</A>;
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-b-releases at lists.sourceforge.net</A>
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+</I>&gt;<i> 
+</I>&gt;<i> Hi all,
+</I>&gt;<i> 
+</I>&gt;<i> finally we have a release of chan-sccp-b which compiles out-of-the- 
+</I>&gt;<i> box on both Asterisk 1.4 and 1.2 - you just have to type make to do  
+</I>&gt;<i> so. There is not much of an updated documentation yet, so don't  
+</I>&gt;<i> hesitate to ask here in the first place if you've got any questions  
+</I>&gt;<i> as to the new features (which you probably are already using ;-).
+</I>&gt;<i> 
+</I>&gt;<i> Please check our project site on sourceforge to download it:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://sourceforge.net/projects/chan-sccp-b/">http://sourceforge.net/projects/chan-sccp-b/</A>
+</I>&gt;<i> 
+</I>&gt;<i> We will soon move our codebase to the sourceforge svn server so you  
+</I>&gt;<i> can stay even more up-to-date with what we're doing or even checkin  
+</I>&gt;<i> some changes yourself. Please let us know if you'd like to be added  
+</I>&gt;<i> as a project developer.
+</I>&gt;<i> 
+</I>&gt;<i> In the meantime we hope you enjoy this first &quot;real&quot; release and are  
+</I>&gt;<i> anxious for feedback if it worked for you.
+</I>&gt;<i> 
+</I>&gt;<i> Regards,
+</I>&gt;<i> -David.
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>
+
+-- 
+//
+// IT- &amp; Software-Systemhaus, Internet Service und Web Agentur
+//
+// Sebastian Lehn, Netzwerkadministrator, LPIC-2, MCSA MESSAGING
+// PLANET IC GmbH, Haus 4, Hagenower Strasse 73, 19061 Schwerin
+// Registergericht Schwerin HRB 6762, Gesch&#228;ftsf&#252;hrer Andreas Scher
+// Telefon 0385 30200 200, Telefax 0385 30200 190, Internet www.planet-ic.de
+//
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: create_config.patch
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071113/aeea4e4b/attachment.ksh">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071113/aeea4e4b/attachment.ksh</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000381.html">[Chan-sccp-users] Chan-SCCP-B Release issued
+</A></li>
+	<LI>Next message: <A HREF="000376.html">[Chan-sccp-users] Chan-SCCP-B Release issued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#382">[ date ]</a>
+              <a href="thread.html#382">[ thread ]</a>
+              <a href="subject.html#382">[ subject ]</a>
+              <a href="author.html#382">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

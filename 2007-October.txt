@@ -1,0 +1,4987 @@
+From chan-sccp.berlios.de at lusiewicz.de  Thu Oct  4 14:23:11 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Thu, 04 Oct 2007 14:23:11 +0200
+Subject: [Chan-sccp-users] Please can we co-ordinate
+ improvements	to	chan_sccp/7914 woes
+In-Reply-To: <EDBC2B1B-6003-4C0E-A8D9-C9A6B0BC6C38@davidded.de>
+References: <1506718.1190845705456.JavaMail.root@mail.linkdc.co.uk>	<1190848776.6489.38.camel@luna.puzzled.xs4all.nl>
+	<EDBC2B1B-6003-4C0E-A8D9-C9A6B0BC6C38@davidded.de>
+Message-ID: <4704DB2F.80200@lusiewicz.de>
+
+David Dederscheck schrieb:
+> Hi,
+
+Hello David,
+hello list members.
+
+> as Marcello and I already promised there will be a release of our  
+> current 1.4 chan_sccp tree soon. However, we are currently both short  
+> on time, and we also wish to take care of a few things:
+> 
+> - That as many as possible useful and robustifying patches around are  
+> included
+> - That the release should work using both 1.2 and 1.4 (requires some  
+> ifdef work)
+> - Some minor yet important issues have still to be tested.
+> 
+> The tests are best done _after_ releasing, but we would like to  
+> include all other stuff first, so that we don't get so many forks  
+> again, even in our own trees.
+> 
+> We believe that our 1.4 tree is quite stable and very complete in  
+> terms of features now. As there of course has been a lot work by  
+> other people as well, a discussion of the available trees and patches  
+> would be in order.
+> 
+> Therefore, I suggest that _everybody_ who has ever released a  
+> chan_sccp tree on this list or submitted a notable patch should write  
+> a report on that. This report should include all relevant information  
+> to ease the effort of merging.
+> 
+> To start off with our own work, I'd like to comment briefly what  
+> Marcello and I have done.
+> 
+> We have working support for * 1.4 (most work afaik by Marcello) as  
+> follows:
+> - It now includes fixes for newer firmware received calls issues, we  
+> also know that there is a locking problem, which I had discovered but  
+> not yet added to Marcello's main tree. It should crashes when hanging  
+> up in some cases.
+
+We are using the chan_sccp-20070826 from sourceforge with
+asterisk-1.4.10. In our production environmen now we often observe an
+asterisk crash (one crash per day). Maybe the reason is the locking
+problem you mentioned above?
+
+The last lines on the asterisk CLI are for example:
+
+
+    -- SEP0016xxxxxxxx: New call on line 258
+    -- SEP0016xxxxxxxx: Ending call 58 on line 258
+    -- SCCP: Asterisk request to hangup channel SCCP/258-0000003a
+Segmentation fault (core dumped)
+
+
+The core dump is not very usefull at all. Here is some excert from gdb,
+thread apply xx bt:
+
+
+(gdb) thread apply 1 bt
+
+Thread 1 (process 15317):
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+#1  0x4190002c in ?? ()
+...
+10 0x40ed7f24 in ?? ()
+#11 0x40202534 in _int_malloc () from /lib/tls/libc.so.6
+#12 0x0000004b in ?? ()
+#13 0x00000000 in ?? ()
+...
+
+Thread 2 (process 19708):
+#0  0x00000246 in ?? ()
+#1  0x00000000 in ?? ()
+...
+Thread 3 (process 10899):
+#0  0x00000246 in ?? ()
+Cannot access memory at address 0x0
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 4 (process 16318):
+#0  0x00200246 in ?? ()
+Cannot access memory at address 0x0
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 5 (process 15320):
+#0  0x00200246 in ?? ()
+Cannot access memory at address 0x8e8e8888
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 6 - 10 ?hnlich wie oben
+
+...
+Thread 11 (process 15204):
+#0  0x00000216 in ?? ()
+#1  0x8beaf7b8 in ?? ()
+#2  0xc969b845 in ?? ()
+#3  0x000003e8 in ?? ()
+#4  0xc106fac1 in ?? ()
+#5  0xc2291ff8 in ?? ()
+#6  0x1811948d in ?? ()
+#7  0x89fffffc in ?? ()
+#8  0xd1e93857 in ?? ()
+#9  0xa1fffffa in ?? ()
+#10 0x0815f180 in ast_config_AST_VAR_DIR ()
+#11 0x840fc085 in ?? ()
+#12 0xfffff394 in ?? ()
+#13 0x1270ffbb in ?? ()
+#14 0x948eb908 in ?? ()
+...
+
+Thread 12 (process 15203):
+#0  0x00000206 in ?? ()
+Cannot access memory at address 0x0
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 13 (process 15202):
+#0  0x00000216 in ?? ()
+#1  0x28282828 in ?? ()
+#2  0x28282828 in ?? ()
+#3  0x28282828 in ?? ()
+#4  0x28282828 in ?? ()
+...
+Thread 14 (process 15201):
+#0  0x00000212 in ?? ()
+Cannot access memory at address 0x6d722f
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 15 (process 15200):
+#0  0x00000206 in ?? ()
+Cannot access memory at address 0x6c69466e
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 20 (process 15195):
+#0  0x00000212 in ?? ()
+#1  0x00000000 in ?? ()
+#2  0x00000002 in ?? ()
+#3  0x0000000e in ?? ()
+#4  0x00000004 in ?? ()
+#5  0x081af160 in ?? ()
+#6  0x00000000 in ?? ()
+#7  0x00000000 in ?? ()
+#8  0x00000000 in ?? ()
+#9  0x407e45a8 in ?? () from /usr/lib/asterisk/modules/app_morsecode.so
+#10 0x081af130 in ?? ()
+#11 0x407e4000 in ?? ()
+#12 0x407e6ae4 in ?? ()
+#13 0x407e6000 in ?? ()
+#14 0x40016670 in ?? ()
+#15 0x081af008 in ?? ()
+#16 0x00000000 in ?? ()
+...
+
+Thread 25 (process 15185):
+#0  0x00000246 in ?? ()
+#1  0x9180b808 in ?? ()
+#2  0x4c890811 in ?? ()
+#3  0x54891c24 in ?? ()
+#4  0x44891824 in ?? ()
+#5  0x04c70424 in ?? ()
+#6  0x00000424 in ?? ()
+#7  0x9d0ae800 in ?? ()
+#8  0xb0e90001 in ?? ()
+#9  0xb8fffffa in ?? ()
+#10 0x0812a7b5 in __PRETTY_FUNCTION__.9340 ()
+#11 0x04244489 in ?? ()
+#12 0x89c8558b in ?? ()
+#13 0x89e82414 in ?? ()
+#14 0x85fffc79 in ?? ()
+#15 0x8b1974c0 in ?? ()
+#16 0x0489d845 in ?? ()
+...
+Thread 30 (process 15170):
+#0  0x00200293 in ?? ()
+Cannot access memory at address 0x0
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+
+
+
+Any help is welcome.
+
+
+> - We also have full working support to add service url entries to  
+> speeddial buttons. This is directly calling any xml page like using  
+> the services menu by the push of a speeddial button.
+> - We have found out how to use 7914 buttons as busy lamp fields so  
+> that the busy party can still be called by pressing the new call key  
+> on the busy line callplane.
+> - Marcello has working asterisk realtime support and some other nice  
+> and handy features he might best announce himself.
+> 
+> What we have under development:
+> - I managed to find out how distinctive ringing (per line ringtones)  
+> works for the newer sccp protocol versions. Marcello has already  
+> implemented something for testing.
+> - I implemented a hack to append the # for terminating a variable- 
+> length number explicitly (neccessary for dialing in Germany) to the  
+> call history lists where applicable. Already works fine for a long  
+> time, but lacks a config option.
+> - There is sometimes an issue where the phone doesn't show the digits  
+> entered before the proceeding state. Still unclear when and why it  
+> occurs. Doesn't happen often though if ever.
+> - When using auto-answer in connection to the page() extension, I  
+> sometimes get crashes upon frequent dial/hangup conditions. Needs  
+> further investigation.
+> 
+> Below follow some comments on the original message. Just keep on  
+> looking down there.
+> 
+> Regards,
+> -David.
+> 
+> 
+> On 27.09.2007, at 01:19, Patrick wrote:
+> 
+>> Hi Martin,
+>>
+>> On Wed, 2007-09-26 at 23:28 +0100, Martin Sutherland wrote:
+>>> Dear List Members,
+>>>
+>>> I know that there are several members out there kindly providing web
+>>> space for the latest chan_sccp, and amendments have been made here  
+>>> and
+>>> there. I am now very confused about which version contains the most
+>>> trusted fixes and what those fixes are. It would be fantastic if we
+>>> could all agree on which is the best version and have a definitive
+>>> list of changes made since 20060408.
+>> Definitely a good idea. +1!
+>>
+>>>  The Asterisk 1.2 version that I have found the best is 20070620  
+>>> which
+>>> was emailed to me by dmitry at makuha.kiev.ua back in July.
+>> I wasn't even aware that this version existed. Is it for 1.2?
+>>
+>>> I am about to try Asterisk 1.4 but simply don't know if all the
+>>> changes made in 20070620 are incorporated into the current Asterisk
+>>> 1.4 version.
+>> Neither do I. I have seen chan_sccp versions pop up on the forum at
+>> www.ip-phone.de but I think those are for Asterisk 1.4.
+>>
+>>> I have however had problems which all seem to stem from using 7914
+>>> side-cars. I have two 7960 phones with two 7914s each. For some  
+>>> reason
+>>> the 7960s behave differently with 7914s attached. One real problem
+>>> concerned having dial timeouts or invalid extensions. Either the  
+>>> phone
+>>> or chan_sccp does not detect the hangup message after the handset is
+>>> put down after a redial tone (and the number dialled remains on the
+>>> display). When the phone is picked up again, the channel/line is  
+>>> still
+>>> active and nothing works. Re-setting the phone then caused  
+>>> Asterisk to
+>>> die, presumably because a phone is registering but still has an  
+>>> active
+>>> channel. Even worse, Asterisk doesn't actually exit, but is stuck in
+>>> memory and requires a server re-boot to fix. I managed to patch my
+>>> version in the off-hook event to detect a channel/line in the redial
+>>> state and issue a on-hook message. The user just finds that nothing
+>>> happens and needs to on-hook and then off-hook again and saves an
+>>> Asterisk crash. Note that this problem  does not happen if the  
+>>> 7914 is
+>>> disconnected!
+>>>
+>>> Is there anyone else out there using 7914s with 7960s?
+>> Not me.
+> 
+> I have a number of 7914 and could easily manage to replicate your  
+> scenario. What firmware do you use? Btw, I didn't ever witness such a  
+> behaviour. But I definitely want to understand why that happens in  
+> your case.
+> 
+>>>  I have 7940s, 7960s and one 7961 with different versions of sccp and
+>>> my protocol version on the server is still set to 3. Should this be
+>>> set to 4? What firmware is working best out there on 7960/7940 and
+>>> 7941/7961?
+>> I use a couple of 7961 phones with factory default firmware, Asterisk
+>> 1.2 and chan_sccp 20060408. I use the following fixes for this  
+>> chan_sccp
+>> release:
+>> - chan_sccp-20060408-MeetMe_crash.patch
+>> - chan_sccp-20060408-Gpickup_crash.patch
+>> - chan_sccp-20060408-placed_calls.patch
+> 
+> The placed calls patch, was that mine, or from somebody else? Just  
+> curious as I'm not sure if I issued a patch for that or not.
+> 
+>> My 7961 says it has the following firmware versions:
+>>
+>> App Load ID:  Jar41.2-9-1-45.sbn
+>> JVM Load ID:  CVM41.2-0-1-45.sbn
+>> OS Load ID:   cnu41.2-7-5-50.sbn
+>> Boot Load ID: 7961G_64-020704128Amd64meg.bin
+>>
+>> The limited functionality that I use work fine: Redial, DND, SendtoVM
+>> and Transfer. Not sure if GPickup works since I don't use it. I've  
+>> seen
+>> requests in the past for the conference functionality which is  
+>> absent in
+>> this config. Would be nice if that were available in a chan_sccp  
+>> version
+>> for 1.2.
+>>> I have recently purchased a used 1721 router with Call Manager  
+>>> Express
+>>> loaded so that I can capture packets between the router and handset,
+>>> but understanding sccp packets is going to be tough for me.
+>> You can use Wireshark (or even tcpdump iirc) to capture the packets,
+>> save them to a file and make the file available for download. This way
+>> others who are interested in helping out can get easy access to this
+>> information.
+> 
+> Absolutely. Wireshare also comes with a nice skinny parser module.
+> 
+> 
+> 
+>>> I look forward to any comments.
+>>>
+>>> Regards,
+>>> Martin
+>> Regards,
+>> Patrick
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+Best regards
+Damian Lusiewicz
+
+
+From aspendora at gmail.com  Thu Oct  4 23:22:39 2007
+From: aspendora at gmail.com (Lacy Moore)
+Date: Thu, 4 Oct 2007 16:22:39 -0500
+Subject: [Chan-sccp-users] Shared lines implementation
+In-Reply-To: <792897337FC81944BA4097ABD708977103CADBC6@pdc.bnsnet.co.uk>
+References: <17523796.1185565114041.JavaMail.root@mail.linkdc.co.uk>
+	<20070728083016.257720@gmx.net> <46AB981F.3050300@c-net.it>
+	<792897337FC81944BA4097ABD708977103CADBC6@pdc.bnsnet.co.uk>
+Message-ID: <56a990d20710041422x429be29mef9c29221bd2640@mail.gmail.com>
+
+On 9/26/07, Steve J. Walker <SteveW at bucks.net> wrote:
+>
+> Afternoon Sergio, all.
+>
+> I would be very interested in seeing how the local driver can be used to
+> emulate a shared line. Would this mean that say 7940's with two lines
+> can have one shared between users and one as the local ext?
+>
+> An example configuration for the Asterisk local driver and chan_sccp
+> would be nice - maybe someone could post it then to one of the WIKI's
+> that's about which deals with SCCP and Asterisk?
+>
+> If it can emulate it properly it might be a better bet than fudging the
+> sccp driver to work as SLA?
+>
+> Regards,
+>
+> Steve
+
+
+I'm curious about this as well.
+
+> -----Original Message-----
+> > From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-
+> > bounces at lists.berlios.de] On Behalf Of Sergio Chersovani
+> > Sent: 28 July 2007 20:25
+> > To: chan-sccp-users at lists.berlios.de
+> > Cc: chan-sccp-b-discussion at lists.sourceforge.net
+> > Subject: Re: [Chan-sccp-users] Shared lines implementation
+> >
+> > Marcello Ceschia ha scritto:
+> > > I started implementing shared line functionality to chan_sccp a few
+> > month ago.
+> > >
+> >
+> > shared line feature can be emulated with the asterisk local channel
+> > driver
+> >
+> > http://www.voip-info.org/wiki/view/Asterisk+local+channels
+> >
+> > I'm running it in my office environment with no problems
+> >
+> > _______________________________________________
+> > Chan-sccp-users mailing list
+> > Chan-sccp-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071004/bbd5dded/attachment.html>
+
+From swannie at swannie.net  Sun Oct  7 05:21:36 2007
+From: swannie at swannie.net (Brian Swan)
+Date: Sat, 6 Oct 2007 22:21:36 -0500
+Subject: [Chan-sccp-users] Cisco 7970 Placed Calls
+Message-ID: <B439F9C3-3DA6-4D48-B73E-5EED8FDF2AD9@swannie.net>
+
+Hi All,
+
+I've got a few 7970's hooked up here with my Asterisk setup (been  
+running 7940's and 7960's for a while now with chan_sccp), and I  
+noticed that the Received/Placed call directories don't seem to  
+populate.  I searched through the mailing list archives, and found a  
+patch to make the received calls work (thanks!), however, I didn't  
+see a solution for the placed calls.  Has anyone been able to make  
+that work?
+
+Thanks!
+Brian
+
+
+From martin at linkdc.co.uk  Sun Oct  7 12:55:22 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Sun, 7 Oct 2007 11:55:22 +0100
+Subject: [Chan-sccp-users] Comparing versions of chan_sccp
+Message-ID: <19881137.1191754522126.JavaMail.root@mail.linkdc.co.uk>
+
+Dear list members,
+ 
+I've placed the Asterisk 1.2 version of chan_sccp that I use on an FTP server as follows:
+ 
+Server IP: 80.168.79.8
+login name: chan-sccp
+login pass: chan-sccp
+ 
+I would be very grateful if someone could compare this with the 20060408 to see the changes. I have found this to be the most stable version so far, although there are still crashes every few days. I was comtemplating upgrading to 1.4, but really worry that the current 1.4 version may actually crash more often with the setup that I use (7940s, 7960s, 7960+7914s with call parking, voicemail etc). Asterisk 1.2 seems to die after a deadlock has been avoided! I've heard that Asterisk 1.4 gets a seg fault.
+ 
+I have given up using paging to handsets (I use the sound card in the server connected to amp and loudspeakers), since it seems to kill the 7914 - presumably so many extensions changing status at the same time is too much.
+ 
+I have recently purchased a 7920 wireless phone (watch out, you have to order the battery separately!). So far the voicemail indication doesn't seem to work and my patch to prevent crashes after a redial tone/timeout for 7960+7914 causes real problems. I need to do more work on this. I'll probably end up using the new Snom m3 DECT SIP phones for my mobile users.
+ 
+We really need to strive to get a version that only crashes once per week. Already one of my customers has converted to SIP and has never looked back (no crashes for months). I would like to help in this effort as much as possible, but am not a C programmer.
+ 
+Best regards,
+ 
+Martin
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071007/d38e8153/attachment.html>
+
+From davidded at davidded.de  Sun Oct  7 13:17:17 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sun, 7 Oct 2007 13:17:17 +0200
+Subject: [Chan-sccp-users] Comparing versions of chan_sccp
+In-Reply-To: <19881137.1191754522126.JavaMail.root@mail.linkdc.co.uk>
+References: <19881137.1191754522126.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <765E282D-A34B-4749-9F4A-50BE70258CA0@davidded.de>
+
+Martin,
+
+maybe you would like to the current version for 1.4 Marcello and I  
+have assembled from our and recent patches. Note that this version  
+runs without crashes in both Marcello's and mine testing  
+environments, comprised of the same kind of devices you use.
+
+I attached the current tree for you to try, despite it will only work  
+with * 1.4 as of now. We shall back-port it once...
+
+I also use a 7920 on a regular basis and have never had any crashes  
+except for when i used channel on for the wifi connection. Seems odd,  
+but resolved when changing to a higher channel. Maybe a problem with  
+the access point.
+
+
+Regards and much luck with your issues,
+-David.
+
+
+
+On 07.10.2007, at 12:55, Martin Sutherland wrote:
+
+> Dear list members,
+>
+> I've placed the Asterisk 1.2 version of chan_sccp that I use on an  
+> FTP server as follows:
+>
+> Server IP: 80.168.79.8
+> login name: chan-sccp
+> login pass: chan-sccp
+>
+> I would be very grateful if someone could compare this with the  
+> 20060408 to see the changes. I have found this to be the most  
+> stable version so far, although there are still crashes every few  
+> days. I was comtemplating upgrading to 1.4, but really worry that  
+> the current 1.4 version may actually crash more often with the  
+> setup that I use (7940s, 7960s, 7960+7914s with call parking,  
+> voicemail etc). Asterisk 1.2 seems to die after a deadlock has been  
+> avoided! I've heard that Asterisk 1.4 gets a seg fault.
+>
+> I have given up using paging to handsets (I use the sound card in  
+> the server connected to amp and loudspeakers), since it seems to  
+> kill the 7914 - presumably so many extensions changing status at  
+> the same time is too much.
+>
+> I have recently purchased a 7920 wireless phone (watch out, you  
+> have to order the battery separately!). So far the voicemail  
+> indication doesn't seem to work and my patch to prevent crashes  
+> after a redial tone/timeout for 7960+7914 causes real problems. I  
+> need to do more work on this. I'll probably end up using the new  
+> Snom m3 DECT SIP phones for my mobile users.
+>
+> We really need to strive to get a version that only crashes once  
+> per week. Already one of my customers has converted to SIP and has  
+> never looked back (no crashes for months). I would like to help in  
+> this effort as much as possible, but am not a C programmer.
+>
+> Best regards,
+>  
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: chan_sccp-20071004-DD.tar.gz
+Type: application/x-gzip
+Size: 102836 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071007/1f5c6a4f/attachment.bin>
+-------------- next part --------------
+> Martin
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From davidded at davidded.de  Sun Oct  7 13:18:35 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sun, 7 Oct 2007 13:18:35 +0200
+Subject: [Chan-sccp-users] Cisco 7970 Placed Calls
+In-Reply-To: <B439F9C3-3DA6-4D48-B73E-5EED8FDF2AD9@swannie.net>
+References: <B439F9C3-3DA6-4D48-B73E-5EED8FDF2AD9@swannie.net>
+Message-ID: <44C55AE3-5256-41E9-8EFC-3725EDD9A373@davidded.de>
+
+Hi Brian,
+
+I solved this issue earlier this year -- it's really as simple as the  
+received calls issue in terms of code. I attached the corresponding  
+patch for you.
+
+Please note that all these patches are included in Marcello's&Mine  
+current tree for 1.4. Please ask us for it if you want to try it  
+before we will release it soon.
+
+Thanks,
+-David.
+
+
+
+On 07.10.2007, at 05:21, Brian Swan wrote:
+
+> Hi All,
+>
+> I've got a few 7970's hooked up here with my Asterisk setup (been
+> running 7940's and 7960's for a while now with chan_sccp), and I
+> noticed that the Received/Placed call directories don't seem to
+> populate.  I searched through the mailing list archives, and found a
+> patch to make the received calls work (thanks!), however, I didn't
+> see a solution for the placed calls.  Has anyone been able to make
+> that work?
+>
+> Thanks!
+> Brian
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: chan_sccp-20060408-7961_DirectoriesDD.patch
+Type: application/octet-stream
+Size: 692 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071007/691d35ce/attachment.obj>
+
+From mobile at nhm.it  Mon Oct  8 08:40:42 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Mon, 8 Oct 2007 08:40:42 +0200
+Subject: [Chan-sccp-users] Comparing versions of chan_sccp
+References: <19881137.1191754522126.JavaMail.root@mail.linkdc.co.uk>
+	<765E282D-A34B-4749-9F4A-50BE70258CA0@davidded.de>
+Message-ID: <48F9FE9628C34974994955C5E71CB528@london>
+
+Hello David,
+
+Here i've got a SIP/ZAPTEL/SCCP "mixed" scenario and sometimes,
+with old patches, asterisk 1.4 crashed in segfault.
+
+In what kind of enviroment are you using the last version ?
+
+Please let me know, i will test for you.
+
+Federico
+
+
+----- Original Message ----- 
+From: "David Dederscheck" <davidded at davidded.de>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Sunday, October 07, 2007 1:17 PM
+Subject: Re: [Chan-sccp-users] Comparing versions of chan_sccp
+
+
+> Martin,
+>
+> maybe you would like to the current version for 1.4 Marcello and I
+> have assembled from our and recent patches. Note that this version
+> runs without crashes in both Marcello's and mine testing
+> environments, comprised of the same kind of devices you use.
+>
+> I attached the current tree for you to try, despite it will only work
+> with * 1.4 as of now. We shall back-port it once...
+>
+> I also use a 7920 on a regular basis and have never had any crashes
+> except for when i used channel on for the wifi connection. Seems odd,
+> but resolved when changing to a higher channel. Maybe a problem with
+> the access point.
+>
+>
+> Regards and much luck with your issues,
+> -David.
+>
+>
+>
+> On 07.10.2007, at 12:55, Martin Sutherland wrote:
+>
+>> Dear list members,
+>>
+>> I've placed the Asterisk 1.2 version of chan_sccp that I use on an
+>> FTP server as follows:
+>>
+>> Server IP: 80.168.79.8
+>> login name: chan-sccp
+>> login pass: chan-sccp
+>>
+>> I would be very grateful if someone could compare this with the
+>> 20060408 to see the changes. I have found this to be the most
+>> stable version so far, although there are still crashes every few
+>> days. I was comtemplating upgrading to 1.4, but really worry that
+>> the current 1.4 version may actually crash more often with the
+>> setup that I use (7940s, 7960s, 7960+7914s with call parking,
+>> voicemail etc). Asterisk 1.2 seems to die after a deadlock has been
+>> avoided! I've heard that Asterisk 1.4 gets a seg fault.
+>>
+>> I have given up using paging to handsets (I use the sound card in
+>> the server connected to amp and loudspeakers), since it seems to
+>> kill the 7914 - presumably so many extensions changing status at
+>> the same time is too much.
+>>
+>> I have recently purchased a 7920 wireless phone (watch out, you
+>> have to order the battery separately!). So far the voicemail
+>> indication doesn't seem to work and my patch to prevent crashes
+>> after a redial tone/timeout for 7960+7914 causes real problems. I
+>> need to do more work on this. I'll probably end up using the new
+>> Snom m3 DECT SIP phones for my mobile users.
+>>
+>> We really need to strive to get a version that only crashes once
+>> per week. Already one of my customers has converted to SIP and has
+>> never looked back (no crashes for months). I would like to help in
+>> this effort as much as possible, but am not a C programmer.
+>>
+>> Best regards,
+>>
+
+
+--------------------------------------------------------------------------------
+
+
+>> Martin
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>
+
+
+--------------------------------------------------------------------------------
+
+
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+
+From swannie at swannie.net  Mon Oct  8 18:48:36 2007
+From: swannie at swannie.net (Brian Swan)
+Date: Mon, 8 Oct 2007 11:48:36 -0500
+Subject: [Chan-sccp-users] Chan-sccp-users Digest, Vol 16, Issue 4
+In-Reply-To: <mailman.59.1191837679.8057.chan-sccp-users@lists.berlios.de>
+References: <mailman.59.1191837679.8057.chan-sccp-users@lists.berlios.de>
+Message-ID: <208C6B96-0C93-4B95-BB26-8A9D529B01DB@swannie.net>
+
+Thanks for the patch, that did the trick!  I guess I didn't see the  
+messages when searching the archive.  I'd be interested in testing  
+out the code you mention.  What else is different?
+
+Thanks!
+Brian
+
+
+> Date: Sun, 7 Oct 2007 13:18:35 +0200
+> From: David Dederscheck <davidded at davidded.de>
+> Subject: Re: [Chan-sccp-users] Cisco 7970 Placed Calls
+> To: chan-sccp-users at lists.berlios.de
+> Message-ID: <44C55AE3-5256-41E9-8EFC-3725EDD9A373 at davidded.de>
+> Content-Type: text/plain; charset="us-ascii"
+>
+> Hi Brian,
+>
+> I solved this issue earlier this year -- it's really as simple as the
+> received calls issue in terms of code. I attached the corresponding
+> patch for you.
+>
+> Please note that all these patches are included in Marcello's&Mine
+> current tree for 1.4. Please ask us for it if you want to try it
+> before we will release it soon.
+>
+> Thanks,
+> -David.
+
+
+
+From shughes at LANDAM.com  Mon Oct  8 20:16:35 2007
+From: shughes at LANDAM.com (Hughes, Sam)
+Date: Mon, 8 Oct 2007 14:16:35 -0400
+Subject: [Chan-sccp-users] Shared lines implementation
+Message-ID: <FF3BAD39A42F7B4FBF9F82CA1E882ADC9738EC@SVARIEXMG01.landam.landamerica.net>
+
+I've been too busy at work to write up something formal, but here's the
+relevant sections from my test config.  Hopefully this will help people
+get on the right track.  It's been awhile since I've messed with this so
+the details are kind of sketchy.  I'm not sure if this config will work
+without tweaking, I may have been in the middle of trying a few
+different things.  Everything was taken from the documentation in the
+Asterisk tarball at asterisk-1.4.12/doc/sla.pdf .  The key to getting it
+working with SCCP are the device lines in sla.conf.  They should be set
+to Local/extension at context and not SCCP/line.
+
+ 
+
+I had two test phones.  SCCP lines 920 and 925 were SLA line 1.
+Incoming Zap calls started at extension s in the [line1] context.
+Because you can't show hint status on a real SCCP line, each phone had
+two lines.  The first line was the normal SCCP line that the calls were
+placed on and the second line reported the hint status.  To keep things
+simple I'm only using one SLA line here.  If you wanted each station to
+have their own dedicated line, you could also set that up as a normal
+SCCP line.  
+
+ 
+
+If I recall correctly there were a few issues.  I don't think the hold
+button released the call from the station the way a SIP client does.
+
+Hope this helps.
+
+ 
+
+ 
+
+-------------------------
+
+sla.conf
+
+ 
+
+ [line1]
+
+ type=trunk
+
+device=Local/disa at line1_outbound  
+
+ 
+
+[station1]
+
+type=station
+
+device=Local/920 at sla_stations
+
+autocontext=sla_stations
+
+trunk=line1
+
+ 
+
+[station2]
+
+type=station
+
+device= Local/925 at sla_stations
+
+autocontext=sla_stations
+
+trunk=line1
+
+ 
+
+------------------------------------------------
+
+sccp.conf
+
+ 
+
+[devices]
+
+type           = 7960
+
+autologin      = 920
+
+description    = Test Phone
+
+transfer       = on
+
+park           = on
+
+cfwdall        = off
+
+speeddial       = 1,SLA Line1,station1_line1 at sla_stations
+
+dtmfmode       = inband
+
+device => SEP<mac>
+
+ 
+
+type           = 7960
+
+autologin      = 925
+
+description    = Test 2
+
+transfer       = on
+
+park           = on
+
+cfwdall        = on
+
+speeddial       = 2,SLA Line1,station2_line1 at sla_stations
+
+dtmfmode       = inband
+
+device => SEP<mac>
+
+ 
+
+[lines]
+
+label           = Line 1
+
+description     = Test phone
+
+context         = sla_stations
+
+incominglimit   = 4
+
+transfer        = on
+
+cid_name        = Test Phone
+
+cid_num         = 3920
+
+line => 920
+
+ 
+
+label           = Line 1
+
+description     = Test 2
+
+context         = sla_stations
+
+incominglimit   = 4
+
+transfer        = on
+
+cid_name        = Test 2
+
+cid_num         = 3925
+
+line => 925
+
+ 
+
+-----------------------------------------------
+
+extensions.conf
+
+[sla_stations]
+
+exten => station1,1,slastation(station1)
+
+exten => station1_line1,hint,SLA:station1_line1
+
+exten => station1_line1,1,slastation(station1_line1)
+
+ 
+
+exten => station2,1,slastation(station2)
+
+exten => station2_line1,hint,SLA:station2_line1
+
+exten => station2_line1,1,slastation(station2_line1)
+
+ 
+
+exten => line1,hint,Local/s at line1
+
+ 
+
+exten => 1,1,Goto(sla_stations|station1_line1|1)
+
+exten => 2,1,Goto(sla_stations|station2_line1|1)
+
+ 
+
+exten => 920,1,Dial(SCCP/920)
+
+exten => 925,1,Dial(SCCP/925)
+
+ 
+
+[line1]
+
+exten => s,1,slatrunk(line1)
+
+ 
+
+[line1_outbound]
+
+exten => _X.,1,Dial(Zap/g1/${EXTEN})
+
+ 
+
+exten => disa,1,Disa(no-password|line1_outbound)
+
+ 
+
+________________________________
+
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Lacy
+Moore
+Sent: Thursday, October 04, 2007 2:23 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] Shared lines implementation
+
+ 
+
+On 9/26/07, Steve J. Walker <SteveW at bucks.net> wrote: 
+
+Afternoon Sergio, all.
+
+I would be very interested in seeing how the local driver can be used to
+emulate a shared line. Would this mean that say 7940's with two lines
+can have one shared between users and one as the local ext?
+
+An example configuration for the Asterisk local driver and chan_sccp
+would be nice - maybe someone could post it then to one of the WIKI's 
+that's about which deals with SCCP and Asterisk?
+
+If it can emulate it properly it might be a better bet than fudging the
+sccp driver to work as SLA?
+
+Regards,
+
+Steve
+
+ 
+
+I'm curious about this as well.
+
+	 
+
+	> -----Original Message-----
+	> From: chan-sccp-users-bounces at lists.berlios.de 
+	[mailto:chan-sccp-users-
+	> bounces at lists.berlios.de] On Behalf Of Sergio Chersovani
+	> Sent: 28 July 2007 20:25
+	> To: chan-sccp-users at lists.berlios.de
+	> Cc: chan-sccp-b-discussion at lists.sourceforge.net
+	> Subject: Re: [Chan-sccp-users] Shared lines implementation 
+	>
+	> Marcello Ceschia ha scritto:
+	> > I started implementing shared line functionality to
+chan_sccp a few
+	> month ago.
+	> >
+	>
+	> shared line feature can be emulated with the asterisk local
+channel 
+	> driver
+	>
+	> http://www.voip-info.org/wiki/view/Asterisk+local+channels
+	>
+	> I'm running it in my office environment with no problems 
+	>
+	> _______________________________________________
+	> Chan-sccp-users mailing list
+	> Chan-sccp-users at lists.berlios.de
+	> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+	_______________________________________________
+	Chan-sccp-users mailing list
+	Chan-sccp-users at lists.berlios.de 
+	https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071008/9803c213/attachment.html>
+
+From shughes at LANDAM.com  Mon Oct  8 20:18:48 2007
+From: shughes at LANDAM.com (Hughes, Sam)
+Date: Mon, 8 Oct 2007 14:18:48 -0400
+Subject: [Chan-sccp-users] Comparing versions of chan_sccp
+Message-ID: <FF3BAD39A42F7B4FBF9F82CA1E882ADC9738ED@SVARIEXMG01.landam.landamerica.net>
+
+I noticed that this version has the realtime patch applied.  Does it
+work?  Are any special extconfig.conf or sccp.conf settings needed?
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+Dederscheck
+Sent: Sunday, October 07, 2007 4:17 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] Comparing versions of chan_sccp
+
+Martin,
+
+maybe you would like to the current version for 1.4 Marcello and I  
+have assembled from our and recent patches. Note that this version  
+runs without crashes in both Marcello's and mine testing  
+environments, comprised of the same kind of devices you use.
+
+I attached the current tree for you to try, despite it will only work  
+with * 1.4 as of now. We shall back-port it once...
+
+I also use a 7920 on a regular basis and have never had any crashes  
+except for when i used channel on for the wifi connection. Seems odd,  
+but resolved when changing to a higher channel. Maybe a problem with  
+the access point.
+
+
+Regards and much luck with your issues,
+-David.
+
+
+
+On 07.10.2007, at 12:55, Martin Sutherland wrote:
+
+> Dear list members,
+>
+> I've placed the Asterisk 1.2 version of chan_sccp that I use on an  
+> FTP server as follows:
+>
+> Server IP: 80.168.79.8
+> login name: chan-sccp
+> login pass: chan-sccp
+>
+> I would be very grateful if someone could compare this with the  
+> 20060408 to see the changes. I have found this to be the most  
+> stable version so far, although there are still crashes every few  
+> days. I was comtemplating upgrading to 1.4, but really worry that  
+> the current 1.4 version may actually crash more often with the  
+> setup that I use (7940s, 7960s, 7960+7914s with call parking,  
+> voicemail etc). Asterisk 1.2 seems to die after a deadlock has been  
+> avoided! I've heard that Asterisk 1.4 gets a seg fault.
+>
+> I have given up using paging to handsets (I use the sound card in  
+> the server connected to amp and loudspeakers), since it seems to  
+> kill the 7914 - presumably so many extensions changing status at  
+> the same time is too much.
+>
+> I have recently purchased a 7920 wireless phone (watch out, you  
+> have to order the battery separately!). So far the voicemail  
+> indication doesn't seem to work and my patch to prevent crashes  
+> after a redial tone/timeout for 7960+7914 causes real problems. I  
+> need to do more work on this. I'll probably end up using the new  
+> Snom m3 DECT SIP phones for my mobile users.
+>
+> We really need to strive to get a version that only crashes once  
+> per week. Already one of my customers has converted to SIP and has  
+> never looked back (no crashes for months). I would like to help in  
+> this effort as much as possible, but am not a C programmer.
+>
+> Best regards,
+>  
+
+
+From davidded at davidded.de  Mon Oct  8 22:55:07 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Mon, 8 Oct 2007 22:55:07 +0200
+Subject: [Chan-sccp-users] Comparing versions of chan_sccp
+In-Reply-To: <FF3BAD39A42F7B4FBF9F82CA1E882ADC9738ED@SVARIEXMG01.landam.landamerica.net>
+References: <FF3BAD39A42F7B4FBF9F82CA1E882ADC9738ED@SVARIEXMG01.landam.landamerica.net>
+Message-ID: <8A5423E4-542F-4437-B440-1B402CC0667D@davidded.de>
+
+Hi,
+
+you will have to ask Marcello for the realtime functionality -- it's  
+his work, and I'm curious to try it myself when I have the time.
+
+Concerning my work, there is the service url functionality. Instead  
+of a speeddial or a line, you can now configure any of these buttons  
+to trigger an XML page. This could come in handy, for instance, to  
+directly jump to the search form of you phonebook, or to open the  
+front door via http ;-)
+
+The syntax is like
+
+serviceURL = Label,http://my.url
+
+in a device section. Please note that the order of lines, speddials  
+and serviceURLs now gets a bit complicated as there are three kinds  
+of button entries
+
+First, the lines are allocated at the specified positions.
+
+Second, the speeddials fill the free positions, leaving out those  
+positions with an empty speeddial.
+
+Last, all now free buttons are filled in order with serviceURLs, also  
+leaving out positions with an empty entry.
+
+
+I know that this is very unintuitive, and indeed Marcello and I have  
+already discussed several ways to completly redesign the way buttons  
+are configured in chan_sccp, as clearly this has to be improved.
+
+If you need an example, just ask me.
+
+
+Regards and much fun with the chan ;-),
+-David.
+
+
+On 08.10.2007, at 20:18, Hughes, Sam wrote:
+
+> I noticed that this version has the realtime patch applied.  Does it
+> work?  Are any special extconfig.conf or sccp.conf settings needed?
+>
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+> Dederscheck
+> Sent: Sunday, October 07, 2007 4:17 AM
+> To: chan-sccp-users at lists.berlios.de
+> Subject: Re: [Chan-sccp-users] Comparing versions of chan_sccp
+>
+> Martin,
+>
+> maybe you would like to the current version for 1.4 Marcello and I
+> have assembled from our and recent patches. Note that this version
+> runs without crashes in both Marcello's and mine testing
+> environments, comprised of the same kind of devices you use.
+>
+> I attached the current tree for you to try, despite it will only work
+> with * 1.4 as of now. We shall back-port it once...
+>
+> I also use a 7920 on a regular basis and have never had any crashes
+> except for when i used channel on for the wifi connection. Seems odd,
+> but resolved when changing to a higher channel. Maybe a problem with
+> the access point.
+>
+>
+> Regards and much luck with your issues,
+> -David.
+>
+>
+>
+> On 07.10.2007, at 12:55, Martin Sutherland wrote:
+>
+>> Dear list members,
+>>
+>> I've placed the Asterisk 1.2 version of chan_sccp that I use on an
+>> FTP server as follows:
+>>
+>> Server IP: 80.168.79.8
+>> login name: chan-sccp
+>> login pass: chan-sccp
+>>
+>> I would be very grateful if someone could compare this with the
+>> 20060408 to see the changes. I have found this to be the most
+>> stable version so far, although there are still crashes every few
+>> days. I was comtemplating upgrading to 1.4, but really worry that
+>> the current 1.4 version may actually crash more often with the
+>> setup that I use (7940s, 7960s, 7960+7914s with call parking,
+>> voicemail etc). Asterisk 1.2 seems to die after a deadlock has been
+>> avoided! I've heard that Asterisk 1.4 gets a seg fault.
+>>
+>> I have given up using paging to handsets (I use the sound card in
+>> the server connected to amp and loudspeakers), since it seems to
+>> kill the 7914 - presumably so many extensions changing status at
+>> the same time is too much.
+>>
+>> I have recently purchased a 7920 wireless phone (watch out, you
+>> have to order the battery separately!). So far the voicemail
+>> indication doesn't seem to work and my patch to prevent crashes
+>> after a redial tone/timeout for 7960+7914 causes real problems. I
+>> need to do more work on this. I'll probably end up using the new
+>> Snom m3 DECT SIP phones for my mobile users.
+>>
+>> We really need to strive to get a version that only crashes once
+>> per week. Already one of my customers has converted to SIP and has
+>> never looked back (no crashes for months). I would like to help in
+>> this effort as much as possible, but am not a C programmer.
+>>
+>> Best regards,
+>>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From mobile at nhm.it  Tue Oct  9 09:04:30 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Tue, 9 Oct 2007 09:04:30 +0200
+Subject: [Chan-sccp-users] Comparing versions of chan_sccp
+References: <FF3BAD39A42F7B4FBF9F82CA1E882ADC9738ED@SVARIEXMG01.landam.landamerica.net>
+	<8A5423E4-542F-4437-B440-1B402CC0667D@davidded.de>
+Message-ID: <6FEEBCECE91B4CE1AFA63677BA05E78C@london>
+
+Hello David,
+
+i would like to know which version of SCCP firmware are u using on 7940/7960 
+phones
+as i would like to test the latest code in a production environment and i 
+can't get any
+troubles.
+
+Also, just to understand all new functionality maybe usefull to post an 
+example configuration
+file.
+
+Please let me know.
+
+Federico
+
+----- Original Message ----- 
+From: "David Dederscheck" <davidded at davidded.de>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Monday, October 08, 2007 10:55 PM
+Subject: Re: [Chan-sccp-users] Comparing versions of chan_sccp
+
+
+> Hi,
+>
+> you will have to ask Marcello for the realtime functionality -- it's
+> his work, and I'm curious to try it myself when I have the time.
+>
+> Concerning my work, there is the service url functionality. Instead
+> of a speeddial or a line, you can now configure any of these buttons
+> to trigger an XML page. This could come in handy, for instance, to
+> directly jump to the search form of you phonebook, or to open the
+> front door via http ;-)
+>
+> The syntax is like
+>
+> serviceURL = Label,http://my.url
+>
+> in a device section. Please note that the order of lines, speddials
+> and serviceURLs now gets a bit complicated as there are three kinds
+> of button entries
+>
+> First, the lines are allocated at the specified positions.
+>
+> Second, the speeddials fill the free positions, leaving out those
+> positions with an empty speeddial.
+>
+> Last, all now free buttons are filled in order with serviceURLs, also
+> leaving out positions with an empty entry.
+>
+>
+> I know that this is very unintuitive, and indeed Marcello and I have
+> already discussed several ways to completly redesign the way buttons
+> are configured in chan_sccp, as clearly this has to be improved.
+>
+> If you need an example, just ask me.
+>
+>
+> Regards and much fun with the chan ;-),
+> -David.
+>
+>
+> On 08.10.2007, at 20:18, Hughes, Sam wrote:
+>
+>> I noticed that this version has the realtime patch applied.  Does it
+>> work?  Are any special extconfig.conf or sccp.conf settings needed?
+>>
+>> -----Original Message-----
+>> From: chan-sccp-users-bounces at lists.berlios.de
+>> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+>> Dederscheck
+>> Sent: Sunday, October 07, 2007 4:17 AM
+>> To: chan-sccp-users at lists.berlios.de
+>> Subject: Re: [Chan-sccp-users] Comparing versions of chan_sccp
+>>
+>> Martin,
+>>
+>> maybe you would like to the current version for 1.4 Marcello and I
+>> have assembled from our and recent patches. Note that this version
+>> runs without crashes in both Marcello's and mine testing
+>> environments, comprised of the same kind of devices you use.
+>>
+>> I attached the current tree for you to try, despite it will only work
+>> with * 1.4 as of now. We shall back-port it once...
+>>
+>> I also use a 7920 on a regular basis and have never had any crashes
+>> except for when i used channel on for the wifi connection. Seems odd,
+>> but resolved when changing to a higher channel. Maybe a problem with
+>> the access point.
+>>
+>>
+>> Regards and much luck with your issues,
+>> -David.
+>>
+>>
+>>
+>> On 07.10.2007, at 12:55, Martin Sutherland wrote:
+>>
+>>> Dear list members,
+>>>
+>>> I've placed the Asterisk 1.2 version of chan_sccp that I use on an
+>>> FTP server as follows:
+>>>
+>>> Server IP: 80.168.79.8
+>>> login name: chan-sccp
+>>> login pass: chan-sccp
+>>>
+>>> I would be very grateful if someone could compare this with the
+>>> 20060408 to see the changes. I have found this to be the most
+>>> stable version so far, although there are still crashes every few
+>>> days. I was comtemplating upgrading to 1.4, but really worry that
+>>> the current 1.4 version may actually crash more often with the
+>>> setup that I use (7940s, 7960s, 7960+7914s with call parking,
+>>> voicemail etc). Asterisk 1.2 seems to die after a deadlock has been
+>>> avoided! I've heard that Asterisk 1.4 gets a seg fault.
+>>>
+>>> I have given up using paging to handsets (I use the sound card in
+>>> the server connected to amp and loudspeakers), since it seems to
+>>> kill the 7914 - presumably so many extensions changing status at
+>>> the same time is too much.
+>>>
+>>> I have recently purchased a 7920 wireless phone (watch out, you
+>>> have to order the battery separately!). So far the voicemail
+>>> indication doesn't seem to work and my patch to prevent crashes
+>>> after a redial tone/timeout for 7960+7914 causes real problems. I
+>>> need to do more work on this. I'll probably end up using the new
+>>> Snom m3 DECT SIP phones for my mobile users.
+>>>
+>>> We really need to strive to get a version that only crashes once
+>>> per week. Already one of my customers has converted to SIP and has
+>>> never looked back (no crashes for months). I would like to help in
+>>> this effort as much as possible, but am not a C programmer.
+>>>
+>>> Best regards,
+>>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users 
+
+
+
+From martin at linkdc.co.uk  Tue Oct  9 12:10:18 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Tue, 9 Oct 2007 11:10:18 +0100
+Subject: [Chan-sccp-users] Phone loads
+Message-ID: <19275446.1191924618017.JavaMail.root@mail.linkdc.co.uk>
+
+Dear list members,
+ 
+I really am looking forward to trying Marcello/David'd Asterisk 1.4 chan_sccp. The missing bit of info is that we need to know what firmware you are running on the various models of phone and which protocol version is being used. Hopefully if I run the same then I can expect the same results.
+ 
+An update on the 7960+7914 dial timeout/invalid number problem (onhook missed). I have had this problem with 7960 phone load 7.2.4, 8.0.1 & 8.0.5 and 7914 load 5.0.1 & 5.0.3. I also had another strange problem with the oldest version just listed with assisted transfer. Whilst speaking to the person to which you want to transfer the calls, after about a minute the Transfer option on the display just changed to TransVM and made it impossible to transfer the call! This did go away with the newer firmware. The solution that I developed for the missed onhook event after invalid number/timeout problem is to detect an active line/channel in the redial/invalid state in the offhook event and issue an onhook as follows in sccp_actions.c
+ 
+void sccp_handle_offhook(sccp_session_t * s, sccp_moo_t * r) {
+        sccp_line_t * l;
+        sccp_channel_t * c;
+        sccp_device_t * d = s->device;
+        if (!d)
+                return;
+/*************************************************************************************************/
+        if ( (c = sccp_channel_get_active(d)) ) {
+                if (c->callstate = SCCP_CHANNELSTATE_INVALIDNUMBER) {
+                        if (!strcasecmp(d->config_type, "7914")) {
+                                sccp_log(1) (VERBOSE_PREFIX_3 "%s: Taken Offhook having just had an invalid number situation. Terminate the call\n", d->id);
+                                sccp_channel_endcall(c);
+                                } else {
+                                sccp_log(1)(VERBOSE_PREFIX_3 "%s: Taken Offhook with a call (%d) in progress. Skip it!\n",d->id,c->callid);
+                                }
+                } else {
+                sccp_log(1)(VERBOSE_PREFIX_3 "%s: Taken Offhook with a call (%d) in progess. Skip it!\n", d->id, c->callid);
+                }
+                return;
+        }
+/**************************************************************************************************/
+ 
+ 
+An update on the 7920 wireless phone...strangly after entering a number and pressing the green send key, chan_sccp detects the send key and sets up a line and sets internal status to offhook and instructs the phone to go offhook; then the phone suddenly sends an offhook message. Internally the line seems to be marked as an invalid number so my patch for 7914 prevents any dialing working - strangely calls to voicemail worked perfectly. I had to re-write the fix for the 7914 above to only apply when phone model was 7914.
+ 
+Regards,
+ 
+Martin
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071009/09602237/attachment.html>
+
+From spickermann at e-systems.org  Tue Oct  9 14:19:29 2007
+From: spickermann at e-systems.org (spickermann at e-systems.org)
+Date: Tue, 9 Oct 2007 12:19:29 +0000
+Subject: [Chan-sccp-users] German Language with 7971
+Message-ID: <DIIE.0000060F0002593E@192.168.3.1>
+
+Dear list members,
+
+does anyone knows, how to get german language buttons etc with an 7971 Phone?
+Some directory options are already in german, like "Telefonbuch ansehen".
+But there are no mutated vowels like "?". Can someone help me?
+
+Thanks in advance ;-)
+
+Martin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071009/cf0be7c6/attachment.html>
+
+From s.lam at keenserver.nl  Tue Oct  9 15:00:12 2007
+From: s.lam at keenserver.nl (Steven Lam, KeenServer)
+Date: Tue, 9 Oct 2007 15:00:12 +0200
+Subject: [Chan-sccp-users] German Language with 7971
+References: <DIIE.0000060F0002593E@192.168.3.1>
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22402A7A5@goofy.bison.keenserver.nl>
+
+You need files from the Cisco local installer.
+
+You can download them from the Cisco site http://www.cisco.com/kobayashi/sw-center/telephony/callmgr/locale-installer.shtml (you need a cisco contract for that...)
+
+ 
+
+Steven.
+
+ 
+
+ 
+
+From: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of spickermann at e-systems.org
+Sent: dinsdag 9 oktober 2007 14:19
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] German Language with 7971
+
+ 
+
+Dear list members,
+
+ 
+
+does anyone knows, how to get german language buttons etc with an 7971 Phone?
+
+Some directory options are already in german, like "Telefonbuch ansehen".
+
+But there are no mutated vowels like "?". Can someone help me?
+
+ 
+
+Thanks in advance ;-)
+
+ 
+
+Martin
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071009/95b662e6/attachment.html>
+
+From chan-sccp.berlios.de at lusiewicz.de  Tue Oct  9 15:38:43 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Tue, 09 Oct 2007 15:38:43 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2 and
+	chan_sccp-20071004-DD
+In-Reply-To: <765E282D-A34B-4749-9F4A-50BE70258CA0@davidded.de>
+References: <19881137.1191754522126.JavaMail.root@mail.linkdc.co.uk>
+	<765E282D-A34B-4749-9F4A-50BE70258CA0@davidded.de>
+Message-ID: <470B8463.1010009@lusiewicz.de>
+
+David Dederscheck schrieb:
+> Martin,
+> 
+> maybe you would like to the current version for 1.4 Marcello and I have
+> assembled from our and recent patches. Note that this version runs
+> without crashes in both Marcello's and mine testing environments,
+> comprised of the same kind of devices you use.
+
+Hello David,
+
+after a while we have got a hanging asterisk. Following we see on the CLI:
+
+    -- SEP0016Cxxxxxxx: Answer the channel 211-642
+    -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+250 at SEP0016Cxxxxxxx-641
+    -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+    -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+SCCP/211-00000282
+    -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+    -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+    -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets sent:
+474 rcvd:
+461 lost: 0 jitter: 0 latency: 3
+[Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:54] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:55] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:56] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:57] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:58] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:59] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:59] NOTICE[27088]: chan_iax2.c:946 __schedule_action: Out
+of idle
+IAX2 threads for scheduling!
+[Oct  9 13:19:00] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+
+The above message is displayed until we kill the asterisk process.
+
+
+> I attached the current tree for you to try, despite it will only work
+> with * 1.4 as of now. We shall back-port it once...
+> 
+
+
+@David: maybe you have got an further idea, how to solve this? Many
+thanks for your help so far.
+
+Best regards
+Damian Lusiewicz
+
+
+From sccp-list at puzzled.xs4all.nl  Tue Oct  9 15:47:40 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Tue, 09 Oct 2007 15:47:40 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2
+	and	chan_sccp-20071004-DD
+In-Reply-To: <470B8463.1010009@lusiewicz.de>
+References: <19881137.1191754522126.JavaMail.root@mail.linkdc.co.uk>
+	<765E282D-A34B-4749-9F4A-50BE70258CA0@davidded.de>
+	<470B8463.1010009@lusiewicz.de>
+Message-ID: <1191937660.10126.5.camel@localhost.localdomain>
+
+On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+[snip]
+> Hello David,
+> 
+> after a while we have got a hanging asterisk. Following we see on the CLI:
+> 
+>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+> 250 at SEP0016Cxxxxxxx-641
+>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+> SCCP/211-00000282
+>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets sent:
+> 474 rcvd:
+> 461 lost: 0 jitter: 0 latency: 3
+> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+> idle IAX2
+> threads for I/O, pausing!
+[snip]
+> 
+> @David: maybe you have got an further idea, how to solve this? Many
+> thanks for your help so far.
+
+Just a wild guess but are you perhaps running out of filedescriptors?
+Try setting the FD limit higher with ulimit. Alternatively try switching
+to SIP (if you can) and see if you can make it work that way.
+
+Regards,
+Patrick
+
+
+
+
+From spickermann at e-systems.org  Tue Oct  9 16:50:49 2007
+From: spickermann at e-systems.org (spickermann at e-systems.org)
+Date: Tue, 9 Oct 2007 14:50:49 +0000
+Subject: [Chan-sccp-users] Re-2:  German Language with 7971
+Message-ID: <DIIE.000001F30002597D@192.168.3.1>
+
+Which one is the easiest to implement? And if i have the file, which files should be placed
+where?
+
+Martin
+Original Message        processed by David InfoCenter 
+Subject: Re: [Chan-sccp-users] German Language with 7971 (09-Okt-2007 15:00)
+From:    s.lam at keenserver.nl
+To:      spickermann at e-systems.org
+
+
+You need files from the Cisco local installer.
+You can download them from the Cisco site http://www.cisco.com/kobayashi/sw-center/telephony/callmgr/locale-installer.shtml (you need a cisco contract for that
+)
+ 
+Steven.
+ 
+ 
+From: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of spickermann at e-systems.org
+Sent: dinsdag 9 oktober 2007 14:19
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] German Language with 7971
+ 
+Dear list members,
+ 
+does anyone knows, how to get german language buttons etc with an 7971 Phone?
+Some directory options are already in german, like "Telefonbuch ansehen".
+But there are no mutated vowels like "?". Can someone help me?
+ 
+Thanks in advance ;-)
+ 
+Martin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071009/d694a1f5/attachment.html>
+
+From m.robichon at llg.de  Wed Oct 10 16:18:42 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Wed, 10 Oct 2007 16:18:42 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2
+	and	chan_sccp	-20071004-DD
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106622834@lhu01.llg.de>
+
+Hi,
+
+it is hanging with asterisk version 1.4.11 and the newest chan_sccp. If you
+downgrade to asterisk 1.4.6 everything works fine.
+
+This is what we have done.
+
+Marcus Robichon
+ 
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Patrick
+Gesendet: Dienstag, 9. Oktober 2007 15:48
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+chan_sccp-20071004-DD
+
+On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+[snip]
+> Hello David,
+> 
+> after a while we have got a hanging asterisk. Following we see on the CLI:
+> 
+>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+> 250 at SEP0016Cxxxxxxx-641
+>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+> SCCP/211-00000282
+>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets sent:
+> 474 rcvd:
+> 461 lost: 0 jitter: 0 latency: 3
+> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+> idle IAX2
+> threads for I/O, pausing!
+[snip]
+> 
+> @David: maybe you have got an further idea, how to solve this? Many
+> thanks for your help so far.
+
+Just a wild guess but are you perhaps running out of filedescriptors?
+Try setting the FD limit higher with ulimit. Alternatively try switching
+to SIP (if you can) and see if you can make it work that way.
+
+Regards,
+Patrick
+
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071010/87d7f5b1/attachment.html>
+
+From davidded at davidded.de  Wed Oct 10 18:13:02 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Wed, 10 Oct 2007 18:13:02 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2
+	and	chan_sccp	-20071004-DD
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC51106622834@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622834@lhu01.llg.de>
+Message-ID: <7D191A1D-27C3-43E9-BFAA-8B97E1E32766@davidded.de>
+
+Hi folks,
+
+I'm not sure why this happens. Does it only occur after a transfer?  
+My guess would be that there could be some problems with the handling  
+of audio transcoding. This has been a problem with IAX2 and Zap with  
+asterisk > 1.4.6 (@Marcello, was it right that version?), which we  
+solved Q&D, i.e. ignore it when possible. Just look at the comments  
+ending with (DD) or (-DD).
+
+Sorry that I can't go into more details now -- just fell ill with my  
+Tonsils aching badly.
+
+Regards,
+-David.
+
+On 10.10.2007, at 16:18, Marcus Robichon wrote:
+
+> Hi,
+>
+> it is hanging with asterisk version 1.4.11 and the newest  
+> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+>
+> This is what we have done.
+>
+> Marcus Robichon
+>
+> -----Urspr?ngliche Nachricht-----
+> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp- 
+> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+> Gesendet: Dienstag, 9. Oktober 2007 15:48
+> An: chan-sccp-users at lists.berlios.de
+> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and  
+> chan_sccp-20071004-DD
+>
+> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+> [snip]
+> > Hello David,
+> >
+> > after a while we have got a hanging asterisk. Following we see on  
+> the CLI:
+> >
+> >     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+> >     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+> > 250 at SEP0016Cxxxxxxx-641
+> >     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+> >     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+> > SCCP/211-00000282
+> >     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+> >     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+> >     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets  
+> sent:
+> > 474 rcvd:
+> > 461 lost: 0 jitter: 0 latency: 3
+> > [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:  
+> Out of
+> > idle IAX2
+> > threads for I/O, pausing!
+> [snip]
+> >
+> > @David: maybe you have got an further idea, how to solve this? Many
+> > thanks for your help so far.
+>
+> Just a wild guess but are you perhaps running out of filedescriptors?
+> Try setting the FD limit higher with ulimit. Alternatively try  
+> switching
+> to SIP (if you can) and see if you can make it work that way.
+>
+> Regards,
+> Patrick
+>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From chan-sccp.berlios.de at lusiewicz.de  Wed Oct 10 18:49:03 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Wed, 10 Oct 2007 18:49:03 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp
+ -20071004-DD
+In-Reply-To: <7D191A1D-27C3-43E9-BFAA-8B97E1E32766@davidded.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622834@lhu01.llg.de>
+	<7D191A1D-27C3-43E9-BFAA-8B97E1E32766@davidded.de>
+Message-ID: <470D027F.8030400@lusiewicz.de>
+
+David Dederscheck schrieb:
+> Hi folks,
+> 
+> I'm not sure why this happens. Does it only occur after a transfer?  
+
+Possibly yes, a "Transfer confirmation destination" message is shown on
+CLI before the trouble beginns.
+
+I am using the following patch in channel.c to get chan-sccp to work
+correctly with asterisk-1.4.10:
+
+int ast_channel_make_compatible(struct ast_channel *chan, struct
+ast_channel *pe
+er)
+{
+        int src;
+        int dst;
+
+        if (chan->readformat == peer->writeformat && chan->writeformat
+== peer->
+readformat) {
+                /* Already compatible!  Moving on ... */
++                src = peer->nativeformats;
++                dst = chan->nativeformats;
++                ast_translator_best_choice(&dst, &src);
++                ast_set_read_format(chan, dst);
++                ast_set_write_format(peer, dst);
+                return 0;
+        }
+
+
+Without this patch, calls from chan_sccp to chan_iax2 are ending up with
+a hangup.
+
+> My guess would be that there could be some problems with the handling  
+> of audio transcoding. This has been a problem with IAX2 and Zap with  
+> asterisk > 1.4.6 (@Marcello, was it right that version?), which we  
+> solved Q&D, i.e. ignore it when possible. Just look at the comments  
+> ending with (DD) or (-DD).
+> 
+> Sorry that I can't go into more details now -- just fell ill with my  
+> Tonsils aching badly.
+> 
+> Regards,
+> -David.
+> 
+> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+> 
+>> Hi,
+>>
+>> it is hanging with asterisk version 1.4.11 and the newest  
+>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+>>
+>> This is what we have done.
+>>
+>> Marcus Robichon
+>>
+>> -----Urspr?ngliche Nachricht-----
+>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp- 
+>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>> An: chan-sccp-users at lists.berlios.de
+>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and  
+>> chan_sccp-20071004-DD
+>>
+>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>> [snip]
+>>> Hello David,
+>>>
+>>> after a while we have got a hanging asterisk. Following we see on  
+>> the CLI:
+>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+>>> 250 at SEP0016Cxxxxxxx-641
+>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+>>> SCCP/211-00000282
+>>>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>>>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets  
+>> sent:
+>>> 474 rcvd:
+>>> 461 lost: 0 jitter: 0 latency: 3
+>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:  
+>> Out of
+>>> idle IAX2
+>>> threads for I/O, pausing!
+>> [snip]
+>>> @David: maybe you have got an further idea, how to solve this? Many
+>>> thanks for your help so far.
+>> Just a wild guess but are you perhaps running out of filedescriptors?
+>> Try setting the FD limit higher with ulimit. Alternatively try  
+>> switching
+>> to SIP (if you can) and see if you can make it work that way.
+>>
+>> Regards,
+>> Patrick
+>>
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+Viele Gr??e
+Damian Lusiewicz
+
+
+From chan-sccp.berlios.de at lusiewicz.de  Wed Oct 10 18:49:33 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Wed, 10 Oct 2007 18:49:33 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp
+ -20071004-DD
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC51106622834@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622834@lhu01.llg.de>
+Message-ID: <470D029D.4040808@lusiewicz.de>
+
+Hello.
+
+Today we have got a hanging asterisk. The iax2 threads are hanging again:
+
+[Oct 10 16:29:58] NOTICE[12827]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2 threads for I/O, pausing!
+[Oct 10 16:29:59] NOTICE[12827]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2 threads for I/O, pausing!
+[Oct 10 16:30:00] NOTICE[12827]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+...
+[Oct 10 16:31:16] NOTICE[12827]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2 threads for I/O, pausing!
+
+
+For debugging purposes here is the output of "iax2 show threads" in case
+of such hanging:
+
+
+pbx*CLI> iax2 show threads
+IAX2 Thread Information
+Idle Threads:
+Active Threads:
+Thread D255: state=2, update=1192026676, actions=1, func ='socket_process'
+Thread D254: state=2, update=1192026676, actions=1, func ='socket_process'
+Thread D253: state=2, update=1192026676, actions=1, func ='socket_process'
+Thread D252: state=2, update=1192026676, actions=1, func ='socket_process'
+...(many lines like this).
+
+
+Normally, the output of "iax2 show threads" is:
+
+
+pbx*CLI> iax2 show threads
+IAX2 Thread Information
+Idle Threads:
+Thread 74: state=0, update=0, actions=2321, func =''
+Thread 80: state=0, update=0, actions=2320, func =''
+Thread 79: state=0, update=0, actions=2321, func =''
+Thread 76: state=0, update=0, actions=2322, func =''
+Thread 81: state=0, update=0, actions=2320, func =''
+Thread 82: state=0, update=0, actions=2320, func =''
+Thread 85: state=0, update=0, actions=2320, func =''
+...
+
+
+
+Downgrading may be a solution for this problem, but then we would run
+outdated software with possibly other bugs.
+
+
+Any help will be welcome.
+
+Best regards
+Damian
+
+
+Marcus Robichon schrieb:
+> Hi,
+> 
+> it is hanging with asterisk version 1.4.11 and the newest chan_sccp. If
+> you downgrade to asterisk 1.4.6 everything works fine.
+> 
+> This is what we have done.
+> 
+> Marcus Robichon
+>  
+> -----Urspr?ngliche Nachricht-----
+> Von: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Patrick
+> Gesendet: Dienstag, 9. Oktober 2007 15:48
+> An: chan-sccp-users at lists.berlios.de
+> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+> chan_sccp-20071004-DD
+> 
+> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+> [snip]
+>> Hello David,
+>>
+>> after a while we have got a hanging asterisk. Following we see on the
+> CLI:
+>>
+>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+>> 250 at SEP0016Cxxxxxxx-641
+>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+>> SCCP/211-00000282
+>>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets sent:
+>> 474 rcvd:
+>> 461 lost: 0 jitter: 0 latency: 3
+>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+>> idle IAX2
+>> threads for I/O, pausing!
+> [snip]
+>>
+>> @David: maybe you have got an further idea, how to solve this? Many
+>> thanks for your help so far.
+> 
+> Just a wild guess but are you perhaps running out of filedescriptors?
+> Try setting the FD limit higher with ulimit. Alternatively try switching
+> to SIP (if you can) and see if you can make it work that way.
+> 
+> Regards,
+> Patrick
+> 
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+
+From davidded at davidded.de  Wed Oct 10 21:47:47 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Wed, 10 Oct 2007 21:47:47 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp
+	-20071004-DD
+In-Reply-To: <470D027F.8030400@lusiewicz.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622834@lhu01.llg.de>
+	<7D191A1D-27C3-43E9-BFAA-8B97E1E32766@davidded.de>
+	<470D027F.8030400@lusiewicz.de>
+Message-ID: <53A6CA4D-D14B-4B89-8980-F1EDA9B59F4C@davidded.de>
+
+Hi,
+
+i did it the other way. I didn't touch the code you mentioned in  
+ast_channel_make_compatible, but I removed the hangup behaviour from  
+chan_sccp in that case.
+
+Please try the new version I attached to this mail and _don't patch_  
+asterisk as you did before.
+
+Please let me know if it works out for you, too.
+
+Regards,
+-David.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: chan_sccp-20071009-DD.tar.gz
+Type: application/x-gzip
+Size: 102865 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071010/c91bc5cc/attachment.bin>
+-------------- next part --------------
+
+On Oct 10, 2007, at 6:49 PM, Damian Lusiewicz wrote:
+
+> David Dederscheck schrieb:
+>> Hi folks,
+>>
+>> I'm not sure why this happens. Does it only occur after a transfer?
+>
+> Possibly yes, a "Transfer confirmation destination" message is  
+> shown on
+> CLI before the trouble beginns.
+>
+> I am using the following patch in channel.c to get chan-sccp to work
+> correctly with asterisk-1.4.10:
+>
+> int ast_channel_make_compatible(struct ast_channel *chan, struct
+> ast_channel *pe
+> er)
+> {
+>         int src;
+>         int dst;
+>
+>         if (chan->readformat == peer->writeformat && chan->writeformat
+> == peer->
+> readformat) {
+>                 /* Already compatible!  Moving on ... */
+> +                src = peer->nativeformats;
+> +                dst = chan->nativeformats;
+> +                ast_translator_best_choice(&dst, &src);
+> +                ast_set_read_format(chan, dst);
+> +                ast_set_write_format(peer, dst);
+>                 return 0;
+>         }
+>
+>
+> Without this patch, calls from chan_sccp to chan_iax2 are ending up  
+> with
+> a hangup.
+>
+>> My guess would be that there could be some problems with the handling
+>> of audio transcoding. This has been a problem with IAX2 and Zap with
+>> asterisk > 1.4.6 (@Marcello, was it right that version?), which we
+>> solved Q&D, i.e. ignore it when possible. Just look at the comments
+>> ending with (DD) or (-DD).
+>>
+>> Sorry that I can't go into more details now -- just fell ill with my
+>> Tonsils aching badly.
+>>
+>> Regards,
+>> -David.
+>>
+>> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+>>
+>>> Hi,
+>>>
+>>> it is hanging with asterisk version 1.4.11 and the newest
+>>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+>>>
+>>> This is what we have done.
+>>>
+>>> Marcus Robichon
+>>>
+>>> -----Urspr?ngliche Nachricht-----
+>>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-
+>>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>>> An: chan-sccp-users at lists.berlios.de
+>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>> chan_sccp-20071004-DD
+>>>
+>>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>>> [snip]
+>>>> Hello David,
+>>>>
+>>>> after a while we have got a hanging asterisk. Following we see on
+>>> the CLI:
+>>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+>>>> 250 at SEP0016Cxxxxxxx-641
+>>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on  
+>>>> channel
+>>>> SCCP/211-00000282
+>>>>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>>>>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets
+>>> sent:
+>>>> 474 rcvd:
+>>>> 461 lost: 0 jitter: 0 latency: 3
+>>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:
+>>> Out of
+>>>> idle IAX2
+>>>> threads for I/O, pausing!
+>>> [snip]
+>>>> @David: maybe you have got an further idea, how to solve this? Many
+>>>> thanks for your help so far.
+>>> Just a wild guess but are you perhaps running out of  
+>>> filedescriptors?
+>>> Try setting the FD limit higher with ulimit. Alternatively try
+>>> switching
+>>> to SIP (if you can) and see if you can make it work that way.
+>>>
+>>> Regards,
+>>> Patrick
+>>>
+>>>
+>>> _______________________________________________
+>>> Chan-sccp-users mailing list
+>>> Chan-sccp-users at lists.berlios.de
+>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>
+>>> _______________________________________________
+>>> Chan-sccp-users mailing list
+>>> Chan-sccp-users at lists.berlios.de
+>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>
+>
+>
+> Viele Gr??e
+> Damian Lusiewicz
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From chan-sccp.berlios.de at lusiewicz.de  Thu Oct 11 14:28:41 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Thu, 11 Oct 2007 14:28:41 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp
+ -20071004-DD
+In-Reply-To: <53A6CA4D-D14B-4B89-8980-F1EDA9B59F4C@davidded.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622834@lhu01.llg.de>	<7D191A1D-27C3-43E9-BFAA-8B97E1E32766@davidded.de>	<470D027F.8030400@lusiewicz.de>
+	<53A6CA4D-D14B-4B89-8980-F1EDA9B59F4C@davidded.de>
+Message-ID: <470E16F9.4010807@lusiewicz.de>
+
+David Dederscheck schrieb:
+> Hi,
+
+Hi David,
+hi list members,
+
+> i did it the other way. I didn't touch the code you mentioned in
+> ast_channel_make_compatible, but I removed the hangup behaviour from
+> chan_sccp in that case.
+> 
+> Please try the new version I attached to this mail and _don't patch_
+> asterisk as you did before.
+
+Ok, I am currently running asterisk-1.4.10 without my patch, and with
+your todays version of chan-sccp. In few days I will know more and let
+you know.
+
+Many thanks so far.
+
+> Please let me know if it works out for you, too.
+> 
+> Regards,
+> -David.
+> 
+> On Oct 10, 2007, at 6:49 PM, Damian Lusiewicz wrote:
+> 
+>> David Dederscheck schrieb:
+>>> Hi folks,
+>>>
+>>> I'm not sure why this happens. Does it only occur after a transfer?
+>>
+>> Possibly yes, a "Transfer confirmation destination" message is shown on
+>> CLI before the trouble beginns.
+>>
+>> I am using the following patch in channel.c to get chan-sccp to work
+>> correctly with asterisk-1.4.10:
+>>
+>> int ast_channel_make_compatible(struct ast_channel *chan, struct
+>> ast_channel *pe
+>> er)
+>> {
+>>         int src;
+>>         int dst;
+>>
+>>         if (chan->readformat == peer->writeformat && chan->writeformat
+>> == peer->
+>> readformat) {
+>>                 /* Already compatible!  Moving on ... */
+>> +                src = peer->nativeformats;
+>> +                dst = chan->nativeformats;
+>> +                ast_translator_best_choice(&dst, &src);
+>> +                ast_set_read_format(chan, dst);
+>> +                ast_set_write_format(peer, dst);
+>>                 return 0;
+>>         }
+>>
+>>
+>> Without this patch, calls from chan_sccp to chan_iax2 are ending up with
+>> a hangup.
+>>
+>>> My guess would be that there could be some problems with the handling
+>>> of audio transcoding. This has been a problem with IAX2 and Zap with
+>>> asterisk > 1.4.6 (@Marcello, was it right that version?), which we
+>>> solved Q&D, i.e. ignore it when possible. Just look at the comments
+>>> ending with (DD) or (-DD).
+>>>
+>>> Sorry that I can't go into more details now -- just fell ill with my
+>>> Tonsils aching badly.
+>>>
+>>> Regards,
+>>> -David.
+>>>
+>>> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+>>>
+>>>> Hi,
+>>>>
+>>>> it is hanging with asterisk version 1.4.11 and the newest
+>>>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+>>>>
+>>>> This is what we have done.
+>>>>
+>>>> Marcus Robichon
+>>>>
+>>>> -----Urspr?ngliche Nachricht-----
+>>>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-
+>>>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>>>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>>>> An: chan-sccp-users at lists.berlios.de
+>>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>>> chan_sccp-20071004-DD
+>>>>
+>>>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>>>> [snip]
+>>>>> Hello David,
+>>>>>
+>>>>> after a while we have got a hanging asterisk. Following we see on
+>>>> the CLI:
+>>>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>>>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+>>>>> 250 at SEP0016Cxxxxxxx-641
+>>>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+>>>>> SCCP/211-00000282
+>>>>>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>>>>>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>>>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets
+>>>> sent:
+>>>>> 474 rcvd:
+>>>>> 461 lost: 0 jitter: 0 latency: 3
+>>>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:
+>>>> Out of
+>>>>> idle IAX2
+>>>>> threads for I/O, pausing!
+>>>> [snip]
+>>>>> @David: maybe you have got an further idea, how to solve this? Many
+>>>>> thanks for your help so far.
+>>>> Just a wild guess but are you perhaps running out of filedescriptors?
+>>>> Try setting the FD limit higher with ulimit. Alternatively try
+>>>> switching
+>>>> to SIP (if you can) and see if you can make it work that way.
+>>>>
+>>>> Regards,
+>>>> Patrick
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Chan-sccp-users mailing list
+>>>> Chan-sccp-users at lists.berlios.de
+>>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>>
+>>>> _______________________________________________
+>>>> Chan-sccp-users mailing list
+>>>> Chan-sccp-users at lists.berlios.de
+>>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>
+>>> _______________________________________________
+>>> Chan-sccp-users mailing list
+>>> Chan-sccp-users at lists.berlios.de
+>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>
+>>
+>>
+>> Viele Gr??e
+>> Damian Lusiewicz
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+Best regards
+Damian Lusiewicz
+
+
+From m.robichon at llg.de  Thu Oct 11 17:05:06 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Thu, 11 Oct 2007 17:05:06 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp	
+	-20071004-DD
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC511066228B5@lhu01.llg.de>
+
+Hi,
+
+sorry, I cannot check this in the moment, because my boss gets a bit
+aggressive due to several brakedowns the last month. Once because of this
+IAX problem, but more about our Kirk installation which is crashing our
+productive system once a day. 
+
+So, we have to fix first the Kirk problems.
+
+Sorry guys.
+
+Marcus
+
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Damian
+Lusiewicz
+Gesendet: Donnerstag, 11. Oktober 2007 14:29
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and chan_sccp
+-20071004-DD
+
+David Dederscheck schrieb:
+> Hi,
+
+Hi David,
+hi list members,
+
+> i did it the other way. I didn't touch the code you mentioned in
+> ast_channel_make_compatible, but I removed the hangup behaviour from
+> chan_sccp in that case.
+> 
+> Please try the new version I attached to this mail and _don't patch_
+> asterisk as you did before.
+
+Ok, I am currently running asterisk-1.4.10 without my patch, and with
+your todays version of chan-sccp. In few days I will know more and let
+you know.
+
+Many thanks so far.
+
+> Please let me know if it works out for you, too.
+> 
+> Regards,
+> -David.
+> 
+> On Oct 10, 2007, at 6:49 PM, Damian Lusiewicz wrote:
+> 
+>> David Dederscheck schrieb:
+>>> Hi folks,
+>>>
+>>> I'm not sure why this happens. Does it only occur after a transfer?
+>>
+>> Possibly yes, a "Transfer confirmation destination" message is shown on
+>> CLI before the trouble beginns.
+>>
+>> I am using the following patch in channel.c to get chan-sccp to work
+>> correctly with asterisk-1.4.10:
+>>
+>> int ast_channel_make_compatible(struct ast_channel *chan, struct
+>> ast_channel *pe
+>> er)
+>> {
+>>         int src;
+>>         int dst;
+>>
+>>         if (chan->readformat == peer->writeformat && chan->writeformat
+>> == peer->
+>> readformat) {
+>>                 /* Already compatible!  Moving on ... */
+>> +                src = peer->nativeformats;
+>> +                dst = chan->nativeformats;
+>> +                ast_translator_best_choice(&dst, &src);
+>> +                ast_set_read_format(chan, dst);
+>> +                ast_set_write_format(peer, dst);
+>>                 return 0;
+>>         }
+>>
+>>
+>> Without this patch, calls from chan_sccp to chan_iax2 are ending up with
+>> a hangup.
+>>
+>>> My guess would be that there could be some problems with the handling
+>>> of audio transcoding. This has been a problem with IAX2 and Zap with
+>>> asterisk > 1.4.6 (@Marcello, was it right that version?), which we
+>>> solved Q&D, i.e. ignore it when possible. Just look at the comments
+>>> ending with (DD) or (-DD).
+>>>
+>>> Sorry that I can't go into more details now -- just fell ill with my
+>>> Tonsils aching badly.
+>>>
+>>> Regards,
+>>> -David.
+>>>
+>>> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+>>>
+>>>> Hi,
+>>>>
+>>>> it is hanging with asterisk version 1.4.11 and the newest
+>>>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+>>>>
+>>>> This is what we have done.
+>>>>
+>>>> Marcus Robichon
+>>>>
+>>>> -----Urspr?ngliche Nachricht-----
+>>>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-
+>>>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>>>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>>>> An: chan-sccp-users at lists.berlios.de
+>>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>>> chan_sccp-20071004-DD
+>>>>
+>>>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>>>> [snip]
+>>>>> Hello David,
+>>>>>
+>>>>> after a while we have got a hanging asterisk. Following we see on
+>>>> the CLI:
+>>>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>>>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+>>>>> 250 at SEP0016Cxxxxxxx-641
+>>>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+>>>>> SCCP/211-00000282
+>>>>>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>>>>>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>>>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets
+>>>> sent:
+>>>>> 474 rcvd:
+>>>>> 461 lost: 0 jitter: 0 latency: 3
+>>>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:
+>>>> Out of
+>>>>> idle IAX2
+>>>>> threads for I/O, pausing!
+>>>> [snip]
+>>>>> @David: maybe you have got an further idea, how to solve this? Many
+>>>>> thanks for your help so far.
+>>>> Just a wild guess but are you perhaps running out of filedescriptors?
+>>>> Try setting the FD limit higher with ulimit. Alternatively try
+>>>> switching
+>>>> to SIP (if you can) and see if you can make it work that way.
+>>>>
+>>>> Regards,
+>>>> Patrick
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Chan-sccp-users mailing list
+>>>> Chan-sccp-users at lists.berlios.de
+>>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>>
+>>>> _______________________________________________
+>>>> Chan-sccp-users mailing list
+>>>> Chan-sccp-users at lists.berlios.de
+>>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>
+>>> _______________________________________________
+>>> Chan-sccp-users mailing list
+>>> Chan-sccp-users at lists.berlios.de
+>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>
+>>
+>>
+>> Viele Gr??e
+>> Damian Lusiewicz
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+Best regards
+Damian Lusiewicz
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071011/dc8856a7/attachment.html>
+
+From m.robichon at llg.de  Tue Oct 16 07:42:58 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Tue, 16 Oct 2007 07:42:58 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp	
+	-20071004-DD
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106622A5F@lhu01.llg.de>
+
+Hi Damian,
+
+i am curious about the results of the patch version of chan_sccp from David.
+Does it fix your iax problems?
+
+Kind regards
+
+Marcus Robichon
+ 
+Lab Logistics Group GmbH
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Damian
+Lusiewicz
+Gesendet: Donnerstag, 11. Oktober 2007 14:29
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and chan_sccp
+-20071004-DD
+
+David Dederscheck schrieb:
+> Hi,
+
+Hi David,
+hi list members,
+
+> i did it the other way. I didn't touch the code you mentioned in
+> ast_channel_make_compatible, but I removed the hangup behaviour from
+> chan_sccp in that case.
+> 
+> Please try the new version I attached to this mail and _don't patch_
+> asterisk as you did before.
+
+Ok, I am currently running asterisk-1.4.10 without my patch, and with
+your todays version of chan-sccp. In few days I will know more and let
+you know.
+
+Many thanks so far.
+
+> Please let me know if it works out for you, too.
+> 
+> Regards,
+> -David.
+> 
+> On Oct 10, 2007, at 6:49 PM, Damian Lusiewicz wrote:
+> 
+>> David Dederscheck schrieb:
+>>> Hi folks,
+>>>
+>>> I'm not sure why this happens. Does it only occur after a transfer?
+>>
+>> Possibly yes, a "Transfer confirmation destination" message is shown on
+>> CLI before the trouble beginns.
+>>
+>> I am using the following patch in channel.c to get chan-sccp to work
+>> correctly with asterisk-1.4.10:
+>>
+>> int ast_channel_make_compatible(struct ast_channel *chan, struct
+>> ast_channel *pe
+>> er)
+>> {
+>>         int src;
+>>         int dst;
+>>
+>>         if (chan->readformat == peer->writeformat && chan->writeformat
+>> == peer->
+>> readformat) {
+>>                 /* Already compatible!  Moving on ... */
+>> +                src = peer->nativeformats;
+>> +                dst = chan->nativeformats;
+>> +                ast_translator_best_choice(&dst, &src);
+>> +                ast_set_read_format(chan, dst);
+>> +                ast_set_write_format(peer, dst);
+>>                 return 0;
+>>         }
+>>
+>>
+>> Without this patch, calls from chan_sccp to chan_iax2 are ending up with
+>> a hangup.
+>>
+>>> My guess would be that there could be some problems with the handling
+>>> of audio transcoding. This has been a problem with IAX2 and Zap with
+>>> asterisk > 1.4.6 (@Marcello, was it right that version?), which we
+>>> solved Q&D, i.e. ignore it when possible. Just look at the comments
+>>> ending with (DD) or (-DD).
+>>>
+>>> Sorry that I can't go into more details now -- just fell ill with my
+>>> Tonsils aching badly.
+>>>
+>>> Regards,
+>>> -David.
+>>>
+>>> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+>>>
+>>>> Hi,
+>>>>
+>>>> it is hanging with asterisk version 1.4.11 and the newest
+>>>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+>>>>
+>>>> This is what we have done.
+>>>>
+>>>> Marcus Robichon
+>>>>
+>>>> -----Urspr?ngliche Nachricht-----
+>>>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-
+>>>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>>>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>>>> An: chan-sccp-users at lists.berlios.de
+>>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>>> chan_sccp-20071004-DD
+>>>>
+>>>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>>>> [snip]
+>>>>> Hello David,
+>>>>>
+>>>>> after a while we have got a hanging asterisk. Following we see on
+>>>> the CLI:
+>>>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>>>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+>>>>> 250 at SEP0016Cxxxxxxx-641
+>>>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+>>>>> SCCP/211-00000282
+>>>>>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>>>>>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>>>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets
+>>>> sent:
+>>>>> 474 rcvd:
+>>>>> 461 lost: 0 jitter: 0 latency: 3
+>>>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:
+>>>> Out of
+>>>>> idle IAX2
+>>>>> threads for I/O, pausing!
+>>>> [snip]
+>>>>> @David: maybe you have got an further idea, how to solve this? Many
+>>>>> thanks for your help so far.
+>>>> Just a wild guess but are you perhaps running out of filedescriptors?
+>>>> Try setting the FD limit higher with ulimit. Alternatively try
+>>>> switching
+>>>> to SIP (if you can) and see if you can make it work that way.
+>>>>
+>>>> Regards,
+>>>> Patrick
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Chan-sccp-users mailing list
+>>>> Chan-sccp-users at lists.berlios.de
+>>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>>
+>>>> _______________________________________________
+>>>> Chan-sccp-users mailing list
+>>>> Chan-sccp-users at lists.berlios.de
+>>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>
+>>> _______________________________________________
+>>> Chan-sccp-users mailing list
+>>> Chan-sccp-users at lists.berlios.de
+>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>
+>>
+>>
+>> Viele Gr??e
+>> Damian Lusiewicz
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+Best regards
+Damian Lusiewicz
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071016/3fd6d1c3/attachment.html>
+
+From chan-sccp.berlios.de at lusiewicz.de  Tue Oct 16 16:29:30 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Tue, 16 Oct 2007 16:29:30 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp
+ -20071004-DD
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC51106622A5F@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622A5F@lhu01.llg.de>
+Message-ID: <4714CACA.8040405@lusiewicz.de>
+
+Marcus Robichon schrieb:
+> Hi Damian,
+
+Hello Marcus.
+
+> i am curious about the results of the patch version of chan_sccp from
+> David. Does it fix your iax problems?
+
+No. Yesterday our asterisk has crashed again. Again, all iax threads
+were busy.
+
+Currently I try to set up a sip connection between the asterisk hosts,
+but I found, that there are several unsolved problems with this solution.
+
+Best regards
+Damian Lusiewicz
+
+
+> Kind regards
+> 
+> Marcus Robichon
+>  
+> Lab Logistics Group GmbH
+> -----Urspr?ngliche Nachricht-----
+> Von: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Damian
+> Lusiewicz
+> 
+> Gesendet: Donnerstag, 11. Oktober 2007 14:29
+> An: chan-sccp-users at lists.berlios.de
+> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+> chan_sccp -20071004-DD
+> 
+> David Dederscheck schrieb:
+>> Hi,
+> 
+> Hi David,
+> hi list members,
+> 
+>> i did it the other way. I didn't touch the code you mentioned in
+>> ast_channel_make_compatible, but I removed the hangup behaviour from
+>> chan_sccp in that case.
+>>
+>> Please try the new version I attached to this mail and _don't patch_
+>> asterisk as you did before.
+> 
+> Ok, I am currently running asterisk-1.4.10 without my patch, and with
+> your todays version of chan-sccp. In few days I will know more and let
+> you know.
+> 
+> Many thanks so far.
+> 
+>> Please let me know if it works out for you, too.
+>>
+>> Regards,
+>> -David.
+>>
+>> On Oct 10, 2007, at 6:49 PM, Damian Lusiewicz wrote:
+>>
+>>> David Dederscheck schrieb:
+>>>> Hi folks,
+>>>>
+>>>> I'm not sure why this happens. Does it only occur after a transfer?
+>>>
+>>> Possibly yes, a "Transfer confirmation destination" message is shown on
+>>> CLI before the trouble beginns.
+>>>
+>>> I am using the following patch in channel.c to get chan-sccp to work
+>>> correctly with asterisk-1.4.10:
+>>>
+>>> int ast_channel_make_compatible(struct ast_channel *chan, struct
+>>> ast_channel *pe
+>>> er)
+>>> {
+>>>         int src;
+>>>         int dst;
+>>>
+>>>         if (chan->readformat == peer->writeformat && chan->writeformat
+>>> == peer->
+>>> readformat) {
+>>>                 /* Already compatible!  Moving on ... */
+>>> +                src = peer->nativeformats;
+>>> +                dst = chan->nativeformats;
+>>> +                ast_translator_best_choice(&dst, &src);
+>>> +                ast_set_read_format(chan, dst);
+>>> +                ast_set_write_format(peer, dst);
+>>>                 return 0;
+>>>         }
+>>>
+>>>
+>>> Without this patch, calls from chan_sccp to chan_iax2 are ending up with
+>>> a hangup.
+>>>
+>>>> My guess would be that there could be some problems with the handling
+>>>> of audio transcoding. This has been a problem with IAX2 and Zap with
+>>>> asterisk > 1.4.6 (@Marcello, was it right that version?), which we
+>>>> solved Q&D, i.e. ignore it when possible. Just look at the comments
+>>>> ending with (DD) or (-DD).
+>>>>
+>>>> Sorry that I can't go into more details now -- just fell ill with my
+>>>> Tonsils aching badly.
+>>>>
+>>>> Regards,
+>>>> -David.
+>>>>
+>>>> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+>>>>
+>>>>> Hi,
+>>>>>
+>>>>> it is hanging with asterisk version 1.4.11 and the newest
+>>>>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+>>>>>
+>>>>> This is what we have done.
+>>>>>
+>>>>> Marcus Robichon
+>>>>>
+>>>>> -----Urspr?ngliche Nachricht-----
+>>>>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-
+>>>>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>>>>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>>>>> An: chan-sccp-users at lists.berlios.de
+>>>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>>>> chan_sccp-20071004-DD
+>>>>>
+>>>>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>>>>> [snip]
+>>>>>> Hello David,
+>>>>>>
+>>>>>> after a while we have got a hanging asterisk. Following we see on
+>>>>> the CLI:
+>>>>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>>>>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+>>>>>> 250 at SEP0016Cxxxxxxx-641
+>>>>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+>>>>>> SCCP/211-00000282
+>>>>>>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>>>>>>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>>>>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets
+>>>>> sent:
+>>>>>> 474 rcvd:
+>>>>>> 461 lost: 0 jitter: 0 latency: 3
+>>>>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:
+>>>>> Out of
+>>>>>> idle IAX2
+>>>>>> threads for I/O, pausing!
+>>>>> [snip]
+>>>>>> @David: maybe you have got an further idea, how to solve this? Many
+>>>>>> thanks for your help so far.
+>>>>> Just a wild guess but are you perhaps running out of filedescriptors?
+>>>>> Try setting the FD limit higher with ulimit. Alternatively try
+>>>>> switching
+>>>>> to SIP (if you can) and see if you can make it work that way.
+>>>>>
+>>>>> Regards,
+>>>>> Patrick
+>>>>>
+>>>>>
+
+
+
+
+From m.robichon at llg.de  Tue Oct 16 18:18:49 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Tue, 16 Oct 2007 18:18:49 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp	
+	-20071004-DD
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106622B33@lhu01.llg.de>
+
+Hi Damian,
+
+I actually updated asterisk to version 1.4.13 including the new
+chan_sccp20071009-DD from David. I have a second asterisk running version
+1.4.11 without chan_sccp. This seems to work now for me. I tested several
+scenarios. 
+
+I will report tomorrow when all people are working again if it holds what it
+promises.
+
+Have a nice day.
+
+Marcus Robichon
+ 
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Damian
+Lusiewicz
+Gesendet: Dienstag, 16. Oktober 2007 16:30
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and chan_sccp
+-20071004-DD
+
+Marcus Robichon schrieb:
+> Hi Damian,
+
+Hello Marcus.
+
+> i am curious about the results of the patch version of chan_sccp from
+> David. Does it fix your iax problems?
+
+No. Yesterday our asterisk has crashed again. Again, all iax threads
+were busy.
+
+Currently I try to set up a sip connection between the asterisk hosts,
+but I found, that there are several unsolved problems with this solution.
+
+Best regards
+Damian Lusiewicz
+
+
+> Kind regards
+> 
+> Marcus Robichon
+>  
+> Lab Logistics Group GmbH
+> -----Urspr?ngliche Nachricht-----
+> Von: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Damian
+> Lusiewicz
+> 
+> Gesendet: Donnerstag, 11. Oktober 2007 14:29
+> An: chan-sccp-users at lists.berlios.de
+> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+> chan_sccp -20071004-DD
+> 
+> David Dederscheck schrieb:
+>> Hi,
+> 
+> Hi David,
+> hi list members,
+> 
+>> i did it the other way. I didn't touch the code you mentioned in
+>> ast_channel_make_compatible, but I removed the hangup behaviour from
+>> chan_sccp in that case.
+>>
+>> Please try the new version I attached to this mail and _don't patch_
+>> asterisk as you did before.
+> 
+> Ok, I am currently running asterisk-1.4.10 without my patch, and with
+> your todays version of chan-sccp. In few days I will know more and let
+> you know.
+> 
+> Many thanks so far.
+> 
+>> Please let me know if it works out for you, too.
+>>
+>> Regards,
+>> -David.
+>>
+>> On Oct 10, 2007, at 6:49 PM, Damian Lusiewicz wrote:
+>>
+>>> David Dederscheck schrieb:
+>>>> Hi folks,
+>>>>
+>>>> I'm not sure why this happens. Does it only occur after a transfer?
+>>>
+>>> Possibly yes, a "Transfer confirmation destination" message is shown on
+>>> CLI before the trouble beginns.
+>>>
+>>> I am using the following patch in channel.c to get chan-sccp to work
+>>> correctly with asterisk-1.4.10:
+>>>
+>>> int ast_channel_make_compatible(struct ast_channel *chan, struct
+>>> ast_channel *pe
+>>> er)
+>>> {
+>>>         int src;
+>>>         int dst;
+>>>
+>>>         if (chan->readformat == peer->writeformat && chan->writeformat
+>>> == peer->
+>>> readformat) {
+>>>                 /* Already compatible!  Moving on ... */
+>>> +                src = peer->nativeformats;
+>>> +                dst = chan->nativeformats;
+>>> +                ast_translator_best_choice(&dst, &src);
+>>> +                ast_set_read_format(chan, dst);
+>>> +                ast_set_write_format(peer, dst);
+>>>                 return 0;
+>>>         }
+>>>
+>>>
+>>> Without this patch, calls from chan_sccp to chan_iax2 are ending up with
+>>> a hangup.
+>>>
+>>>> My guess would be that there could be some problems with the handling
+>>>> of audio transcoding. This has been a problem with IAX2 and Zap with
+>>>> asterisk > 1.4.6 (@Marcello, was it right that version?), which we
+>>>> solved Q&D, i.e. ignore it when possible. Just look at the comments
+>>>> ending with (DD) or (-DD).
+>>>>
+>>>> Sorry that I can't go into more details now -- just fell ill with my
+>>>> Tonsils aching badly.
+>>>>
+>>>> Regards,
+>>>> -David.
+>>>>
+>>>> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+>>>>
+>>>>> Hi,
+>>>>>
+>>>>> it is hanging with asterisk version 1.4.11 and the newest
+>>>>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+>>>>>
+>>>>> This is what we have done.
+>>>>>
+>>>>> Marcus Robichon
+>>>>>
+>>>>> -----Urspr?ngliche Nachricht-----
+>>>>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-
+>>>>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>>>>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>>>>> An: chan-sccp-users at lists.berlios.de
+>>>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>>>> chan_sccp-20071004-DD
+>>>>>
+>>>>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>>>>> [snip]
+>>>>>> Hello David,
+>>>>>>
+>>>>>> after a while we have got a hanging asterisk. Following we see on
+>>>>> the CLI:
+>>>>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>>>>     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+>>>>>> 250 at SEP0016Cxxxxxxx-641
+>>>>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+>>>>>> SCCP/211-00000282
+>>>>>>     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+>>>>>>     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1<MASQ>
+>>>>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets
+>>>>> sent:
+>>>>>> 474 rcvd:
+>>>>>> 461 lost: 0 jitter: 0 latency: 3
+>>>>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:
+>>>>> Out of
+>>>>>> idle IAX2
+>>>>>> threads for I/O, pausing!
+>>>>> [snip]
+>>>>>> @David: maybe you have got an further idea, how to solve this? Many
+>>>>>> thanks for your help so far.
+>>>>> Just a wild guess but are you perhaps running out of filedescriptors?
+>>>>> Try setting the FD limit higher with ulimit. Alternatively try
+>>>>> switching
+>>>>> to SIP (if you can) and see if you can make it work that way.
+>>>>>
+>>>>> Regards,
+>>>>> Patrick
+>>>>>
+>>>>>
+
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071016/d238c75a/attachment.html>
+
+From m.robichon at llg.de  Tue Oct 16 18:35:39 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Tue, 16 Oct 2007 18:35:39 +0200
+Subject: [Chan-sccp-users] Kirk Wireless Server 600v3
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106622B38@lhu01.llg.de>
+
+Hallo,
+ 
+I have a new question fort his mailing list. We have a Kirk Wireless DECT
+Server 600v3. We recognize that we get breakdowns with asterisk when we set
+the incoming limit more then 1. The second call to this line breakes down
+asterisk (not immediate, but after some minutes). Most times the whole
+server is running into memory leak that it has to be rebooted manually.
+ 
+Could someone tell me what is different to the device setting when I set the
+phone type to kirk?
+ 
+The biggest problem is, that I cannot see the real reason of the breakdown
+and the memory leaks. Is there something I can do to get this information? I
+already set the debug mode to the highest number ... but I cannot see
+anything is wrong.
+ 
+Thanks for your help.
+ 
+Marcus Robichon
+ 
+ 
+ 
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071016/2e4d8438/attachment.html>
+
+From davidded at davidded.de  Tue Oct 16 21:08:55 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Tue, 16 Oct 2007 21:08:55 +0200
+Subject: [Chan-sccp-users] Kirk Wireless Server 600v3
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC51106622B38@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622B38@lhu01.llg.de>
+Message-ID: <8A2B4D01-3AFE-4724-B519-4A101FDC1BA5@davidded.de>
+
+Hi Marcus,
+
+that sounds interesting. Maybe we should do a debugging session using  
+valgrind/ddd together?
+
+Btw, apart from only setting the phone type in the config file,  
+chan_sccp also detects the phone type by itself. I can't actually  
+remember where this autodetection ends and the manual setting is of  
+importance (@all: could anyone try to remember, please?)
+
+Kind regards,
+-David.
+
+
+On 16.10.2007, at 18:35, Marcus Robichon wrote:
+
+> Hallo,
+>
+>
+>
+> I have a new question fort his mailing list. We have a Kirk  
+> Wireless DECT Server 600v3. We recognize that we get breakdowns  
+> with asterisk when we set the incoming limit more then 1. The  
+> second call to this line breakes down asterisk (not immediate, but  
+> after some minutes). Most times the whole server is running into  
+> memory leak that it has to be rebooted manually.
+>
+>
+>
+> Could someone tell me what is different to the device setting when  
+> I set the phone type to kirk?
+>
+>
+>
+> The biggest problem is, that I cannot see the real reason of the  
+> breakdown and the memory leaks. Is there something I can do to get  
+> this information? I already set the debug mode to the highest  
+> number ? but I cannot see anything is wrong.
+>
+>
+>
+> Thanks for your help.
+>
+>
+>
+> Marcus Robichon
+>
+>
+>
+>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From davidded at davidded.de  Tue Oct 16 21:13:33 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Tue, 16 Oct 2007 21:13:33 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp
+	-20071004-DD
+In-Reply-To: <4714CACA.8040405@lusiewicz.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622A5F@lhu01.llg.de>
+	<4714CACA.8040405@lusiewicz.de>
+Message-ID: <042DEDF3-77BD-497F-8359-5CABE2A1F7A0@davidded.de>
+
+Hi Damian,
+
+as obviously the IAX issue doesn't work out either way, so I'd like  
+to reproduce it to help debugging it.
+
+Could you please give me the exact versions of everything involved,  
+and, the IAX config of the connection where the issue occurs?
+
+As I actually am a setup using asterisk 1.4.11 and my version of  
+chan_sccp, I'd be curious in what situation the crash occurs? Was it  
+only after a transfer, or also under different circumstances?
+
+Regards,
+-David.
+
+On 16.10.2007, at 16:29, Damian Lusiewicz wrote:
+
+> Marcus Robichon schrieb:
+>> Hi Damian,
+>
+> Hello Marcus.
+>
+>> i am curious about the results of the patch version of chan_sccp from
+>> David. Does it fix your iax problems?
+>
+> No. Yesterday our asterisk has crashed again. Again, all iax threads
+> were busy.
+>
+> Currently I try to set up a sip connection between the asterisk hosts,
+> but I found, that there are several unsolved problems with this  
+> solution.
+>
+> Best regards
+> Damian Lusiewicz
+>
+>
+>> Kind regards
+>>
+>> Marcus Robichon
+>>
+>> Lab Logistics Group GmbH
+>> -----Urspr?ngliche Nachricht-----
+>> Von: chan-sccp-users-bounces at lists.berlios.de
+>> [mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von  
+>> Damian
+>> Lusiewicz
+>>
+>> Gesendet: Donnerstag, 11. Oktober 2007 14:29
+>> An: chan-sccp-users at lists.berlios.de
+>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>> chan_sccp -20071004-DD
+>>
+>> David Dederscheck schrieb:
+>>> Hi,
+>>
+>> Hi David,
+>> hi list members,
+>>
+>>> i did it the other way. I didn't touch the code you mentioned in
+>>> ast_channel_make_compatible, but I removed the hangup behaviour from
+>>> chan_sccp in that case.
+>>>
+>>> Please try the new version I attached to this mail and _don't patch_
+>>> asterisk as you did before.
+>>
+>> Ok, I am currently running asterisk-1.4.10 without my patch, and with
+>> your todays version of chan-sccp. In few days I will know more and  
+>> let
+>> you know.
+>>
+>> Many thanks so far.
+>>
+>>> Please let me know if it works out for you, too.
+>>>
+>>> Regards,
+>>> -David.
+>>>
+>>> On Oct 10, 2007, at 6:49 PM, Damian Lusiewicz wrote:
+>>>
+>>>> David Dederscheck schrieb:
+>>>>> Hi folks,
+>>>>>
+>>>>> I'm not sure why this happens. Does it only occur after a  
+>>>>> transfer?
+>>>>
+>>>> Possibly yes, a "Transfer confirmation destination" message is  
+>>>> shown on
+>>>> CLI before the trouble beginns.
+>>>>
+>>>> I am using the following patch in channel.c to get chan-sccp to  
+>>>> work
+>>>> correctly with asterisk-1.4.10:
+>>>>
+>>>> int ast_channel_make_compatible(struct ast_channel *chan, struct
+>>>> ast_channel *pe
+>>>> er)
+>>>> {
+>>>>         int src;
+>>>>         int dst;
+>>>>
+>>>>         if (chan->readformat == peer->writeformat && chan- 
+>>>> >writeformat
+>>>> == peer->
+>>>> readformat) {
+>>>>                 /* Already compatible!  Moving on ... */
+>>>> +                src = peer->nativeformats;
+>>>> +                dst = chan->nativeformats;
+>>>> +                ast_translator_best_choice(&dst, &src);
+>>>> +                ast_set_read_format(chan, dst);
+>>>> +                ast_set_write_format(peer, dst);
+>>>>                 return 0;
+>>>>         }
+>>>>
+>>>>
+>>>> Without this patch, calls from chan_sccp to chan_iax2 are ending  
+>>>> up with
+>>>> a hangup.
+>>>>
+>>>>> My guess would be that there could be some problems with the  
+>>>>> handling
+>>>>> of audio transcoding. This has been a problem with IAX2 and Zap  
+>>>>> with
+>>>>> asterisk > 1.4.6 (@Marcello, was it right that version?), which we
+>>>>> solved Q&D, i.e. ignore it when possible. Just look at the  
+>>>>> comments
+>>>>> ending with (DD) or (-DD).
+>>>>>
+>>>>> Sorry that I can't go into more details now -- just fell ill  
+>>>>> with my
+>>>>> Tonsils aching badly.
+>>>>>
+>>>>> Regards,
+>>>>> -David.
+>>>>>
+>>>>> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+>>>>>
+>>>>>> Hi,
+>>>>>>
+>>>>>> it is hanging with asterisk version 1.4.11 and the newest
+>>>>>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works  
+>>>>>> fine.
+>>>>>>
+>>>>>> This is what we have done.
+>>>>>>
+>>>>>> Marcus Robichon
+>>>>>>
+>>>>>> -----Urspr?ngliche Nachricht-----
+>>>>>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-
+>>>>>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>>>>>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>>>>>> An: chan-sccp-users at lists.berlios.de
+>>>>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>>>>> chan_sccp-20071004-DD
+>>>>>>
+>>>>>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>>>>>> [snip]
+>>>>>>> Hello David,
+>>>>>>>
+>>>>>>> after a while we have got a hanging asterisk. Following we  
+>>>>>>> see on
+>>>>>> the CLI:
+>>>>>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>>>>>     -- SCCP: Outgoing call has been answered SCCP/ 
+>>>>>>> 250-00000281 on
+>>>>>>> 250 at SEP0016Cxxxxxxx-641
+>>>>>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>>>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on  
+>>>>>>> channel
+>>>>>>> SCCP/211-00000282
+>>>>>>>     -- SCCP: Asterisk request to hangup channel SCCP/ 
+>>>>>>> 250-00000280
+>>>>>>>     -- SCCP: Asterisk request to hangup channel IAX2/ 
+>>>>>>> pbx_e1-1<MASQ>
+>>>>>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets
+>>>>>> sent:
+>>>>>>> 474 rcvd:
+>>>>>>> 461 lost: 0 jitter: 0 latency: 3
+>>>>>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:
+>>>>>> Out of
+>>>>>>> idle IAX2
+>>>>>>> threads for I/O, pausing!
+>>>>>> [snip]
+>>>>>>> @David: maybe you have got an further idea, how to solve  
+>>>>>>> this? Many
+>>>>>>> thanks for your help so far.
+>>>>>> Just a wild guess but are you perhaps running out of  
+>>>>>> filedescriptors?
+>>>>>> Try setting the FD limit higher with ulimit. Alternatively try
+>>>>>> switching
+>>>>>> to SIP (if you can) and see if you can make it work that way.
+>>>>>>
+>>>>>> Regards,
+>>>>>> Patrick
+>>>>>>
+>>>>>>
+>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From m.robichon at llg.de  Tue Oct 16 22:54:57 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Tue, 16 Oct 2007 22:54:57 +0200
+Subject: [Chan-sccp-users] Kirk Wireless Server 600v3
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106622B3A@lhu01.llg.de>
+
+Hi David,
+
+if you tell me how can I use these tools (valgrind/ddd) we can try to figure
+out what happens when asterisk crashes the next time. 
+
+I would appreciate a debugging session :-), due to the reason I don?t know
+what to do with this Kirk Wireless server and the continuously crashing
+asterisk. My boss and my colleagues go mad.
+
+Awaiting your response David.
+
+Marcus Robichon
+
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von David
+Dederscheck
+Gesendet: Dienstag, 16. Oktober 2007 21:09
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Kirk Wireless Server 600v3
+
+Hi Marcus,
+
+that sounds interesting. Maybe we should do a debugging session using  
+valgrind/ddd together?
+
+Btw, apart from only setting the phone type in the config file,  
+chan_sccp also detects the phone type by itself. I can't actually  
+remember where this autodetection ends and the manual setting is of  
+importance (@all: could anyone try to remember, please?)
+
+Kind regards,
+-David.
+
+
+On 16.10.2007, at 18:35, Marcus Robichon wrote:
+
+> Hallo,
+>
+>
+>
+> I have a new question fort his mailing list. We have a Kirk  
+> Wireless DECT Server 600v3. We recognize that we get breakdowns  
+> with asterisk when we set the incoming limit more then 1. The  
+> second call to this line breakes down asterisk (not immediate, but  
+> after some minutes). Most times the whole server is running into  
+> memory leak that it has to be rebooted manually.
+>
+>
+>
+> Could someone tell me what is different to the device setting when  
+> I set the phone type to kirk?
+>
+>
+>
+> The biggest problem is, that I cannot see the real reason of the  
+> breakdown and the memory leaks. Is there something I can do to get  
+> this information? I already set the debug mode to the highest  
+> number ... but I cannot see anything is wrong.
+>
+>
+>
+> Thanks for your help.
+>
+>
+>
+> Marcus Robichon
+>
+>
+>
+>
+>
+>
+>
+>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071016/32c2a69e/attachment.html>
+
+From davidded at davidded.de  Tue Oct 16 23:12:57 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Tue, 16 Oct 2007 23:12:57 +0200
+Subject: [Chan-sccp-users] Kirk Wireless Server 600v3
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC51106622B3A@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622B3A@lhu01.llg.de>
+Message-ID: <75B5F1B6-67A2-4B82-B60D-1C9B34F0E7A9@davidded.de>
+
+Hi Marcus,
+
+I'd suggest to do this on phone, via IRC, or even both.
+
+Are you at the office right now?
+
+Kind regards,
+-David.
+
+
+On 16.10.2007, at 22:54, Marcus Robichon wrote:
+
+> Hi David,
+>
+> if you tell me how can I use these tools (valgrind/ddd) we can try  
+> to figure out what happens when asterisk crashes the next time.
+>
+> I would appreciate a debugging session :-), due to the reason I don 
+> ?t know what to do with this Kirk Wireless server and the  
+> continuously crashing asterisk. My boss and my colleagues go mad.
+>
+> Awaiting your response David.
+>
+> Marcus Robichon
+>
+> -----Urspr?ngliche Nachricht-----
+> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp- 
+> users-bounces at lists.berlios.de] Im Auftrag von David Dederscheck
+>
+> Gesendet: Dienstag, 16. Oktober 2007 21:09
+> An: chan-sccp-users at lists.berlios.de
+> Betreff: Re: [Chan-sccp-users] Kirk Wireless Server 600v3
+>
+> Hi Marcus,
+>
+> that sounds interesting. Maybe we should do a debugging session using
+> valgrind/ddd together?
+>
+> Btw, apart from only setting the phone type in the config file,
+> chan_sccp also detects the phone type by itself. I can't actually
+> remember where this autodetection ends and the manual setting is of
+> importance (@all: could anyone try to remember, please?)
+>
+> Kind regards,
+> -David.
+>
+>
+> On 16.10.2007, at 18:35, Marcus Robichon wrote:
+>
+> > Hallo,
+> >
+> >
+> >
+> > I have a new question fort his mailing list. We have a Kirk
+> > Wireless DECT Server 600v3. We recognize that we get breakdowns
+> > with asterisk when we set the incoming limit more then 1. The
+> > second call to this line breakes down asterisk (not immediate, but
+> > after some minutes). Most times the whole server is running into
+> > memory leak that it has to be rebooted manually.
+> >
+> >
+> >
+> > Could someone tell me what is different to the device setting when
+> > I set the phone type to kirk?
+> >
+> >
+> >
+> > The biggest problem is, that I cannot see the real reason of the
+> > breakdown and the memory leaks. Is there something I can do to get
+> > this information? I already set the debug mode to the highest
+> > number ... but I cannot see anything is wrong.
+> >
+> >
+> >
+> > Thanks for your help.
+> >
+> >
+> >
+> > Marcus Robichon
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > Chan-sccp-users mailing list
+> > Chan-sccp-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From m.robichon at llg.de  Tue Oct 16 23:19:50 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Tue, 16 Oct 2007 23:19:50 +0200
+Subject: [Chan-sccp-users] Kirk Wireless Server 600v3
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106622B3F@lhu01.llg.de>
+
+No at home. We can do this tomorrow, if you have time ...
+
+Marcus Robichon
+ 
+Lab Logistics Group GmbH
+
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von David
+Dederscheck
+Gesendet: Dienstag, 16. Oktober 2007 23:13
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Kirk Wireless Server 600v3
+
+Hi Marcus,
+
+I'd suggest to do this on phone, via IRC, or even both.
+
+Are you at the office right now?
+
+Kind regards,
+-David.
+
+
+On 16.10.2007, at 22:54, Marcus Robichon wrote:
+
+> Hi David,
+>
+> if you tell me how can I use these tools (valgrind/ddd) we can try  
+> to figure out what happens when asterisk crashes the next time.
+>
+> I would appreciate a debugging session :-), due to the reason I don 
+> ?t know what to do with this Kirk Wireless server and the  
+> continuously crashing asterisk. My boss and my colleagues go mad.
+>
+> Awaiting your response David.
+>
+> Marcus Robichon
+>
+> -----Urspr?ngliche Nachricht-----
+> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp- 
+> users-bounces at lists.berlios.de] Im Auftrag von David Dederscheck
+>
+> Gesendet: Dienstag, 16. Oktober 2007 21:09
+> An: chan-sccp-users at lists.berlios.de
+> Betreff: Re: [Chan-sccp-users] Kirk Wireless Server 600v3
+>
+> Hi Marcus,
+>
+> that sounds interesting. Maybe we should do a debugging session using
+> valgrind/ddd together?
+>
+> Btw, apart from only setting the phone type in the config file,
+> chan_sccp also detects the phone type by itself. I can't actually
+> remember where this autodetection ends and the manual setting is of
+> importance (@all: could anyone try to remember, please?)
+>
+> Kind regards,
+> -David.
+>
+>
+> On 16.10.2007, at 18:35, Marcus Robichon wrote:
+>
+> > Hallo,
+> >
+> >
+> >
+> > I have a new question fort his mailing list. We have a Kirk
+> > Wireless DECT Server 600v3. We recognize that we get breakdowns
+> > with asterisk when we set the incoming limit more then 1. The
+> > second call to this line breakes down asterisk (not immediate, but
+> > after some minutes). Most times the whole server is running into
+> > memory leak that it has to be rebooted manually.
+> >
+> >
+> >
+> > Could someone tell me what is different to the device setting when
+> > I set the phone type to kirk?
+> >
+> >
+> >
+> > The biggest problem is, that I cannot see the real reason of the
+> > breakdown and the memory leaks. Is there something I can do to get
+> > this information? I already set the debug mode to the highest
+> > number ... but I cannot see anything is wrong.
+> >
+> >
+> >
+> > Thanks for your help.
+> >
+> >
+> >
+> > Marcus Robichon
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > Chan-sccp-users mailing list
+> > Chan-sccp-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071016/1ce9c890/attachment.html>
+
+From chan-sccp.berlios.de at lusiewicz.de  Wed Oct 17 12:04:39 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Wed, 17 Oct 2007 12:04:39 +0200
+Subject: [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp
+ -20071004-DD
+In-Reply-To: <042DEDF3-77BD-497F-8359-5CABE2A1F7A0@davidded.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106622A5F@lhu01.llg.de>	<4714CACA.8040405@lusiewicz.de>
+	<042DEDF3-77BD-497F-8359-5CABE2A1F7A0@davidded.de>
+Message-ID: <4715DE37.6060007@lusiewicz.de>
+
+David Dederscheck schrieb:
+> Hi Damian,
+> 
+> as obviously the IAX issue doesn't work out either way, so I'd like  
+> to reproduce it to help debugging it.
+> 
+> Could you please give me the exact versions of everything involved,  
+> and, the IAX config of the connection where the issue occurs?
+
+Hello David.
+
+Many thanks for your willingness to help us.
+
+Here our setup. The asterisk on host pbx is hanging after a while,
+perhaps after transfering an external call between cisco phones.
+
+The asterisk on pbx-e1 is still working without any problems.
+
+
+
+General setup:
+--------------
+
+Cisco 7970 Phones: TERM70.7-0-3-0S
+  |
+  | chan_sccp-20071009-DD
+  |
+pbx: Asterisk 1.4.10
+  |
+  | IAX2
+  |
+pbx-e1: Asterisk 1.2.22
+  |
+  | wct4xxp
+  |
+PSTN
+
+
+Configs on pbx:
+---------------
+extensions.conf:
+----------------
+
+[iaxin]
+; calls from outside are handled here
+exten => _2XX,1,macro(externalincomming,${EXTEN})
+
+[macro-externalincomming]
+exten => s,1,Set(CHANNEL(language)=de)
+exten => s,n,SetAMAFlags(documentation) ; documentation only
+exten => s,n,AGI(number2name.agi)
+exten => s,n,SetCallerID(${CIDNAME})
+exten => s,n,Dial(SCCP/${ARG1},30)
+exten => s,n,goto(s-${DIALSTATUS},1)
+exten => s-BUSY,1,Voicemail(b${ARG1})
+exten => s-NOANSWER,1,Voicemail(u${ARG1})
+exten => s-CHANUNAVAIL,1,Voicemail(u${ARG1})
+
+[secure]
+; internal calls to outside
+exten => _0.,1,Dial(IAX2/asteriskwm:PASSWD1 at pbx-e1/${EXTEN}@secure,60,j)
+
+; internal calls to internal phones
+exten => _2XX,1,macro(internaldial,${EXTEN})
+
+[macro-internaldial]
+exten => s,1,NoCDR
+exten => s,n,SetCalledParty("Intern" <${ARG1}>)
+exten => s,n,Dial(SCCP/${ARG1},30,r)
+exten => s,n,goto(s-${DIALSTATUS},1)
+exten => s-BUSY,1,AGI(agi://localhost/ccbs.agi?exten=${ARG1})
+exten => s-BUSY,2,NoOp
+exten => s-BUSY,3,Hangup
+exten => s-BUSY,101,Voicemail(${ARG1})
+exten => s-NOANSWER,1,Voicemail(u${ARG1})
+exten => s-CHANUNAVAIL,1,Voicemail(u${ARG1})
+
+
+sccp.conf:
+----------
+[devices]
+type        = 7970
+autologin   = 299
+description = Konferenz EG
+transfer = on
+park = on
+speeddial = 293,empl1
+speeddial = 292,empl2
+speeddial = 291,empl3
+speeddial = 296,empl4
+speeddial = 259,empl5
+speeddial = 279,empl6
+speeddial = 210,empl7
+cfwdall = on
+cfwdbusy = on
+dtmfmode = inband
+dnd = off
+trustphoneip = no
+mwilamp = on
+mwioncall = on
+device => SEP00xxxx
+
+[lines]
+id          = 299
+pin         = 1234
+label       = 299
+description = Konferenz EG (299)
+context     = secure
+incominglimit = 1
+transfer = on
+mailbox = 299
+vmnum = 8500
+cid_name = Konferenz EG
+cid_num = 299
+secondary_dialtone_digits = 0
+secondary_dialtone_tone = 0x22
+musicclass=default
+language=de
+accountcode=299
+rtptos = 184
+echocancel = on
+silencesuppression = off
+line => 299
+
+
+iax.conf
+--------
+[general]
+language=de
+bandwidth=high
+disallow=lpc10
+jitterbuffer=no
+forcejitterbuffer=no
+maxthreadcount = 100
+iaxmaxthreadcount = 500
+tos=lowdelay
+autokill=yes
+
+[pbx_e1]
+type=friend
+host=dynamic
+secret=PASSWD2
+context=iaxin
+
+
+
+Configs on pbx-e1:
+------------------
+extensions.conf:
+----------------
+[globals]
+; SCCP-PBX
+PBXSCCP=IAX2/pbx_e1:PASSWD2 at 195.253.2.107
+PBXINT=${PBXSCCP}
+
+[pri1]
+; incoming calls from pstn
+exten => _97032XX,1,SetCallerID(0${CALLERIDNUM})
+exten => _97032XX,2,Dial(${PBXINT}/${EXTEN:4}@iaxin)
+exten => _97032XX,3,Hangup
+
+[secure]
+; incoming calls from pbx (cisco phones) over iax
+exten => _00Z.,1,SetCallerID(9703${CALLERIDNUM})
+exten => _00Z.,2,Dial(Zap/g1/${EXTEN:1},60)
+exten => _00Z.,3,Hangup
+exten => _00Z.,102,Congestion
+
+exten => _0Z.,1,SetCallerID(9703${CALLERIDNUM})
+exten => _0Z.,2,Dial(Zap/g1/${EXTEN:1},60)
+exten => _0Z.,3,Hangup
+exten => _0Z.,102,Congestion
+
+
+iax.conf:
+---------
+[general]
+bandwidth=high
+disallow=lpc10
+jitterbuffer=no
+forcejitterbuffer=no
+tos=lowdelay
+autokill=yes
+
+[asteriskwm]
+type=user
+username=asteriskwm
+secret=PASSWD1
+host=dynamic
+context=secure
+
+
+
+Please let me know if you need further details.
+
+Best regards
+Damian
+
+
+> 
+> As I actually am a setup using asterisk 1.4.11 and my version of  
+> chan_sccp, I'd be curious in what situation the crash occurs? Was it  
+> only after a transfer, or also under different circumstances?
+> 
+> Regards,
+> -David.
+> 
+> On 16.10.2007, at 16:29, Damian Lusiewicz wrote:
+> 
+>> Marcus Robichon schrieb:
+>>> Hi Damian,
+>> Hello Marcus.
+>>
+>>> i am curious about the results of the patch version of chan_sccp from
+>>> David. Does it fix your iax problems?
+>> No. Yesterday our asterisk has crashed again. Again, all iax threads
+>> were busy.
+>>
+>> Currently I try to set up a sip connection between the asterisk hosts,
+>> but I found, that there are several unsolved problems with this  
+>> solution.
+>>
+>> Best regards
+>> Damian Lusiewicz
+>>
+>>
+>>> Kind regards
+>>>
+>>> Marcus Robichon
+>>>
+>>> Lab Logistics Group GmbH
+>>> -----Urspr?ngliche Nachricht-----
+>>> Von: chan-sccp-users-bounces at lists.berlios.de
+>>> [mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von  
+>>> Damian
+>>> Lusiewicz
+>>>
+>>> Gesendet: Donnerstag, 11. Oktober 2007 14:29
+>>> An: chan-sccp-users at lists.berlios.de
+>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>> chan_sccp -20071004-DD
+>>>
+>>> David Dederscheck schrieb:
+>>>> Hi,
+>>> Hi David,
+>>> hi list members,
+>>>
+>>>> i did it the other way. I didn't touch the code you mentioned in
+>>>> ast_channel_make_compatible, but I removed the hangup behaviour from
+>>>> chan_sccp in that case.
+>>>>
+>>>> Please try the new version I attached to this mail and _don't patch_
+>>>> asterisk as you did before.
+>>> Ok, I am currently running asterisk-1.4.10 without my patch, and with
+>>> your todays version of chan-sccp. In few days I will know more and  
+>>> let
+>>> you know.
+>>>
+>>> Many thanks so far.
+>>>
+>>>> Please let me know if it works out for you, too.
+>>>>
+>>>> Regards,
+>>>> -David.
+>>>>
+>>>> On Oct 10, 2007, at 6:49 PM, Damian Lusiewicz wrote:
+>>>>
+>>>>> David Dederscheck schrieb:
+>>>>>> Hi folks,
+>>>>>>
+>>>>>> I'm not sure why this happens. Does it only occur after a  
+>>>>>> transfer?
+>>>>> Possibly yes, a "Transfer confirmation destination" message is  
+>>>>> shown on
+>>>>> CLI before the trouble beginns.
+>>>>>
+>>>>> I am using the following patch in channel.c to get chan-sccp to  
+>>>>> work
+>>>>> correctly with asterisk-1.4.10:
+>>>>>
+>>>>> int ast_channel_make_compatible(struct ast_channel *chan, struct
+>>>>> ast_channel *pe
+>>>>> er)
+>>>>> {
+>>>>>         int src;
+>>>>>         int dst;
+>>>>>
+>>>>>         if (chan->readformat == peer->writeformat && chan- 
+>>>>>> writeformat
+>>>>> == peer->
+>>>>> readformat) {
+>>>>>                 /* Already compatible!  Moving on ... */
+>>>>> +                src = peer->nativeformats;
+>>>>> +                dst = chan->nativeformats;
+>>>>> +                ast_translator_best_choice(&dst, &src);
+>>>>> +                ast_set_read_format(chan, dst);
+>>>>> +                ast_set_write_format(peer, dst);
+>>>>>                 return 0;
+>>>>>         }
+>>>>>
+>>>>>
+>>>>> Without this patch, calls from chan_sccp to chan_iax2 are ending  
+>>>>> up with
+>>>>> a hangup.
+>>>>>
+>>>>>> My guess would be that there could be some problems with the  
+>>>>>> handling
+>>>>>> of audio transcoding. This has been a problem with IAX2 and Zap  
+>>>>>> with
+>>>>>> asterisk > 1.4.6 (@Marcello, was it right that version?), which we
+>>>>>> solved Q&D, i.e. ignore it when possible. Just look at the  
+>>>>>> comments
+>>>>>> ending with (DD) or (-DD).
+>>>>>>
+>>>>>> Sorry that I can't go into more details now -- just fell ill  
+>>>>>> with my
+>>>>>> Tonsils aching badly.
+>>>>>>
+>>>>>> Regards,
+>>>>>> -David.
+>>>>>>
+>>>>>> On 10.10.2007, at 16:18, Marcus Robichon wrote:
+>>>>>>
+>>>>>>> Hi,
+>>>>>>>
+>>>>>>> it is hanging with asterisk version 1.4.11 and the newest
+>>>>>>> chan_sccp. If you downgrade to asterisk 1.4.6 everything works  
+>>>>>>> fine.
+>>>>>>>
+>>>>>>> This is what we have done.
+>>>>>>>
+>>>>>>> Marcus Robichon
+>>>>>>>
+>>>>>>> -----Urspr?ngliche Nachricht-----
+>>>>>>> Von: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-
+>>>>>>> users-bounces at lists.berlios.de] Im Auftrag von Patrick
+>>>>>>> Gesendet: Dienstag, 9. Oktober 2007 15:48
+>>>>>>> An: chan-sccp-users at lists.berlios.de
+>>>>>>> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and
+>>>>>>> chan_sccp-20071004-DD
+>>>>>>>
+>>>>>>> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+>>>>>>> [snip]
+>>>>>>>> Hello David,
+>>>>>>>>
+>>>>>>>> after a while we have got a hanging asterisk. Following we  
+>>>>>>>> see on
+>>>>>>> the CLI:
+>>>>>>>>     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+>>>>>>>>     -- SCCP: Outgoing call has been answered SCCP/ 
+>>>>>>>> 250-00000281 on
+>>>>>>>> 250 at SEP0016Cxxxxxxx-641
+>>>>>>>>     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+>>>>>>>>     -- SEP0016Cxxxxxxx: Transfer confirmation destination on  
+>>>>>>>> channel
+>>>>>>>> SCCP/211-00000282
+>>>>>>>>     -- SCCP: Asterisk request to hangup channel SCCP/ 
+>>>>>>>> 250-00000280
+>>>>>>>>     -- SCCP: Asterisk request to hangup channel IAX2/ 
+>>>>>>>> pbx_e1-1<MASQ>
+>>>>>>>>     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets
+>>>>>>> sent:
+>>>>>>>> 474 rcvd:
+>>>>>>>> 461 lost: 0 jitter: 0 latency: 3
+>>>>>>>> [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:
+>>>>>>> Out of
+>>>>>>>> idle IAX2
+>>>>>>>> threads for I/O, pausing!
+>>>>>>> [snip]
+>>>>>>>> @David: maybe you have got an further idea, how to solve  
+>>>>>>>> this? Many
+>>>>>>>> thanks for your help so far.
+>>>>>>> Just a wild guess but are you perhaps running out of  
+>>>>>>> filedescriptors?
+>>>>>>> Try setting the FD limit higher with ulimit. Alternatively try
+>>>>>>> switching
+>>>>>>> to SIP (if you can) and see if you can make it work that way.
+>>>>>>>
+>>>>>>> Regards,
+>>>>>>> Patrick
+>>>>>>>
+>>>>>>>
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+From s.lam at keenserver.nl  Wed Oct 17 21:14:22 2007
+From: s.lam at keenserver.nl (Steven Lam, KeenServer)
+Date: Wed, 17 Oct 2007 21:14:22 +0200
+Subject: [Chan-sccp-users] Crash with after lot of registrations
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22414FBCF@goofy.bison.keenserver.nl>
+
+Hi all,
+ 
+I upscaled a chan_sccp configuration to about 60 devices, everything
+works as it should.
+There is one small problem, when a lot of devices register within
+something like one or two seconds asterisk crashes :-(
+If they register spread over say 5 seconds, there is no problem.
+ 
+You can generate this behavior by killing a perfectly working asterisk
+and restart immediately.
+ 
+Atached is the sccp.conf and the output of the console... (crash.log)
+I have been traying to find the problem but i'm stuck.
+ 
+Could it be the machine is low on memory?? a cat /proc/meminfo tells me:
+MemTotal:       255844 kB
+MemFree:          4088 kB
+Buffers:        223208 kB
+Cached:           8812 kB
+SwapCached:          0 kB
+Active:          11976 kB
+Inactive:       225188 kB
+HighTotal:           0 kB
+HighFree:            0 kB
+LowTotal:       255844 kB
+LowFree:          4088 kB
+SwapTotal:           0 kB
+SwapFree:            0 kB
+Dirty:               0 kB
+Writeback:           0 kB
+Mapped:           8824 kB
+Slab:             8312 kB
+CommitLimit:    127920 kB
+Committed_AS:     9232 kB
+PageTables:        276 kB
+VmallocTotal:   778216 kB
+VmallocUsed:      5692 kB
+VmallocChunk:   772160 kB
+ 
+All help is welkom.
+ 
+Steven.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: crash.log
+Type: application/octet-stream
+Size: 11327 bytes
+Desc: crash.log
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: sccp.conf
+Type: application/octet-stream
+Size: 34952 bytes
+Desc: sccp.conf
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment-0001.obj>
+
+From davidded at davidded.de  Wed Oct 17 21:46:37 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Wed, 17 Oct 2007 21:46:37 +0200
+Subject: [Chan-sccp-users] Crash with after lot of registrations
+In-Reply-To: <E0EC7D6DD04A614BB52E24FB6735F22414FBCF@goofy.bison.keenserver.nl>
+References: <E0EC7D6DD04A614BB52E24FB6735F22414FBCF@goofy.bison.keenserver.nl>
+Message-ID: <DF73378C-01FB-486F-8AF5-1744D98294D7@davidded.de>
+
+Hi Steven,
+
+we'd like to help you with your problem, however, the attached log  
+doesn't provide enough information.
+
+Maybe you should send us your full log if you have that activated in  
+the config; if you don't know how to create a full log, please let us  
+know. Btw, from the supplied log it doesn't really look like a crash.
+
+What would be really helpful is a gdb trace of the crashing asterisk.  
+Please stop asterisk to that end, and run it manually  as following:
+
+ > gdb asterisk
+(gdb) set args -vvvvvf
+(gdb) run
+
+Please provide a backtrace (just type bt at the gdb prompt).
+
+Regards,
+-David.
+
+On 17.10.2007, at 21:14, Steven Lam, KeenServer wrote:
+
+> Hi all,
+>
+> I upscaled a chan_sccp configuration to about 60 devices,  
+> everything works as it should.
+> There is one small problem, when a lot of devices register within  
+> something like one or two seconds asterisk crashes :-(
+> If they register spread over say 5 seconds, there is no problem.
+>
+> You can generate this behavior by killing a perfectly working  
+> asterisk and restart immediately.
+>
+> Atached is the sccp.conf and the output of the console... (crash.log)
+> I have been traying to find the problem but i'm stuck.
+>
+> Could it be the machine is low on memory?? a cat /proc/meminfo  
+> tells me:
+> MemTotal:       255844 kB
+> MemFree:          4088 kB
+> Buffers:        223208 kB
+> Cached:           8812 kB
+> SwapCached:          0 kB
+> Active:          11976 kB
+> Inactive:       225188 kB
+> HighTotal:           0 kB
+> HighFree:            0 kB
+> LowTotal:       255844 kB
+> LowFree:          4088 kB
+> SwapTotal:           0 kB
+> SwapFree:            0 kB
+> Dirty:               0 kB
+> Writeback:           0 kB
+> Mapped:           8824 kB
+> Slab:             8312 kB
+> CommitLimit:    127920 kB
+> Committed_AS:     9232 kB
+> PageTables:        276 kB
+> VmallocTotal:   778216 kB
+> VmallocUsed:      5692 kB
+> VmallocChunk:   772160 kB
+>
+> All help is welkom.
+>
+> Steven.<crash.log><sccp.conf>_________________________________________ 
+> ______
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From s.lam at keenserver.nl  Wed Oct 17 22:01:19 2007
+From: s.lam at keenserver.nl (Steven Lam, KeenServer)
+Date: Wed, 17 Oct 2007 22:01:19 +0200
+Subject: [Chan-sccp-users] Crash with after lot of registrations
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22414FBD1@goofy.bison.keenserver.nl>
+
+Hi David,
+
+I know this doesn't look like a crash, this is all i could get using a
+debug of 30
+I will try using gdb tomorrow...
+
+Steven
+
+-----Oorspronkelijk bericht-----
+Van: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Namens David
+Dederscheck
+Verzonden: woensdag 17 oktober 2007 21:47
+Aan: chan-sccp-users at lists.berlios.de
+Onderwerp: Re: [Chan-sccp-users] Crash with after lot of registrations
+
+Hi Steven,
+
+we'd like to help you with your problem, however, the attached log
+doesn't provide enough information.
+
+Maybe you should send us your full log if you have that activated in the
+config; if you don't know how to create a full log, please let us know.
+Btw, from the supplied log it doesn't really look like a crash.
+
+What would be really helpful is a gdb trace of the crashing asterisk.  
+Please stop asterisk to that end, and run it manually  as following:
+
+ > gdb asterisk
+(gdb) set args -vvvvvf
+(gdb) run
+
+Please provide a backtrace (just type bt at the gdb prompt).
+
+Regards,
+-David.
+
+
+From DSmith at gibsondunn.com  Sat Oct 20 22:17:26 2007
+From: DSmith at gibsondunn.com (Smith, Douglas D.)
+Date: Sat, 20 Oct 2007 13:17:26 -0700
+Subject: [Chan-sccp-users] is there a site where I can download the most
+ stable version of chan_sccp for *1.4.10
+Message-ID: <9F0B86FBE62A2A4C865F31B36F7F674807783B5D@SFMAIL1.Gibsondunn.net>
+
+Thanks in advance
+
+ 
+
+ 
+
+ 
+
+Best Regards
+
+ 
+
+Doug Smith
+
+
+"MMS <Gibsondunn.net>" made the following annotations.
+------------------------------------------------------------------------------
+
+This message may contain confidential and privileged information.  If it has been sent to you in error, please reply to advise the sender of the error and then immediately delete this message.
+==============================================================================
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071020/5e259a48/attachment.html>
+
+From chan-sccp.berlios.de at lusiewicz.de  Fri Oct 26 17:21:05 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Fri, 26 Oct 2007 17:21:05 +0200
+Subject: [Chan-sccp-users] bt full of dying asterisk with chan_sccp
+Message-ID: <472205E1.8030200@lusiewicz.de>
+
+Hallo.
+
+Our problems with hanging asterisk persists and now there is a new word
+born in our company "dreeeecksanlage".  :-(
+
+But now seriously:
+
+Today I was able to make some debuggings of the dying asterisk, please
+see attached file. Maybe someone can take a look and say, what the
+reason could be.
+
+Many thanks in advance
+Damian
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ast-bt-full.txt.gz
+Type: application/x-gzip
+Size: 22671 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071026/a60d7dbf/attachment.bin>
+
+From davidded at davidded.de  Fri Oct 26 23:26:17 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Fri, 26 Oct 2007 23:26:17 +0200
+Subject: [Chan-sccp-users] bt full of dying asterisk with chan_sccp
+In-Reply-To: <472205E1.8030200@lusiewicz.de>
+References: <472205E1.8030200@lusiewicz.de>
+Message-ID: <6F3A45F7-2F82-40BD-90C1-538FAA6879C5@davidded.de>
+
+Hi Damian,
+
+I've had a look at the gdb output but it leaves me clueless I'm  
+afraid. The reason for that it doesn't tell me which thread(s) were  
+last active when the crash occured.
+
+Maybe you should try debugging asterisk in the foreground by stopping  
+it first and then running
+
+ > gdb asterisk
+(gdb) args -vf
+(gdb) run
+
+during business hours. I hope it won't get to slow that way.
+
+That kind of debugging method could prove more fruitful, or can we  
+also get the active thread from the log (maybe I overlooked it), or  
+with another command attaching to gdb? Maybe a simple backtrace call  
+would do?
+
+Regards,
+-David.
+
+
+P.S. I also feel it neccessary to make chan_sccp more stable to make  
+it survive and accepted amongs people. We must try hard to push that  
+work to that end.
+
+On Oct 26, 2007, at 5:21 PM, Damian Lusiewicz wrote:
+
+> Hallo.
+>
+> Our problems with hanging asterisk persists and now there is a new  
+> word
+> born in our company "dreeeecksanlage".  :-(
+>
+> But now seriously:
+>
+> Today I was able to make some debuggings of the dying asterisk, please
+> see attached file. Maybe someone can take a look and say, what the
+> reason could be.
+>
+> Many thanks in advance
+> Damian
+>
+>
+> <ast-bt-full.txt.gz>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From fs at matflow.net  Sat Oct 27 12:36:43 2007
+From: fs at matflow.net (Frank Segtrop)
+Date: Sat, 27 Oct 2007 12:36:43 +0200
+Subject: [Chan-sccp-users] Blind transfer crashes fixed?
+Message-ID: <472314BB.1060405@matflow.net>
+
+Hi, there!
+
+I also had some trouble with blind transfer crashes. When it works well,
+we get two "Blind transfer" log messages as in this example:
+
+    -- SEP0014F27649DB: Transfer request from line channel 199-19
+    -- Started music on hold, class 'default', on Zap/2-1
+    -- SEP0014F27649DB: Hold the channel 199-19
+    -- Stopped music on hold on Zap/2-1
+    -- Started music on hold, class 'default', on Zap/2-1
+    -- GOT data SCCP/199-00000014 (0x82038a8)
+    -- GOT line 199
+    -- GOT device SEP0014F27649DB
+    -- SEP0014F27649DB: New call on line 199
+    -- SEP0014F27649DB: Statistics from 2 callid: 19 Packets sent: 185
+rcvd: 187 lost: 1 jitter: 0 latency: 0
+    -- SEP0014F27649DB: Cisco Digit: 00000002 (2) on line 199
+    -- SEP0014F27649DB: Cisco Digit: 0000000f (15) on line 199
+    -- Executing [2 at droste-phones:1] Dial("SCCP/199-00000014", "SCCP/2")
+in new stack
+    -- SEP001B5452F561: Asterisk request to call SCCP/2-00000015
+    -- Called 2
+    -- SCCP/2-00000015 is ringing
+    -- SEP0014F27649DB: Complete transfer from 199-20
+    -- SEP0014F27649DB: Blind transfer. Signalling ringing state to Zap/2-1
+    -- SEP0014F27649DB: Blind transfer. Signalling ringing state to Zap/2-1
+    -- SCCP: Asterisk request to hangup channel Zap/2-1<MASQ>
+    -- SEP0014F27649DB: Current channel 199-20 state RingOut(3)
+    -- Stopped music on hold on SCCP/199-00000014<ZOMBIE>
+    -- SCCP: Asterisk request to hangup channel SCCP/199-00000013
+  == Spawn extension (droste-phones, 199, 1) exited non-zero on
+'SCCP/199-00000014<ZOMBIE>'
+    -- Executing [h at droste-phones:1] Hangup("SCCP/199-00000014<ZOMBIE>",
+"") in new stack
+  == Spawn extension (droste-phones, h, 1) exited non-zero on
+'SCCP/199-00000014<ZOMBIE>'
+
+
+Sometimes however, there is only one log message "Blind transfer". In
+this case, asterisk used to crash.
+
+
+    -- SEP001B5452F561: Transfer request from line channel 2-21
+    -- Started music on hold, class 'default', on Zap/2-1
+    -- SEP001B5452F561: Hold the channel 2-21
+    -- Stopped music on hold on Zap/2-1
+    -- Started music on hold, class 'default', on Zap/2-1
+    -- GOT data SCCP/2-00000016 (0x8209578)
+    -- GOT line 2
+    -- GOT device SEP001B5452F561
+    -- SEP001B5452F561: New call on line 2
+    -- SEP001B5452F561: Statistics from 195 callid: 21 Packets sent: 56
+rcvd: 55 lost: 0 jitter: 0 latency: 0
+    -- SEP001B5452F561: Cisco Digit: 00000001 (1) on line 2
+    -- SEP001B5452F561: Cisco Digit: 00000009 (9) on line 2
+    -- SEP001B5452F561: Cisco Digit: 00000009 (9) on line 2
+    -- SEP001B5452F561: Cisco Digit: 0000000f (15) on line 2
+    -- Executing [199 at droste-phones:1] Dial("SCCP/2-00000016",
+"SCCP/199") in new stack
+    -- SEP0014F27649DB: Asterisk request to call SCCP/199-00000017
+    -- Called 199
+    -- SCCP/199-00000017 is ringing
+    -- SEP001B5452F561: Complete transfer from 2-22
+    -- SEP001B5452F561: Blind transfer. Signalling ringing state to Zap/2-1
+    -- SCCP: Asterisk request to hangup channel Zap/2-1<MASQ>
+    -- Stopped music on hold on SCCP/2-00000016<ZOMBIE>
+    -- SCCP: Asterisk request to hangup channel SCCP/2-00000015
+  == Spawn extension (droste-phones, 2, 1) exited non-zero on
+'SCCP/2-00000016<ZOMBIE>'
+    -- Executing [h at droste-phones:1] Hangup("SCCP/2-00000016<ZOMBIE>",
+"") in new stack
+  == Spawn extension (droste-phones, h, 1) exited non-zero on
+'SCCP/2-00000016<ZOMBIE>'
+
+
+So, I only changed this in sccp_channel.c, sccp_channel_transfer_complete:
+Old:
+
+        if (c->state == SCCP_CHANNELSTATE_RINGOUT) {
+                sccp_log(1)(VERBOSE_PREFIX_3 "%s: Blind transfer.
+Signalling ringing state to %s\n", d->id, transferred->name);
+
+        }
+        ast_queue_hangup(peer->owner);
+        ast_mutex_unlock(&transferee->lock);
+
+
+New:
+
+        if (c->state == SCCP_CHANNELSTATE_RINGOUT) {
+                sccp_log(1)(VERBOSE_PREFIX_3 "%s: Blind transfer.
+Signalling ringing state to %s\n", d->id, transferred->name);
+
+
+        }
+        else {
+                sccp_log(1)(VERBOSE_PREFIX_3 "Not a blind transfer??\n");
+                return;
+        }
+
+        ast_queue_hangup(peer->owner);
+        ast_mutex_unlock(&transferee->lock);
+
+
+
+With this change, there are no more transfer crashes at all. Asterisk
+still hangs up the calls, I have not noticed any negative effects yet.
+I am using chan_sccp-20070429.
+
+
+Hope that helps,
+Frank
+
+
+
+From davidded at davidded.de  Mon Oct 29 02:24:39 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Mon, 29 Oct 2007 02:24:39 +0100
+Subject: [Chan-sccp-users] Blind transfer crashes fixed?
+In-Reply-To: <472314BB.1060405@matflow.net>
+References: <472314BB.1060405@matflow.net>
+Message-ID: <A4365151-CAEE-4A3F-8520-A15574B5D06D@davidded.de>
+
+Hi,
+
+this sounds very promising, especially as AFAIK the IAX issues with  
+1.4 only occured after issuing a transfer. Shall I incorporate this  
+in Marcello's and mine tree and repost it with this change?
+
+Regards,
+-David.
+
+
+On 27.10.2007, at 12:36, Frank Segtrop wrote:
+
+> Hi, there!
+>
+> I also had some trouble with blind transfer crashes. When it works  
+> well,
+> we get two "Blind transfer" log messages as in this example:
+>
+>     -- SEP0014F27649DB: Transfer request from line channel 199-19
+>     -- Started music on hold, class 'default', on Zap/2-1
+>     -- SEP0014F27649DB: Hold the channel 199-19
+>     -- Stopped music on hold on Zap/2-1
+>     -- Started music on hold, class 'default', on Zap/2-1
+>     -- GOT data SCCP/199-00000014 (0x82038a8)
+>     -- GOT line 199
+>     -- GOT device SEP0014F27649DB
+>     -- SEP0014F27649DB: New call on line 199
+>     -- SEP0014F27649DB: Statistics from 2 callid: 19 Packets sent: 185
+> rcvd: 187 lost: 1 jitter: 0 latency: 0
+>     -- SEP0014F27649DB: Cisco Digit: 00000002 (2) on line 199
+>     -- SEP0014F27649DB: Cisco Digit: 0000000f (15) on line 199
+>     -- Executing [2 at droste-phones:1] Dial("SCCP/199-00000014",  
+> "SCCP/2")
+> in new stack
+>     -- SEP001B5452F561: Asterisk request to call SCCP/2-00000015
+>     -- Called 2
+>     -- SCCP/2-00000015 is ringing
+>     -- SEP0014F27649DB: Complete transfer from 199-20
+>     -- SEP0014F27649DB: Blind transfer. Signalling ringing state to  
+> Zap/2-1
+>     -- SEP0014F27649DB: Blind transfer. Signalling ringing state to  
+> Zap/2-1
+>     -- SCCP: Asterisk request to hangup channel Zap/2-1<MASQ>
+>     -- SEP0014F27649DB: Current channel 199-20 state RingOut(3)
+>     -- Stopped music on hold on SCCP/199-00000014<ZOMBIE>
+>     -- SCCP: Asterisk request to hangup channel SCCP/199-00000013
+>   == Spawn extension (droste-phones, 199, 1) exited non-zero on
+> 'SCCP/199-00000014<ZOMBIE>'
+>     -- Executing [h at droste-phones:1] Hangup("SCCP/ 
+> 199-00000014<ZOMBIE>",
+> "") in new stack
+>   == Spawn extension (droste-phones, h, 1) exited non-zero on
+> 'SCCP/199-00000014<ZOMBIE>'
+>
+>
+> Sometimes however, there is only one log message "Blind transfer". In
+> this case, asterisk used to crash.
+>
+>
+>     -- SEP001B5452F561: Transfer request from line channel 2-21
+>     -- Started music on hold, class 'default', on Zap/2-1
+>     -- SEP001B5452F561: Hold the channel 2-21
+>     -- Stopped music on hold on Zap/2-1
+>     -- Started music on hold, class 'default', on Zap/2-1
+>     -- GOT data SCCP/2-00000016 (0x8209578)
+>     -- GOT line 2
+>     -- GOT device SEP001B5452F561
+>     -- SEP001B5452F561: New call on line 2
+>     -- SEP001B5452F561: Statistics from 195 callid: 21 Packets  
+> sent: 56
+> rcvd: 55 lost: 0 jitter: 0 latency: 0
+>     -- SEP001B5452F561: Cisco Digit: 00000001 (1) on line 2
+>     -- SEP001B5452F561: Cisco Digit: 00000009 (9) on line 2
+>     -- SEP001B5452F561: Cisco Digit: 00000009 (9) on line 2
+>     -- SEP001B5452F561: Cisco Digit: 0000000f (15) on line 2
+>     -- Executing [199 at droste-phones:1] Dial("SCCP/2-00000016",
+> "SCCP/199") in new stack
+>     -- SEP0014F27649DB: Asterisk request to call SCCP/199-00000017
+>     -- Called 199
+>     -- SCCP/199-00000017 is ringing
+>     -- SEP001B5452F561: Complete transfer from 2-22
+>     -- SEP001B5452F561: Blind transfer. Signalling ringing state to  
+> Zap/2-1
+>     -- SCCP: Asterisk request to hangup channel Zap/2-1<MASQ>
+>     -- Stopped music on hold on SCCP/2-00000016<ZOMBIE>
+>     -- SCCP: Asterisk request to hangup channel SCCP/2-00000015
+>   == Spawn extension (droste-phones, 2, 1) exited non-zero on
+> 'SCCP/2-00000016<ZOMBIE>'
+>     -- Executing [h at droste-phones:1] Hangup("SCCP/2-00000016<ZOMBIE>",
+> "") in new stack
+>   == Spawn extension (droste-phones, h, 1) exited non-zero on
+> 'SCCP/2-00000016<ZOMBIE>'
+>
+>
+> So, I only changed this in sccp_channel.c,  
+> sccp_channel_transfer_complete:
+> Old:
+>
+>         if (c->state == SCCP_CHANNELSTATE_RINGOUT) {
+>                 sccp_log(1)(VERBOSE_PREFIX_3 "%s: Blind transfer.
+> Signalling ringing state to %s\n", d->id, transferred->name);
+>
+>         }
+>         ast_queue_hangup(peer->owner);
+>         ast_mutex_unlock(&transferee->lock);
+>
+>
+> New:
+>
+>         if (c->state == SCCP_CHANNELSTATE_RINGOUT) {
+>                 sccp_log(1)(VERBOSE_PREFIX_3 "%s: Blind transfer.
+> Signalling ringing state to %s\n", d->id, transferred->name);
+>
+>
+>         }
+>         else {
+>                 sccp_log(1)(VERBOSE_PREFIX_3 "Not a blind transfer?? 
+> \n");
+>                 return;
+>         }
+>
+>         ast_queue_hangup(peer->owner);
+>         ast_mutex_unlock(&transferee->lock);
+>
+>
+>
+> With this change, there are no more transfer crashes at all. Asterisk
+> still hangs up the calls, I have not noticed any negative effects yet.
+> I am using chan_sccp-20070429.
+>
+>
+> Hope that helps,
+> Frank
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From fs at matflow.net  Mon Oct 29 07:15:00 2007
+From: fs at matflow.net (Frank Segtrop)
+Date: Mon, 29 Oct 2007 07:15:00 +0100
+Subject: [Chan-sccp-users] Blind transfer crashes fixed?
+In-Reply-To: <A4365151-CAEE-4A3F-8520-A15574B5D06D@davidded.de>
+References: <472314BB.1060405@matflow.net>
+	<A4365151-CAEE-4A3F-8520-A15574B5D06D@davidded.de>
+Message-ID: <47257A64.3040001@matflow.net>
+
+Hi,
+
+my quick fix worked quite well, but it was not really addressing the
+problem, which is ast_queue_hangup(peer->owner), as some people on this
+list have found out long ago already.
+
+So, I tried this old patch from Geoff Thornton:
+
+
+        if (peer->owner)
+                ast_queue_hangup(peer->owner);
+        else {
+                sccp_log(1)(VERBOSE_PREFIX_3 "Peer owner disappeared!
+Can't free ressources\n");
+                return;
+        }
+        ast_mutex_lock(&d->lock);
+
+However, asterisk still crashed once at ast_queue_hangup. Now, I have this:
+
+        ast_mutex_lock(&d->lock);
+        if (peer->owner)
+                ast_queue_hangup(peer->owner);
+        else {
+                sccp_log(1)(VERBOSE_PREFIX_3 "Peer owner disappeared!
+Can't free ressources\n");
+                ast_mutex_unlock(&d->lock);
+                return;
+        }
+        ast_mutex_unlock(&transferee->lock);
+        d->transfer_channel = NULL;
+        ast_mutex_unlock(&d->lock);
+
+
+--Frank
+
+
+
+From fs at matflow.net  Wed Oct 31 16:24:52 2007
+From: fs at matflow.net (Frank Segtrop)
+Date: Wed, 31 Oct 2007 16:24:52 +0100
+Subject: [Chan-sccp-users] Success with Asterisk 1.4.13 with
+ chan_sccp-20071009-DD and two small fixes
+Message-ID: <47289E44.5050303@matflow.net>
+
+Hi,
+
+I can confirm that Asterisk 1.4.13 works very well with
+chan_sccp-20071009-DD, except for blind transfers and GPickUps.
+
+The blind transfer crashes can be fixed with this small patch of
+sccp_channel.c:
+
+--- chan_sccp-20071009-DD/sccp_channel.c        2007-10-02
+18:33:20.000000000 +0200
++++ chan_sccp-20071009-DD-mod/sccp_channel.c    2007-10-25
+10:28:37.365078170 +0100
+@@ -888,10 +888,18 @@
+
+        }
+
+-       ast_queue_hangup(peer->owner);
++        ast_mutex_lock(&d->lock);
++        if (peer->owner)
++                ast_queue_hangup(peer->owner);
++        else {
++                sccp_log(1)(VERBOSE_PREFIX_3 "Peer owner disappeared!
+Can't free ressources\n");
++                ast_mutex_unlock(&d->lock);
++                return;
++        }
++
+        ast_mutex_unlock(&transferee->lock);
+
+-       ast_mutex_lock(&d->lock);
++       //ast_mutex_lock(&d->lock);
+        d->transfer_channel = NULL;
+        ast_mutex_unlock(&d->lock);
+
+
+GPickUp crashes as well, this hack fixes that for me:
+
+--- chan_sccp-20071009-DD/sccp_pbx.c    2007-10-04 18:18:14.000000000 +0200
++++ chan_sccp-20071009-DD-mod/sccp_pbx.c        2007-10-25
+18:05:42.910102970 +0100
+@@ -728,9 +728,10 @@
+        uint8_t res_exten = 0, res_wait = 0, res_timeout = 0;
+
+        /*sccp_log(1)( VERBOSE_PREFIX_3 "CS_AST_CHANNEL_PVT: %s\n",
+chan->tech_pvt);*/
+-
++
++
+        c = CS_AST_CHANNEL_PVT(chan);
+-       if (!c) {
++       if (!c || !c->device || !c->device->id) {
+                /* let's go out as soon as possibile */
+                if (!ast_test_flag(chan, AST_FLAG_ZOMBIE)) {
+                        ast_log(LOG_ERROR, "SCCP: return from the dial
+thread. No sccp channel available for %s\n", (chan) ? chan->name :
+"(null)");
+@@ -741,6 +742,19 @@
+                }
+                return NULL;
+        }
++
++       if (strncmp(c->device->id,"SEP",3)!=0 &&
+strncmp(c->device->id,"ATA",3)!=0) {
++                if (!ast_test_flag(chan, AST_FLAG_ZOMBIE)) {
++                        sccp_log(1)( VERBOSE_PREFIX_3 "SCCP: return
+from the dial thread. No sccp channel available for %s\n", (chan) ?
+chan->name : "(null)");
++                        if (chan)
++                                ast_hangup(chan);
++                } else {
++                        sccp_log(1)( VERBOSE_PREFIX_3 "SCCP: return
+from the dial thread. No sccp channel available for zombie\n");
++                }
++                return NULL;
++
++
++       }
+
+        /* this is an outgoung call */
+        ast_mutex_lock(&c->lock);
+
+
+With these two fixes, there are no more deadlocks or segfaults at all.
+David and Marcello, if you like, you can add any of these fixes into
+your code.
+
+Thanks!
+
+--Frank
+
+

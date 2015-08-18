@@ -1,0 +1,617 @@
+From Marcello.Ceschia at gmx.net  Tue May  1 00:51:11 2007
+From: Marcello.Ceschia at gmx.net (Ceschia, Marcello)
+Date: Tue, 1 May 2007 00:51:11 +0200
+Subject: [Chan-sccp-users] chan_sccp for asterisk > 1.4.3
+In-Reply-To: <001501c7877a$f1ea1c00$970010ac@mitchpc>
+References: <001501c7877a$f1ea1c00$970010ac@mitchpc>
+Message-ID: <200705010051.12093.Marcello.Ceschia@gmx.net>
+
+New version for asterisk > 1.4.3 can be downloaded at 
+http://www.ip-phone-forum.de/showthread.php?t=130267
+
+If you find a bug, please let me know.
+
+ Marcello
+
+Am Mittwoch, 25. April 2007 22:47 schrieb Mitch Warnke:
+> Does anyone have the structure to the newer SCCP message
+> "StationCallInfoV2Message"   MSGID=0x14a.   It replaces the message
+> "CallInfoMessage"
+>
+>
+> Thanks
+>
+> Mitch
+
+
+From root at nizon.ca  Tue May  1 08:16:04 2007
+From: root at nizon.ca (Paul)
+Date: Tue, 1 May 2007 01:16:04 -0500
+Subject: [Chan-sccp-users] 7960 multiple lines
+In-Reply-To: <200705010544.l415iJHt027561@srv1.nickelnetworks.com>
+Message-ID: <20070501061721.B76F3D14D8@mail.berlios.de>
+
+Something like this:
+
+exten => 302,1,Dial(SCCP/302a,30,tr)
+exten => 302,101,Dial(SCCP/302b,30,tr)
+exten => 302,202,Dial(SCCP/302c,30,tr)
+
+Asterisk will ring the first one, if it's busy, move to the second and so
+on. Stick a voicemail between each of those and it'll time out to that after
+30 sec.
+
+Make sure you set incominglimit to 1 in sccp.conf
+
+Hope this gets you somewhere
+
+-Paul
+
+
+-----Original Message-----
+From: Paul Aviles [mailto:paul.aviles at nickelnetworks.com] 
+Sent: Tuesday, May 01, 2007 12:44 AM
+To: root at nizon.ca
+Subject: Re: [Chan-sccp-users] 7960 multiple lines
+
+Paul, do you have any examples of the dialplan for this?
+
+Thanks
+-pa
+
+
+
+> > Message: 2
+> > Date: Sun, 22 Apr 2007 03:33:40 -0500
+> > From: "Paul" <root at nizon.ca>
+> > Subject: Re: [Chan-sccp-users] 7960 multiple lines
+> > To: <chan-sccp-users at lists.berlios.de>
+> > Message-ID: <20070422083502.16034E7801 at mail.berlios.de>
+> > Content-Type: text/plain;       charset="us-ascii"
+> >
+> > Each line will only show up once, you can't have duplicates of the
+> same
+> > line.
+> > If you get another call it will just be listed on the display.
+> >
+> > What you could do is create 6 different lines and make the label the 
+> > same.
+> > Then write your dialplan to ring them in sequence.
+> >
+> > -Pau
+
+
+
+
+
+From paul.aviles at nickelnetworks.com  Tue May  1 16:37:14 2007
+From: paul.aviles at nickelnetworks.com (Paul Aviles)
+Date: Tue, 1 May 2007 10:37:14 -0400
+Subject: [Chan-sccp-users] chan_sccp for asterisk > 1.4.3
+In-Reply-To: <mailman.62.1178013655.32597.chan-sccp-users@lists.berlios.de>
+Message-ID: <200705011437.l41EbEGw024743@srv1.nickelnetworks.com>
+
+ 
+Marcello, 
+
+Downloaded and tested it without any issues so far. Best birthday present to
+date!! :-)
+
+Any chances of implementing a Conference and DC Pick ability native to the
+protocol like using a Call Manager?
+
+We will even sponsor $100 US for the initial development of it if anyone is
+interested.
+
+Regards,
+
+Paul
+
+
+
+
+From arlen.nascimento at gmail.com  Thu May 10 18:57:17 2007
+From: arlen.nascimento at gmail.com (Arlen Nascimento)
+Date: Thu, 10 May 2007 12:57:17 -0400
+Subject: [Chan-sccp-users] CP 7906
+Message-ID: <51461ca60705100957t4d55f07h6007f20bca47a98b@mail.gmail.com>
+
+Hi,
+
+i download your chan_sccp and my cp7920 is working perfectly
+but i also have lots of cp7906 and i can't get it working properly
+e.g.: i can reach it, but when i try to originate a call the dial button
+doesn't work
+
+Regards
+
+-- 
+Arlen Nascimento
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070510/f7b39852/attachment.html>
+
+From martin at linkdc.co.uk  Fri May 11 22:36:56 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Fri, 11 May 2007 21:36:56 +0100
+Subject: [Chan-sccp-users] An Excellent GUI for Asterisk 1.2.x with full
+	support for chan_sccp
+Message-ID: <4478654.1178915816699.JavaMail.root@mail.linkdc.co.uk>
+
+Dear chan_sccp experts/users,
+ 
+I know that much of recent contributions to this list concern the move to Asterisk 1.4, but for those that are quite happy to stay on 1.2.x and are looking for an excellent GUI then I have found just the thing. I discovered it when researching a potential 200-300 handset Asterisk system incorporating two call centres. The client definitely wanted to manage the system in house, so I went looking for GUIs. I tried the one from Digium (very basic - couldn't even allow multiple phones to ring without using queues!), trixbox (a bit of a mess) etc and came across a product called ScopServ written by a French Canadian company. At the time, it had very limited support for chan_sccp, but I have worked with them for the past few months and now the support is excellent. It will generate the SEP<MAC>.cnf.xml files in the tftpboot folder, write the sccp.conf complete with support for 7914s and non standard dial commands to do paging and distinctive ring selection etc. 
+ 
+The really big difference with this package is that the GUI covers all aspects of the server and includes easy to use firewall config, DHCP server config, updates to Asterisk, config of Digium/Sangoma hardware etc. They have just re-written the ACD real time display window to use AJAX which allows a fully configurable display that that could be projected onto a wall and of course includes good CDR reporting and export. Installation from bare bones couldn't be easier. Download the ISO of CentOS Server and install, add a few entries to the yum.conf and do a yum install and everything else is automatic and managed through the GUI such as detecting analogue/digital cards, backup of Asterisk/voicemail/CDR, providing a web interface for users to manage their voicemail and follow-me settings...
+ 
+The product also includes SpanDSP to allow for reception/transmission of faxes, automatic provisioning of many popular SIP handsets etc. I never really appreciated how powerful Asterisk was until all the options were easily seen. To be honest, unlike some others that subscribe to this list, hand rolling Asterisk configurations was hard work and customer changes were a nightmare. As you can tell, I am very impressed with this software and it knocks the socks off Digium's efforts (remember they said that creating a GUI would only limit the functions of Asterisk!). I know that you like using Cisco handsets with the native protocol to give traditional PBX functionality, but this choice is a real problem in terms of GUI support.
+ 
+Please have a look at www.scopserv.com. (don't be put off by the impression that they only sell hardware appliances - they do sell the software only for loading on your own hardware). You can request an evaluation key so that you can try it out. Unfortunately this software is not open source or free, but I think this is a sacrifice worth accepting when you see what has been acheived. Prices start at ?795 for 25 users/1 tenant with an annual renewal of ?199. Within the UK, I am very happy to come and demo a server complete with a Digium TE110P single span ISDN30, Digium FXO/FXS card and some Cisco 7960/7914 handsets.
+ 
+Hopefully I won't be struck off this list for promoting a paid for product, but I just had to share my discovery.
+ 
+Martin Sutherland
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070511/afe20eaa/attachment.html>
+
+From martin at linkdc.co.uk  Sat May 12 14:15:45 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Sat, 12 May 2007 13:15:45 +0100
+Subject: [Chan-sccp-users] GUI for Asterisk - follow up
+Message-ID: <28049074.1178972145423.JavaMail.root@mail.linkdc.co.uk>
+
+Sorry, just to clarify, the prices mentioned are in Euros (somehow the euro symbol was lost)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070512/daab6033/attachment.html>
+
+From DSmith at gibsondunn.com  Sat May 12 18:43:07 2007
+From: DSmith at gibsondunn.com (Smith, Douglas D.)
+Date: Sat, 12 May 2007 09:43:07 -0700
+Subject: [Chan-sccp-users] Mute causes hang-up
+Message-ID: <9F0B86FBE62A2A4C865F31B36F7F67480700C163@SFMAIL1.Gibsondunn.net>
+
+
+Whenever I use the mute button on my 7970 phone (8.2-2SR1S, but it
+happened with earlier firmware as well) about 20 seconds later the line
+hangs up.
+
+running trixbox 2.2 (asterisk 1.2.18) and the most recent build of
+chan_sccp.
+
+Rlevant section from the asterisk log follows.  The first entry is the
+last digit input before pushing the mute button
+
+May 11 08:29:31 VERBOSE[16839] logger.c:     -- SEP00112032C70A: Cisco
+Digit: 00000001 (1) on line 2
+May 11 08:29:40 DEBUG[16843] chan_iax2.c: Peer lastms 90, historicms 90,
+maxms 2000 May 11 08:30:21 DEBUG[16843] chan_iax2.c: Peer lastms 89,
+historicms 89, maxms 2000 May 11 08:30:22 DEBUG[16841] chan_sip.c:
+Stopping retransmission on
+'4ec15ea326f6d64c2c0bd7c266255e92 at 192.168.1.50' of Request 102: Match
+Found May 11 08:30:23 DEBUG[17369] manager.c: Manager received command
+'Command'
+May 11 08:30:23 DEBUG[17369] manager.c: Manager received command
+'Command'
+May 11 08:30:23 DEBUG[17369] manager.c: Manager received command
+'Command'
+May 11 08:30:34 DEBUG[16843] chan_iax2.c: Immediately destroying 4,
+having received hangup May 11 08:30:34 DEBUG[18906] channel.c: Didn't
+get a frame from channel:
+IAX2/VP-IAX2-B-4
+May 11 08:30:34 DEBUG[18906] channel.c: Bridge stops bridging channels
+SCCP/2-0000000a and IAX2/VP-IAX2-B-4 May 11 08:30:34 DEBUG[18906]
+chan_iax2.c: We're hanging up
+IAX2/VP-IAX2-B-4 now...
+May 11 08:30:34 DEBUG[18906] chan_iax2.c: Really destroying
+IAX2/VP-IAX2-B-4 now...
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Hungup
+'IAX2/VP-IAX2-B-4'
+May 11 08:30:34 DEBUG[18906] app_dial.c: Exiting with DIALSTATUS=ANSWER.
+May 11 08:30:34 VERBOSE[18906] logger.c:   == Spawn extension
+(macro-dialout-trunk, s, 20) exited non-zero on 'SCCP/2-0000000a' in
+macro 'dialout-trunk'
+May 11 08:30:34 VERBOSE[18906] logger.c:   == Spawn extension
+(macro-dialout-trunk, s, 20) exited non-zero on 'SCCP/2-0000000a'
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+Macro("SCCP/2-0000000a", "hangupcall") in new stack
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+ResetCDR("SCCP/2-0000000a", "w") in new stack May 11 08:30:34
+DEBUG[18906] cdr_addon_mysql.c: cdr_mysql: inserting a CDR record.
+May 11 08:30:34 DEBUG[18906] cdr_addon_mysql.c: cdr_mysql: SQL command
+as follows: INSERT INTO cdr
+(calldate,clid,src,dst,dcontext,channel,dstchannel,lastapp,lastdata,dura
+tion,billsec,disposition,amaflags,accountcode,uniqueid) VALUES
+('2007-05-11 08:29:04','\"\"Doug Smith\"
+<4153938390>','4153938390','14153938220','from-internal',
+'SCCP/2-0000000a','IAX2/VP-IAX2-B-4','ResetCDR','w',90,84,'ANSWERED',3,'
+','1178897340.28')
+May 11 08:30:34 DEBUG[18906] app_macro.c: Executed application: ResetCDR
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+NoCDR("SCCP/2-0000000a", "") in new stack May 11 08:30:34 NOTICE[18906]
+cdr.c: CDR on channel 'SCCP/2-0000000a'
+not posted
+May 11 08:30:34 NOTICE[18906] cdr.c: CDR on channel 'SCCP/2-0000000a'
+lacks end
+May 11 08:30:34 DEBUG[18906] app_macro.c: Executed application: NoCDR
+May 11 08:30:34 DEBUG[18906] pbx.c: Expression result is '1'
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+GotoIf("SCCP/2-0000000a", "1?skiprg") in new stack
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Goto
+(macro-hangupcall,s,6)
+May 11 08:30:34 DEBUG[18906] app_macro.c: Executed application: GotoIf
+May 11 08:30:34 DEBUG[18906] pbx.c: Expression result is '1'
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+GotoIf("SCCP/2-0000000a", "1?theend") in new stack
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Goto
+(macro-hangupcall,s,9)
+May 11 08:30:34 DEBUG[18906] app_macro.c: Executed application: GotoIf
+May 11 08:30:34 VERBOSE[18906] logger.c:     -- Executing
+Wait("SCCP/2-0000000a", "5") in new stack May 11 08:30:39 DEBUG[18906]
+app_macro.c: Executed application: Wait
+May 11 08:30:39 VERBOSE[18906] logger.c:     -- Executing
+Hangup("SCCP/2-0000000a", "") in new stack
+May 11 08:30:39 VERBOSE[18906] logger.c:   == Spawn extension
+(macro-hangupcall, s, 10) exited non-zero on 'SCCP/2-0000000a' in macro
+'hangupcall'
+May 11 08:30:39 VERBOSE[18906] logger.c:   == Spawn extension
+(macro-hangupcall, s, 10) exited non-zero on 'SCCP/2-0000000a'
+May 11 08:30:39 VERBOSE[18906] logger.c:     -- SCCP: Asterisk request
+to hangup channel SCCP/2-0000000a
+May 11 08:30:39 VERBOSE[16839] logger.c:     -- SEP00112032C70A:
+Statistics from 14153938220 callid: 10 Packets sent: 613 rcvd: 4314
+lost: 0 jitter: 0 latency: 0
+May 11 08:30:39 DEBUG[16839] db.c: Unable to find key 'timeout' in
+family 'SCCP/message'
+May 11 08:30:39 DEBUG[16839] db.c: Unable to find key 'text' in family
+'SCCP/message'
+May 11 08:30:40 DEBUG[16843] chan_iax2.c: Peer lastms 89, historicms 89,
+maxms 2000
+
+Any help would be much appreciated.  
+
+"MMS <Gibsondunn.net>" made the following annotations.
+------------------------------------------------------------------------
+------
+
+This message may contain confidential and privileged information.  If it
+has been sent to you in error, please reply to advise the sender of the
+error and then immediately delete this message.
+========================================================================
+======
+
+
+==============================================================================
+
+This message may contain confidential and privileged information.  If it has been sent to you in error, please reply to advise the sender of the error and then immediately delete this message.
+==============================================================================
+
+
+
+
+From ml at reda-systems.at  Wed May 16 12:14:58 2007
+From: ml at reda-systems.at (Daniel Schlager)
+Date: Wed, 16 May 2007 12:14:58 +0200
+Subject: [Chan-sccp-users] asterisk crash, dead device
+Message-ID: <A2EDF27F-E52B-41B1-BB59-E60C5F39E7F9@reda-systems.at>
+
+Hello,
+
+asterisk crash after dead device message from sccp_socket.c
+
+Asterisk 1.2.13 + chan_sccp version 20060408
+
+ > 30 Cisco 7970G in the office
++ 3 Cisco 7970G behind a Cisco PIX (VPN tunneling)
+
+sometimes but not always if the vpn tunnel disconnects i can see that  
+entry in
+/var/log/asterisk/messages
+
+Apr 16 13:05:42 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+Apr 16 13:09:33 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+Apr 16 13:11:06 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-357
+Apr 16 13:12:28 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+Apr 16 13:16:44 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-369
+Apr 16 13:17:06 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-370
+Apr 16 13:18:17 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+Apr 16 13:19:53 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-372
+Apr 16 13:19:54 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put  
+on hold an inactive channel 123-372
+Apr 16 13:21:06 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+
+after that the asterisk remove all phones (not only the dead one)!!!
+
+asterisk*CLI> sccp show lines
+asterisk*CLI>
+NAME             DEVICE           MWI  Chs  Active Channel
+================ ================ ==== ====  
+=================================================
+
+^^ is empty
+
+the only way to get asterisk running is to reboot the server.
+
+i didn't understand that because we have an office with about 6  
+phones (same hardware, same software & configuration) and no problems  
+since over 6 months but in the big office with over 30 phones, the  
+system is crashing sometimes every day!! i think chan_sccp are  
+getting very instable if there are more phones connected
+
+has anyone the same problem and can help me?
+
+
+thanks
+
+Daniel
+
+
+-
+Mit freundlichen Gr??en,
+Daniel Schlager
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070516/43995469/attachment.html>
+
+From lmele at INFOCLIP.FR  Wed May 16 12:26:55 2007
+From: lmele at INFOCLIP.FR (Laurent MELE)
+Date: Wed, 16 May 2007 12:26:55 +0200
+Subject: [Chan-sccp-users] asterisk crash, dead device
+References: <A2EDF27F-E52B-41B1-BB59-E60C5F39E7F9@reda-systems.at>
+Message-ID: <01459B225347E04A9896E75D1CE204110101D817@hermes.ifc.local>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi Daniel,
+
+ 
+
+I dont think that your problem is related to chan_sccp but maybe to zaptel (I had same).
+
+Is there any deadlock messages before that  ?
+
+ 
+
+Is there any pri or bri devices in your asterisk box ? 
+
+ 
+
+ 
+
+- --
+
+Laurent Mele
+
+ 
+
+De : chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-users-bounces at lists.berlios.de] De la part de Daniel Schlager
+Envoy? : mercredi 16 mai 2007 12:15
+? : chan-sccp-users at lists.berlios.de
+Objet : [Chan-sccp-users] asterisk crash, dead device
+
+ 
+
+Hello,
+
+ 
+
+asterisk crash after dead device message from sccp_socket.c
+
+ 
+
+Asterisk 1.2.13 + chan_sccp version 20060408
+
+ 
+
+> 30 Cisco 7970G in the office
+
++ 3 Cisco 7970G behind a Cisco PIX (VPN tunneling)
+
+ 
+
+sometimes but not always if the vpn tunnel disconnects i can see that entry in 
+
+/var/log/asterisk/messages
+
+ 
+
+Apr 16 13:05:42 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+Apr 16 13:09:33 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+Apr 16 13:11:06 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-357
+
+Apr 16 13:12:28 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+Apr 16 13:16:44 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-369
+
+Apr 16 13:17:06 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-370
+
+Apr 16 13:18:17 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+Apr 16 13:19:53 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-372
+
+Apr 16 13:19:54 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-372
+
+Apr 16 13:21:06 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+ 
+
+after that the asterisk remove all phones (not only the dead one)!!! 
+
+ 
+
+asterisk*CLI> sccp show lines
+
+asterisk*CLI> 
+
+NAME             DEVICE           MWI  Chs  Active Channel  
+
+================ ================ ==== ==== =================================================
+
+ 
+
+^^ is empty
+
+ 
+
+the only way to get asterisk running is to reboot the server.
+
+ 
+
+i didn't understand that because we have an office with about 6 phones (same hardware, same software & configuration) and no problems since over 6 months but in the big office with over 30 phones, the system is crashing sometimes every day!! i think chan_sccp are getting very instable if there are more phones connected
+
+ 
+
+has anyone the same problem and can help me?
+
+ 
+
+ 
+
+thanks
+
+ 
+
+Daniel
+
+ 
+
+ 
+
+- - 
+
+Mit freundlichen Gr??en,
+
+Daniel Schlager
+
+ 
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: 9.6.1 (Build 1012)
+
+wj8DBQFGStxvYQLM6r0zcxoRAsvTAJ9wxYkJCQl7c2j57quNuKIzzIR5yACfeBBE
+bd8+j6DvgzeNB2Sz+8OkHwg=
+=1YBT
+-----END PGP SIGNATURE-----
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: PGPexch.htm.pgp
+Type: application/octet-stream
+Size: 3404 bytes
+Desc: PGPexch.htm.pgp
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070516/9e690528/attachment.obj>
+
+From ml at reda-systems.at  Wed May 16 12:59:20 2007
+From: ml at reda-systems.at (Daniel Schlager)
+Date: Wed, 16 May 2007 12:59:20 +0200
+Subject: [Chan-sccp-users] asterisk crash, dead device
+In-Reply-To: <01459B225347E04A9896E75D1CE204110101D817@hermes.ifc.local>
+References: <A2EDF27F-E52B-41B1-BB59-E60C5F39E7F9@reda-systems.at>
+	<01459B225347E04A9896E75D1CE204110101D817@hermes.ifc.local>
+Message-ID: <40E09E12-7FB9-4A0E-8D43-A17CED6AD23B@reda-systems.at>
+
+Hi Laurent,
+
+Is there any deadlock messages before that  ?
+
+nothing only that 1 line
+
+Apr 16 13:05:42 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead  
+device does not send a keepalive message in 60 seconds. Will be removed
+
+
+--
+
+no zaptel on my machine
+
+i am using an
+
+0000:02:03.0 Network controller: Eicon Networks Corporation Diva  
+Server 4BRI-8M Rev 2 (rev 01)
+
+lsmod
+
+capifs                  5768  1
+divacapi              248032  4
+diva_mtpx             360228  0
+diva_idi               34616  0
+divas                 124248  0
+divadidd               59752  4 divacapi,diva_mtpx,diva_idi,divas
+
+with asterisk capi module
+
+vis*CLI> capi show channels
+CAPI B-channel information:
+Line-Name       NTmode state i/o bproto isdnstate   ton  number
+----------------------------------------------------------------
+ISDN3#02         no    Disc   -  trans              0x00 ''->''
+ISDN3#01         no    Disc   -  trans              0x00 ''->''
+ISDN2#02         no    Disc   -  trans              0x00 ''->''
+ISDN2#01         no    -----  -  trans              0x00 ''->''
+ISDN1#02         no    Disc   -  trans              0x00 ''->''
+ISDN1#01         no    -----  -  trans              0x00 ''->''
+
+
+thats my next problem
+
+sometimes the server crash after the following message
+
+Mar  1 13:29:43 ERROR[6026] chan_capi.c: Could not write to pipe for  
+ISDN3#02
+
+
+thanks
+
+daniel
+
+
+
+Am 16.05.2007 um 12:26 schrieb Laurent MELE:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi Daniel,
+
+
+
+I dont think that your problem is related to chan_sccp but maybe to  
+zaptel (I had same).
+
+Is there any deadlock messages before that  ?
+
+
+
+Is there any pri or bri devices in your asterisk box ?
+
+
+
+
+
+- --
+
+Laurent Mele
+
+-
+Mit freundlichen Gr??en,
+Daniel Schlager
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070516/2c9f322a/attachment.html>
+

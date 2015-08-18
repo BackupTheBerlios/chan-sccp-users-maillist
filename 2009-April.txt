@@ -1,0 +1,329 @@
+From mrfexy at gmail.com  Wed Apr  8 20:59:37 2009
+From: mrfexy at gmail.com (Mr Fexy)
+Date: Wed, 8 Apr 2009 14:59:37 -0400
+Subject: [Chan-sccp-users] Realtime Configuration
+Message-ID: <db755ed60904081159m7c9ec0c6jf64310c879a8ee7@mail.gmail.com>
+
+Hi attempting to use Cisco 7960s with asterisk-1.4.22 and
+chan_sccp-20090109. Everything is compiled the phones even register,
+but I'm having trouble assigning them lines. I'm using the database
+structure at http://www.voip-info.org/wiki/view/Asterisk+RealTime+chan_sccp2
+Is the schema of sccplines missing a line field or is the extension
+stored in one of the other fields? Here is my error message
+
+ [Apr  8 14:35:40] ERROR[10951]: sccp_actions.c:477
+sccp_handle_line_number: SEP002155D4950A: requested a line
+configuration for unknown line 0
+
+Thanks!
+
+
+From mobile at nhm.it  Fri Apr 10 10:07:23 2009
+From: mobile at nhm.it (Federico Santulli)
+Date: Fri, 10 Apr 2009 10:07:23 +0200
+Subject: [Chan-sccp-users] Realtime Configuration
+In-Reply-To: <db755ed60904081159m7c9ec0c6jf64310c879a8ee7@mail.gmail.com>
+References: <db755ed60904081159m7c9ec0c6jf64310c879a8ee7@mail.gmail.com>
+Message-ID: <4C13719B36494F1C88945884FD6F1432@PCFreddy>
+
+we were building a wiki during last month, so if you could wait a while, 
+you'll find the information you need.
+
+Cheers
+
+Federico
+
+----- Original Message ----- 
+From: "Mr Fexy" <mrfexy at gmail.com>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Wednesday, April 08, 2009 8:59 PM
+Subject: [Chan-sccp-users] Realtime Configuration
+
+
+> Hi attempting to use Cisco 7960s with asterisk-1.4.22 and
+> chan_sccp-20090109. Everything is compiled the phones even register,
+> but I'm having trouble assigning them lines. I'm using the database
+> structure at 
+> http://www.voip-info.org/wiki/view/Asterisk+RealTime+chan_sccp2
+> Is the schema of sccplines missing a line field or is the extension
+> stored in one of the other fields? Here is my error message
+>
+> [Apr  8 14:35:40] ERROR[10951]: sccp_actions.c:477
+> sccp_handle_line_number: SEP002155D4950A: requested a line
+> configuration for unknown line 0
+>
+> Thanks!
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users 
+
+
+
+From mlists at c-net.it  Tue Apr 14 10:11:12 2009
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Tue, 14 Apr 2009 10:11:12 +0200
+Subject: [Chan-sccp-users] Realtime Configuration
+In-Reply-To: <db755ed60904081159m7c9ec0c6jf64310c879a8ee7@mail.gmail.com>
+References: <db755ed60904081159m7c9ec0c6jf64310c879a8ee7@mail.gmail.com>
+Message-ID: <49E44520.8070309@c-net.it>
+
+
+post your sccp.conf and yes it is missing a line directive
+
+Mr Fexy ha scritto:
+> Hi attempting to use Cisco 7960s with asterisk-1.4.22 and
+> chan_sccp-20090109. Everything is compiled the phones even register,
+> but I'm having trouble assigning them lines. I'm using the database
+> structure at http://www.voip-info.org/wiki/view/Asterisk+RealTime+chan_sccp2
+> Is the schema of sccplines missing a line field or is the extension
+> stored in one of the other fields? Here is my error message
+>
+>  [Apr  8 14:35:40] ERROR[10951]: sccp_actions.c:477
+> sccp_handle_line_number: SEP002155D4950A: requested a line
+> configuration for unknown line 0
+>
+> Thanks!
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>   
+
+
+
+From tearl42 at gmail.com  Tue Apr 28 01:54:04 2009
+From: tearl42 at gmail.com (Thomas Earl)
+Date: Mon, 27 Apr 2009 19:54:04 -0400
+Subject: [Chan-sccp-users] Paging Help
+Message-ID: <29aa1a390904271654j62eed9f7x8cc0adc0b60b8b46@mail.gmail.com>
+
+Greetings to all,
+
+I have a small 10 person office that needs 1 to 1 paging w/ full duplex,
+auto answer and barge if the target user is on the phone. I have reviewed
+some other posts and I'm using ...
+
+
+exten => _X.,n,Dial(SCCP/${EXTEN}/aa=1w/ringer=inside, 120)
+
+...in my extensions_additional.conf. I have also tried replacing the
+variables with actual extensions like I saw in a few other posts, but
+nothing...
+
+I'm using Trixbox 2.6.2.2 with SCCP version 20071213... It looks like I'm
+way behind in versions too, maybe this was addressed in a more recent
+version?
+
+Thanks,
+
+Tom
+
+-- 
+Thomas Earl
+Sr. Network Engineer
+CSC/General Dynamics Land Systems
++1.248.705.7408 (cell)
++1.248.751.6050 (fax) *NEW NUMBER*
+Nextel DC: 131*744174*30
+
+"Human-kind cannot gain anything without first giving something in return.
+To obtain something of equal value must be lost. That is alchemy's first law
+of Equivalent Exchange." - Antoine Lavoisier's law of conservation of
+matter,
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090427/00e4a92a/attachment.html>
+
+From SeanS at networkoutsource.com  Tue Apr 28 01:59:01 2009
+From: SeanS at networkoutsource.com (Sean Sellars)
+Date: Mon, 27 Apr 2009 19:59:01 -0400
+Subject: [Chan-sccp-users] Paging Help
+In-Reply-To: <29aa1a390904271654j62eed9f7x8cc0adc0b60b8b46@mail.gmail.com>
+References: <29aa1a390904271654j62eed9f7x8cc0adc0b60b8b46@mail.gmail.com>
+Message-ID: <32F3FA7C22BD84489775DA82ED529D9C02C65AB6@exchange.corporate.networkoutsource.com>
+
+Tom,
+
+ 
+
+aa=1w is only going to give you one way paging .  If you want full
+duplex you will need to change that to aa=2w.  Are you getting the phone
+to auto answer at all?
+
+ 
+
+Sean
+
+ 
+
+Sean Sellars
+
+Project Manager
+NetworkOutsource
+135 Denton Avenue
+New Hyde Park, NY 11040 
+(P) 516-488-5888 
+seans at networkoutsource.com <mailto:seans at networkoutsource.com> 
+
+ 
+
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Thomas
+Earl
+Sent: Monday, April 27, 2009 7:54 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] Paging Help
+
+ 
+
+Greetings to all, 
+
+I have a small 10 person office that needs 1 to 1 paging w/ full duplex,
+auto answer and barge if the target user is on the phone. I have
+reviewed some other posts and I'm using ...
+
+
+exten => _X.,n,Dial(SCCP/${EXTEN}/aa=1w/ringer=inside, 120)
+
+...in my extensions_additional.conf. I have also tried replacing the
+variables with actual extensions like I saw in a few other posts, but
+nothing... 
+
+I'm using Trixbox 2.6.2.2 with SCCP version 20071213... It looks like
+I'm way behind in versions too, maybe this was addressed in a more
+recent version?
+
+Thanks, 
+
+Tom
+
+-- 
+Thomas Earl
+Sr. Network Engineer
+CSC/General Dynamics Land Systems
++1.248.705.7408 (cell)
++1.248.751.6050 (fax) *NEW NUMBER*
+Nextel DC: 131*744174*30
+
+"Human-kind cannot gain anything without first giving something in
+return. To obtain something of equal value must be lost. That is
+alchemy's first law of Equivalent Exchange." - Antoine Lavoisier's law
+of conservation of matter,
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090427/a988e9b3/attachment.html>
+
+From tearl42 at gmail.com  Wed Apr 29 02:28:55 2009
+From: tearl42 at gmail.com (Thomas Earl)
+Date: Tue, 28 Apr 2009 20:28:55 -0400
+Subject: [Chan-sccp-users] Paging Help
+Message-ID: <29aa1a390904281728j1a49cf29uefe9279c865a1dc0@mail.gmail.com>
+
+Hey Sean,
+
+Thanks for answering... Yes, I'm getting the auto answer to work, just
+no audio either way.
+
+Here is a clip of my extension_additional.conf... I'm not sure where
+the autoanswer marco came from, but I thought I would include it even
+thought I don't know that I'm using it.
+
+[macro-autoanswer]
+include => macro-autoanswer-custom
+exten => s,1,Set(DIAL=${DB(DEVICE/${ARG1}/dial)})
+exten => s,n,GotoIf($["${DB(DEVICE/${ARG1}/autoanswer/macro)}" != "" ]?macro)
+exten => s,n,Set(phone=${SIPPEER(${CUT(DIAL,/,2)}:useragent)})
+exten => s,n,Set(ALERTINFO=Alert-Info: Ring Answer)
+exten => s,n,Set(CALLINFO=Call-Info: <uri>\;answer-after=0)
+exten => s,n,Set(SIPURI=intercom=true)
+exten => s,n,Set(ANSWERMACRO=)
+exten => s,n,ExecIf($["${phone:0:5}" =
+"Mitel"],Set,CALLINFO=Call-Info: <sip:broadworks.net>\;answer-after=0)
+exten => s,n,GotoIf($["${ANSWERMACRO}" != ""]?macro2)
+exten => s,n,ExecIf($["${ALERTINFO}" != ""],SipAddHeader,${ALERTINFO})
+exten => s,n,ExecIf($["${CALLINFO}" != ""],SipAddHeader,${CALLINFO})
+exten => s,n,ExecIf($["${SIPURI}" != ""],Set,__SIP_URI_OPTIONS=${SIPURI})
+exten => s,n+2(macro),Macro(${DB(DEVICE/${ARG1}/autoanswer/macro)},${ARG1})
+exten => s,n+2(macro2),Macro(${ANSWERMACRO},${ARG1})
+
+; end of [macro-autoanswer]
+
+
+[ext-paging]
+include => ext-paging-custom
+exten => _PAGE.,1,GotoIf($[ ${AMPUSER} = ${EXTEN:4} ]?skipself)
+exten => _PAGE.,n,GotoIf($[ ${FORCE_PAGE} != 1 ]?AVAIL)
+exten => _PAGE.,n,Set(AVAILSTATUS=not checked)
+exten => _PAGE.,n,Goto(SKIPCHECK)
+exten => _PAGE.,n(AVAIL),ChanIsAvail(${DB(DEVICE/${EXTEN:4}/dial)},js)
+exten => _PAGE.,n(SKIPCHECK),Noop(Seems to be available (state = ${AVAILSTATUS})
+exten => _PAGE.,n,Macro(autoanswer,${EXTEN:4})
+exten => _PAGE.,n,Dial(${DIAL},5, A(beep))
+exten => _PAGE.,n(skipself),Noop(Not paging originator)
+exten => _PAGE.,n,Hangup
+exten => _PAGE.,AVAIL+101,Noop(Channel ${AVAILCHAN} is not available
+(state = ${AVAILSTATUS}))
+exten => Debug,1,Noop(dialstr is
+LOCAL/PAGE2001 at ext-paging&LOCAL/PAGE2011 at ext-paging&LOCAL/PAGE2021 at ext-paging&LOCAL/PAGE2031 at ext-paging&LOCAL/PAGE204 at ext-paging&LOCAL/PAGE205 at ext-paging&LOCAL/PAGE2061 at ext-paging&LOCAL/PAGE207 at ext-paging&LOCAL/PAGE2081 at ext-paging)
+exten => Debug,n,Noop(dialstr is LOCAL/PAGE2011 at ext-paging)
+exten => 800,1,Answer
+exten => 800,n,Set(_FORCE_PAGE=0)
+exten => 800,n,Macro(user-callerid,)
+exten => 800,n,Set(_AMPUSER=${AMPUSER})
+exten => 800,n,Page(LOCAL/PAGE2001 at ext-paging&LOCAL/PAGE2011 at ext-paging&LOCAL/PAGE2021 at ext-paging&LOCAL/PAGE2031 at ext-paging&LOCAL/PAGE204 at ext-paging&LOCAL/PAGE205 at ext-paging&LOCAL/PAGE2061 at ext-paging&LOCAL/PAGE207 at ext-paging&LOCAL/PAGE2081 at ext-paging)
+exten => 801,1,Answer
+exten => 801,n,Set(_FORCE_PAGE=1)
+exten => 801,n,Macro(user-callerid,)
+exten => 801,n,Set(_AMPUSER=${AMPUSER})
+exten => 801,n,Page(LOCAL/PAGE2011 at ext-paging)
+
+
+Let me know if I'm going about this wrong, please.
+
+Thanks,
+
+Tom
+
+>> Date: Mon, 27 Apr 2009 19:59:01 -0400
+>> From: "Sean Sellars" <SeanS at networkoutsource.com>
+>> Subject: Re: [Chan-sccp-users] Paging Help
+>> To: <chan-sccp-users at lists.berlios.de>
+>> Message-ID:
+>>       <32F3FA7C22BD84489775DA82ED529D9C02C65AB6 at exchange.corporate.networkoutsource.com>
+>>
+>> Content-Type: text/plain; charset="us-ascii"
+>>
+>> Tom,
+>>
+>> aa=1w is only going to give you one way paging .  If you want full
+>> duplex you will need to change that to aa=2w.  Are you getting the phone
+>> to auto answer at all?
+>>
+>> Sean
+>>
+>> Sean Sellars
+>> Project Manager
+>> NetworkOutsource
+>> 135 Denton Avenue
+>> New Hyde Park, NY 11040
+>> (P) 516-488-5888
+>> seans at networkoutsource.com <mailto:seans at networkoutsource.com>
+
+
+--
+Thomas Earl
+Sr. Network Engineer
+CSC/General Dynamics Land Systems
++1.248.705.7408 (cell)
++1.248.751.6050 (fax) *NEW NUMBER*
+Nextel DC: 131*744174*30
+
+"Human-kind cannot gain anything without first giving something in
+return. To obtain something of equal value must be lost. That is
+alchemy's first law of Equivalent Exchange." - Antoine Lavoisier's law
+of conservation of matter,
+
+

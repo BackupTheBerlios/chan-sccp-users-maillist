@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7960 Upgrade
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207960%20Upgrade&In-Reply-To=%3C4C792A099259634C83F97067671B37FE02D9C01A%40GDSEXC.gds.pri%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000129.html">
+   <LINK REL="Next"  HREF="000122.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7960 Upgrade</H1>
+    <B>Patrick Mowry</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207960%20Upgrade&In-Reply-To=%3C4C792A099259634C83F97067671B37FE02D9C01A%40GDSEXC.gds.pri%3E"
+       TITLE="[Chan-sccp-users] 7960 Upgrade">pmowry at getgds.com
+       </A><BR>
+    <I>Mon Apr  2 23:55:32 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000129.html">[Chan-sccp-users] 7960 Upgrade
+</A></li>
+        <LI>Next message: <A HREF="000122.html">[Chan-sccp-users] 7960 Upgrade
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+I didn't know this:
+
+&quot;Note that the OS79XX.txt file only gets you between protocol versions as the phone only checks the first four letters of the load name.&quot;
+
+What may work for you is to get the phone on a SIP load and then change OS79XX.txt to get it back to a newer skinny load.  Doesn't sound very nice, but it might help.
+
+-Patrick
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of Paul
+Sent: Monday, April 02, 2007 2:32 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">c-allen at btclick.com</A>
+Subject: Re: [Chan-sccp-users] 7960 Upgrade
+
+It's not even requesting that file when SEPmac.cnf doesn't exist.
+It doesn't seem to like xml config files... perhaps there's an older format
+for sccp?
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">c-allen at btclick.com</A>
+Sent: Monday, April 02, 2007 1:39 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Re: [Chan-sccp-users] 7960 Upgrade
+
+The XMLDefault.cnf.xml is case sensitive, check the exact format in tftplog.
+
+You can google for a sample of the XMLDefault file and put it on TFTP and
+then follow the cisco upgrade path by editing the file to include the image
+you want to load. The phone has a different load image from version 6, so
+may need to go to v4 then to v6 then to latest version. I'll check onn CCO
+for the upgrade path for you.
+
+
+Sent from my BlackBerry&#174; wireless device  
+
+-----Original Message-----
+From: &quot;Paul&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">root at nizon.ca</A>&gt;
+Date: Mon, 2 Apr 2007 13:21:03 
+To:&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">c-allen at btclick.com</A>&gt;
+Subject: Re: [Chan-sccp-users] 7960 Upgrade
+
+A little bit of an update.
+Two other phones I have are using 3.2, I've been able to get these guys to
+upgrade as they actually request an XMLDefault.cnf.xml
+
+However the super old guy with P003P301 isn't requesting this file.
+It seems to ignore anything I put in SEPmac.cnf
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">c-allen at btclick.com</A>
+Sent: Monday, April 02, 2007 1:14 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Re: [Chan-sccp-users] 7960 Upgrade
+
+Need to verify the exact spelling of the image. Bin file may be formatted
+incorrectly.
+
+
+Sent from my BlackBerry&#174; wireless device  
+
+-----Original Message-----
+From: (&#164;Phil&#164;) &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">phil at ingineerix.com</A>&gt;
+Date: Mon, 2 Apr 2007 10:37:39 
+To:&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Subject: Re: [Chan-sccp-users] 7960 Upgrade
+
+The older versions don't seem to use the OS79XX sometimes.&#160; Put the
+&lt;loadInformation&gt; in the SEPxx file. 
+&#160; 
+ 
+ 
+ -Phil  &lt;<A HREF="http://mindfart.com/sig/?">http://mindfart.com/sig/?</A>&gt; -Phil 
+----- Original Message ----- 
+From: Paul: &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">root at nizon.ca</A>&gt;  
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>:
+&lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;  
+Sent: Monday, April 02, 2007 10:35 AM 
+Subject: [Chan-sccp-users] 7960 Upgrade 
+
+ 
+ 
+&#160;
+ 
+&#160;
+ 
+Well I managed to track down version 6 for these 7960s but I still can't get
+the phone to download the new image.
+ 
+&#160;
+ 
+Here's a TFTP log:
+ 
+Apr 02 12:05:45 hex atftpd[19899.-1210647632]: Creating new socket:
+10.0.87.1:50508
+ 
+Apr 02 12:05:45 hex atftpd[19899.-1210647632]: Serving OS79XX.TXT to
+10.0.87.100:51802
+ 
+Apr 02 12:05:45 hex atftpd[19899.-1210647632]: End of transfer
+ 
+Apr 02 12:05:45 hex atftpd[19899.-1210647632]: Server thread exiting
+ 
+Apr 02 12:05:45 hex atftpd[19899.-1210647632]: Creating new socket:
+10.0.87.1:50508
+ 
+Apr 02 12:05:45 hex atftpd[19899.-1210647632]: Serving SEP00blahblah.cnf to
+10.0.87.100:51803
+ 
+Apr 02 12:05:45 hex atftpd[19899.-1210647632]: End of transfer
+ 
+Apr 02 12:05:45 hex atftpd[19899.-1210647632]: Server thread exiting
+ 
+&#160;
+ 
+OS79XX.TXT looks like this:
+ 
+P00306000300
+ 
+&#160;
+ 
+&#160;
+ 
+I've tried two SEP00blahblah.cnf using the xml format and the old style one.
+ 
+&#160;
+ 
+&#160;
+ 
+#Image Version
+ 
+image_version:P00306000300 ;
+ 
+&#160;
+ 
+&#160;
+ 
+or
+ 
+&#160;
+ 
+&lt;Default&gt;
+ 
+&#160; &lt;callManagerGroup&gt;
+ 
+&#160;&#160;&#160;&#160; &lt;members&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;member priority=&quot;0&quot;&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;callManager&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;ports&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;ethernetPhonePort&gt;2000&lt;/ethernetPhonePort&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;mgcpPorts&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;listen&gt;2427&lt;/listen&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;keepAlive&gt;2428&lt;/keepAlive&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;/mgcpPorts&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;/ports&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;processNodeName&gt;&lt;/processNodeName&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;/callManager&gt;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;/member&gt;
+ 
+&#160;&#160;&#160;&#160; &lt;/members&gt;
+ 
+&#160; &lt;/callManagerGroup&gt;
+ 
+&#160;
+ 
+&#160;&lt;loadInformation7&#160; model=&quot;Cisco 7960&quot;&gt;P00306000300&lt;/loadInformation7&gt;
+ 
+&#160;&lt;authenticationURL&gt;&lt;/authenticationURL&gt;
+ 
+&#160;&lt;directoryURL&gt;&lt;/directoryURL&gt;
+ 
+&#160;&lt;idleURL&gt;&lt;/idleURL&gt;
+ 
+&#160;&lt;informationURL&gt;&lt;/informationURL&gt;
+ 
+&#160;&lt;messagesURL&gt;&lt;/messagesURL&gt;
+ 
+&#160;&lt;servicesURL&gt;&lt;/servicesURL&gt;
+ 
+&lt;/Default&gt;
+ 
+&#160;
+ 
+&#160;
+ 
+Phone says application load is P003P301
+ 
+&#160;
+ 
+&#160;
+ 
+Any help would be greatly appreciated, thanks!
+ 
+ 
+----------------
+ 
+
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000129.html">[Chan-sccp-users] 7960 Upgrade
+</A></li>
+	<LI>Next message: <A HREF="000122.html">[Chan-sccp-users] 7960 Upgrade
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

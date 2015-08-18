@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Please can we co-ordinate improvements	tochan_sccp/7914 woes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Please%20can%20we%20co-ordinate%20improvements%0A%09tochan_sccp/7914%20woes&In-Reply-To=%3C792897337FC81944BA4097ABD708977103CADC32%40pdc.bnsnet.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000296.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Please can we co-ordinate improvements	tochan_sccp/7914 woes</H1>
+    <B>Steve J. Walker</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Please%20can%20we%20co-ordinate%20improvements%0A%09tochan_sccp/7914%20woes&In-Reply-To=%3C792897337FC81944BA4097ABD708977103CADC32%40pdc.bnsnet.co.uk%3E"
+       TITLE="[Chan-sccp-users] Please can we co-ordinate improvements	tochan_sccp/7914 woes">SteveW at bucks.net
+       </A><BR>
+    <I>Thu Sep 27 09:29:25 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000296.html">[Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#297">[ date ]</a>
+              <a href="thread.html#297">[ thread ]</a>
+              <a href="subject.html#297">[ subject ]</a>
+              <a href="author.html#297">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Martin,
+
+&gt;<i> I know that there are several members out there kindly providing web
+</I>&gt;<i> space for the latest chan_sccp, and amendments have been made here and
+</I>&gt;<i> there. I am now very confused about which version contains the most
+</I>&gt;<i> trusted fixes and what those fixes are. It would be fantastic if we
+</I>&gt;<i> could all agree on which is the best version and have a definitive
+</I>list
+&gt;<i> of changes made since 20060408. The Asterisk 1.2 version that I have
+</I>&gt;<i> found the best is 20070620 which was emailed to me by
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">dmitry at makuha.kiev.ua</A> back in July. I am about to try Asterisk 1.4 but
+</I>&gt;<i> simply don't know if all the changes made in 20070620 are incorporated
+</I>&gt;<i> into the current Asterisk 1.4 version.
+</I>
+Do you have a list of fixes that 20070620 contains over the last version
+in 2006? Do you find it stable under 1.2? I think that your right and a
+mini FAQ or patch / fix list needs to appear somewhere. We have a 2006
+build we have changed to suit our needs and it works very well. But I
+assume people who know chan_sccp better than we do have probably fixed
+or extended it properly :-)
+
+But could you place that sccp version somewhere? url?
+ 
+&gt;<i> I have however had problems which all seem to stem from using 7914
+</I>&gt;<i> side-cars. I have two 7960 phones with two 7914s each. For some reason
+</I>&gt;<i> the 7960s behave differently with 7914s attached. One real problem
+</I>&gt;<i> concerned having dial timeouts or invalid extensions. Either the phone
+</I>&gt;<i> or chan_sccp does not detect the hangup message after the handset is
+</I>&gt;<i> put down after a redial tone (and the number dialled remains on the
+</I>&gt;<i> display). When the phone is picked up again, the channel/line is still
+</I>&gt;<i> active and nothing works. Re-setting the phone then caused Asterisk to
+</I>&gt;<i> die, presumably because a phone is registering but still has an active
+</I>&gt;<i> channel. Even worse, Asterisk doesn't actually exit, but is stuck in
+</I>&gt;<i> memory and requires a server re-boot to fix. I managed to patch my
+</I>&gt;<i> version in the off-hook event to detect a channel/line in the redial
+</I>&gt;<i> state and issue a on-hook message. The user just finds that nothing
+</I>&gt;<i> happens and needs to on-hook and then off-hook again and saves an
+</I>&gt;<i> Asterisk crash. Note that this problem  does not happen if the 7914 is
+</I>&gt;<i> disconnected!
+</I>
+We found that the firmware used for the 7960 and 7914 make a huge
+difference to its performance.
+
+We use P00307020300 for the 7940/60s and S00105000200 for the 7914s and
+do not have any of the issues you are describing. Maybe trying that
+firmware with your current config should solve the issues. I asked here
+and someone recommended those versions to me for our setup and it is
+very stable. 
+
+So I am just passing on what they say :-) YMMV
+ 
+Regards,
+
+Steve 
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000296.html">[Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#297">[ date ]</a>
+              <a href="thread.html#297">[ thread ]</a>
+              <a href="subject.html#297">[ subject ]</a>
+              <a href="author.html#297">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

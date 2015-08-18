@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Paging Help
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Paging%20Help&In-Reply-To=%3C29aa1a390904281728j1a49cf29uefe9279c865a1dc0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000477.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Paging Help</H1>
+    <B>Thomas Earl</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Paging%20Help&In-Reply-To=%3C29aa1a390904281728j1a49cf29uefe9279c865a1dc0%40mail.gmail.com%3E"
+       TITLE="[Chan-sccp-users] Paging Help">tearl42 at gmail.com
+       </A><BR>
+    <I>Wed Apr 29 02:28:55 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000477.html">[Chan-sccp-users] Paging Help
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#478">[ date ]</a>
+              <a href="thread.html#478">[ thread ]</a>
+              <a href="subject.html#478">[ subject ]</a>
+              <a href="author.html#478">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey Sean,
+
+Thanks for answering... Yes, I'm getting the auto answer to work, just
+no audio either way.
+
+Here is a clip of my extension_additional.conf... I'm not sure where
+the autoanswer marco came from, but I thought I would include it even
+thought I don't know that I'm using it.
+
+[macro-autoanswer]
+include =&gt; macro-autoanswer-custom
+exten =&gt; s,1,Set(DIAL=${DB(DEVICE/${ARG1}/dial)})
+exten =&gt; s,n,GotoIf($[&quot;${DB(DEVICE/${ARG1}/autoanswer/macro)}&quot; != &quot;&quot; ]?macro)
+exten =&gt; s,n,Set(phone=${SIPPEER(${CUT(DIAL,/,2)}:useragent)})
+exten =&gt; s,n,Set(ALERTINFO=Alert-Info: Ring Answer)
+exten =&gt; s,n,Set(CALLINFO=Call-Info: &lt;uri&gt;\;answer-after=0)
+exten =&gt; s,n,Set(SIPURI=intercom=true)
+exten =&gt; s,n,Set(ANSWERMACRO=)
+exten =&gt; s,n,ExecIf($[&quot;${phone:0:5}&quot; =
+&quot;Mitel&quot;],Set,CALLINFO=Call-Info: &lt;sip:broadworks.net&gt;\;answer-after=0)
+exten =&gt; s,n,GotoIf($[&quot;${ANSWERMACRO}&quot; != &quot;&quot;]?macro2)
+exten =&gt; s,n,ExecIf($[&quot;${ALERTINFO}&quot; != &quot;&quot;],SipAddHeader,${ALERTINFO})
+exten =&gt; s,n,ExecIf($[&quot;${CALLINFO}&quot; != &quot;&quot;],SipAddHeader,${CALLINFO})
+exten =&gt; s,n,ExecIf($[&quot;${SIPURI}&quot; != &quot;&quot;],Set,__SIP_URI_OPTIONS=${SIPURI})
+exten =&gt; s,n+2(macro),Macro(${DB(DEVICE/${ARG1}/autoanswer/macro)},${ARG1})
+exten =&gt; s,n+2(macro2),Macro(${ANSWERMACRO},${ARG1})
+
+; end of [macro-autoanswer]
+
+
+[ext-paging]
+include =&gt; ext-paging-custom
+exten =&gt; _PAGE.,1,GotoIf($[ ${AMPUSER} = ${EXTEN:4} ]?skipself)
+exten =&gt; _PAGE.,n,GotoIf($[ ${FORCE_PAGE} != 1 ]?AVAIL)
+exten =&gt; _PAGE.,n,Set(AVAILSTATUS=not checked)
+exten =&gt; _PAGE.,n,Goto(SKIPCHECK)
+exten =&gt; _PAGE.,n(AVAIL),ChanIsAvail(${DB(DEVICE/${EXTEN:4}/dial)},js)
+exten =&gt; _PAGE.,n(SKIPCHECK),Noop(Seems to be available (state = ${AVAILSTATUS})
+exten =&gt; _PAGE.,n,Macro(autoanswer,${EXTEN:4})
+exten =&gt; _PAGE.,n,Dial(${DIAL},5, A(beep))
+exten =&gt; _PAGE.,n(skipself),Noop(Not paging originator)
+exten =&gt; _PAGE.,n,Hangup
+exten =&gt; _PAGE.,AVAIL+101,Noop(Channel ${AVAILCHAN} is not available
+(state = ${AVAILSTATUS}))
+exten =&gt; Debug,1,Noop(dialstr is
+LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2001 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2011 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2021 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2031 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE204 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE205 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2061 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE207 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2081 at ext-paging</A>)
+exten =&gt; Debug,n,Noop(dialstr is LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2011 at ext-paging</A>)
+exten =&gt; 800,1,Answer
+exten =&gt; 800,n,Set(_FORCE_PAGE=0)
+exten =&gt; 800,n,Macro(user-callerid,)
+exten =&gt; 800,n,Set(_AMPUSER=${AMPUSER})
+exten =&gt; 800,n,Page(LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2001 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2011 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2021 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2031 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE204 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE205 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2061 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE207 at ext-paging</A>&amp;LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2081 at ext-paging</A>)
+exten =&gt; 801,1,Answer
+exten =&gt; 801,n,Set(_FORCE_PAGE=1)
+exten =&gt; 801,n,Macro(user-callerid,)
+exten =&gt; 801,n,Set(_AMPUSER=${AMPUSER})
+exten =&gt; 801,n,Page(LOCAL/<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">PAGE2011 at ext-paging</A>)
+
+
+Let me know if I'm going about this wrong, please.
+
+Thanks,
+
+Tom
+
+&gt;&gt;<i> Date: Mon, 27 Apr 2009 19:59:01 -0400
+</I>&gt;&gt;<i> From: &quot;Sean Sellars&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">SeanS at networkoutsource.com</A>&gt;
+</I>&gt;&gt;<i> Subject: Re: [Chan-sccp-users] Paging Help
+</I>&gt;&gt;<i> To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;&gt;<i> Message-ID:
+</I>&gt;&gt;<i>       &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">32F3FA7C22BD84489775DA82ED529D9C02C65AB6 at exchange.corporate.networkoutsource.com</A>&gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Content-Type: text/plain; charset=&quot;us-ascii&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Tom,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> aa=1w is only going to give you one way paging .  If you want full
+</I>&gt;&gt;<i> duplex you will need to change that to aa=2w.  Are you getting the phone
+</I>&gt;&gt;<i> to auto answer at all?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Sean
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Sean Sellars
+</I>&gt;&gt;<i> Project Manager
+</I>&gt;&gt;<i> NetworkOutsource
+</I>&gt;&gt;<i> 135 Denton Avenue
+</I>&gt;&gt;<i> New Hyde Park, NY 11040
+</I>&gt;&gt;<i> (P) 516-488-5888
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">seans at networkoutsource.com</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">seans at networkoutsource.com</A>&gt;
+</I>
+
+--
+Thomas Earl
+Sr. Network Engineer
+CSC/General Dynamics Land Systems
++1.248.705.7408 (cell)
++1.248.751.6050 (fax) *NEW NUMBER*
+Nextel DC: 131*744174*30
+
+&quot;Human-kind cannot gain anything without first giving something in
+return. To obtain something of equal value must be lost. That is
+alchemy's first law of Equivalent Exchange.&quot; - Antoine Lavoisier's law
+of conservation of matter,
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000477.html">[Chan-sccp-users] Paging Help
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#478">[ date ]</a>
+              <a href="thread.html#478">[ thread ]</a>
+              <a href="subject.html#478">[ subject ]</a>
+              <a href="author.html#478">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Received calls issue solved
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Received%20calls%20issue%20solved&In-Reply-To=%3C9197E894-C339-4339-9084-B9DF2FE35122%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000277.html">
+   <LINK REL="Next"  HREF="000279.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Received calls issue solved</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Received%20calls%20issue%20solved&In-Reply-To=%3C9197E894-C339-4339-9084-B9DF2FE35122%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Received calls issue solved">davidded at davidded.de
+       </A><BR>
+    <I>Thu Aug 23 01:39:29 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000277.html">[Chan-sccp-users] Latest chan-sccp
+</A></li>
+        <LI>Next message: <A HREF="000279.html">[Chan-sccp-users] Received calls issue solved
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#278">[ date ]</a>
+              <a href="thread.html#278">[ thread ]</a>
+              <a href="subject.html#278">[ subject ]</a>
+              <a href="author.html#278">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I was finally fed up of my Received Calls list being empty on the  
+more recent phones. I just did a delicate side-by-side comparison of  
+chan_sccp's behaviour and Steven's dump. Steven, thanks again for the  
+file.
+
+The issue is that the new phones record the call only if they get an  
+OFFHOOK callstate message before the CONNECTED callstate message.  
+Hmm... Maybe the semantics have changed here.
+
+I have made a patch for the issue. Please let me know if it worked  
+for you.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: recvdCalls.diff
+Type: application/octet-stream
+Size: 311 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070823/4d885fd7/attachment.obj">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070823/4d885fd7/attachment.obj</A>&gt;
+-------------- next part --------------
+Regards,
+-David.
+
+On 09.11.2006, at 22:03, Steven Lam, KeenServer wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> Don't know if this helps, i used ethereal to see what happens when  
+</I>&gt;<i> a 7970 receives a call when hooked up to a real CCM.
+</I>&gt;<i>
+</I>&gt;<i> Atteched is a ethereal dump.
+</I>&gt;<i>
+</I>&gt;<i> Steven.
+</I>&gt;<i>
+</I>&gt;<i> -----Oorspronkelijk bericht-----
+</I>&gt;<i> Van: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:chan-sccp- 
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">users-bounces at lists.berlios.de</A>] Namens Steinringer, Christian
+</I>&gt;<i> Verzonden: woensdag 8 november 2006 11:23
+</I>&gt;<i> Aan: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Onderwerp: Re: [Chan-sccp-users] {Spam}{0/10} Re: {Spam}{0/10}  
+</I>&gt;<i> CompanyDirectory
+</I>&gt;<i>
+</I>&gt;<i> Hi!
+</I>&gt;<i>
+</I>&gt;<i> Fine that all works ;-) Received calls i don?t know I am working on it
+</I>&gt;<i>
+</I>&gt;<i> Anyone other has ideas ? 
+</I>&gt;<i> &lt;7970_receiving_call_from_141_on_CCM41.cap&gt;___________________________ 
+</I>&gt;<i> ____________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000277.html">[Chan-sccp-users] Latest chan-sccp
+</A></li>
+	<LI>Next message: <A HREF="000279.html">[Chan-sccp-users] Received calls issue solved
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#278">[ date ]</a>
+              <a href="thread.html#278">[ thread ]</a>
+              <a href="subject.html#278">[ subject ]</a>
+              <a href="author.html#278">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

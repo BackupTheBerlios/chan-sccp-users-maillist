@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7921 Registration Problem
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20Registration%20Problem&In-Reply-To=%3C474EFBAF.5010104%40natcotech.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000397.html">
+   <LINK REL="Next"  HREF="000399.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7921 Registration Problem</H1>
+    <B>Russ Woodman</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20Registration%20Problem&In-Reply-To=%3C474EFBAF.5010104%40natcotech.com%3E"
+       TITLE="[Chan-sccp-users] 7921 Registration Problem">russ at natcotech.com
+       </A><BR>
+    <I>Thu Nov 29 18:49:35 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000397.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+        <LI>Next message: <A HREF="000399.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#398">[ date ]</a>
+              <a href="thread.html#398">[ thread ]</a>
+              <a href="subject.html#398">[ subject ]</a>
+              <a href="author.html#398">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+With the help of a good friend, I managed to get past the problem. It
+turns out that because I'm using a 64-bit machine for my Asterisk
+server, there is a bug in the code in sccp_socket.c. I have submitted a
+patch via the SourceForge bug tracker for this issue. Now the phone
+registers fine and I can make and receive calls, however I am dealing
+with a one-way audio problem.  The 7921G sends audio but will not
+receive, no matter which way the call was initiated.
+
+Regards,
+Russ
+
+Russ Woodman wrote:
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> Unfortunately the higher SCCP debug level didn't real yield more
+</I>&gt;<i> information. Here is what repeats now:
+</I>&gt;<i>
+</I>&gt;<i> [Nov 29 08:54:12]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+</I>&gt;<i> [Nov 29 08:54:12]     -- SCCP: Using ip 205.167.xxx.xxx
+</I>&gt;<i> [Nov 29 08:54:14] WARNING[4433]: sccp_socket.c:54 sccp_read_data: SCCP:
+</I>&gt;<i> read() returned Bad address
+</I>&gt;<i> [Nov 29 08:54:14]     -- SCCP: Old session marked down
+</I>&gt;<i> [Nov 29 08:54:14]     -- SCCP: Killing Session 12.199.xxx.xxx
+</I>&gt;<i>
+</I>&gt;<i> This happens with a network that is P/NAT'd and one that isn't so it's
+</I>&gt;<i> not a problem with that. I can't find any documentation that leads to a
+</I>&gt;<i> solution either. I've checked the source code of sccp_socket.c where the
+</I>&gt;<i> error resides, but the error description and the reason for it are
+</I>&gt;<i> pretty cryptic to me.
+</I>&gt;<i>
+</I>&gt;<i> It seems like this must be something simple but so far I'm stuck.
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Russ
+</I>&gt;<i>
+</I>&gt;<i> David Dederscheck wrote:
+</I>&gt;<i>   
+</I>&gt;&gt;<i> Hi Russ,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> this looks strange to me. I'm not sure what causes it. Could you maybe  
+</I>&gt;&gt;<i> get me a bit more log output by typing &quot;sccp debug 10&quot; in the console  
+</I>&gt;&gt;<i> and then try to register again?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Unfortunately I haven't such a phone at hand to try as well. I  
+</I>&gt;&gt;<i> remember, however, Marcus thinking about getting one himself. What  
+</I>&gt;&gt;<i> about it, Marcus?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Regards,
+</I>&gt;&gt;<i> -David.
+</I>&gt;&gt;<i>     
+</I>-- 
+Russ Woodman
+Systems Administrator
+NATCO Technologies
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000397.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+	<LI>Next message: <A HREF="000399.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#398">[ date ]</a>
+              <a href="thread.html#398">[ thread ]</a>
+              <a href="subject.html#398">[ subject ]</a>
+              <a href="author.html#398">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

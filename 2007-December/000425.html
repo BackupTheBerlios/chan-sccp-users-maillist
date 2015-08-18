@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] I give up
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20I%20give%20up&In-Reply-To=%3CAEC3923D57A8448D92110832A99ABBDB%40London%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000424.html">
+   <LINK REL="Next"  HREF="000426.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] I give up</H1>
+    <B>Federico Santulli</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20I%20give%20up&In-Reply-To=%3CAEC3923D57A8448D92110832A99ABBDB%40London%3E"
+       TITLE="[Chan-sccp-users] I give up">mobile at nhm.it
+       </A><BR>
+    <I>Thu Dec 20 22:03:35 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000424.html">[Chan-sccp-users] I give up
+</A></li>
+        <LI>Next message: <A HREF="000426.html">[Chan-sccp-users] I give up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#425">[ date ]</a>
+              <a href="thread.html#425">[ thread ]</a>
+              <a href="subject.html#425">[ subject ]</a>
+              <a href="author.html#425">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've got some problems on transfers too, expecially in mixed environments
+SCCP/SIP/IAX.
+
+I didn't recognize the problem at the moment. I looked onto every log but 
+atm
+nothing.
+
+If anyone could suggest me something for debug, the help will be 
+appreciated.
+
+Thanks in advance.
+
+Federico
+
+----- Original Message ----- 
+From: &quot;David Dederscheck&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">davidded at davidded.de</A>&gt;
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Sent: Wednesday, December 19, 2007 1:18 AM
+Subject: Re: [Chan-sccp-users] I give up
+
+
+&gt;<i> Hi Martin,
+</I>&gt;<i>
+</I>&gt;<i> On 18.12.2007, at 01:43, Martin Sutherland wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Dear list members,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I recently tried to move to Asterisk 1.4.x with the latest chan-sccp-
+</I>&gt;&gt;<i> b on a system running a mixture of 7940s, 7960s and 7961+7914s and
+</I>&gt;&gt;<i> immediately the system crashed when testing assisted transfers.
+</I>&gt;&gt;<i> Having primed the end users for some months that a new version was
+</I>&gt;&gt;<i> going to solve the crashes every few days, it was a great
+</I>&gt;&gt;<i> disappointment and I had to roll back.
+</I>&gt;<i>
+</I>&gt;<i> I'm very sad to hear that. This is especially because Marcello and I
+</I>&gt;<i> didn't experience any further crashes related to transfers any more,
+</I>&gt;<i> and we hoped that the current release would be a solid base for most
+</I>&gt;<i> people.
+</I>&gt;<i>
+</I>&gt;<i> Furthermore, I feel particularly sorry for your situation as you made
+</I>&gt;<i> that generous donation to the both of us. In connection to this, it
+</I>&gt;<i> shall be noted that you thus made possible many of the improvements
+</I>&gt;<i> and new fixed that we lately did. Although we could get on with quite
+</I>&gt;<i> some compatiblity issues and new features, the implementation and
+</I>&gt;<i> debugging is always another issue.
+</I>&gt;<i>
+</I>&gt;<i> As Asterisk makes vast use of multithreading, debugging becomes a
+</I>&gt;<i> really formidable task, and it will always be. This is where only
+</I>&gt;<i> extensive debugging and the effort of many together trying to find the
+</I>&gt;<i> issues in various scenarious will be able to help; Ideally, running a
+</I>&gt;<i> production system with gdb on a very fast machine.
+</I>&gt;<i>
+</I>&gt;&gt;<i> The decision has now been made to abandon sccp and move to SIP and
+</I>&gt;&gt;<i> the Cisco 7961+7914s will be replaced by Polycom IP601s and side
+</I>&gt;&gt;<i> cars. Having stuck to my guns over Cisco handsets and native
+</I>&gt;&gt;<i> protocol over the last 1.5 years, I have now made the personal
+</I>&gt;&gt;<i> decision to move to SIP and will not risk putting any more Cisco
+</I>&gt;&gt;<i> handsets in with native protocol and will probably move to Polycom
+</I>&gt;&gt;<i> handsets entirely. I very much thank those who have contributed to
+</I>&gt;&gt;<i> the effort, but end users will simply not accept that a PBX should
+</I>&gt;&gt;<i> have the same reliable as their PCs, and the problems over the last
+</I>&gt;&gt;<i> year have damaged my reputation with
+</I>&gt;&gt;<i>  long standing customers who I provide I.T. support for.
+</I>&gt;<i>
+</I>&gt;<i> I can very well understand your decision, and I'd also suggest you
+</I>&gt;<i> that course of action if your customers have a very high load and
+</I>&gt;<i> can't live with occasional crashes. Although the stability may be
+</I>&gt;<i> quite well in the light of the high load, it may simply not be
+</I>&gt;<i> sufficient for your customers, so you need solutions where you can
+</I>&gt;<i> blame the manufacturer, also in terms of liability. Obviously chan-
+</I>&gt;<i> sccp-b can't provide sufficient stability right now, so you need to
+</I>&gt;<i> look for alternatives. As polycom officially supports asterisk, this
+</I>&gt;<i> should be your choice.
+</I>&gt;<i>
+</I>&gt;<i> Finally, this should remember all of us that we still have a long way
+</I>&gt;<i> to go. Yet, there's already so much to find along that way that we
+</I>&gt;<i> should pursue it further.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Best regards and all the best,
+</I>&gt;<i> -David
+</I>&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Good luck and best regards,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Martin Sutherland
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Chan-sccp-users mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000424.html">[Chan-sccp-users] I give up
+</A></li>
+	<LI>Next message: <A HREF="000426.html">[Chan-sccp-users] I give up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#425">[ date ]</a>
+              <a href="thread.html#425">[ thread ]</a>
+              <a href="subject.html#425">[ subject ]</a>
+              <a href="author.html#425">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

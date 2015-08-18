@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Blind transfer crashes fixed?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Blind%20transfer%20crashes%20fixed%3F&In-Reply-To=%3CA4365151-CAEE-4A3F-8520-A15574B5D06D%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000339.html">
+   <LINK REL="Next"  HREF="000341.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Blind transfer crashes fixed?</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Blind%20transfer%20crashes%20fixed%3F&In-Reply-To=%3CA4365151-CAEE-4A3F-8520-A15574B5D06D%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Blind transfer crashes fixed?">davidded at davidded.de
+       </A><BR>
+    <I>Mon Oct 29 02:24:39 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000339.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+        <LI>Next message: <A HREF="000341.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#340">[ date ]</a>
+              <a href="thread.html#340">[ thread ]</a>
+              <a href="subject.html#340">[ subject ]</a>
+              <a href="author.html#340">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+this sounds very promising, especially as AFAIK the IAX issues with  
+1.4 only occured after issuing a transfer. Shall I incorporate this  
+in Marcello's and mine tree and repost it with this change?
+
+Regards,
+-David.
+
+
+On 27.10.2007, at 12:36, Frank Segtrop wrote:
+
+&gt;<i> Hi, there!
+</I>&gt;<i>
+</I>&gt;<i> I also had some trouble with blind transfer crashes. When it works  
+</I>&gt;<i> well,
+</I>&gt;<i> we get two &quot;Blind transfer&quot; log messages as in this example:
+</I>&gt;<i>
+</I>&gt;<i>     -- SEP0014F27649DB: Transfer request from line channel 199-19
+</I>&gt;<i>     -- Started music on hold, class 'default', on Zap/2-1
+</I>&gt;<i>     -- SEP0014F27649DB: Hold the channel 199-19
+</I>&gt;<i>     -- Stopped music on hold on Zap/2-1
+</I>&gt;<i>     -- Started music on hold, class 'default', on Zap/2-1
+</I>&gt;<i>     -- GOT data SCCP/199-00000014 (0x82038a8)
+</I>&gt;<i>     -- GOT line 199
+</I>&gt;<i>     -- GOT device SEP0014F27649DB
+</I>&gt;<i>     -- SEP0014F27649DB: New call on line 199
+</I>&gt;<i>     -- SEP0014F27649DB: Statistics from 2 callid: 19 Packets sent: 185
+</I>&gt;<i> rcvd: 187 lost: 1 jitter: 0 latency: 0
+</I>&gt;<i>     -- SEP0014F27649DB: Cisco Digit: 00000002 (2) on line 199
+</I>&gt;<i>     -- SEP0014F27649DB: Cisco Digit: 0000000f (15) on line 199
+</I>&gt;<i>     -- Executing [<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">2 at droste-phones</A>:1] Dial(&quot;SCCP/199-00000014&quot;,  
+</I>&gt;<i> &quot;SCCP/2&quot;)
+</I>&gt;<i> in new stack
+</I>&gt;<i>     -- SEP001B5452F561: Asterisk request to call SCCP/2-00000015
+</I>&gt;<i>     -- Called 2
+</I>&gt;<i>     -- SCCP/2-00000015 is ringing
+</I>&gt;<i>     -- SEP0014F27649DB: Complete transfer from 199-20
+</I>&gt;<i>     -- SEP0014F27649DB: Blind transfer. Signalling ringing state to  
+</I>&gt;<i> Zap/2-1
+</I>&gt;<i>     -- SEP0014F27649DB: Blind transfer. Signalling ringing state to  
+</I>&gt;<i> Zap/2-1
+</I>&gt;<i>     -- SCCP: Asterisk request to hangup channel Zap/2-1&lt;MASQ&gt;
+</I>&gt;<i>     -- SEP0014F27649DB: Current channel 199-20 state RingOut(3)
+</I>&gt;<i>     -- Stopped music on hold on SCCP/199-00000014&lt;ZOMBIE&gt;
+</I>&gt;<i>     -- SCCP: Asterisk request to hangup channel SCCP/199-00000013
+</I>&gt;<i>   == Spawn extension (droste-phones, 199, 1) exited non-zero on
+</I>&gt;<i> 'SCCP/199-00000014&lt;ZOMBIE&gt;'
+</I>&gt;<i>     -- Executing [<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">h at droste-phones</A>:1] Hangup(&quot;SCCP/ 
+</I>&gt;<i> 199-00000014&lt;ZOMBIE&gt;&quot;,
+</I>&gt;<i> &quot;&quot;) in new stack
+</I>&gt;<i>   == Spawn extension (droste-phones, h, 1) exited non-zero on
+</I>&gt;<i> 'SCCP/199-00000014&lt;ZOMBIE&gt;'
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Sometimes however, there is only one log message &quot;Blind transfer&quot;. In
+</I>&gt;<i> this case, asterisk used to crash.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>     -- SEP001B5452F561: Transfer request from line channel 2-21
+</I>&gt;<i>     -- Started music on hold, class 'default', on Zap/2-1
+</I>&gt;<i>     -- SEP001B5452F561: Hold the channel 2-21
+</I>&gt;<i>     -- Stopped music on hold on Zap/2-1
+</I>&gt;<i>     -- Started music on hold, class 'default', on Zap/2-1
+</I>&gt;<i>     -- GOT data SCCP/2-00000016 (0x8209578)
+</I>&gt;<i>     -- GOT line 2
+</I>&gt;<i>     -- GOT device SEP001B5452F561
+</I>&gt;<i>     -- SEP001B5452F561: New call on line 2
+</I>&gt;<i>     -- SEP001B5452F561: Statistics from 195 callid: 21 Packets  
+</I>&gt;<i> sent: 56
+</I>&gt;<i> rcvd: 55 lost: 0 jitter: 0 latency: 0
+</I>&gt;<i>     -- SEP001B5452F561: Cisco Digit: 00000001 (1) on line 2
+</I>&gt;<i>     -- SEP001B5452F561: Cisco Digit: 00000009 (9) on line 2
+</I>&gt;<i>     -- SEP001B5452F561: Cisco Digit: 00000009 (9) on line 2
+</I>&gt;<i>     -- SEP001B5452F561: Cisco Digit: 0000000f (15) on line 2
+</I>&gt;<i>     -- Executing [<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">199 at droste-phones</A>:1] Dial(&quot;SCCP/2-00000016&quot;,
+</I>&gt;<i> &quot;SCCP/199&quot;) in new stack
+</I>&gt;<i>     -- SEP0014F27649DB: Asterisk request to call SCCP/199-00000017
+</I>&gt;<i>     -- Called 199
+</I>&gt;<i>     -- SCCP/199-00000017 is ringing
+</I>&gt;<i>     -- SEP001B5452F561: Complete transfer from 2-22
+</I>&gt;<i>     -- SEP001B5452F561: Blind transfer. Signalling ringing state to  
+</I>&gt;<i> Zap/2-1
+</I>&gt;<i>     -- SCCP: Asterisk request to hangup channel Zap/2-1&lt;MASQ&gt;
+</I>&gt;<i>     -- Stopped music on hold on SCCP/2-00000016&lt;ZOMBIE&gt;
+</I>&gt;<i>     -- SCCP: Asterisk request to hangup channel SCCP/2-00000015
+</I>&gt;<i>   == Spawn extension (droste-phones, 2, 1) exited non-zero on
+</I>&gt;<i> 'SCCP/2-00000016&lt;ZOMBIE&gt;'
+</I>&gt;<i>     -- Executing [<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">h at droste-phones</A>:1] Hangup(&quot;SCCP/2-00000016&lt;ZOMBIE&gt;&quot;,
+</I>&gt;<i> &quot;&quot;) in new stack
+</I>&gt;<i>   == Spawn extension (droste-phones, h, 1) exited non-zero on
+</I>&gt;<i> 'SCCP/2-00000016&lt;ZOMBIE&gt;'
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> So, I only changed this in sccp_channel.c,  
+</I>&gt;<i> sccp_channel_transfer_complete:
+</I>&gt;<i> Old:
+</I>&gt;<i>
+</I>&gt;<i>         if (c-&gt;state == SCCP_CHANNELSTATE_RINGOUT) {
+</I>&gt;<i>                 sccp_log(1)(VERBOSE_PREFIX_3 &quot;%s: Blind transfer.
+</I>&gt;<i> Signalling ringing state to %s\n&quot;, d-&gt;id, transferred-&gt;name);
+</I>&gt;<i>
+</I>&gt;<i>         }
+</I>&gt;<i>         ast_queue_hangup(peer-&gt;owner);
+</I>&gt;<i>         ast_mutex_unlock(&amp;transferee-&gt;lock);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> New:
+</I>&gt;<i>
+</I>&gt;<i>         if (c-&gt;state == SCCP_CHANNELSTATE_RINGOUT) {
+</I>&gt;<i>                 sccp_log(1)(VERBOSE_PREFIX_3 &quot;%s: Blind transfer.
+</I>&gt;<i> Signalling ringing state to %s\n&quot;, d-&gt;id, transferred-&gt;name);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>         }
+</I>&gt;<i>         else {
+</I>&gt;<i>                 sccp_log(1)(VERBOSE_PREFIX_3 &quot;Not a blind transfer?? 
+</I>&gt;<i> \n&quot;);
+</I>&gt;<i>                 return;
+</I>&gt;<i>         }
+</I>&gt;<i>
+</I>&gt;<i>         ast_queue_hangup(peer-&gt;owner);
+</I>&gt;<i>         ast_mutex_unlock(&amp;transferee-&gt;lock);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> With this change, there are no more transfer crashes at all. Asterisk
+</I>&gt;<i> still hangs up the calls, I have not noticed any negative effects yet.
+</I>&gt;<i> I am using chan_sccp-20070429.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hope that helps,
+</I>&gt;<i> Frank
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000339.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+	<LI>Next message: <A HREF="000341.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#340">[ date ]</a>
+              <a href="thread.html#340">[ thread ]</a>
+              <a href="subject.html#340">[ subject ]</a>
+              <a href="author.html#340">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

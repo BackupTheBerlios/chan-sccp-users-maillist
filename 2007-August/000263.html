@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] chan_sccp and Big Endian
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%20Big%20Endian&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E88%40THEBRAIN1.drs.ca%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000262.html">
+   <LINK REL="Next"  HREF="000264.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] chan_sccp and Big Endian</H1>
+    <B>Zuber, Jonathan</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%20Big%20Endian&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E88%40THEBRAIN1.drs.ca%3E"
+       TITLE="[Chan-sccp-users] chan_sccp and Big Endian">jzuber at drs.ca
+       </A><BR>
+    <I>Wed Aug  1 22:55:37 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000262.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+        <LI>Next message: <A HREF="000264.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#263">[ date ]</a>
+              <a href="thread.html#263">[ thread ]</a>
+              <a href="subject.html#263">[ subject ]</a>
+              <a href="author.html#263">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ok so I found a &quot;workaround&quot; if you will, if you are having the same
+problem.  Under sccp_protocals.h line 625 (or thereabouts)  I change the
+structure as follows:
+
+was:
+        struct {
+                uint32_t lel_lineNumber;
+        } LineStatReqMessage;
+
+changed to:
+        struct {
+                uint16_t lel_lineNumber;
+        } LineStatReqMessage;
+
+Only thing now is that it seems to be causing trouble with the 7960, of
+COURSE lol. 
+
+I'll be looking into that tomorrow, just wanted to keep you all posted.
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From:	Zuber, Jonathan [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>]
+</I>&gt;<i> Sent:	Wednesday, August 01, 2007 3:16 PM
+</I>&gt;<i> To:	'<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>'
+</I>&gt;<i> Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+</I>&gt;<i> 
+</I>&gt;<i> It was a Linux 2.4 using asterisk 1.2.20 and 1.4.6 and on Linux 2.6 using
+</I>&gt;<i> asterisk 1.4.8 .
+</I>&gt;<i> 
+</I>&gt;<i> &gt; -----Original Message-----
+</I>&gt;<i> &gt; From:	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">peder at networkoblivion.com</A> [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">peder at networkoblivion.com</A>]
+</I>&gt;<i> &gt; Sent:	Wednesday, August 01, 2007 3:04 PM
+</I>&gt;<i> &gt; To:	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; What is the server?  I use tftp on Windows XP, Vista, and several
+</I>&gt;<i> versions
+</I>&gt;<i> &gt; of linux and I haven't seen any issues like that (I've even had a Cisco
+</I>&gt;<i> &gt; router do tftp).
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; ----- Original Message -----
+</I>&gt;<i> &gt; From: &quot;Jonathan Zuber&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>&gt;
+</I>&gt;<i> &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; Sent: Wednesday, August 1, 2007 2:01:10 PM (GMT-0600) America/Chicago
+</I>&gt;<i> &gt; Subject: [Chan-sccp-users] chan_sccp and Big Endian
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Ok, so I think I finally found the problem that has been holding me up
+</I>&gt;<i> for
+</I>&gt;<i> &gt; the past couple weeks; the TFTPBOOT server I was using was BIG endian
+</I>&gt;<i> &gt; format.  Well I guess I could be wrong, but I ended up taking a regular
+</I>&gt;<i> PC
+</I>&gt;<i> &gt; and setting an asterisk server up on there (Little endian), and all the
+</I>&gt;<i> &gt; same
+</I>&gt;<i> &gt; files that were not working now worked!
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Basically what was happening is that I could not 'dial' out, I could
+</I>&gt;<i> &gt; speedial, no problem, but dialing would not connect.  
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; When the phone connects with asterisk, it gives the following error:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number:
+</I>&gt;<i> SEPXXXXXXXXXXXX:
+</I>&gt;<i> &gt; requested a line configuration for unknown line 0
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; This was causing me to have no line to connect the phone to the asterisk
+</I>&gt;<i> &gt; server.  I started noticing it might be a problem with the lines when I
+</I>&gt;<i> &gt; tried to 'autolog' into 3 different lines, and got 3 of the above
+</I>&gt;<i> &gt; messages.
+</I>&gt;<i> &gt; I double, triple, quadruple, etc etc.... checked my configs and all
+</I>&gt;<i> seemed
+</I>&gt;<i> &gt; well (and in fact was), yet nothing worked.  
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I was having this error with the Cisco 7970 and 7971 IP phones.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Don't know yet if there is a fix for this, I am going to keep looking
+</I>&gt;<i> into
+</I>&gt;<i> &gt; it to see if it is 100% for sure the BIG Endian vs Little Endian that is
+</I>&gt;<i> &gt; causing the problem.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Any feedback would be awesome!
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Chan-sccp-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Chan-sccp-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000262.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+	<LI>Next message: <A HREF="000264.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#263">[ date ]</a>
+              <a href="thread.html#263">[ thread ]</a>
+              <a href="subject.html#263">[ subject ]</a>
+              <a href="author.html#263">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

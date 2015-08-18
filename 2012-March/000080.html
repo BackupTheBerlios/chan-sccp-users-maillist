@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> No subject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.4.1331727719.29954.chan-sccp-users%40lists.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000075.html">
+   <LINK REL="Next"  HREF="000082.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>No subject</H1>
+    <B></B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.4.1331727719.29954.chan-sccp-users%40lists.berlios.de%3E"
+       TITLE="No subject">
+       </A><BR>
+    <I>Wed Mar 14 13:21:59 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000075.html">No subject
+</A></li>
+        <LI>Next message: <A HREF="000082.html">No subject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#80">[ date ]</a>
+              <a href="thread.html#80">[ thread ]</a>
+              <a href="subject.html#80">[ subject ]</a>
+              <a href="author.html#80">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>just the firmware upgrade is not enough.
+
+The older phones like the 7940 and 7960 do not need a firware upgrade. 
+Details for the phones are at:
+
+<A HREF="http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice09186a00807d3d9e.shtml">http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice09186a00807d3d9e.shtml</A>
+
+-Patrick
+
+________________________________________
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> 
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of (&#164;Phil&#164;)
+Sent: Tuesday, March 13, 2007 2:11 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Thanks for the tips, but I rebooted the entire box. No changes. Test phone 
+is a 7970, maybe there is something that needs updating in the Locale?
+
+-Phil
+----- Original Message ----- 
+From: Hughes, Sam
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Sent: Tuesday, March 13, 2007 11:58 AM
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Yeah, the phones get the time from the server. Many services only read from 
+/etc/locatime on startup. Have you tried rebooting the server or restarting 
+Asterisk? If the phones aren't receiving the tzoffset changes then sccp.conf 
+hasn't been reloaded.
+
+________________________________________
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> 
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of (&#164;Phil&#164;)
+Sent: Tuesday, March 13, 2007 11:54 AM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: [Chan-sccp-users] New DST error?
+
+My asterisk (linux) server smoothly handled the new daylight savings time 
+switchover, and has the correct time, but all the SCCP phones seem to have 
+the time still &quot;stuck&quot; one hour earlier. Anyone else experiencing this?
+
+Doesn't the phone get it's time from the server? Reboots don't seem to 
+effect it, nor does a temp fix by using the tzoffset configuration variable.
+
+-Phil
+________________________________________
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000075.html">No subject
+</A></li>
+	<LI>Next message: <A HREF="000082.html">No subject
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#80">[ date ]</a>
+              <a href="thread.html#80">[ thread ]</a>
+              <a href="subject.html#80">[ subject ]</a>
+              <a href="author.html#80">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

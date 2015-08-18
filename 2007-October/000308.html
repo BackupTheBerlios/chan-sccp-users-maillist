@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Comparing versions of chan_sccp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Comparing%20versions%20of%20chan_sccp&In-Reply-To=%3C8A5423E4-542F-4437-B440-1B402CC0667D%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000307.html">
+   <LINK REL="Next"  HREF="000309.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Comparing versions of chan_sccp</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Comparing%20versions%20of%20chan_sccp&In-Reply-To=%3C8A5423E4-542F-4437-B440-1B402CC0667D%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Comparing versions of chan_sccp">davidded at davidded.de
+       </A><BR>
+    <I>Mon Oct  8 22:55:07 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000307.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+        <LI>Next message: <A HREF="000309.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+you will have to ask Marcello for the realtime functionality -- it's  
+his work, and I'm curious to try it myself when I have the time.
+
+Concerning my work, there is the service url functionality. Instead  
+of a speeddial or a line, you can now configure any of these buttons  
+to trigger an XML page. This could come in handy, for instance, to  
+directly jump to the search form of you phonebook, or to open the  
+front door via http ;-)
+
+The syntax is like
+
+serviceURL = Label,<A HREF="http://my.url">http://my.url</A>
+
+in a device section. Please note that the order of lines, speddials  
+and serviceURLs now gets a bit complicated as there are three kinds  
+of button entries
+
+First, the lines are allocated at the specified positions.
+
+Second, the speeddials fill the free positions, leaving out those  
+positions with an empty speeddial.
+
+Last, all now free buttons are filled in order with serviceURLs, also  
+leaving out positions with an empty entry.
+
+
+I know that this is very unintuitive, and indeed Marcello and I have  
+already discussed several ways to completly redesign the way buttons  
+are configured in chan_sccp, as clearly this has to be improved.
+
+If you need an example, just ask me.
+
+
+Regards and much fun with the chan ;-),
+-David.
+
+
+On 08.10.2007, at 20:18, Hughes, Sam wrote:
+
+&gt;<i> I noticed that this version has the realtime patch applied.  Does it
+</I>&gt;<i> work?  Are any special extconfig.conf or sccp.conf settings needed?
+</I>&gt;<i>
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of David
+</I>&gt;<i> Dederscheck
+</I>&gt;<i> Sent: Sunday, October 07, 2007 4:17 AM
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] Comparing versions of chan_sccp
+</I>&gt;<i>
+</I>&gt;<i> Martin,
+</I>&gt;<i>
+</I>&gt;<i> maybe you would like to the current version for 1.4 Marcello and I
+</I>&gt;<i> have assembled from our and recent patches. Note that this version
+</I>&gt;<i> runs without crashes in both Marcello's and mine testing
+</I>&gt;<i> environments, comprised of the same kind of devices you use.
+</I>&gt;<i>
+</I>&gt;<i> I attached the current tree for you to try, despite it will only work
+</I>&gt;<i> with * 1.4 as of now. We shall back-port it once...
+</I>&gt;<i>
+</I>&gt;<i> I also use a 7920 on a regular basis and have never had any crashes
+</I>&gt;<i> except for when i used channel on for the wifi connection. Seems odd,
+</I>&gt;<i> but resolved when changing to a higher channel. Maybe a problem with
+</I>&gt;<i> the access point.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Regards and much luck with your issues,
+</I>&gt;<i> -David.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 07.10.2007, at 12:55, Martin Sutherland wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Dear list members,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I've placed the Asterisk 1.2 version of chan_sccp that I use on an
+</I>&gt;&gt;<i> FTP server as follows:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Server IP: 80.168.79.8
+</I>&gt;&gt;<i> login name: chan-sccp
+</I>&gt;&gt;<i> login pass: chan-sccp
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I would be very grateful if someone could compare this with the
+</I>&gt;&gt;<i> 20060408 to see the changes. I have found this to be the most
+</I>&gt;&gt;<i> stable version so far, although there are still crashes every few
+</I>&gt;&gt;<i> days. I was comtemplating upgrading to 1.4, but really worry that
+</I>&gt;&gt;<i> the current 1.4 version may actually crash more often with the
+</I>&gt;&gt;<i> setup that I use (7940s, 7960s, 7960+7914s with call parking,
+</I>&gt;&gt;<i> voicemail etc). Asterisk 1.2 seems to die after a deadlock has been
+</I>&gt;&gt;<i> avoided! I've heard that Asterisk 1.4 gets a seg fault.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I have given up using paging to handsets (I use the sound card in
+</I>&gt;&gt;<i> the server connected to amp and loudspeakers), since it seems to
+</I>&gt;&gt;<i> kill the 7914 - presumably so many extensions changing status at
+</I>&gt;&gt;<i> the same time is too much.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I have recently purchased a 7920 wireless phone (watch out, you
+</I>&gt;&gt;<i> have to order the battery separately!). So far the voicemail
+</I>&gt;&gt;<i> indication doesn't seem to work and my patch to prevent crashes
+</I>&gt;&gt;<i> after a redial tone/timeout for 7960+7914 causes real problems. I
+</I>&gt;&gt;<i> need to do more work on this. I'll probably end up using the new
+</I>&gt;&gt;<i> Snom m3 DECT SIP phones for my mobile users.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> We really need to strive to get a version that only crashes once
+</I>&gt;&gt;<i> per week. Already one of my customers has converted to SIP and has
+</I>&gt;&gt;<i> never looked back (no crashes for months). I would like to help in
+</I>&gt;&gt;<i> this effort as much as possible, but am not a C programmer.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Best regards,
+</I>&gt;&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000307.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+	<LI>Next message: <A HREF="000309.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

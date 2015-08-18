@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Please%20can%20we%20co-ordinate%0A%20improvements%09to%09chan_sccp/7914%20woes&In-Reply-To=%3C4704DB2F.80200%40lusiewicz.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000299.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes</H1>
+    <B>Damian Lusiewicz</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Please%20can%20we%20co-ordinate%0A%20improvements%09to%09chan_sccp/7914%20woes&In-Reply-To=%3C4704DB2F.80200%40lusiewicz.de%3E"
+       TITLE="[Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes">chan-sccp.berlios.de at lusiewicz.de
+       </A><BR>
+    <I>Thu Oct  4 14:23:11 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000299.html">[Chan-sccp-users] Shared lines implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>David Dederscheck schrieb:
+&gt;<i> Hi,
+</I>
+Hello David,
+hello list members.
+
+&gt;<i> as Marcello and I already promised there will be a release of our  
+</I>&gt;<i> current 1.4 chan_sccp tree soon. However, we are currently both short  
+</I>&gt;<i> on time, and we also wish to take care of a few things:
+</I>&gt;<i> 
+</I>&gt;<i> - That as many as possible useful and robustifying patches around are  
+</I>&gt;<i> included
+</I>&gt;<i> - That the release should work using both 1.2 and 1.4 (requires some  
+</I>&gt;<i> ifdef work)
+</I>&gt;<i> - Some minor yet important issues have still to be tested.
+</I>&gt;<i> 
+</I>&gt;<i> The tests are best done _after_ releasing, but we would like to  
+</I>&gt;<i> include all other stuff first, so that we don't get so many forks  
+</I>&gt;<i> again, even in our own trees.
+</I>&gt;<i> 
+</I>&gt;<i> We believe that our 1.4 tree is quite stable and very complete in  
+</I>&gt;<i> terms of features now. As there of course has been a lot work by  
+</I>&gt;<i> other people as well, a discussion of the available trees and patches  
+</I>&gt;<i> would be in order.
+</I>&gt;<i> 
+</I>&gt;<i> Therefore, I suggest that _everybody_ who has ever released a  
+</I>&gt;<i> chan_sccp tree on this list or submitted a notable patch should write  
+</I>&gt;<i> a report on that. This report should include all relevant information  
+</I>&gt;<i> to ease the effort of merging.
+</I>&gt;<i> 
+</I>&gt;<i> To start off with our own work, I'd like to comment briefly what  
+</I>&gt;<i> Marcello and I have done.
+</I>&gt;<i> 
+</I>&gt;<i> We have working support for * 1.4 (most work afaik by Marcello) as  
+</I>&gt;<i> follows:
+</I>&gt;<i> - It now includes fixes for newer firmware received calls issues, we  
+</I>&gt;<i> also know that there is a locking problem, which I had discovered but  
+</I>&gt;<i> not yet added to Marcello's main tree. It should crashes when hanging  
+</I>&gt;<i> up in some cases.
+</I>
+We are using the chan_sccp-20070826 from sourceforge with
+asterisk-1.4.10. In our production environmen now we often observe an
+asterisk crash (one crash per day). Maybe the reason is the locking
+problem you mentioned above?
+
+The last lines on the asterisk CLI are for example:
+
+
+    -- SEP0016xxxxxxxx: New call on line 258
+    -- SEP0016xxxxxxxx: Ending call 58 on line 258
+    -- SCCP: Asterisk request to hangup channel SCCP/258-0000003a
+Segmentation fault (core dumped)
+
+
+The core dump is not very usefull at all. Here is some excert from gdb,
+thread apply xx bt:
+
+
+(gdb) thread apply 1 bt
+
+Thread 1 (process 15317):
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+#1  0x4190002c in ?? ()
+...
+10 0x40ed7f24 in ?? ()
+#11 0x40202534 in _int_malloc () from /lib/tls/libc.so.6
+#12 0x0000004b in ?? ()
+#13 0x00000000 in ?? ()
+...
+
+Thread 2 (process 19708):
+#0  0x00000246 in ?? ()
+#1  0x00000000 in ?? ()
+...
+Thread 3 (process 10899):
+#0  0x00000246 in ?? ()
+Cannot access memory at address 0x0
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 4 (process 16318):
+#0  0x00200246 in ?? ()
+Cannot access memory at address 0x0
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 5 (process 15320):
+#0  0x00200246 in ?? ()
+Cannot access memory at address 0x8e8e8888
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 6 - 10 &#228;hnlich wie oben
+
+...
+Thread 11 (process 15204):
+#0  0x00000216 in ?? ()
+#1  0x8beaf7b8 in ?? ()
+#2  0xc969b845 in ?? ()
+#3  0x000003e8 in ?? ()
+#4  0xc106fac1 in ?? ()
+#5  0xc2291ff8 in ?? ()
+#6  0x1811948d in ?? ()
+#7  0x89fffffc in ?? ()
+#8  0xd1e93857 in ?? ()
+#9  0xa1fffffa in ?? ()
+#10 0x0815f180 in ast_config_AST_VAR_DIR ()
+#11 0x840fc085 in ?? ()
+#12 0xfffff394 in ?? ()
+#13 0x1270ffbb in ?? ()
+#14 0x948eb908 in ?? ()
+...
+
+Thread 12 (process 15203):
+#0  0x00000206 in ?? ()
+Cannot access memory at address 0x0
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 13 (process 15202):
+#0  0x00000216 in ?? ()
+#1  0x28282828 in ?? ()
+#2  0x28282828 in ?? ()
+#3  0x28282828 in ?? ()
+#4  0x28282828 in ?? ()
+...
+Thread 14 (process 15201):
+#0  0x00000212 in ?? ()
+Cannot access memory at address 0x6d722f
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 15 (process 15200):
+#0  0x00000206 in ?? ()
+Cannot access memory at address 0x6c69466e
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+...
+Thread 20 (process 15195):
+#0  0x00000212 in ?? ()
+#1  0x00000000 in ?? ()
+#2  0x00000002 in ?? ()
+#3  0x0000000e in ?? ()
+#4  0x00000004 in ?? ()
+#5  0x081af160 in ?? ()
+#6  0x00000000 in ?? ()
+#7  0x00000000 in ?? ()
+#8  0x00000000 in ?? ()
+#9  0x407e45a8 in ?? () from /usr/lib/asterisk/modules/app_morsecode.so
+#10 0x081af130 in ?? ()
+#11 0x407e4000 in ?? ()
+#12 0x407e6ae4 in ?? ()
+#13 0x407e6000 in ?? ()
+#14 0x40016670 in ?? ()
+#15 0x081af008 in ?? ()
+#16 0x00000000 in ?? ()
+...
+
+Thread 25 (process 15185):
+#0  0x00000246 in ?? ()
+#1  0x9180b808 in ?? ()
+#2  0x4c890811 in ?? ()
+#3  0x54891c24 in ?? ()
+#4  0x44891824 in ?? ()
+#5  0x04c70424 in ?? ()
+#6  0x00000424 in ?? ()
+#7  0x9d0ae800 in ?? ()
+#8  0xb0e90001 in ?? ()
+#9  0xb8fffffa in ?? ()
+#10 0x0812a7b5 in __PRETTY_FUNCTION__.9340 ()
+#11 0x04244489 in ?? ()
+#12 0x89c8558b in ?? ()
+#13 0x89e82414 in ?? ()
+#14 0x85fffc79 in ?? ()
+#15 0x8b1974c0 in ?? ()
+#16 0x0489d845 in ?? ()
+...
+Thread 30 (process 15170):
+#0  0x00200293 in ?? ()
+Cannot access memory at address 0x0
+#0  0x40201937 in malloc_consolidate () from /lib/tls/libc.so.6
+
+
+
+Any help is welcome.
+
+
+&gt;<i> - We also have full working support to add service url entries to  
+</I>&gt;<i> speeddial buttons. This is directly calling any xml page like using  
+</I>&gt;<i> the services menu by the push of a speeddial button.
+</I>&gt;<i> - We have found out how to use 7914 buttons as busy lamp fields so  
+</I>&gt;<i> that the busy party can still be called by pressing the new call key  
+</I>&gt;<i> on the busy line callplane.
+</I>&gt;<i> - Marcello has working asterisk realtime support and some other nice  
+</I>&gt;<i> and handy features he might best announce himself.
+</I>&gt;<i> 
+</I>&gt;<i> What we have under development:
+</I>&gt;<i> - I managed to find out how distinctive ringing (per line ringtones)  
+</I>&gt;<i> works for the newer sccp protocol versions. Marcello has already  
+</I>&gt;<i> implemented something for testing.
+</I>&gt;<i> - I implemented a hack to append the # for terminating a variable- 
+</I>&gt;<i> length number explicitly (neccessary for dialing in Germany) to the  
+</I>&gt;<i> call history lists where applicable. Already works fine for a long  
+</I>&gt;<i> time, but lacks a config option.
+</I>&gt;<i> - There is sometimes an issue where the phone doesn't show the digits  
+</I>&gt;<i> entered before the proceeding state. Still unclear when and why it  
+</I>&gt;<i> occurs. Doesn't happen often though if ever.
+</I>&gt;<i> - When using auto-answer in connection to the page() extension, I  
+</I>&gt;<i> sometimes get crashes upon frequent dial/hangup conditions. Needs  
+</I>&gt;<i> further investigation.
+</I>&gt;<i> 
+</I>&gt;<i> Below follow some comments on the original message. Just keep on  
+</I>&gt;<i> looking down there.
+</I>&gt;<i> 
+</I>&gt;<i> Regards,
+</I>&gt;<i> -David.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> On 27.09.2007, at 01:19, Patrick wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Hi Martin,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Wed, 2007-09-26 at 23:28 +0100, Martin Sutherland wrote:
+</I>&gt;&gt;&gt;<i> Dear List Members,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I know that there are several members out there kindly providing web
+</I>&gt;&gt;&gt;<i> space for the latest chan_sccp, and amendments have been made here  
+</I>&gt;&gt;&gt;<i> and
+</I>&gt;&gt;&gt;<i> there. I am now very confused about which version contains the most
+</I>&gt;&gt;&gt;<i> trusted fixes and what those fixes are. It would be fantastic if we
+</I>&gt;&gt;&gt;<i> could all agree on which is the best version and have a definitive
+</I>&gt;&gt;&gt;<i> list of changes made since 20060408.
+</I>&gt;&gt;<i> Definitely a good idea. +1!
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  The Asterisk 1.2 version that I have found the best is 20070620  
+</I>&gt;&gt;&gt;<i> which
+</I>&gt;&gt;&gt;<i> was emailed to me by <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">dmitry at makuha.kiev.ua</A> back in July.
+</I>&gt;&gt;<i> I wasn't even aware that this version existed. Is it for 1.2?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I am about to try Asterisk 1.4 but simply don't know if all the
+</I>&gt;&gt;&gt;<i> changes made in 20070620 are incorporated into the current Asterisk
+</I>&gt;&gt;&gt;<i> 1.4 version.
+</I>&gt;&gt;<i> Neither do I. I have seen chan_sccp versions pop up on the forum at
+</I>&gt;&gt;<i> www.ip-phone.de but I think those are for Asterisk 1.4.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I have however had problems which all seem to stem from using 7914
+</I>&gt;&gt;&gt;<i> side-cars. I have two 7960 phones with two 7914s each. For some  
+</I>&gt;&gt;&gt;<i> reason
+</I>&gt;&gt;&gt;<i> the 7960s behave differently with 7914s attached. One real problem
+</I>&gt;&gt;&gt;<i> concerned having dial timeouts or invalid extensions. Either the  
+</I>&gt;&gt;&gt;<i> phone
+</I>&gt;&gt;&gt;<i> or chan_sccp does not detect the hangup message after the handset is
+</I>&gt;&gt;&gt;<i> put down after a redial tone (and the number dialled remains on the
+</I>&gt;&gt;&gt;<i> display). When the phone is picked up again, the channel/line is  
+</I>&gt;&gt;&gt;<i> still
+</I>&gt;&gt;&gt;<i> active and nothing works. Re-setting the phone then caused  
+</I>&gt;&gt;&gt;<i> Asterisk to
+</I>&gt;&gt;&gt;<i> die, presumably because a phone is registering but still has an  
+</I>&gt;&gt;&gt;<i> active
+</I>&gt;&gt;&gt;<i> channel. Even worse, Asterisk doesn't actually exit, but is stuck in
+</I>&gt;&gt;&gt;<i> memory and requires a server re-boot to fix. I managed to patch my
+</I>&gt;&gt;&gt;<i> version in the off-hook event to detect a channel/line in the redial
+</I>&gt;&gt;&gt;<i> state and issue a on-hook message. The user just finds that nothing
+</I>&gt;&gt;&gt;<i> happens and needs to on-hook and then off-hook again and saves an
+</I>&gt;&gt;&gt;<i> Asterisk crash. Note that this problem  does not happen if the  
+</I>&gt;&gt;&gt;<i> 7914 is
+</I>&gt;&gt;&gt;<i> disconnected!
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Is there anyone else out there using 7914s with 7960s?
+</I>&gt;&gt;<i> Not me.
+</I>&gt;<i> 
+</I>&gt;<i> I have a number of 7914 and could easily manage to replicate your  
+</I>&gt;<i> scenario. What firmware do you use? Btw, I didn't ever witness such a  
+</I>&gt;<i> behaviour. But I definitely want to understand why that happens in  
+</I>&gt;<i> your case.
+</I>&gt;<i> 
+</I>&gt;&gt;&gt;<i>  I have 7940s, 7960s and one 7961 with different versions of sccp and
+</I>&gt;&gt;&gt;<i> my protocol version on the server is still set to 3. Should this be
+</I>&gt;&gt;&gt;<i> set to 4? What firmware is working best out there on 7960/7940 and
+</I>&gt;&gt;&gt;<i> 7941/7961?
+</I>&gt;&gt;<i> I use a couple of 7961 phones with factory default firmware, Asterisk
+</I>&gt;&gt;<i> 1.2 and chan_sccp 20060408. I use the following fixes for this  
+</I>&gt;&gt;<i> chan_sccp
+</I>&gt;&gt;<i> release:
+</I>&gt;&gt;<i> - chan_sccp-20060408-MeetMe_crash.patch
+</I>&gt;&gt;<i> - chan_sccp-20060408-Gpickup_crash.patch
+</I>&gt;&gt;<i> - chan_sccp-20060408-placed_calls.patch
+</I>&gt;<i> 
+</I>&gt;<i> The placed calls patch, was that mine, or from somebody else? Just  
+</I>&gt;<i> curious as I'm not sure if I issued a patch for that or not.
+</I>&gt;<i> 
+</I>&gt;&gt;<i> My 7961 says it has the following firmware versions:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> App Load ID:  Jar41.2-9-1-45.sbn
+</I>&gt;&gt;<i> JVM Load ID:  CVM41.2-0-1-45.sbn
+</I>&gt;&gt;<i> OS Load ID:   cnu41.2-7-5-50.sbn
+</I>&gt;&gt;<i> Boot Load ID: 7961G_64-020704128Amd64meg.bin
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The limited functionality that I use work fine: Redial, DND, SendtoVM
+</I>&gt;&gt;<i> and Transfer. Not sure if GPickup works since I don't use it. I've  
+</I>&gt;&gt;<i> seen
+</I>&gt;&gt;<i> requests in the past for the conference functionality which is  
+</I>&gt;&gt;<i> absent in
+</I>&gt;&gt;<i> this config. Would be nice if that were available in a chan_sccp  
+</I>&gt;&gt;<i> version
+</I>&gt;&gt;<i> for 1.2.
+</I>&gt;&gt;&gt;<i> I have recently purchased a used 1721 router with Call Manager  
+</I>&gt;&gt;&gt;<i> Express
+</I>&gt;&gt;&gt;<i> loaded so that I can capture packets between the router and handset,
+</I>&gt;&gt;&gt;<i> but understanding sccp packets is going to be tough for me.
+</I>&gt;&gt;<i> You can use Wireshark (or even tcpdump iirc) to capture the packets,
+</I>&gt;&gt;<i> save them to a file and make the file available for download. This way
+</I>&gt;&gt;<i> others who are interested in helping out can get easy access to this
+</I>&gt;&gt;<i> information.
+</I>&gt;<i> 
+</I>&gt;<i> Absolutely. Wireshare also comes with a nice skinny parser module.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;&gt;&gt;<i> I look forward to any comments.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Regards,
+</I>&gt;&gt;&gt;<i> Martin
+</I>&gt;&gt;<i> Regards,
+</I>&gt;&gt;<i> Patrick
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Chan-sccp-users mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+Best regards
+Damian Lusiewicz
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000299.html">[Chan-sccp-users] Shared lines implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

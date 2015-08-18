@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Bounty
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Bounty&In-Reply-To=%3C3C673BDA-F2F8-4E9B-89D9-22ECFFA72B21%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000006.html">
+   <LINK REL="Next"  HREF="000008.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Bounty</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Bounty&In-Reply-To=%3C3C673BDA-F2F8-4E9B-89D9-22ECFFA72B21%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Bounty">davidded at davidded.de
+       </A><BR>
+    <I>Sat Jan  6 04:50:07 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000006.html">[Chan-sccp-users] Bounty
+</A></li>
+        <LI>Next message: <A HREF="000008.html">[Chan-sccp-users] chan_sccp and asterisk 1.4.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I am using * 1.2.13-BRIstuffed-0.3.0-PRE-1v with the florz patch  
+serving several patched hfc-s cards, about 10 cisco phones, a few  
+isdn phones, an agfeo as32 pbx, and finally some snom phones. For me,  
+a transition to 1.4 will be of interest as soon as all the bristuff- 
+related stuff has been ported to 1.4 as well.
+
+I'm sure there are many other people around relying on bristuff.
+
+There are several disagreements among developers as how to integrate  
+the Line paradigm into the asterisk architecture, some would like to  
+adopt the paradigm, some not. I'd like to do a mixture of both,  
+making things even more complicated.
+
+In this light, I think it'd be vital for _multiple_ implentations of  
+sccp to survive, one of which being under GPL resolving some of the  
+&quot;political&quot; issues mentioned above. Anyways I doubt that chan_skinny  
+will soon come close to the functionality and robustness of chan_sccp.
+
+
+We should start porting chan_sccp 1.4 early to make sure the project  
+will stay alive in the future, but only for this reason (or for a  
+bounty, as it was offered). Beyond that, my concern is about  
+implementing more native features of the cisco phones, like shared  
+lines, direct transfer between calls, dynamic logon/logoff with  
+configuration of line-keys, speeddial etc.
+
+By the way: Anyone here with a 7936 he/she got working? I have one  
+myself, however with the usual problem not being able to hangup after  
+a few calls, and a lousy sound quality. It seems to me that there are  
+dsp profiles to be uploaded to the station which are not present in  
+the factory defaults.
+
+I'd be curious to hear about your experiences, also in the &quot;real&quot;  
+cisco world with a call-manager.
+
+
+Regards,
+-David
+
+
+On 05.01.2007, at 18:21, Marcus Robichon wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> we are using chan_sccp with * 1.2.14, 35 Cisco phones and it works  
+</I>&gt;<i> quite well. Why should we change to Asterisk 1.4. I can not find  
+</I>&gt;<i> any reason at this time. Awaiting that chan_skinny is developing  
+</I>&gt;<i> with all the features of chan_sccp is the most common way for us.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Can someone explain the main difference between both Asterisk  
+</I>&gt;<i> versions? We are likely to support the chan_sccp as well as the  
+</I>&gt;<i> chan_skinny solution, but it has to work. &#8230; and even more the code  
+</I>&gt;<i> should under GPL afterwards.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> We are also a German company and paying via Paypal is not the  
+</I>&gt;<i> problem, but getting an invoice J
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Have a nice day,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Awaiting your comments
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Marcus
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Von: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:chan-sccp- 
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">users-bounces at lists.berlios.de</A>] Im Auftrag von Dietmar G. Matzke
+</I>&gt;<i> Gesendet: Freitag, 5. Januar 2007 13:52
+</I>&gt;<i> An: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Betreff: Re: [Chan-sccp-users] Bounty
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hi
+</I>&gt;<i>
+</I>&gt;<i> we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to  
+</I>&gt;<i> keep/get SCCP alive for the community and us.
+</I>&gt;<i>
+</I>&gt;<i> Thus, we will DOUBLE Jay&#180;s bountys by  offering additional honeypots:
+</I>&gt;<i>
+</I>&gt;<i> For solution 1): 100 USD
+</I>&gt;<i>
+</I>&gt;<i> For solution 2): 500 USD (OUR PREFERENCE)
+</I>&gt;<i>
+</I>&gt;<i> Conditions: As mentioned by Jay!
+</I>&gt;<i>
+</I>&gt;<i> Dietmar
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Am 05.01.2007 11:04 Uhr schrieb &quot;Jay R. Worthington&quot; unter  
+</I>&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jayrworthington at gmail.com</A>&gt;:
+</I>&gt;<i>
+</I>&gt;<i> Hi
+</I>&gt;<i>
+</I>&gt;<i> in a last attempt to get a working, usable SCCP channel for  
+</I>&gt;<i> asterisk 1.4, i'm offering two bountys:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> 1. $100 USD (PayPal)
+</I>&gt;<i>
+</I>&gt;<i> - patch against chan_sccp 20060408
+</I>&gt;<i> - GPL (obviously)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> 2. $500 USD (PayPal)
+</I>&gt;<i>
+</I>&gt;<i> - patch against chan_skinny from asterisk 1.4
+</I>&gt;<i> - properly disclamed to digium for inclusion in the official  
+</I>&gt;<i> asterisk svn
+</I>&gt;<i> - includes all features of chan_sccp
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> The first one should be pretty easy, the loader work has already  
+</I>&gt;<i> been done and is available at <A HREF="https://svn.sourceforge.net/svnroot/">https://svn.sourceforge.net/svnroot/</A> 
+</I>&gt;<i> pbxcc/modules/chan_sccp, so it's just the rtp stuff that has to be  
+</I>&gt;<i> done. I guess a look at how the changes where done to chan_skinny  
+</I>&gt;<i> would help. Bounty can be collected after i've done the first  
+</I>&gt;<i> successfull call (without crash ;-)).
+</I>&gt;<i>
+</I>&gt;<i> The second one will be much harder, you more-or-less have to  
+</I>&gt;<i> rebuild all features from scratch, based on chan_skinny.  
+</I>&gt;<i> Technically, i dont care how it is done, if someone can convince/ 
+</I>&gt;<i> bribe Sergio to disclame his patches you can safe a lot of time and  
+</I>&gt;<i> work. Bounty can be collected after inclusion in the digium svn  
+</I>&gt;<i> with all features of chan_sccp.
+</I>&gt;<i>
+</I>&gt;<i> If you wish to collect the second bounty, please contact me in  
+</I>&gt;<i> advance.
+</I>&gt;<i>
+</I>&gt;<i> Jay....
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/pkcs7-signature
+Size: 2109 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070106/95ae6560/attachment.bin">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070106/95ae6560/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000006.html">[Chan-sccp-users] Bounty
+</A></li>
+	<LI>Next message: <A HREF="000008.html">[Chan-sccp-users] chan_sccp and asterisk 1.4.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

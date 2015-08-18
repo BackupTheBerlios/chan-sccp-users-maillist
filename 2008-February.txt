@@ -1,0 +1,195 @@
+From chan-sccp.berlios.de at lusiewicz.de  Fri Feb 15 13:08:07 2008
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Fri, 15 Feb 2008 13:08:07 +0100
+Subject: [Chan-sccp-users] Asterisk crashes while parking is done and remote
+	party hangs up
+Message-ID: <47B580A7.2000101@lusiewicz.de>
+
+Hello.
+
+We found, that asterisk crashes in following situation:
+
+- internal call between two sccp phones is done
+- user A presses "park" softkey and hears "seven zero one"
+- in this moment user B hangs up
+- after the message "seven zero one" is spoken the asterisk crashes.
+- in log we found:
+
+res_features.c: Whoa, failed to remove the extension!
+
+Our configuration:
+
+asterisk 1.4.10
+chan-sccp 20070825
+
+Please could somebody verify this behaviour?
+
+Best regards.
+Damian Lusiewicz
+
+
+
+From davidded at davidded.de  Fri Feb 15 13:29:25 2008
+From: davidded at davidded.de (David Dederscheck)
+Date: Fri, 15 Feb 2008 13:29:25 +0100
+Subject: [Chan-sccp-users] Asterisk crashes while parking is done and
+	remote party hangs up
+In-Reply-To: <47B580A7.2000101@lusiewicz.de>
+References: <47B580A7.2000101@lusiewicz.de>
+Message-ID: <EC618352-F447-43B5-8ED1-ACB9FAEC372A@davidded.de>
+
+Hi Damian,
+
+I shall do so.
+
+Thanks for the report.
+
+
+Regards,
+-David
+
+
+On 15.02.2008, at 13:08, Damian Lusiewicz wrote:
+
+> Hello.
+>
+> We found, that asterisk crashes in following situation:
+>
+> - internal call between two sccp phones is done
+> - user A presses "park" softkey and hears "seven zero one"
+> - in this moment user B hangs up
+> - after the message "seven zero one" is spoken the asterisk crashes.
+> - in log we found:
+>
+> res_features.c: Whoa, failed to remove the extension!
+>
+> Our configuration:
+>
+> asterisk 1.4.10
+> chan-sccp 20070825
+>
+> Please could somebody verify this behaviour?
+>
+> Best regards.
+> Damian Lusiewicz
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From s.lam at keensystems.eu  Fri Feb 15 14:57:01 2008
+From: s.lam at keensystems.eu (Steven Lam, KeenSystems B.V.)
+Date: Fri, 15 Feb 2008 14:57:01 +0100
+Subject: [Chan-sccp-users] Asterisk crashes while parking is done and
+	remoteparty hangs up
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22414FD94@goofy.bison.keenserver.nl>
+
+Hi,
+
+I have a test configuration with the same behavior, asterisk 1.4.18,
+sccp 20071213.
+
+
+The last output using gdb:
+
+  == Parked SCCP/1002-00000013 on 701 at parkedcalls. Will timeout back to
+extension [default] 1001, 1 in 45 seconds
+    -- <SCCP/1001-00000015> Playing 'digits/7' (language 'nl')
+    -- SEP0019E79B04BB is Onhook
+    -- SEP0019E79B04BB: Ending call 19 on line 1002
+  == SCCP/1002-00000013 got tired of being parked
+    -- SCCP: Asterisk request to hangup channel SCCP/1002-00000013
+[Feb 15 14:32:38] WARNING[10615]: res_features.c:1763 do_parking_thread:
+Whoa, failed to remove the extension!
+    -- SEP0019E79B04BB: Statistics from 1001 callid: 19 Packets sent:
+984 rcvd: 155 lost: 1 jitter: 0 latency: 0
+    -- <SCCP/1001-00000015> Playing 'digits/0' (language 'nl')
+    -- <SCCP/1001-00000015> Playing 'digits/1' (language 'nl')
+    -- Added extension '701' priority 1 to parkedcalls
+
+Program received signal SIGSEGV, Segmentation fault.
+[Switching to Thread -1226679376 (LWP 10661)]
+0xb7e5c344 in vfprintf () from /lib/tls/libc.so.6
+(gdb) bt full
+#0  0xb7e5c344 in vfprintf () from /lib/tls/libc.so.6
+No symbol table info available.
+#1  0xb7e78ee5 in vsnprintf () from /lib/tls/libc.so.6
+No symbol table info available.
+#2  0x080fd847 in ast_dynamic_str_thread_build_va (buf=0xb6e25368,
+max_len=0, ts=0x8151ac0, append=0, fmt=0x0, ap=0x0)
+    at utils.c:1294
+        res = 0
+        offset = -1208815628
+        __PRETTY_FUNCTION__ = "ast_dynamic_str_thread_build_va"
+#3  0x080ac655 in ast_verbose (fmt=0xb711c278 "    -- %s: Parked channel
+%s on %d\n") at logger.c:886
+        __res = 0
+        v = (struct verb *) 0xb6e25368
+        buf = (struct ast_dynamic_str *) 0x81e0500
+        __PRETTY_FUNCTION__ = "ast_verbose"
+#4  0xb710a874 in sccp_channel_park_thread (stuff=0xfffff901) at
+sccp_channel.c:1043
+        chan1 = (struct ast_channel *) 0x81f3550
+        chan2 = (struct ast_channel *) 0x81e30e8
+        f = (struct ast_frame *) 0x0
+        ext = 701
+        res = 0
+        extstr = "\200! 701", '\0' <repeats 13 times>
+        c = (sccp_channel_t *) 0x81e4c70
+#5  0x080fd275 in dummy_start (data=0xfffff901) at utils.c:852
+        _buffer = {__routine = 0x8068470 <ast_unregister_thread>, __arg
+= 0xb6e25bb0, __canceltype = 0, __prev = 0x0}
+        ret = (void *) 0x81f39e0
+        a = {start_routine = 0xb710a762 <sccp_channel_park_thread>, data
+= 0x81f4298, 
+  name = 0x81f39e0 "sccp_channel_park_thread started at [ 1149]
+sccp_channel.c sccp_channel_park()"}
+#6  0xb7fad28c in start_thread () from /lib/tls/libpthread.so.0
+No symbol table info available.
+#7  0xb7ed45be in clone () from /lib/tls/libc.so.6
+No symbol table info available.
+
+
+Steven. 
+
+-----Oorspronkelijk bericht-----
+Van: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Namens Damian
+Lusiewicz
+Verzonden: vrijdag 15 februari 2008 13:08
+Aan: chan-sccp-users at lists.berlios.de
+Onderwerp: [Chan-sccp-users] Asterisk crashes while parking is done and
+remoteparty hangs up
+
+Hello.
+
+We found, that asterisk crashes in following situation:
+
+- internal call between two sccp phones is done
+- user A presses "park" softkey and hears "seven zero one"
+- in this moment user B hangs up
+- after the message "seven zero one" is spoken the asterisk crashes.
+- in log we found:
+
+res_features.c: Whoa, failed to remove the extension!
+
+Our configuration:
+
+asterisk 1.4.10
+chan-sccp 20070825
+
+Please could somebody verify this behaviour?
+
+Best regards.
+Damian Lusiewicz
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+

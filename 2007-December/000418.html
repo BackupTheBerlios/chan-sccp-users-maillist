@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] New Release
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20New%20Release&In-Reply-To=%3CA7CCEB3A60E74144B4AFC2CAB0BC9D80%40London%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000417.html">
+   <LINK REL="Next"  HREF="000419.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] New Release</H1>
+    <B>Federico Santulli</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20New%20Release&In-Reply-To=%3CA7CCEB3A60E74144B4AFC2CAB0BC9D80%40London%3E"
+       TITLE="[Chan-sccp-users] New Release">mobile at nhm.it
+       </A><BR>
+    <I>Mon Dec 17 09:49:39 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000417.html">[Chan-sccp-users] New Release
+</A></li>
+        <LI>Next message: <A HREF="000419.html">[Chan-sccp-users] I give up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#418">[ date ]</a>
+              <a href="thread.html#418">[ thread ]</a>
+              <a href="subject.html#418">[ subject ]</a>
+              <a href="author.html#418">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I didn't check latest release (i have manually fixed the 20071114 one) but 
+often, during transfers (not blind),
+happens segfault.
+
+How could i check for this ?
+
+Thanks
+
+Federico
+
+----- Original Message ----- 
+From: &quot;David Dederscheck&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">davidded at davidded.de</A>&gt;
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-b-discussion at lists.sourceforge.net</A>&gt;
+Cc: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Sent: Saturday, December 15, 2007 1:44 PM
+Subject: [Chan-sccp-users] New Release
+
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I almost forgot to mention to the list:
+</I>&gt;<i>
+</I>&gt;<i> We released chan-sccp-b-20071213, which also includes Fredericos's
+</I>&gt;<i> latest patch.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Does anybody have an idea what would be an appropriate replacement
+</I>&gt;<i> for setting the callstate?
+</I>&gt;<i> Maybe just a display message?
+</I>&gt;<i>
+</I>&gt;<i> Thank,
+</I>&gt;<i> -David.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On Dec 13, 2007, at 11:25 AM, Federico Santulli wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> You forget to comment
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> sccp_channel_set_callstate(c, SKINNY_CALLSTATE_CONGESTION);
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> in SCCP_INDICATE.c section CONGESTION
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> found and killed the bug.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ----- Original Message -----
+</I>&gt;&gt;<i> From: &quot;Federico Santulli&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">mobile at nhm.it</A>&gt;
+</I>&gt;&gt;<i> To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-b-discussion at lists.sourceforge.net</A>&gt;
+</I>&gt;&gt;<i> Sent: Thursday, December 13, 2007 11:11 AM
+</I>&gt;&gt;<i> Subject: Re: [Chan-sccp-b-discussion] [Chan-sccp-users] 7960 and
+</I>&gt;&gt;<i> load 8.0.5
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> David,
+</I>&gt;&gt;&gt;<i> the problem i have it's related to sccp-sip interfacement cause,
+</I>&gt;&gt;&gt;<i> all the
+</I>&gt;&gt;&gt;<i> interns i have are sip
+</I>&gt;&gt;&gt;<i> and only the operator console (7960g+1x7914) is SCCP.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Please take a try and let me know.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Thanks in advance.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Federico
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> --------------------------------------------------------------------- 
+</I>&gt;&gt;&gt;<i> ----
+</I>&gt;&gt;&gt;<i> SF.Net email is sponsored by:
+</I>&gt;&gt;&gt;<i> Check out the new SourceForge.net Marketplace.
+</I>&gt;&gt;&gt;<i> It's the best place to buy or sell services
+</I>&gt;&gt;&gt;<i> for just about anything Open Source.
+</I>&gt;&gt;&gt;<i> <A HREF="http://ad.doubleclick.net/clk;164216239;13503038;w?http://sf.net/">http://ad.doubleclick.net/clk;164216239;13503038;w?http://sf.net/</A>
+</I>&gt;&gt;&gt;<i> marketplace
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> Chan-sccp-b-discussion mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-b-discussion at lists.sourceforge.net</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.sourceforge.net/lists/listinfo/chan-sccp-b-discussion">https://lists.sourceforge.net/lists/listinfo/chan-sccp-b-discussion</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ---------------------------------------------------------------------- 
+</I>&gt;&gt;<i> ---
+</I>&gt;&gt;<i> SF.Net email is sponsored by:
+</I>&gt;&gt;<i> Check out the new SourceForge.net Marketplace.
+</I>&gt;&gt;<i> It's the best place to buy or sell services
+</I>&gt;&gt;<i> for just about anything Open Source.
+</I>&gt;&gt;<i> <A HREF="http://ad.doubleclick.net/clk;164216239;13503038;w?http://sf.net/">http://ad.doubleclick.net/clk;164216239;13503038;w?http://sf.net/</A>
+</I>&gt;&gt;<i> marketplace
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Chan-sccp-b-discussion mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-b-discussion at lists.sourceforge.net</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.sourceforge.net/lists/listinfo/chan-sccp-b-discussion">https://lists.sourceforge.net/lists/listinfo/chan-sccp-b-discussion</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000417.html">[Chan-sccp-users] New Release
+</A></li>
+	<LI>Next message: <A HREF="000419.html">[Chan-sccp-users] I give up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#418">[ date ]</a>
+              <a href="thread.html#418">[ thread ]</a>
+              <a href="subject.html#418">[ subject ]</a>
+              <a href="author.html#418">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

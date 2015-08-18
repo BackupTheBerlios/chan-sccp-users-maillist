@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Asterisk and Deadlocks: maybe a solution.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%20and%20Deadlocks%3A%20maybe%20a%20solution.&In-Reply-To=%3C4745C8F102714B93B04C3E31D483AE6A%40london%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000167.html">
+   <LINK REL="Next"  HREF="000169.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Asterisk and Deadlocks: maybe a solution.</H1>
+    <B>Federico Santulli</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%20and%20Deadlocks%3A%20maybe%20a%20solution.&In-Reply-To=%3C4745C8F102714B93B04C3E31D483AE6A%40london%3E"
+       TITLE="[Chan-sccp-users] Asterisk and Deadlocks: maybe a solution.">mobile at nhm.it
+       </A><BR>
+    <I>Thu Jul  5 19:43:02 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000167.html">[Chan-sccp-users] I've finally had to give up with chan_sccp
+</A></li>
+        <LI>Next message: <A HREF="000169.html">[Chan-sccp-users] Asterisk and Deadlocks: maybe a solution.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#168">[ date ]</a>
+              <a href="thread.html#168">[ thread ]</a>
+              <a href="subject.html#168">[ subject ]</a>
+              <a href="author.html#168">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>AW: [Chan-sccp-users] I've finally had to give up with chan_sccpAll deadlocks issues are caused by sccp_pbx_hangup, sccp_pbx_startchannel routines, and are derived from wrong call transfer callbacks management (for both normal and blind ones).
+
+Working on other channes source, i made a fix that i'm testing to forget all the hangings on the asterisk pbx. 
+
+If anyone would test, i will appreciate.
+
+Please contact me at
+mobile at nhm.it
+
+Federico Santulli
+Italy
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070705/5a3334fb/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070705/5a3334fb/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000167.html">[Chan-sccp-users] I've finally had to give up with chan_sccp
+</A></li>
+	<LI>Next message: <A HREF="000169.html">[Chan-sccp-users] Asterisk and Deadlocks: maybe a solution.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#168">[ date ]</a>
+              <a href="thread.html#168">[ thread ]</a>
+              <a href="subject.html#168">[ subject ]</a>
+              <a href="author.html#168">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

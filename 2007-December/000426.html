@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] I give up
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20I%20give%20up&In-Reply-To=%3CDBF51A55-CC99-496B-AA28-0C88ADBB2D5F%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000425.html">
+   <LINK REL="Next"  HREF="000428.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] I give up</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20I%20give%20up&In-Reply-To=%3CDBF51A55-CC99-496B-AA28-0C88ADBB2D5F%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] I give up">davidded at davidded.de
+       </A><BR>
+    <I>Fri Dec 21 02:32:42 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000425.html">[Chan-sccp-users] I give up
+</A></li>
+        <LI>Next message: <A HREF="000428.html">[Chan-sccp-users] I give up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#426">[ date ]</a>
+              <a href="thread.html#426">[ thread ]</a>
+              <a href="subject.html#426">[ subject ]</a>
+              <a href="author.html#426">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I also noticed some problems when performing transfers in mixed  
+environments lately. I first thought the issue was due to some  
+unorthodox use of meetme rooms in connection with local channels, but  
+then it also occured with a transfer _to_ a Zap channel.
+
+My problem is characterized by the following phenomenon:
+
+1. You attempt a transfer and it doesn't work. Possibly the phone  
+won't react properly.
+2. If you type &quot;show channels&quot; at the asterisk prompt, it will give  
+you an infinite list of the same channel all over again.
+3. You need to restart asterisk.
+
+The problem seems to occur only with 1.4.
+
+By the way it's pretty nasty that you can really mess up the global  
+channel list of asterisk in such a way.
+
+We shall get working on the problem shorty, but it would be very  
+helpful if any of you could reproduce it  and / or get his/her hands  
+on it.
+
+
+Kind Regards,
+-David.
+
+
+On Dec 20, 2007, at 10:03 PM, Federico Santulli wrote:
+
+&gt;<i> I've got some problems on transfers too, expecially in mixed  
+</I>&gt;<i> environments
+</I>&gt;<i> SCCP/SIP/IAX.
+</I>&gt;<i>
+</I>&gt;<i> I didn't recognize the problem at the moment. I looked onto every  
+</I>&gt;<i> log but
+</I>&gt;<i> atm
+</I>&gt;<i> nothing.
+</I>&gt;<i>
+</I>&gt;<i> If anyone could suggest me something for debug, the help will be
+</I>&gt;<i> appreciated.
+</I>&gt;<i>
+</I>&gt;<i> Thanks in advance.
+</I>&gt;<i>
+</I>&gt;<i> Federico
+</I>&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;David Dederscheck&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">davidded at davidded.de</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;<i> Sent: Wednesday, December 19, 2007 1:18 AM
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] I give up
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi Martin,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On 18.12.2007, at 01:43, Martin Sutherland wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Dear list members,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I recently tried to move to Asterisk 1.4.x with the latest chan- 
+</I>&gt;&gt;&gt;<i> sccp-
+</I>&gt;&gt;&gt;<i> b on a system running a mixture of 7940s, 7960s and 7961+7914s and
+</I>&gt;&gt;&gt;<i> immediately the system crashed when testing assisted transfers.
+</I>&gt;&gt;&gt;<i> Having primed the end users for some months that a new version was
+</I>&gt;&gt;&gt;<i> going to solve the crashes every few days, it was a great
+</I>&gt;&gt;&gt;<i> disappointment and I had to roll back.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm very sad to hear that. This is especially because Marcello and I
+</I>&gt;&gt;<i> didn't experience any further crashes related to transfers any more,
+</I>&gt;&gt;<i> and we hoped that the current release would be a solid base for most
+</I>&gt;&gt;<i> people.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Furthermore, I feel particularly sorry for your situation as you made
+</I>&gt;&gt;<i> that generous donation to the both of us. In connection to this, it
+</I>&gt;&gt;<i> shall be noted that you thus made possible many of the improvements
+</I>&gt;&gt;<i> and new fixed that we lately did. Although we could get on with quite
+</I>&gt;&gt;<i> some compatiblity issues and new features, the implementation and
+</I>&gt;&gt;<i> debugging is always another issue.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> As Asterisk makes vast use of multithreading, debugging becomes a
+</I>&gt;&gt;<i> really formidable task, and it will always be. This is where only
+</I>&gt;&gt;<i> extensive debugging and the effort of many together trying to find  
+</I>&gt;&gt;<i> the
+</I>&gt;&gt;<i> issues in various scenarious will be able to help; Ideally, running a
+</I>&gt;&gt;<i> production system with gdb on a very fast machine.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> The decision has now been made to abandon sccp and move to SIP and
+</I>&gt;&gt;&gt;<i> the Cisco 7961+7914s will be replaced by Polycom IP601s and side
+</I>&gt;&gt;&gt;<i> cars. Having stuck to my guns over Cisco handsets and native
+</I>&gt;&gt;&gt;<i> protocol over the last 1.5 years, I have now made the personal
+</I>&gt;&gt;&gt;<i> decision to move to SIP and will not risk putting any more Cisco
+</I>&gt;&gt;&gt;<i> handsets in with native protocol and will probably move to Polycom
+</I>&gt;&gt;&gt;<i> handsets entirely. I very much thank those who have contributed to
+</I>&gt;&gt;&gt;<i> the effort, but end users will simply not accept that a PBX should
+</I>&gt;&gt;&gt;<i> have the same reliable as their PCs, and the problems over the last
+</I>&gt;&gt;&gt;<i> year have damaged my reputation with
+</I>&gt;&gt;&gt;<i>  long standing customers who I provide I.T. support for.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I can very well understand your decision, and I'd also suggest you
+</I>&gt;&gt;<i> that course of action if your customers have a very high load and
+</I>&gt;&gt;<i> can't live with occasional crashes. Although the stability may be
+</I>&gt;&gt;<i> quite well in the light of the high load, it may simply not be
+</I>&gt;&gt;<i> sufficient for your customers, so you need solutions where you can
+</I>&gt;&gt;<i> blame the manufacturer, also in terms of liability. Obviously chan-
+</I>&gt;&gt;<i> sccp-b can't provide sufficient stability right now, so you need to
+</I>&gt;&gt;<i> look for alternatives. As polycom officially supports asterisk, this
+</I>&gt;&gt;<i> should be your choice.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Finally, this should remember all of us that we still have a long way
+</I>&gt;&gt;<i> to go. Yet, there's already so much to find along that way that we
+</I>&gt;&gt;<i> should pursue it further.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Best regards and all the best,
+</I>&gt;&gt;<i> -David
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Good luck and best regards,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Martin Sutherland
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> Chan-sccp-users mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Chan-sccp-users mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000425.html">[Chan-sccp-users] I give up
+</A></li>
+	<LI>Next message: <A HREF="000428.html">[Chan-sccp-users] I give up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#426">[ date ]</a>
+              <a href="thread.html#426">[ thread ]</a>
+              <a href="subject.html#426">[ subject ]</a>
+              <a href="author.html#426">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

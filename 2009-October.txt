@@ -1,0 +1,741 @@
+From jquintana at simplifieditsolutions.com  Fri Oct 23 00:24:32 2009
+From: jquintana at simplifieditsolutions.com (Juan A. Quintana)
+Date: Thu, 22 Oct 2009 17:24:32 -0500
+Subject: [Chan-sccp-users] Cisco 7960 with SCCP and asterisk
+Message-ID: <00A24AA921915B4D99E90311BC1632F00D43FA@exchange2k3.five-fifteen.local>
+
+Hello, all.
+
+ 
+
+I am trying to configure some Cisco 7960G phones to work with sccp and
+asterisk. I have successfully loaded the sccp driver on the asterisk
+machine. I have also loaded the sccp firmware on the phone. My problem
+is that the phone is not registering with the asterisk machine.
+
+ 
+
+I have tried asking for help on the trixbox forums and pbxinaflash
+forums as well but have not gotten the help I need.
+
+ 
+
+You can see the two links here: 
+http://pbxinaflash.com/forum/showthread.php?t=5807 and 
+http://trixbox.org/forums/trixbox-forums/jobs-board/need-cisco-7960-work
+-sccp 
+
+ 
+
+I am willing to pay for this if someone can help me out. I am
+desperately trying to get it work.
+
+
+Thanks!
+
+ 
+
+Juan A. Quintana 
+
+www.simplifieditsolutions.com <http://www.simplifieditsolutions.com/> 
+
+Simplified IT Solutions
+Network Consultant 
+
+8002 Thorncroft Manor Ln
+Richmond, TX 77407
+ 
+ 
+
+E-mail:
+jquintana at simplifieditsolutions.com
+<mailto:jquintana at simplifieditsolutions.com>  
+
+	                               Office: 
+
+                               832.798.5989 
+
+We do IT right.
+
+ 
+
+  <http://www.twitter.com/simplifiedIT> 
+
+ 
+
+The information contained in this E-mail message is privileged,
+confidential, and may be protected from disclosure; please be aware that
+any other use, printing, copying, disclosure or dissemination of this
+communication may be subject to legal restriction or sanction. If you
+think that you have received this e-mail message in error, please reply
+to the sender.
+
+This E-mail message and any attachments hereto have been scanned for
+viruses and are believed to be free of any virus or other defect that
+might affect any computer system into which it is received and opened.
+However, it is the responsibility of the recipient to ensure that it is
+virus free and no responsibility is accepted by Simplified IT Solutions
+for any loss or damage arising in any way from its use.
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091022/a62b653d/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: image001.png
+Type: image/png
+Size: 20527 bytes
+Desc: image001.png
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091022/a62b653d/attachment.png>
+
+From jquintana at simplifieditsolutions.com  Fri Oct 23 07:45:19 2009
+From: jquintana at simplifieditsolutions.com (Juan A. Quintana)
+Date: Fri, 23 Oct 2009 00:45:19 -0500
+Subject: [Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+Message-ID: <00A24AA921915B4D99E90311BC1632F00D43FF@exchange2k3.five-fifteen.local>
+
+Thanks to all who have replied to my question.
+
+ 
+
+I think I may have made some progress in my situation. Below is the
+output I get now.
+
+ 
+
+NAME             DEVICE           MWI  Chs  Active Channel
+
+================ ================ ==== ====
+=================================================
+
+6000             --               OFF  0    --
+
+
+trixbox*CLI> sccp show devices
+
+trixbox*CLI>
+
+NAME             ADDRESS         MAC              Reg. State
+
+================ =============== ================ ==========
+
+TEST             10.0.0.100      SEP00136090A798  Ok
+
+ 
+
+If I understand this correctly the phone is registering with asterisk
+but the phone isn't configured to use extension 6000?
+
+ 
+
+Thanks in advance for any help, it is truly appreciated!
+
+ 
+
+Juan A. Quintana 
+
+www.simplifieditsolutions.com <http://www.simplifieditsolutions.com/> 
+
+Simplified IT Solutions
+Network Consultant 
+
+8002 Thorncroft Manor Ln
+Richmond, TX 77407
+ 
+ 
+
+E-mail:
+jquintana at simplifieditsolutions.com
+<mailto:jquintana at simplifieditsolutions.com>  
+
+	                               Office: 
+
+                               832.798.5989 
+
+We do IT right.
+
+ 
+
+  <http://www.twitter.com/simplifiedIT> 
+
+ 
+
+The information contained in this E-mail message is privileged,
+confidential, and may be protected from disclosure; please be aware that
+any other use, printing, copying, disclosure or dissemination of this
+communication may be subject to legal restriction or sanction. If you
+think that you have received this e-mail message in error, please reply
+to the sender.
+
+This E-mail message and any attachments hereto have been scanned for
+viruses and are believed to be free of any virus or other defect that
+might affect any computer system into which it is received and opened.
+However, it is the responsibility of the recipient to ensure that it is
+virus free and no responsibility is accepted by Simplified IT Solutions
+for any loss or damage arising in any way from its use.
+
+ 
+
+From: Juan A. Quintana 
+Sent: Thursday, October 22, 2009 5:25 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Cisco 7960 with SCCP and asterisk
+
+ 
+
+Hello, all.
+
+ 
+
+I am trying to configure some Cisco 7960G phones to work with sccp and
+asterisk. I have successfully loaded the sccp driver on the asterisk
+machine. I have also loaded the sccp firmware on the phone. My problem
+is that the phone is not registering with the asterisk machine.
+
+ 
+
+I have tried asking for help on the trixbox forums and pbxinaflash
+forums as well but have not gotten the help I need.
+
+ 
+
+You can see the two links here: 
+http://pbxinaflash.com/forum/showthread.php?t=5807 and 
+http://trixbox.org/forums/trixbox-forums/jobs-board/need-cisco-7960-work
+-sccp 
+
+ 
+
+I am willing to pay for this if someone can help me out. I am
+desperately trying to get it work.
+
+
+Thanks!
+
+ 
+
+Juan A. Quintana 
+
+www.simplifieditsolutions.com <http://www.simplifieditsolutions.com/> 
+
+Simplified IT Solutions
+Network Consultant 
+
+8002 Thorncroft Manor Ln
+Richmond, TX 77407
+ 
+ 
+
+E-mail:
+jquintana at simplifieditsolutions.com
+<mailto:jquintana at simplifieditsolutions.com>  
+
+	                               Office: 
+
+                               832.798.5989 
+
+We do IT right.
+
+ 
+
+ <http://www.twitter.com/simplifiedIT> 
+
+ 
+
+The information contained in this E-mail message is privileged,
+confidential, and may be protected from disclosure; please be aware that
+any other use, printing, copying, disclosure or dissemination of this
+communication may be subject to legal restriction or sanction. If you
+think that you have received this e-mail message in error, please reply
+to the sender.
+
+This E-mail message and any attachments hereto have been scanned for
+viruses and are believed to be free of any virus or other defect that
+might affect any computer system into which it is received and opened.
+However, it is the responsibility of the recipient to ensure that it is
+virus free and no responsibility is accepted by Simplified IT Solutions
+for any loss or damage arising in any way from its use.
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/16fabf6b/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: image001.png
+Type: image/png
+Size: 20527 bytes
+Desc: image001.png
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/16fabf6b/attachment.png>
+
+From mobile at nhm.it  Fri Oct 23 09:57:55 2009
+From: mobile at nhm.it (Federico Santulli)
+Date: Fri, 23 Oct 2009 09:57:55 +0200
+Subject: [Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+In-Reply-To: <00A24AA921915B4D99E90311BC1632F00D43FF@exchange2k3.five-fifteen.local>
+References: <00A24AA921915B4D99E90311BC1632F00D43FF@exchange2k3.five-fifteen.local>
+Message-ID: <C3BB8673C38B4AC1BD96042FBCCE46A0@NewYork>
+
+try adding into device section
+autologin=6000
+
+Cheers.
+
+Federico
+
+
+From: Juan A. Quintana 
+Sent: Friday, October 23, 2009 7:45 AM
+To: chan-sccp-users at lists.berlios.de 
+Subject: [Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+
+
+Thanks to all who have replied to my question.
+
+ 
+
+I think I may have made some progress in my situation. Below is the output I get now.
+
+ 
+
+NAME             DEVICE           MWI  Chs  Active Channel
+
+================ ================ ==== ==== =================================================
+
+6000             --               OFF  0    --                                  
+
+trixbox*CLI> sccp show devices
+
+trixbox*CLI>
+
+NAME             ADDRESS         MAC              Reg. State
+
+================ =============== ================ ==========
+
+TEST             10.0.0.100      SEP00136090A798  Ok
+
+ 
+
+If I understand this correctly the phone is registering with asterisk but the phone isn't configured to use extension 6000?
+
+ 
+
+Thanks in advance for any help, it is truly appreciated!
+
+ 
+
+      Juan A. Quintana 
+     www.simplifieditsolutions.com
+     
+      Simplified IT Solutions
+      Network Consultant 
+     8002 Thorncroft Manor Ln
+      Richmond, TX 77407
+       
+       
+     
+      E-mail:
+      jquintana at simplifieditsolutions.com 
+                                     Office: 
+
+                                     832.798.5989 
+     
+      We do IT right.
+     
+
+ 
+
+
+
+ 
+
+The information contained in this E-mail message is privileged, confidential, and may be protected from disclosure; please be aware that any other use, printing, copying, disclosure or dissemination of this communication may be subject to legal restriction or sanction. If you think that you have received this e-mail message in error, please reply to the sender.
+
+This E-mail message and any attachments hereto have been scanned for viruses and are believed to be free of any virus or other defect that might affect any computer system into which it is received and opened. However, it is the responsibility of the recipient to ensure that it is virus free and no responsibility is accepted by Simplified IT Solutions for any loss or damage arising in any way from its use.
+
+ 
+
+From: Juan A. Quintana 
+Sent: Thursday, October 22, 2009 5:25 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Cisco 7960 with SCCP and asterisk
+
+ 
+
+Hello, all.
+
+ 
+
+I am trying to configure some Cisco 7960G phones to work with sccp and asterisk. I have successfully loaded the sccp driver on the asterisk machine. I have also loaded the sccp firmware on the phone. My problem is that the phone is not registering with the asterisk machine.
+
+ 
+
+I have tried asking for help on the trixbox forums and pbxinaflash forums as well but have not gotten the help I need.
+
+ 
+
+You can see the two links here: http://pbxinaflash.com/forum/showthread.php?t=5807 and http://trixbox.org/forums/trixbox-forums/jobs-board/need-cisco-7960-work-sccp 
+
+ 
+
+I am willing to pay for this if someone can help me out. I am desperately trying to get it work.
+
+
+Thanks!
+
+ 
+
+      Juan A. Quintana 
+     www.simplifieditsolutions.com
+     
+      Simplified IT Solutions
+      Network Consultant 
+     8002 Thorncroft Manor Ln
+      Richmond, TX 77407
+       
+       
+     
+      E-mail:
+      jquintana at simplifieditsolutions.com 
+                                     Office: 
+
+                                     832.798.5989 
+     
+      We do IT right.
+     
+
+ 
+
+
+
+ 
+
+The information contained in this E-mail message is privileged, confidential, and may be protected from disclosure; please be aware that any other use, printing, copying, disclosure or dissemination of this communication may be subject to legal restriction or sanction. If you think that you have received this e-mail message in error, please reply to the sender.
+
+This E-mail message and any attachments hereto have been scanned for viruses and are believed to be free of any virus or other defect that might affect any computer system into which it is received and opened. However, it is the responsibility of the recipient to ensure that it is virus free and no responsibility is accepted by Simplified IT Solutions for any loss or damage arising in any way from its use.
+
+ 
+
+
+
+--------------------------------------------------------------------------------
+
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/8f6b1774/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: image001.png
+Type: image/png
+Size: 20527 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/8f6b1774/attachment.png>
+
+From jquintana at simplifieditsolutions.com  Fri Oct 23 15:33:57 2009
+From: jquintana at simplifieditsolutions.com (Juan A. Quintana)
+Date: Fri, 23 Oct 2009 08:33:57 -0500
+Subject: [Chan-sccp-users] Chan-sccp-users Digest, Vol 31, Issue 3
+References: <mailman.2317.1256285084.5709.chan-sccp-users@lists.berlios.de>
+Message-ID: <00A24AA921915B4D99E90311BC1632F00D4404@exchange2k3.five-fifteen.local>
+
+Thanks again for the help. I have made more progress in the past 24 hours with the help of all you guys than I have in the past month!
+
+After I added autologin = 6000 my phone now registers with asterisk!!!!!!
+
+NAME             ADDRESS         MAC              Reg. State
+================ =============== ================ ==========
+TEST             10.0.0.100      SEP00136090A798  Ok
+    -- SCCP: Channel '3' freed by schedule.
+trixbox*CLI> sccp show lines
+trixbox*CLI>
+NAME             DEVICE           MWI  Chs  Active Channel
+================ ================ ==== ==== =================================================
+6000             SEP00136090A798  OFF  0    --         
+
+Now I am unable to dial from this phone. Maybe this is a dialplan issue now? When I dial a number this is what is show on my console while running asterisk -r:
+
+
+Connected to Asterisk 1.4.22-4 RPM by vc-rpms at voipconsulting.nl currently running on trixbox (pid = 7104)
+Verbosity is at least 3
+    -- SEP00136090A798: Accessory 'Speaker' is 'OffHook' (0)
+    -- SEP00136090A798: Cisco Digit: 00000008 (8) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000003 (3) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000002 (2) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000007 (7) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000009 (9) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000008 (8) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000005 (5) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000009 (9) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000008 (8) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000009 (9) on line 6000
+ SCCP: Timeout for callid '7'. Going to dial '8327985989'
+    -- SCCP: Unable to cancel schedule ID 49.
+    -- SEP00136090A798: (sccp_pbx_softswitch) New call on line 6000
+    -- SEP00136090A798: Ending call 7 on line 6000
+    -- SCCP: Asterisk request to hangup channel SCCP/6000-00000007
+    -- SCCP: Request to schedule delete for channel '7' in 10 seconds
+    -- SEP00136090A798: Accessory 'Speaker' is 'OnHook' (0)
+    -- SCCP: Channel '7' freed by schedule.
+
+Thanks again for all the help -- you guys are awesome!!!!
+
+Juan A. Quintana 
+www.simplifieditsolutions.com
+Simplified IT Solutions
+Network Consultant 
+8002 Thorncroft Manor Ln
+Richmond, TX 77407
+?
+?
+E-mail:
+jquintana at simplifieditsolutions.com 
+
+?????????????????????????????? Office: 
+?????????????????????????????? 832.798.5989 
+We do IT right.
+
+
+
+The information contained in this E-mail message is privileged, confidential, and may be protected from disclosure; please be aware that any other use, printing, copying, disclosure or dissemination of this communication may be subject to legal restriction or sanction. If you think that you have received this e-mail message in error, please reply to the sender.
+
+This E-mail message and any attachments hereto have been scanned for viruses and are believed to be free of any virus or other defect that might affect any computer system into which it is received and opened. However, it is the responsibility of the recipient to ensure that it is virus free and no responsibility is accepted by Simplified IT Solutions for any loss or damage arising in any way from its use.
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of chan-sccp-users-request at lists.berlios.de
+Sent: Friday, October 23, 2009 3:05 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: Chan-sccp-users Digest, Vol 31, Issue 3
+
+Send Chan-sccp-users mailing list submissions to
+	chan-sccp-users at lists.berlios.de
+
+To subscribe or unsubscribe via the World Wide Web, visit
+	https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+or, via email, send a message with subject or body 'help' to
+	chan-sccp-users-request at lists.berlios.de
+
+You can reach the person managing the list at
+	chan-sccp-users-owner at lists.berlios.de
+
+When replying, please edit your Subject line so it is more specific
+than "Re: Contents of Chan-sccp-users digest..."
+
+
+Today's Topics:
+
+   1. Re: FW: Cisco 7960 with SCCP and asterisk (Federico Santulli)
+
+
+----------------------------------------------------------------------
+
+Message: 1
+Date: Fri, 23 Oct 2009 09:57:55 +0200
+From: "Federico Santulli" <mobile at nhm.it>
+Subject: Re: [Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+To: <chan-sccp-users at lists.berlios.de>
+Message-ID: <C3BB8673C38B4AC1BD96042FBCCE46A0 at NewYork>
+Content-Type: text/plain; charset="iso-8859-1"
+
+try adding into device section
+autologin=6000
+
+Cheers.
+
+Federico
+
+
+From: Juan A. Quintana 
+Sent: Friday, October 23, 2009 7:45 AM
+To: chan-sccp-users at lists.berlios.de 
+Subject: [Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+
+
+Thanks to all who have replied to my question.
+
+ 
+
+I think I may have made some progress in my situation. Below is the output I get now.
+
+ 
+
+NAME             DEVICE           MWI  Chs  Active Channel
+
+================ ================ ==== ==== =================================================
+
+6000             --               OFF  0    --                                  
+
+trixbox*CLI> sccp show devices
+
+trixbox*CLI>
+
+NAME             ADDRESS         MAC              Reg. State
+
+================ =============== ================ ==========
+
+TEST             10.0.0.100      SEP00136090A798  Ok
+
+ 
+
+If I understand this correctly the phone is registering with asterisk but the phone isn't configured to use extension 6000?
+
+ 
+
+Thanks in advance for any help, it is truly appreciated!
+
+ 
+
+      Juan A. Quintana 
+     www.simplifieditsolutions.com
+     
+      Simplified IT Solutions
+      Network Consultant 
+     8002 Thorncroft Manor Ln
+      Richmond, TX 77407
+       
+       
+     
+      E-mail:
+      jquintana at simplifieditsolutions.com 
+                                     Office: 
+
+                                     832.798.5989 
+     
+      We do IT right.
+     
+
+ 
+
+
+
+ 
+
+The information contained in this E-mail message is privileged, confidential, and may be protected from disclosure; please be aware that any other use, printing, copying, disclosure or dissemination of this communication may be subject to legal restriction or sanction. If you think that you have received this e-mail message in error, please reply to the sender.
+
+This E-mail message and any attachments hereto have been scanned for viruses and are believed to be free of any virus or other defect that might affect any computer system into which it is received and opened. However, it is the responsibility of the recipient to ensure that it is virus free and no responsibility is accepted by Simplified IT Solutions for any loss or damage arising in any way from its use.
+
+ 
+
+From: Juan A. Quintana 
+Sent: Thursday, October 22, 2009 5:25 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Cisco 7960 with SCCP and asterisk
+
+ 
+
+Hello, all.
+
+ 
+
+I am trying to configure some Cisco 7960G phones to work with sccp and asterisk. I have successfully loaded the sccp driver on the asterisk machine. I have also loaded the sccp firmware on the phone. My problem is that the phone is not registering with the asterisk machine.
+
+ 
+
+I have tried asking for help on the trixbox forums and pbxinaflash forums as well but have not gotten the help I need.
+
+ 
+
+You can see the two links here: http://pbxinaflash.com/forum/showthread.php?t=5807 and http://trixbox.org/forums/trixbox-forums/jobs-board/need-cisco-7960-work-sccp 
+
+ 
+
+I am willing to pay for this if someone can help me out. I am desperately trying to get it work.
+
+
+Thanks!
+
+ 
+
+      Juan A. Quintana 
+     www.simplifieditsolutions.com
+     
+      Simplified IT Solutions
+      Network Consultant 
+     8002 Thorncroft Manor Ln
+      Richmond, TX 77407
+       
+       
+     
+      E-mail:
+      jquintana at simplifieditsolutions.com 
+                                     Office: 
+
+                                     832.798.5989 
+     
+      We do IT right.
+     
+
+ 
+
+
+
+ 
+
+The information contained in this E-mail message is privileged, confidential, and may be protected from disclosure; please be aware that any other use, printing, copying, disclosure or dissemination of this communication may be subject to legal restriction or sanction. If you think that you have received this e-mail message in error, please reply to the sender.
+
+This E-mail message and any attachments hereto have been scanned for viruses and are believed to be free of any virus or other defect that might affect any computer system into which it is received and opened. However, it is the responsibility of the recipient to ensure that it is virus free and no responsibility is accepted by Simplified IT Solutions for any loss or damage arising in any way from its use.
+
+ 
+
+
+
+--------------------------------------------------------------------------------
+
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/8f6b1774/attachment.html 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: image/png
+Size: 20527 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/8f6b1774/attachment.png 
+
+------------------------------
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+End of Chan-sccp-users Digest, Vol 31, Issue 3
+**********************************************
+
+
+From torintino1 at hotmail.com  Fri Oct 23 17:02:50 2009
+From: torintino1 at hotmail.com (Torintino T)
+Date: Fri, 23 Oct 2009 17:02:50 +0200
+Subject: [Chan-sccp-users] Cisco 7921 Wireless Phone on Asterisk
+Message-ID: <BAY110-W1DE9DBEE1FA964C9704038CBD0@phx.gbl>
+
+
+
+
+Is available to setup chan_sccp on Asterisk 1.2.28
+and register Cisco 7921 wireless phone on it?
+
+If yes, Can anybody please kindly post the detailed steps.
+
+Thanks 
+ 		 	   		  
+_________________________________________________________________
+Windows Live Hotmail: Your friends can get your Facebook updates, right from Hotmail?.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/social-network-basics.aspx?ocid=PID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_4:092009
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/1d22e466/attachment.html>
+

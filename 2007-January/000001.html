@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7961 + 7914
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207961%20%2B%207914&In-Reply-To=%3C459C25DE.9000605%40ict-visions.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000000.html">
+   <LINK REL="Next"  HREF="000004.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7961 + 7914</H1>
+    <B>Andreas Schlager</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207961%20%2B%207914&In-Reply-To=%3C459C25DE.9000605%40ict-visions.at%3E"
+       TITLE="[Chan-sccp-users] 7961 + 7914">andreas.schlager at ict-visions.at
+       </A><BR>
+    <I>Wed Jan  3 22:53:34 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000000.html">[Chan-sccp-users] 7961 + 7914
+</A></li>
+        <LI>Next message: <A HREF="000004.html">[Chan-sccp-users] 7961 + 7914
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Kelly Opal schrieb:
+&gt;<i> Hi
+</I>&gt;<i> 	Does anyone have a working SEP&lt;Mac&gt;.cnf.xml file for a 7961 with the
+</I>&gt;<i> 7914 side car. I can't seem to get it right and the phone looks up at
+</I>&gt;<i> least 4 times a week.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks For the help
+</I>&gt;<i> 
+</I>&gt;<i> Kelly
+</I>
+
+Hi Kelly,
+
+look at the following config-file. It's designed for a 7970. Watch out
+for the two &quot;addOnModule&quot; Sections. You need one for each 7914 exp. units.
+There's a good description at <A HREF="http://www.voip-info.org">http://www.voip-info.org</A> for this one.
+
+hth.
+
+Regards,
+
+- -Andreas.
+
+- -------------
+&lt;device&gt;
+ &lt;sshUserId&gt;root&lt;/sshUserId&gt;
+ &lt;sshPassword&gt;xyz&lt;/sshPassword&gt;
+ &lt;devicePool&gt;
+  &lt;name&gt;Default&lt;/name&gt;
+  &lt;dateTimeSetting&gt;
+   &lt;name&gt;CMLocal&lt;/name&gt;
+   &lt;dateTemplate&gt;D.M.Y&lt;/dateTemplate&gt;
+   &lt;timeZone&gt;W. Europe Standard/Daylight Time&lt;/timeZone&gt;
+  &lt;/dateTimeSetting&gt;
+  &lt;callManagerGroup&gt;
+   &lt;members&gt;
+    &lt;member  priority=&quot;0&quot;&gt;
+     &lt;callManager&gt;
+      &lt;ports&gt;
+       &lt;ethernetPhonePort&gt;2000&lt;/ethernetPhonePort&gt;
+      &lt;/ports&gt;
+      &lt;processNodeName&gt;192.168.103.2&lt;/processNodeName&gt;
+     &lt;/callManager&gt;
+    &lt;/member&gt;
+   &lt;/members&gt;
+  &lt;/callManagerGroup&gt;
+  &lt;srstInfo&gt;
+   &lt;name&gt;Enable&lt;/name&gt;
+   &lt;srstOption&gt;Enable&lt;/srstOption&gt;
+   &lt;userModifiable&gt;true&lt;/userModifiable&gt;
+   &lt;ipAddr1&gt;192.168.103.2&lt;/ipAddr1&gt;
+   &lt;port1&gt;2000&lt;/port1&gt;
+   &lt;ipAddr2&gt;&lt;/ipAddr2&gt;
+   &lt;port2&gt;2000&lt;/port2&gt;
+   &lt;ipAddr3&gt;&lt;/ipAddr3&gt;
+   &lt;port3&gt;2000&lt;/port3&gt;
+  &lt;/srstInfo&gt;
+  &lt;mlppDomainId&gt;-1&lt;/mlppDomainId&gt;
+  &lt;mlppIndicationStatus&gt;Default&lt;/mlppIndicationStatus&gt;
+  &lt;preemption&gt;Default&lt;/preemption&gt;
+ &lt;/devicePool&gt;
+ &lt;loadInformation&gt;SCCP70.8-0-4SR1S&lt;/loadInformation&gt;
+ &lt;addOnModules&gt;
+  &lt;addOnModule idx=&quot;1&quot;&gt;
+   &lt;loadInformation&gt;S00105000200&lt;/loadInformation&gt;
+  &lt;/addOnModule&gt;
+  &lt;addOnModule idx=&quot;2&quot;&gt;
+   &lt;loadInformation&gt;S00105000200&lt;/loadInformation&gt;
+  &lt;/addOnModule&gt;
+ &lt;/addOnModules&gt;
+ &lt;vendorConfig&gt;
+  &lt;disableSpeaker&gt;false&lt;/disableSpeaker&gt;
+  &lt;disableSpeakerAndHeadset&gt;false&lt;/disableSpeakerAndHeadset&gt;
+  &lt;forwardingDelay&gt;1&lt;/forwardingDelay&gt;
+  &lt;pcPort&gt;0&lt;/pcPort&gt;
+  &lt;settingsAccess&gt;1&lt;/settingsAccess&gt;
+  &lt;garp&gt;0&lt;/garp&gt;
+  &lt;voiceVlanAccess&gt;0&lt;/voiceVlanAccess&gt;
+  &lt;videoCapability&gt;1&lt;/videoCapability&gt;
+  &lt;autoSelectLineEnable&gt;0&lt;/autoSelectLineEnable&gt;
+  &lt;webAccess&gt;0&lt;/webAccess&gt;
+  &lt;daysDisplayNotActive&gt;1,7&lt;/daysDisplayNotActive&gt;
+  &lt;displayOnTime&gt;07:00&lt;/displayOnTime&gt;
+  &lt;displayOnDuration&gt;11:30&lt;/displayOnDuration&gt;
+  &lt;displayIdleTimeout&gt;01:00&lt;/displayIdleTimeout&gt;
+ &lt;/vendorConfig&gt;
+ &lt;versionStamp&gt;&lt;/versionStamp&gt;
+ &lt;userLocale&gt;
+  &lt;name&gt;German_Germany&lt;/name&gt;
+  &lt;langCode&gt;de&lt;/langCode&gt;
+  &lt;winCharSet&gt;utf-8&lt;/winCharSet&gt;
+ &lt;/userLocale&gt;
+ &lt;networkLocale&gt;Austria&lt;/networkLocale&gt;
+ &lt;networkLocaleInfo&gt;
+  &lt;name&gt;Austria&lt;/name&gt;
+ &lt;/networkLocaleInfo&gt;
+ &lt;deviceSecurityMode&gt;0&lt;/deviceSecurityMode&gt;
+ &lt;idleTimeout&gt;0&lt;/idleTimeout&gt;
+ &lt;authenticationURL&gt;<A HREF="http://192.168.103.2:8080/authorization&lt;/authenticationURL">http://192.168.103.2:8080/authorization&lt;/authenticationURL</A>&gt;
+ &lt;directoryURL&gt;<A HREF="http://192.168.103.2/directory_hypoxi/xml/index.php&lt;/directoryURL">http://192.168.103.2/directory_hypoxi/xml/index.php&lt;/directoryURL</A>&gt;
+ &lt;idleURL&gt;&lt;/idleURL&gt;
+ &lt;informationURL&gt;&lt;/informationURL&gt;
+ &lt;messagesURL&gt;&lt;/messagesURL&gt;
+ &lt;proxyServerURL&gt;&lt;/proxyServerURL&gt;
+ &lt;servicesURL&gt;&lt;/servicesURL&gt;
+ &lt;dscpForSCCPPhoneConfig&gt;96&lt;/dscpForSCCPPhoneConfig&gt;
+ &lt;dscpForSCCPPhoneServices&gt;0&lt;/dscpForSCCPPhoneServices&gt;
+ &lt;dscpForCm2Dvce&gt;96&lt;/dscpForCm2Dvce&gt;
+&lt;/device&gt;
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - <A HREF="http://enigmail.mozdev.org">http://enigmail.mozdev.org</A>
+
+iD8DBQFFnCXe5xn1PeU7yzsRAn09AJ43grYT1oQK3+Fx+SU4qZQ3HttkhQCfZbA/
+srLKaWTqmWvNlxw5OgUStd4=
+=rmDK
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000000.html">[Chan-sccp-users] 7961 + 7914
+</A></li>
+	<LI>Next message: <A HREF="000004.html">[Chan-sccp-users] 7961 + 7914
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

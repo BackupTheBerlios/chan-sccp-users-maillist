@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users]  Blind Transfer crashes asterisk
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20%20Blind%20Transfer%20crashes%20asterisk&In-Reply-To=%3CF3F77C7BD63C8C488186EE2E5BC5110655ABB5%40lhu01.llg.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000272.html">
+   <LINK REL="Next"  HREF="000274.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users]  Blind Transfer crashes asterisk</H1>
+    <B>Marcus Robichon</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20%20Blind%20Transfer%20crashes%20asterisk&In-Reply-To=%3CF3F77C7BD63C8C488186EE2E5BC5110655ABB5%40lhu01.llg.de%3E"
+       TITLE="[Chan-sccp-users]  Blind Transfer crashes asterisk">m.robichon at llg.de
+       </A><BR>
+    <I>Thu Aug  9 07:10:36 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000272.html">[Chan-sccp-users] Nagios Plugin
+</A></li>
+        <LI>Next message: <A HREF="000274.html">[Chan-sccp-users] Blind Transfer crashes asterisk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#273">[ date ]</a>
+              <a href="thread.html#273">[ thread ]</a>
+              <a href="subject.html#273">[ subject ]</a>
+              <a href="author.html#273">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+ 
+
+we patched our chan_sccp with the fixes from Andreas Anderson (posted on the
+25th of July). We have big problems in doing a blind transfer. I will
+explain what happens:
+
+ 
+
+You try to transfer a call using [Transfer] button. The extension does not
+pickup the phone, you go and press again the [Transfer] button to get rid of
+the phonecall. At this time asterisk crashes totally. 
+
+ 
+
+We had the workaround in disabling the sccp transfer functionality and use #
++ Extension for transferring calls with asterisk implemented transfer
+technology. But you cannot do a perfect blind transfer. If the extension
+does not pick up the phone asterisk loose the call when you hang up.
+
+ 
+
+Some background information:
+
+ 
+
+Asterisk 1.42
+
+Can_sccp 20060408 patched to 20070725 (see attached DIFF)
+
+ 
+
+Please urgently help.
+
+ 
+
+Marcus
+
+ 
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070809/e42b733c/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070809/e42b733c/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: chan_sccp-20060408-20070725.diff
+Type: application/octet-stream
+Size: 31991 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070809/e42b733c/attachment.obj">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070809/e42b733c/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000272.html">[Chan-sccp-users] Nagios Plugin
+</A></li>
+	<LI>Next message: <A HREF="000274.html">[Chan-sccp-users] Blind Transfer crashes asterisk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#273">[ date ]</a>
+              <a href="thread.html#273">[ thread ]</a>
+              <a href="subject.html#273">[ subject ]</a>
+              <a href="author.html#273">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Success with Asterisk 1.4.13 with chan_sccp-20071009-DD and two small fixes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Success%20with%20Asterisk%201.4.13%20with%0A%20chan_sccp-20071009-DD%20and%20two%20small%20fixes&In-Reply-To=%3C47289E44.5050303%40matflow.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000341.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Success with Asterisk 1.4.13 with chan_sccp-20071009-DD and two small fixes</H1>
+    <B>Frank Segtrop</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Success%20with%20Asterisk%201.4.13%20with%0A%20chan_sccp-20071009-DD%20and%20two%20small%20fixes&In-Reply-To=%3C47289E44.5050303%40matflow.net%3E"
+       TITLE="[Chan-sccp-users] Success with Asterisk 1.4.13 with chan_sccp-20071009-DD and two small fixes">fs at matflow.net
+       </A><BR>
+    <I>Wed Oct 31 16:24:52 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000341.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#342">[ date ]</a>
+              <a href="thread.html#342">[ thread ]</a>
+              <a href="subject.html#342">[ subject ]</a>
+              <a href="author.html#342">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I can confirm that Asterisk 1.4.13 works very well with
+chan_sccp-20071009-DD, except for blind transfers and GPickUps.
+
+The blind transfer crashes can be fixed with this small patch of
+sccp_channel.c:
+
+--- chan_sccp-20071009-DD/sccp_channel.c        2007-10-02
+18:33:20.000000000 +0200
++++ chan_sccp-20071009-DD-mod/sccp_channel.c    2007-10-25
+10:28:37.365078170 +0100
+@@ -888,10 +888,18 @@
+
+        }
+
+-       ast_queue_hangup(peer-&gt;owner);
++        ast_mutex_lock(&amp;d-&gt;lock);
++        if (peer-&gt;owner)
++                ast_queue_hangup(peer-&gt;owner);
++        else {
++                sccp_log(1)(VERBOSE_PREFIX_3 &quot;Peer owner disappeared!
+Can't free ressources\n&quot;);
++                ast_mutex_unlock(&amp;d-&gt;lock);
++                return;
++        }
++
+        ast_mutex_unlock(&amp;transferee-&gt;lock);
+
+-       ast_mutex_lock(&amp;d-&gt;lock);
++       //ast_mutex_lock(&amp;d-&gt;lock);
+        d-&gt;transfer_channel = NULL;
+        ast_mutex_unlock(&amp;d-&gt;lock);
+
+
+GPickUp crashes as well, this hack fixes that for me:
+
+--- chan_sccp-20071009-DD/sccp_pbx.c    2007-10-04 18:18:14.000000000 +0200
++++ chan_sccp-20071009-DD-mod/sccp_pbx.c        2007-10-25
+18:05:42.910102970 +0100
+@@ -728,9 +728,10 @@
+        uint8_t res_exten = 0, res_wait = 0, res_timeout = 0;
+
+        /*sccp_log(1)( VERBOSE_PREFIX_3 &quot;CS_AST_CHANNEL_PVT: %s\n&quot;,
+chan-&gt;tech_pvt);*/
+-
++
++
+        c = CS_AST_CHANNEL_PVT(chan);
+-       if (!c) {
++       if (!c || !c-&gt;device || !c-&gt;device-&gt;id) {
+                /* let's go out as soon as possibile */
+                if (!ast_test_flag(chan, AST_FLAG_ZOMBIE)) {
+                        ast_log(LOG_ERROR, &quot;SCCP: return from the dial
+thread. No sccp channel available for %s\n&quot;, (chan) ? chan-&gt;name :
+&quot;(null)&quot;);
+@@ -741,6 +742,19 @@
+                }
+                return NULL;
+        }
++
++       if (strncmp(c-&gt;device-&gt;id,&quot;SEP&quot;,3)!=0 &amp;&amp;
+strncmp(c-&gt;device-&gt;id,&quot;ATA&quot;,3)!=0) {
++                if (!ast_test_flag(chan, AST_FLAG_ZOMBIE)) {
++                        sccp_log(1)( VERBOSE_PREFIX_3 &quot;SCCP: return
+from the dial thread. No sccp channel available for %s\n&quot;, (chan) ?
+chan-&gt;name : &quot;(null)&quot;);
++                        if (chan)
++                                ast_hangup(chan);
++                } else {
++                        sccp_log(1)( VERBOSE_PREFIX_3 &quot;SCCP: return
+from the dial thread. No sccp channel available for zombie\n&quot;);
++                }
++                return NULL;
++
++
++       }
+
+        /* this is an outgoung call */
+        ast_mutex_lock(&amp;c-&gt;lock);
+
+
+With these two fixes, there are no more deadlocks or segfaults at all.
+David and Marcello, if you like, you can add any of these fixes into
+your code.
+
+Thanks!
+
+--Frank
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000341.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#342">[ date ]</a>
+              <a href="thread.html#342">[ thread ]</a>
+              <a href="subject.html#342">[ subject ]</a>
+              <a href="author.html#342">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

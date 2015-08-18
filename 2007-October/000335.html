@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Crash with after lot of registrations
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Crash%20with%20after%20lot%20of%20registrations&In-Reply-To=%3CE0EC7D6DD04A614BB52E24FB6735F22414FBD1%40goofy.bison.keenserver.nl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000334.html">
+   <LINK REL="Next"  HREF="000336.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Crash with after lot of registrations</H1>
+    <B>Steven Lam, KeenServer</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Crash%20with%20after%20lot%20of%20registrations&In-Reply-To=%3CE0EC7D6DD04A614BB52E24FB6735F22414FBD1%40goofy.bison.keenserver.nl%3E"
+       TITLE="[Chan-sccp-users] Crash with after lot of registrations">s.lam at keenserver.nl
+       </A><BR>
+    <I>Wed Oct 17 22:01:19 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000334.html">[Chan-sccp-users] Crash with after lot of registrations
+</A></li>
+        <LI>Next message: <A HREF="000336.html">[Chan-sccp-users] is there a site where I can download the most stable version of chan_sccp for *1.4.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#335">[ date ]</a>
+              <a href="thread.html#335">[ thread ]</a>
+              <a href="subject.html#335">[ subject ]</a>
+              <a href="author.html#335">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi David,
+
+I know this doesn't look like a crash, this is all i could get using a
+debug of 30
+I will try using gdb tomorrow...
+
+Steven
+
+-----Oorspronkelijk bericht-----
+Van: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] Namens David
+Dederscheck
+Verzonden: woensdag 17 oktober 2007 21:47
+Aan: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Onderwerp: Re: [Chan-sccp-users] Crash with after lot of registrations
+
+Hi Steven,
+
+we'd like to help you with your problem, however, the attached log
+doesn't provide enough information.
+
+Maybe you should send us your full log if you have that activated in the
+config; if you don't know how to create a full log, please let us know.
+Btw, from the supplied log it doesn't really look like a crash.
+
+What would be really helpful is a gdb trace of the crashing asterisk.  
+Please stop asterisk to that end, and run it manually  as following:
+
+ &gt; gdb asterisk
+(gdb) set args -vvvvvf
+(gdb) run
+
+Please provide a backtrace (just type bt at the gdb prompt).
+
+Regards,
+-David.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000334.html">[Chan-sccp-users] Crash with after lot of registrations
+</A></li>
+	<LI>Next message: <A HREF="000336.html">[Chan-sccp-users] is there a site where I can download the most stable version of chan_sccp for *1.4.10
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#335">[ date ]</a>
+              <a href="thread.html#335">[ thread ]</a>
+              <a href="subject.html#335">[ subject ]</a>
+              <a href="author.html#335">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

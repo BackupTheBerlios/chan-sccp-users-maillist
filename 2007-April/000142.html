@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7960 multiple lines
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207960%20multiple%20lines&In-Reply-To=%3C200704220709.l3M79on2002248%40srv1.nickelnetworks.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000141.html">
+   <LINK REL="Next"  HREF="000143.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7960 multiple lines</H1>
+    <B>Paul Aviles</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207960%20multiple%20lines&In-Reply-To=%3C200704220709.l3M79on2002248%40srv1.nickelnetworks.com%3E"
+       TITLE="[Chan-sccp-users] 7960 multiple lines">paul.aviles at nickelnetworks.com
+       </A><BR>
+    <I>Sun Apr 22 09:11:17 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000141.html">[Chan-sccp-users] Patching for *1.4
+</A></li>
+        <LI>Next message: <A HREF="000143.html">[Chan-sccp-users] 7960 multiple lines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#142">[ date ]</a>
+              <a href="thread.html#142">[ thread ]</a>
+              <a href="subject.html#142">[ subject ]</a>
+              <a href="author.html#142">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Maybe someone can share some light on my issue. After many hours dealing
+with sccp, I was able to make trixbox 2.0/asterisk 1.2 work with my 7960
+using P00308000500 firmware. I really don't know if that is the best
+firmware to use, is just the only one I was given so if there is one older
+better please let me know.
+
+Anyway, my question is how to enable all the 6 lines on the phone. Right now
+only 1 lines (the top one) is enabled.
+
+Here is my sccp.conf file. I tried using autologin   = 301,301 and different
+combinations and it only shows 1 line. However, if I use autologin   =
+301,302 it shows line 1 as 301 and line 2 as 302.
+
+I am sure there is a way of doing it.
+
+Regards,
+
+Paul
+
+[general]
+servername = asterisk1.local            ; show this name on the device
+registration
+keepalive = 60                          ; phone keep alive message evey 60
+secs. Used to check the voicemail
+debug = 1                               ; console debug level. 1 =&gt; 10
+context = sccp
+dateFormat = M/D/YA                     ; M-D-Y in any order. Use M/D/YA
+(for 12h format)
+bindaddr = 10.5.36.22                   ; replace with the ip address of the
+asterisk server (RTP important param)
+port = 2000                             ; listen on port 2000 (Skinny,
+default)
+disallow=all                            ; First disallow all codecs
+allow=alaw                              ; Allow codecs in order of
+preference
+allow=ulaw                              ;
+firstdigittimeout = 16                  ; dialing timeout for the 1st digit
+digittimeout = 8                        ; more digits
+digittimeoutchar = #                    ; you can force the channel to dial
+with this char in the dialing state
+autoanswer_ring_time = 1                ; ringing time in seconds for the
+autoanswer, the default is 0
+autoanswer_tone = 0x32                  ; autoanswer confirmation tone. For
+a complete list of tones: grep SKINNY_TONE sccp_protocol.h
+                                        ; not all the tones can be played in
+a connected state, so you have to try.
+remotehangup_tone = 0x32                ; passive hangup notification. 0 for
+none
+transfer_tone = 0                       ; confirmation tone on transfer.
+Works only between SCCP devices
+callwaiting_tone = 0x2d                 ; sets to 0 to disable the
+callwaiting tone
+musicclass=default                      ; Sets the default music on hold
+class
+language=en                             ; Default language setting
+;accountcode=skinny                     ; accountcode to ease billing
+;deny=0.0.0.0/0.0.0.0                   ; Deny every address except for the
+only one allowed.
+;permit=10.5.36.0/255.255.255.0         ; Accept class C 192.168.1.0
+                                                ; You may have multiple
+rules for masking traffic.
+                                                ; Rules are processed from
+the first to the last.
+                                                ; This General rule is valid
+for all incoming connections. It's the 1st filter.
+
+;localnet = 192.168.1.0/255.255.255.0   ; All RFC 1918 addresses are local
+networks
+;externip = 1.2.3.4                     ; IP Address that we're going to
+notify in RTP media stream
+;externhost = mydomain.dyndns.org       ; Hostname (if dynamic) that we're
+going to notify in RTP media stream
+; externrefresh = 60                    ; expire time in seconds for the
+hostname (dns resolution)
+dnd = on                                ; turn on the dnd softkey for all
+devices. Valid values are &quot;off&quot;, &quot;on&quot; (busy signal), &quot;reject&quot; (busy signal),
+&quot;silent&quot; (ringer = silent)
+rtptos = 184                            ; sets the default rtp packets TOS
+echocancel = on                         ; sets the phone echocancel for all
+devices
+silencesuppression = off                ; sets the silence suppression for
+all devices
+;callgroup=1,3-4                        ; We are in caller groups 1,3,4.
+Valid for all lines
+;pickupgroup=1,3-5                      ; We can do call pick-p for call
+group 1,3,4,5. Valid for all lines
+;amaflags =                             ; Sets the default AMA flag code
+stored in the CDR record
+trustphoneip = no                       ; The phone has a ip address. It
+could be private, so if the phone is behind NAT
+                                        ; we don't have to trust the phone
+ip address, but the ip address of the connection
+tos = 0x68                              ; call control packets tos (0x68
+Assured forwarding)
+;earlyrtp = none                        ; valid options: none, offhook,
+dial, ringout. default is none.
+                                        ; The audio strem will be open in
+the progress and connected state.
+private = on                            ; permit the private function
+softkey
+mwilamp = on                            ; Set the MWI lamp style when MWI
+active to on, off, wink, flash or blink
+mwioncall = on                          ; Set the MWI on call.
+blindtransferindication = ring          ; moh or ring. the blind transfer
+should ring the caller or just play music on hold
+;protocolversion = 3                    ; skinny version protocol. Just for
+testing. 2 to 6
+cfwdall = on                            ; activate the callforward ALL stuff
+and softkeys
+cfwdbusy = on                           ; activate the callforward BUSY
+stuff and softkeys
+
+
+[devices]
+type        = 7960                      ; device type (see below)
+autologin   = 301,301                   ; lines list. You can add an empty
+line for an empty button (7960, 7970, 7940, 7920)
+description = Phone7960                 ; internal description. Not
+important
+keepalive = 60                          ; set 0 to disable the keepalive
+check.
+;tzoffset  = +2
+transfer = on                           ; enable or disable the transfer
+capability. It does remove the transfer softkey
+park = on                               ; take a look to the compile howto.
+Park stuff is not compiled by default
+;speeddial = 302,303                            ; you can add an empty
+speedial if you want an empty button (7960, 7970, 7920)
+;speeddial = 1000,name                  ; speeddial number and name
+cfwdall = on                            ; activate the callforward stuff and
+softkeys
+cfwdbusy = on
+dtmfmode = outband                      ; inband or outofband. outofband is
+the native cisco dtmf tone play.
+                                        ; Some phone model does not play
+dtmf tones while connected (bug?), so the default is inband
+imageversion = P00308000500             ; useful to upgrade old firmwares
+(the ones that do not load *.xml from the tftp server)
+;deny=0.0.0.0/0.0.0.0                   ; Same as general
+;permit=10.5.36.0/255.255.255.0         ; This device can register only
+using this ip address
+dnd = on                                        ; turn on the dnd softkey
+for this device. Valid values are &quot;off&quot;, &quot;on&quot; (busy signal), &quot;reject&quot; (busy
+signal), &quot;silent&quot; (ringer = silent)
+trustphoneip = no                               ; The phone has a ip
+address. It could be private, so if the phone is behind NAT
+                                                ; we don't have to trust the
+phone ip address, but the ip address of the connection
+;earlyrtp = none                                ; valid options: none,
+offhook, dial, ringout. default is none.
+                                                ; The audio strem will be
+open in the progress and connected state.
+private = on                            ; permit the private function
+softkey for this device
+mwilamp = on                            ; Set the MWI lamp style when MWI
+active to on, off, wink, flash or blink
+mwioncall = on                          ; Set the MWI on call.
+device =&gt; SEP000C8548C7FA               ; device name SEP&lt;MAC&gt;
+
+type        = 7960                      ; device type (see below)
+autologin   = 302                       ; lines list. You can add an empty
+line for an empty button (7960, 7970, 7940, 7920)
+description = Phone7960                 ; internal description. Not
+important
+keepalive = 60                          ; set 0 to disable the keepalive
+check.
+;tzoffset  = +2
+transfer = on                           ; enable or disable the transfer
+capability. It does remove the transfer softkey
+park = on                               ; take a look to the compile howto.
+Park stuff is not compiled by default
+;speeddial =                            ; you can add an empty speedial if
+you want an empty button (7960, 7970, 7920)
+;speeddial = 1000,name                  ; speeddial number and name
+cfwdall = on                            ; activate the callforward stuff and
+softkeys
+cfwdbusy = on
+dtmfmode = outband                      ; inband or outofband. outofband is
+the native cisco dtmf tone play.
+                                        ; Some phone model does not play
+dtmf tones while connected (bug?), so the default is inband
+imageversion = P00308000500             ; useful to upgrade old firmwares
+(the ones that do not load *.xml from the tftp server)
+;deny=0.0.0.0/0.0.0.0                   ; Same as general
+;permit=10.5.36.0/255.255.255.0         ; This device can register only
+using this ip address
+dnd = on                                        ; turn on the dnd softkey
+for this device. Valid values are &quot;off&quot;, &quot;on&quot; (busy signal), &quot;reject&quot; (busy
+signal), &quot;silent&quot; (ringer = silent)
+trustphoneip = no                               ; The phone has a ip
+address. It could be private, so if the phone is behind NAT
+                                                ; we don't have to trust the
+phone ip address, but the ip address of the connection
+;earlyrtp = none                                ; valid options: none,
+offhook, dial, ringout. default is none.
+                                                ; The audio strem will be
+open in the progress and connected state.
+private = on                            ; permit the private function
+softkey for this device
+mwilamp = on                            ; Set the MWI lamp style when MWI
+active to on, off, wink, flash or blink
+mwioncall = on                          ; Set the MWI on call.
+device =&gt; SEP000D28C2190A               ; device name SEP&lt;MAC&gt;
+
+[lines]
+id          = 301
+pin         = 301
+label       = 301
+description = Paul
+context     = from-internal
+incominglimit = 3
+transfer = on
+mailbox = 301
+vmnum = *97
+cid_name = Paul
+cid_num = 301
+trnsfvm = 1
+secondary_dialtone_digits = 9
+secondary_dialtone_tone = 0x22
+musicclass=default
+language=en
+rtptos = 184
+echocancel = on
+silencesuppression = on
+line =&gt; 301
+
+id          = 302
+pin         = 302
+label       = 302
+description = Leila
+context     = from-internal
+incominglimit = 3
+transfer = on
+mailbox = 302
+vmnum = *97
+cid_name = Leila
+cid_num = 302
+trnsfvm = 1
+secondary_dialtone_digits = 9
+secondary_dialtone_tone = 0x22
+musicclass=default
+language=en
+rtptos = 184
+echocancel = on
+silencesuppression = on
+line =&gt; 302
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000141.html">[Chan-sccp-users] Patching for *1.4
+</A></li>
+	<LI>Next message: <A HREF="000143.html">[Chan-sccp-users] 7960 multiple lines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#142">[ date ]</a>
+              <a href="thread.html#142">[ thread ]</a>
+              <a href="subject.html#142">[ subject ]</a>
+              <a href="author.html#142">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

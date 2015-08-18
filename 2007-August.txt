@@ -1,0 +1,1397 @@
+From mlists at c-net.it  Wed Aug  1 18:47:54 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Wed, 01 Aug 2007 18:47:54 +0200
+Subject: [Chan-sccp-users] R: chan_sccp and 7970
+In-Reply-To: <56a990d20707301237i639a9faahcd6fe20f01f29759@mail.gmail.com>
+References: <03FDC7A639326744925F8EB885247BAF861E81@THEBRAIN1.drs.ca>
+	<56a990d20707301237i639a9faahcd6fe20f01f29759@mail.gmail.com>
+Message-ID: <46B0B93A.2060003@c-net.it>
+
+Lacy Moore - Aspendora ha scritto:
+> I'm using a 7970 and everything works fine except the received calls.  
+> Using current version of Asterisk 1.2 with chan_sccp20060408 with 
+> current patches and latest 7970 firmware.
+
+RTP audio issue
+
+so set the bindaddr option in your sccp.conf
+
+Sergio
+
+
+From mlists at c-net.it  Wed Aug  1 18:49:27 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Wed, 01 Aug 2007 18:49:27 +0200
+Subject: [Chan-sccp-users] Shared lines implementation
+In-Reply-To: <8410625353DBE14D966495050BD2C70A012836F6@svrlae2k3.nationsholdinggroup.com>
+References: <8410625353DBE14D966495050BD2C70A012836F6@svrlae2k3.nationsholdinggroup.com>
+Message-ID: <46B0B997.4050105@c-net.it>
+
+Hughes, Sam ha scritto:
+> The problem I had with this is that the speeddials in Chan_SCCP won't
+> work if the line shows as busy.  Maybe someone has already fixed this.
+
+there's no fix because a speeddial busy line status is a trick. I had to 
+emulate a line on the speeddial in order to let the phone show up the 
+status.
+
+Sergio
+
+
+From jzuber at drs.ca  Wed Aug  1 21:01:10 2007
+From: jzuber at drs.ca (Zuber, Jonathan)
+Date: Wed, 1 Aug 2007 15:01:10 -0400 
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+Message-ID: <03FDC7A639326744925F8EB885247BAF861E86@THEBRAIN1.drs.ca>
+
+Ok, so I think I finally found the problem that has been holding me up for
+the past couple weeks; the TFTPBOOT server I was using was BIG endian
+format.  Well I guess I could be wrong, but I ended up taking a regular PC
+and setting an asterisk server up on there (Little endian), and all the same
+files that were not working now worked!
+
+Basically what was happening is that I could not 'dial' out, I could
+speedial, no problem, but dialing would not connect.  
+
+When the phone connects with asterisk, it gives the following error:
+
+ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number: SEPXXXXXXXXXXXX:
+requested a line configuration for unknown line 0
+
+This was causing me to have no line to connect the phone to the asterisk
+server.  I started noticing it might be a problem with the lines when I
+tried to 'autolog' into 3 different lines, and got 3 of the above messages.
+I double, triple, quadruple, etc etc.... checked my configs and all seemed
+well (and in fact was), yet nothing worked.  
+
+I was having this error with the Cisco 7970 and 7971 IP phones.
+
+Don't know yet if there is a fix for this, I am going to keep looking into
+it to see if it is 100% for sure the BIG Endian vs Little Endian that is
+causing the problem.
+
+Any feedback would be awesome!
+
+
+
+
+From peder at networkoblivion.com  Wed Aug  1 21:03:30 2007
+From: peder at networkoblivion.com (peder at networkoblivion.com)
+Date: Wed, 1 Aug 2007 14:03:30 -0500 (CDT)
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+In-Reply-To: <03FDC7A639326744925F8EB885247BAF861E86@THEBRAIN1.drs.ca>
+Message-ID: <32365037.241185995010143.JavaMail.root@ubuntubert>
+
+What is the server?  I use tftp on Windows XP, Vista, and several versions of linux and I haven't seen any issues like that (I've even had a Cisco router do tftp).
+
+
+----- Original Message -----
+From: "Jonathan Zuber" <jzuber at drs.ca>
+To: chan-sccp-users at lists.berlios.de
+Sent: Wednesday, August 1, 2007 2:01:10 PM (GMT-0600) America/Chicago
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+
+Ok, so I think I finally found the problem that has been holding me up for
+the past couple weeks; the TFTPBOOT server I was using was BIG endian
+format.  Well I guess I could be wrong, but I ended up taking a regular PC
+and setting an asterisk server up on there (Little endian), and all the same
+files that were not working now worked!
+
+Basically what was happening is that I could not 'dial' out, I could
+speedial, no problem, but dialing would not connect.  
+
+When the phone connects with asterisk, it gives the following error:
+
+ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number: SEPXXXXXXXXXXXX:
+requested a line configuration for unknown line 0
+
+This was causing me to have no line to connect the phone to the asterisk
+server.  I started noticing it might be a problem with the lines when I
+tried to 'autolog' into 3 different lines, and got 3 of the above messages.
+I double, triple, quadruple, etc etc.... checked my configs and all seemed
+well (and in fact was), yet nothing worked.  
+
+I was having this error with the Cisco 7970 and 7971 IP phones.
+
+Don't know yet if there is a fix for this, I am going to keep looking into
+it to see if it is 100% for sure the BIG Endian vs Little Endian that is
+causing the problem.
+
+Any feedback would be awesome!
+
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From jzuber at drs.ca  Wed Aug  1 21:16:10 2007
+From: jzuber at drs.ca (Zuber, Jonathan)
+Date: Wed, 1 Aug 2007 15:16:10 -0400 
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+Message-ID: <03FDC7A639326744925F8EB885247BAF861E87@THEBRAIN1.drs.ca>
+
+It was a Linux 2.4 using asterisk 1.2.20 and 1.4.6 and on Linux 2.6 using
+asterisk 1.4.8 .
+
+> -----Original Message-----
+> From:	peder at networkoblivion.com [SMTP:peder at networkoblivion.com]
+> Sent:	Wednesday, August 01, 2007 3:04 PM
+> To:	chan-sccp-users at lists.berlios.de
+> Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+> 
+> What is the server?  I use tftp on Windows XP, Vista, and several versions
+> of linux and I haven't seen any issues like that (I've even had a Cisco
+> router do tftp).
+> 
+> 
+> ----- Original Message -----
+> From: "Jonathan Zuber" <jzuber at drs.ca>
+> To: chan-sccp-users at lists.berlios.de
+> Sent: Wednesday, August 1, 2007 2:01:10 PM (GMT-0600) America/Chicago
+> Subject: [Chan-sccp-users] chan_sccp and Big Endian
+> 
+> Ok, so I think I finally found the problem that has been holding me up for
+> the past couple weeks; the TFTPBOOT server I was using was BIG endian
+> format.  Well I guess I could be wrong, but I ended up taking a regular PC
+> and setting an asterisk server up on there (Little endian), and all the
+> same
+> files that were not working now worked!
+> 
+> Basically what was happening is that I could not 'dial' out, I could
+> speedial, no problem, but dialing would not connect.  
+> 
+> When the phone connects with asterisk, it gives the following error:
+> 
+> ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number: SEPXXXXXXXXXXXX:
+> requested a line configuration for unknown line 0
+> 
+> This was causing me to have no line to connect the phone to the asterisk
+> server.  I started noticing it might be a problem with the lines when I
+> tried to 'autolog' into 3 different lines, and got 3 of the above
+> messages.
+> I double, triple, quadruple, etc etc.... checked my configs and all seemed
+> well (and in fact was), yet nothing worked.  
+> 
+> I was having this error with the Cisco 7970 and 7971 IP phones.
+> 
+> Don't know yet if there is a fix for this, I am going to keep looking into
+> it to see if it is 100% for sure the BIG Endian vs Little Endian that is
+> causing the problem.
+> 
+> Any feedback would be awesome!
+> 
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From jzuber at drs.ca  Wed Aug  1 22:55:37 2007
+From: jzuber at drs.ca (Zuber, Jonathan)
+Date: Wed, 1 Aug 2007 16:55:37 -0400 
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+Message-ID: <03FDC7A639326744925F8EB885247BAF861E88@THEBRAIN1.drs.ca>
+
+Ok so I found a "workaround" if you will, if you are having the same
+problem.  Under sccp_protocals.h line 625 (or thereabouts)  I change the
+structure as follows:
+
+was:
+        struct {
+                uint32_t lel_lineNumber;
+        } LineStatReqMessage;
+
+changed to:
+        struct {
+                uint16_t lel_lineNumber;
+        } LineStatReqMessage;
+
+Only thing now is that it seems to be causing trouble with the 7960, of
+COURSE lol. 
+
+I'll be looking into that tomorrow, just wanted to keep you all posted.
+
+> -----Original Message-----
+> From:	Zuber, Jonathan [SMTP:jzuber at drs.ca]
+> Sent:	Wednesday, August 01, 2007 3:16 PM
+> To:	'chan-sccp-users at lists.berlios.de'
+> Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+> 
+> It was a Linux 2.4 using asterisk 1.2.20 and 1.4.6 and on Linux 2.6 using
+> asterisk 1.4.8 .
+> 
+> > -----Original Message-----
+> > From:	peder at networkoblivion.com [SMTP:peder at networkoblivion.com]
+> > Sent:	Wednesday, August 01, 2007 3:04 PM
+> > To:	chan-sccp-users at lists.berlios.de
+> > Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+> > 
+> > What is the server?  I use tftp on Windows XP, Vista, and several
+> versions
+> > of linux and I haven't seen any issues like that (I've even had a Cisco
+> > router do tftp).
+> > 
+> > 
+> > ----- Original Message -----
+> > From: "Jonathan Zuber" <jzuber at drs.ca>
+> > To: chan-sccp-users at lists.berlios.de
+> > Sent: Wednesday, August 1, 2007 2:01:10 PM (GMT-0600) America/Chicago
+> > Subject: [Chan-sccp-users] chan_sccp and Big Endian
+> > 
+> > Ok, so I think I finally found the problem that has been holding me up
+> for
+> > the past couple weeks; the TFTPBOOT server I was using was BIG endian
+> > format.  Well I guess I could be wrong, but I ended up taking a regular
+> PC
+> > and setting an asterisk server up on there (Little endian), and all the
+> > same
+> > files that were not working now worked!
+> > 
+> > Basically what was happening is that I could not 'dial' out, I could
+> > speedial, no problem, but dialing would not connect.  
+> > 
+> > When the phone connects with asterisk, it gives the following error:
+> > 
+> > ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number:
+> SEPXXXXXXXXXXXX:
+> > requested a line configuration for unknown line 0
+> > 
+> > This was causing me to have no line to connect the phone to the asterisk
+> > server.  I started noticing it might be a problem with the lines when I
+> > tried to 'autolog' into 3 different lines, and got 3 of the above
+> > messages.
+> > I double, triple, quadruple, etc etc.... checked my configs and all
+> seemed
+> > well (and in fact was), yet nothing worked.  
+> > 
+> > I was having this error with the Cisco 7970 and 7971 IP phones.
+> > 
+> > Don't know yet if there is a fix for this, I am going to keep looking
+> into
+> > it to see if it is 100% for sure the BIG Endian vs Little Endian that is
+> > causing the problem.
+> > 
+> > Any feedback would be awesome!
+> > 
+> > 
+> > _______________________________________________
+> > Chan-sccp-users mailing list
+> > Chan-sccp-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> > 
+> > _______________________________________________
+> > Chan-sccp-users mailing list
+> > Chan-sccp-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From mlists at c-net.it  Thu Aug  2 14:29:03 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Thu, 02 Aug 2007 14:29:03 +0200
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+In-Reply-To: <03FDC7A639326744925F8EB885247BAF861E88@THEBRAIN1.drs.ca>
+References: <03FDC7A639326744925F8EB885247BAF861E88@THEBRAIN1.drs.ca>
+Message-ID: <46B1CE0F.30704@c-net.it>
+
+Zuber, Jonathan ha scritto:
+> Ok so I found a "workaround" if you will, if you are having the same
+> problem.  Under sccp_protocals.h line 625 (or thereabouts)  I change the
+> structure as follows:
+>   
+
+The skinny protocol is little endian and the chan_sccp has got endianess 
+conversion functions builtin
+
+There could be a missing endian translation on the line
+
+you just need to follow lel_lineNumber
+
+Sergio
+
+
+From aspendora at gmail.com  Thu Aug  2 17:55:23 2007
+From: aspendora at gmail.com (Lacy Moore - Aspendora)
+Date: Thu, 2 Aug 2007 10:55:23 -0500
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+In-Reply-To: <03FDC7A639326744925F8EB885247BAF861E86@THEBRAIN1.drs.ca>
+References: <03FDC7A639326744925F8EB885247BAF861E86@THEBRAIN1.drs.ca>
+Message-ID: <56a990d20708020855v45f42dd3x76d36b6234afded5@mail.gmail.com>
+
+Glad you found, at least partially, the cause.  I got tied up and wasn't
+able to get back with you regarding the error.
+
+
+On 8/1/07, Zuber, Jonathan <jzuber at drs.ca> wrote:
+>
+> Ok, so I think I finally found the problem that has been holding me up for
+> the past couple weeks; the TFTPBOOT server I was using was BIG endian
+> format.  Well I guess I could be wrong, but I ended up taking a regular PC
+> and setting an asterisk server up on there (Little endian), and all the
+> same
+> files that were not working now worked!
+>
+> Basically what was happening is that I could not 'dial' out, I could
+> speedial, no problem, but dialing would not connect.
+>
+> When the phone connects with asterisk, it gives the following error:
+>
+> ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number: SEPXXXXXXXXXXXX:
+> requested a line configuration for unknown line 0
+>
+> This was causing me to have no line to connect the phone to the asterisk
+> server.  I started noticing it might be a problem with the lines when I
+> tried to 'autolog' into 3 different lines, and got 3 of the above
+> messages.
+> I double, triple, quadruple, etc etc.... checked my configs and all seemed
+> well (and in fact was), yet nothing worked.
+>
+> I was having this error with the Cisco 7970 and 7971 IP phones.
+>
+> Don't know yet if there is a fix for this, I am going to keep looking into
+> it to see if it is 100% for sure the BIG Endian vs Little Endian that is
+> causing the problem.
+>
+> Any feedback would be awesome!
+>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070802/5554ec13/attachment.html>
+
+From aspendora at gmail.com  Thu Aug  2 18:08:15 2007
+From: aspendora at gmail.com (Lacy Moore - Aspendora)
+Date: Thu, 2 Aug 2007 11:08:15 -0500
+Subject: [Chan-sccp-users] Shared lines implementation
+In-Reply-To: <8410625353DBE14D966495050BD2C70A012836F6@svrlae2k3.nationsholdinggroup.com>
+References: <25284288.181185653463079.JavaMail.root@ubuntubert>
+	<8410625353DBE14D966495050BD2C70A012836F6@svrlae2k3.nationsholdinggroup.com>
+Message-ID: <56a990d20708020908j5fb0e4a2lf6770b5517a647de@mail.gmail.com>
+
+On 7/30/07, Hughes, Sam <shughes at nationsholdinggroup.com> wrote:
+>
+> Asterisk 1.4 has a shared line appearance feature.  I've played around
+> with it a little.  It doesn't work if you dial a SCCP channel directly,
+> but you can dial a Local extension that calls the SCCP device.
+>
+> The problem I had with this is that the speeddials in Chan_SCCP won't
+> work if the line shows as busy.  Maybe someone has already fixed this.
+> I'm running  chan_sccp-20060408 but haven't kept up with all the
+> patches.
+
+
+As Sergio said, that's a part of the Skinny protocol.  The behavior is the
+same on Call Manager.  One thing that would be nice, though, is to show the
+ringing state on the speeddial that has hints.  And then further, be able to
+press the button and pickup the call (similar to what the GXP-2000 can do).
+This is something that can be done with Call Manager.  Although, I kinda
+like Sergio's implementation better than Call Manager's.
+
+Call Manager has shared lines, but you have to put the call on hold, and
+then pick up the call elsewhere.  The problem with Call Manager's shared
+lines is that it is just shared lines.  In other words, you can
+t do the monitoring of extensions the way Sergio has implemented things.
+And, with it being shared lines, all phones showing that line ring.
+
+Now, if it was possible to mix and match.  It would be nice to be able to
+put the call on hold and then all other extensions monitoring that line
+could then pick up the call.  That would be neat.  But first, I'd rather
+start with being able to pick up a ringing extension.
+
+As it is, you can use Asterisk's builtin pickup.  The way I do it now is you
+see the call come in, and then dial ** plus extension (the same pattern that
+the GXP sends).  It would be more user friendly to just press the ringing
+button.
+
+Even as it is, it's nice in a setup where you don't want your line to ring
+at another phone, but you do want to be able to answer your phone from
+another phone.  You can hear your phone ringing, look at the phone where you
+are and see the caller id info, if you want to answer, just dial the pickup
+sequence for your extension.
+
+
+
+-----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of
+> peder at networkoblivion.com
+> Sent: Saturday, July 28, 2007 1:11 PM
+> To: chan-sccp-users at lists.berlios.de
+> Subject: Re: [Chan-sccp-users] Shared lines implementation
+>
+> How do you emulate it with the local channel driver?  I read that page
+> and didn't see anything like that.
+>
+> ----- Original Message -----
+> From: "Sergio Chersovani" <mlists at c-net.it>
+> To: chan-sccp-users at lists.berlios.de
+> Cc: chan-sccp-b-discussion at lists.sourceforge.net
+> Sent: Saturday, July 28, 2007 2:25:19 PM (GMT-0600) America/Mexico_City
+> Subject: Re: [Chan-sccp-users] Shared lines implementation
+>
+> Marcello Ceschia ha scritto:
+> > I started implementing shared line functionality to chan_sccp a few
+> month ago.
+> >
+>
+> shared line feature can be emulated with the asterisk local channel
+> driver
+>
+> http://www.voip-info.org/wiki/view/Asterisk+local+channels
+>
+> I'm running it in my office environment with no problems
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>
+>
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070802/d16f73de/attachment.html>
+
+From mlists at c-net.it  Thu Aug  2 20:25:59 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Thu, 02 Aug 2007 20:25:59 +0200
+Subject: [Chan-sccp-users] Shared lines implementation
+In-Reply-To: <56a990d20708020908j5fb0e4a2lf6770b5517a647de@mail.gmail.com>
+References: <25284288.181185653463079.JavaMail.root@ubuntubert>	<8410625353DBE14D966495050BD2C70A012836F6@svrlae2k3.nationsholdinggroup.com>
+	<56a990d20708020908j5fb0e4a2lf6770b5517a647de@mail.gmail.com>
+Message-ID: <46B221B7.5010305@c-net.it>
+
+Lacy Moore - Aspendora ha scritto:
+> Now, if it was possible to mix and match.  It would be nice to be able 
+> to put the call on hold and then all other extensions monitoring that 
+> line could then pick up the call.  That would be neat.  But first, I'd 
+> rather start with being able to pick up a ringing extension.
+
+This is possible. It could be a channel driver internal transfer
+
+Sergio
+
+
+From jzuber at drs.ca  Thu Aug  2 20:33:15 2007
+From: jzuber at drs.ca (Zuber, Jonathan)
+Date: Thu, 2 Aug 2007 14:33:15 -0400 
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+Message-ID: <03FDC7A639326744925F8EB885247BAF861E89@THEBRAIN1.drs.ca>
+
+Ok as I said yesterday I had found a workaround, but now I believe I found a
+fix - if anyone else could test it on different phones and let me know.  I
+have it working for the 7960/70/71 on both a BIG endian and a LITTLE endian
+server:
+
+in sccp_actions.c:
+
+around line 525:
+
+change this:
+
+uint8_t lineNumber = letohs(r->msg.LineStatReqMessage.lel_lineNumber);
+
+to this:
+
+uint8_t lineNumber = letohl(r->msg.LineStatReqMessage.lel_lineNumber);
+
+yes that is only a 1 letter change (sooo simple!!!)  but what is happening
+is that it is only swapping 2 bytes of a 4 byte value with the 's' there,
+and with the 'l' it is swapping all 4 bytes (swapping for little > big
+endian conversion), then it is only taking the 1 byte of info (the uint8_t
+lineNumber is a 1 byte value), which with the wrong swap was grapping bogus
+info!
+
+Thanks all for your suggestions the past couple of weeks!
+
+Jonathan Zuber
+
+
+> -----Original Message-----
+> From:	Lacy Moore - Aspendora [SMTP:aspendora at gmail.com]
+> Sent:	Thursday, August 02, 2007 11:55 AM
+> To:	chan-sccp-users at lists.berlios.de
+> Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+> 
+> Glad you found, at least partially, the cause.  I got tied up and wasn't
+> able to get back with you regarding the error.
+> 
+>  
+> On 8/1/07, Zuber, Jonathan < jzuber at drs.ca <mailto:jzuber at drs.ca>> wrote: 
+> 
+> 	Ok, so I think I finally found the problem that has been holding me
+> up for
+> 	the past couple weeks; the TFTPBOOT server I was using was BIG
+> endian 
+> 	format.  Well I guess I could be wrong, but I ended up taking a
+> regular PC
+> 	and setting an asterisk server up on there (Little endian), and all
+> the same
+> 	files that were not working now worked!
+> 	
+> 	Basically what was happening is that I could not 'dial' out, I could
+> 
+> 	speedial, no problem, but dialing would not connect.
+> 	
+> 	When the phone connects with asterisk, it gives the following error:
+> 	
+> 	ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number:
+> SEPXXXXXXXXXXXX:
+> 	requested a line configuration for unknown line 0 
+> 	
+> 	This was causing me to have no line to connect the phone to the
+> asterisk
+> 	server.  I started noticing it might be a problem with the lines
+> when I
+> 	tried to 'autolog' into 3 different lines, and got 3 of the above
+> messages. 
+> 	I double, triple, quadruple, etc etc.... checked my configs and all
+> seemed
+> 	well (and in fact was), yet nothing worked.
+> 	
+> 	I was having this error with the Cisco 7970 and 7971 IP phones.
+> 	
+> 	Don't know yet if there is a fix for this, I am going to keep
+> looking into 
+> 	it to see if it is 100% for sure the BIG Endian vs Little Endian
+> that is
+> 	causing the problem.
+> 	
+> 	Any feedback would be awesome!
+> 	
+> 	
+> 	_______________________________________________
+> 	Chan-sccp-users mailing list 
+> 	Chan-sccp-users at lists.berlios.de
+> <mailto:Chan-sccp-users at lists.berlios.de>
+> 	<https://lists.berlios.de/mailman/listinfo/chan-sccp-users> 
+> 	
+> 
+> 
+> 
+> 
+> -- 
+> Lacy Moore
+> Somewhere I wish I wasn't  << File: ATT422449.txt >> 
+
+
+From jzuber at drs.ca  Thu Aug  2 20:48:28 2007
+From: jzuber at drs.ca (Zuber, Jonathan)
+Date: Thu, 2 Aug 2007 14:48:28 -0400 
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+Message-ID: <03FDC7A639326744925F8EB885247BAF861E8A@THEBRAIN1.drs.ca>
+
+And just to mention that this is INSTEAD of what I mentioned about changing
+a value in sccp_protocol.h   that was just something that worked in the
+meantime for the 7970 - however it caused problems with the 7960 which is
+why I looked for another option.
+
+> -----Original Message-----
+> From:	Zuber, Jonathan [SMTP:jzuber at drs.ca]
+> Sent:	Thursday, August 02, 2007 2:33 PM
+> To:	'chan-sccp-users at lists.berlios.de'
+> Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+> 
+> Ok as I said yesterday I had found a workaround, but now I believe I found
+> a
+> fix - if anyone else could test it on different phones and let me know.  I
+> have it working for the 7960/70/71 on both a BIG endian and a LITTLE
+> endian
+> server:
+> 
+> in sccp_actions.c:
+> 
+> around line 525:
+> 
+> change this:
+> 
+> uint8_t lineNumber = letohs(r->msg.LineStatReqMessage.lel_lineNumber);
+> 
+> to this:
+> 
+> uint8_t lineNumber = letohl(r->msg.LineStatReqMessage.lel_lineNumber);
+> 
+> yes that is only a 1 letter change (sooo simple!!!)  but what is happening
+> is that it is only swapping 2 bytes of a 4 byte value with the 's' there,
+> and with the 'l' it is swapping all 4 bytes (swapping for little > big
+> endian conversion), then it is only taking the 1 byte of info (the uint8_t
+> lineNumber is a 1 byte value), which with the wrong swap was grapping
+> bogus
+> info!
+> 
+> Thanks all for your suggestions the past couple of weeks!
+> 
+> Jonathan Zuber
+> 
+> 
+> > -----Original Message-----
+> > From:	Lacy Moore - Aspendora [SMTP:aspendora at gmail.com]
+> > Sent:	Thursday, August 02, 2007 11:55 AM
+> > To:	chan-sccp-users at lists.berlios.de
+> > Subject:	Re: [Chan-sccp-users] chan_sccp and Big Endian
+> > 
+> > Glad you found, at least partially, the cause.  I got tied up and wasn't
+> > able to get back with you regarding the error.
+> > 
+> >  
+> > On 8/1/07, Zuber, Jonathan < jzuber at drs.ca <mailto:jzuber at drs.ca>>
+> wrote: 
+> > 
+> > 	Ok, so I think I finally found the problem that has been holding me
+> > up for
+> > 	the past couple weeks; the TFTPBOOT server I was using was BIG
+> > endian 
+> > 	format.  Well I guess I could be wrong, but I ended up taking a
+> > regular PC
+> > 	and setting an asterisk server up on there (Little endian), and all
+> > the same
+> > 	files that were not working now worked!
+> > 	
+> > 	Basically what was happening is that I could not 'dial' out, I could
+> > 
+> > 	speedial, no problem, but dialing would not connect.
+> > 	
+> > 	When the phone connects with asterisk, it gives the following error:
+> > 	
+> > 	ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number:
+> > SEPXXXXXXXXXXXX:
+> > 	requested a line configuration for unknown line 0 
+> > 	
+> > 	This was causing me to have no line to connect the phone to the
+> > asterisk
+> > 	server.  I started noticing it might be a problem with the lines
+> > when I
+> > 	tried to 'autolog' into 3 different lines, and got 3 of the above
+> > messages. 
+> > 	I double, triple, quadruple, etc etc.... checked my configs and all
+> > seemed
+> > 	well (and in fact was), yet nothing worked.
+> > 	
+> > 	I was having this error with the Cisco 7970 and 7971 IP phones.
+> > 	
+> > 	Don't know yet if there is a fix for this, I am going to keep
+> > looking into 
+> > 	it to see if it is 100% for sure the BIG Endian vs Little Endian
+> > that is
+> > 	causing the problem.
+> > 	
+> > 	Any feedback would be awesome!
+> > 	
+> > 	
+> > 	_______________________________________________
+> > 	Chan-sccp-users mailing list 
+> > 	Chan-sccp-users at lists.berlios.de
+> > <mailto:Chan-sccp-users at lists.berlios.de>
+> > 	<https://lists.berlios.de/mailman/listinfo/chan-sccp-users> 
+> > 	
+> > 
+> > 
+> > 
+> > 
+> > -- 
+> > Lacy Moore
+> > Somewhere I wish I wasn't  << File: ATT422449.txt >> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From m.robichon at llg.de  Tue Aug  7 18:59:23 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Tue, 7 Aug 2007 18:59:23 +0200 
+Subject: [Chan-sccp-users]  Nagios Plugin
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC5110655AB12@lhu01.llg.de>
+
+Hi all,
+
+has anyone an idea how to implement a Nagios check for chan_sccp like the
+Nagios check for sip?
+
+Have a nice day.
+
+Marcus
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070807/d9df6e8f/attachment.html>
+
+From Marcello.Ceschia at gmx.net  Wed Aug  8 08:36:22 2007
+From: Marcello.Ceschia at gmx.net (Ceschia, Marcello)
+Date: Wed, 8 Aug 2007 08:36:22 +0200
+Subject: [Chan-sccp-users] Nagios Plugin
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC5110655AB12@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC5110655AB12@lhu01.llg.de>
+Message-ID: <200708080836.22950.Marcello.Ceschia@gmx.net>
+
+Hi Marcus,
+
+I think the best way is, to implement an interface for asterisk management 
+console. 
+Then it is posible to make checks for devices and/or lines.
+
+What do you want to check?
+
+ Marcello
+
+
+Am Dienstag, 7. August 2007 18:59 schrieb Marcus Robichon:
+> Hi all,
+>
+> has anyone an idea how to implement a Nagios check for chan_sccp like the
+> Nagios check for sip?
+>
+> Have a nice day.
+>
+> Marcus
+
+
+From m.robichon at llg.de  Wed Aug  8 16:25:21 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Wed, 8 Aug 2007 16:25:21 +0200 
+Subject: [Chan-sccp-users] Nagios Plugin
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC5110655ABAA@lhu01.llg.de>
+
+Hi Marcello,
+
+it would be nice to see if chan_sccp is responding or not. I think this must
+be possible if Nagios will register as a device.
+
+Of course it is also nice to see how many sccp devices are registered.
+
+Marcus Robichon
+ 
+Lab Logistics Group GmbH
+
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Ceschia,
+Marcello
+Gesendet: Mittwoch, 8. August 2007 08:36
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Nagios Plugin
+
+Hi Marcus,
+
+I think the best way is, to implement an interface for asterisk management 
+console. 
+Then it is posible to make checks for devices and/or lines.
+
+What do you want to check?
+
+ Marcello
+
+
+Am Dienstag, 7. August 2007 18:59 schrieb Marcus Robichon:
+> Hi all,
+>
+> has anyone an idea how to implement a Nagios check for chan_sccp like the
+> Nagios check for sip?
+>
+> Have a nice day.
+>
+> Marcus
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070808/fa7afafe/attachment.html>
+
+From m.robichon at llg.de  Thu Aug  9 07:10:36 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Thu, 9 Aug 2007 07:10:36 +0200 
+Subject: [Chan-sccp-users]  Blind Transfer crashes asterisk
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC5110655ABB5@lhu01.llg.de>
+
+Hi,
+
+ 
+
+we patched our chan_sccp with the fixes from Andreas Anderson (posted on the
+25th of July). We have big problems in doing a blind transfer. I will
+explain what happens:
+
+ 
+
+You try to transfer a call using [Transfer] button. The extension does not
+pickup the phone, you go and press again the [Transfer] button to get rid of
+the phonecall. At this time asterisk crashes totally. 
+
+ 
+
+We had the workaround in disabling the sccp transfer functionality and use #
++ Extension for transferring calls with asterisk implemented transfer
+technology. But you cannot do a perfect blind transfer. If the extension
+does not pick up the phone asterisk loose the call when you hang up.
+
+ 
+
+Some background information:
+
+ 
+
+Asterisk 1.42
+
+Can_sccp 20060408 patched to 20070725 (see attached DIFF)
+
+ 
+
+Please urgently help.
+
+ 
+
+Marcus
+
+ 
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070809/e42b733c/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: chan_sccp-20060408-20070725.diff
+Type: application/octet-stream
+Size: 31991 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070809/e42b733c/attachment.obj>
+
+From jeanlouis.curty at free.fr  Thu Aug  9 08:49:10 2007
+From: jeanlouis.curty at free.fr (Jean-Louis Curty)
+Date: Thu, 09 Aug 2007 08:49:10 +0200
+Subject: [Chan-sccp-users] Blind Transfer crashes asterisk
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC5110655ABB5@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC5110655ABB5@lhu01.llg.de>
+Message-ID: <1186642150.46bab8e6578b3@imp.free.fr>
+
+why don't you use #1 #2 features for attended and blind transfer of asterisk
+( uncomment nec lines in features.conf )
+not the best solution but at least your have the fonctionnality,
+jl
+
+Selon Marcus Robichon <m.robichon at llg.de>:
+
+> Hi,
+>
+>
+>
+> we patched our chan_sccp with the fixes from Andreas Anderson (posted on the
+> 25th of July). We have big problems in doing a blind transfer. I will
+> explain what happens:
+>
+>
+>
+> You try to transfer a call using [Transfer] button. The extension does not
+> pickup the phone, you go and press again the [Transfer] button to get rid of
+> the phonecall. At this time asterisk crashes totally.
+>
+>
+>
+> We had the workaround in disabling the sccp transfer functionality and use #
+> + Extension for transferring calls with asterisk implemented transfer
+> technology. But you cannot do a perfect blind transfer. If the extension
+> does not pick up the phone asterisk loose the call when you hang up.
+>
+>
+>
+> Some background information:
+>
+>
+>
+> Asterisk 1.42
+>
+> Can_sccp 20060408 patched to 20070725 (see attached DIFF)
+>
+>
+>
+> Please urgently help.
+>
+>
+>
+> Marcus
+>
+>
+>
+>
+>
+>
+
+
+-- 
+
+
+From chan-sccp at vaag.nu  Wed Aug 22 08:52:46 2007
+From: chan-sccp at vaag.nu (Remco Barendse)
+Date: Wed, 22 Aug 2007 08:52:46 +0200 (CEST)
+Subject: [Chan-sccp-users] Latest chan-sccp
+In-Reply-To: <BAY109-F29F4437941FA485E073D68E4F10@phx.gbl>
+References: <BAY109-F29F4437941FA485E073D68E4F10@phx.gbl>
+Message-ID: <Pine.LNX.4.64.0708220838410.22377@raveon.vaag.nu>
+
+Hi all!!
+
+During the last few months i have seen some talks about patches, fixes and 
+updates to chan-sccp(b). There was even some discussion about 
+consolidating them, is there a version available anywhere that has all the 
+fixes included?
+
+I am still on Asterisk 1.2.24 and don't need any special features, just 
+place and receive calls.
+
+My current problem with chan-sccp is that i am using a Kirk Dect IP 600 
+V2 with SCCP. The Kirk seems to work, i can register handsets to it and 
+they can make outgoing calls. I am using the handsets at home, so i want 
+to ring all handsets when a call comes in. Only 5 handsets ring, the 
+other 6 stay silent, always the same handsets stay silent.
+
+I believe my setup is different from most people on this list, because 
+registration of all handsets (lines / devices) will come from one single 
+ip address only.
+
+Most people will use normal phones, and i guess not more than 1 - 3 
+registrations per phone.
+
+Can anyone confirm this problem?
+
+Would i be better off using built in skinny now of Asterisk 1.2 or 1.4 or 
+should chan-sccp still work for me?. There were some other messages of 
+people on the list using the Kirk, but also with only a few handsets.
+
+I assume that the issue in chan-sccp would be minor, if anyone would be 
+willing to fix it for a reasonable fee i would also be interested in that.
+
+Thanks all!!
+Remco
+
+
+From m.robichon at llg.de  Wed Aug 22 10:19:13 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Wed, 22 Aug 2007 10:19:13 +0200
+Subject: [Chan-sccp-users] Latest chan-sccp
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC5110655B0E9@lhu01.llg.de>
+
+Hi Remco,
+
+we also use Kirk Dect IP 600 with chan_sccp. We do not have this problem.
+All connections from Kirk come from one IP, but this is handled correctly in
+Asterisk. I believe this has something to do with the firmware of Kirk. We
+have other big problems with Kirk which were majorly fixed by upgrading the
+firmware to version 6.00 dvl-sr1 IP1200[07-60600.07], Bootcode[365], HW[10]
+16384/16384. You can download this firmware at Kirk webpage.
+
+We tried skinny protocol and it is enough for Kirk DECT solution, because
+all the major advantages of chan_sccp are not included in the Kirk
+distribution.
+
+Try the new firmware, if you did not already run it.
+
+Kind regards
+
+Marcus Robichon
+ 
+Lab Logistics Group GmbH
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Remco
+Barendse
+Gesendet: Mittwoch, 22. August 2007 08:53
+An: chan-sccp-b-discussion at lists.sourceforge.net
+Cc: chan-sccp-users at lists.berlios.de
+Betreff: [Chan-sccp-users] Latest chan-sccp
+
+Hi all!!
+
+During the last few months i have seen some talks about patches, fixes and 
+updates to chan-sccp(b). There was even some discussion about 
+consolidating them, is there a version available anywhere that has all the 
+fixes included?
+
+I am still on Asterisk 1.2.24 and don't need any special features, just 
+place and receive calls.
+
+My current problem with chan-sccp is that i am using a Kirk Dect IP 600 
+V2 with SCCP. The Kirk seems to work, i can register handsets to it and 
+they can make outgoing calls. I am using the handsets at home, so i want 
+to ring all handsets when a call comes in. Only 5 handsets ring, the 
+other 6 stay silent, always the same handsets stay silent.
+
+I believe my setup is different from most people on this list, because 
+registration of all handsets (lines / devices) will come from one single 
+ip address only.
+
+Most people will use normal phones, and i guess not more than 1 - 3 
+registrations per phone.
+
+Can anyone confirm this problem?
+
+Would i be better off using built in skinny now of Asterisk 1.2 or 1.4 or 
+should chan-sccp still work for me?. There were some other messages of 
+people on the list using the Kirk, but also with only a few handsets.
+
+I assume that the issue in chan-sccp would be minor, if anyone would be 
+willing to fix it for a reasonable fee i would also be interested in that.
+
+Thanks all!!
+Remco
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070822/c66c95bb/attachment.html>
+
+From chan-sccp at vaag.nu  Wed Aug 22 16:03:10 2007
+From: chan-sccp at vaag.nu (Remco Barendse)
+Date: Wed, 22 Aug 2007 16:03:10 +0200 (CEST)
+Subject: [Chan-sccp-users] Latest chan-sccp
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC5110655B0E9@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC5110655B0E9@lhu01.llg.de>
+Message-ID: <Pine.LNX.4.64.0708221551350.22377@raveon.vaag.nu>
+
+Thanks for the reply!
+
+Which version of chan_sccp or skinny are you using, and with which 
+patches? Asterisk 1.2 or 1.4 ?
+
+
+The version numbers you quoted from your Kirk seem really really new.
+Are you sure you have a hardware version 2 of the Kirk, not the hardware 
+version 3 Skinny ??
+
+I looked for software updates here, but i seem to have the latest 
+installed, all much older than the numbers you gave me.
+I looked here http://www.kirktelecom.com/Installer/suk227.asp
+
+My Kirk says:
+Version V5.01 sr1-hotfix ip600[01Codec], Bootcode[323], HW[8] 4096/16384
+
+Thanks a 1,000,000 :)
+
+
+On Wed, 22 Aug 2007, Marcus Robichon wrote:
+
+> Hi Remco,
+>
+> we also use Kirk Dect IP 600 with chan_sccp. We do not have this problem.
+> All connections from Kirk come from one IP, but this is handled correctly in
+> Asterisk. I believe this has something to do with the firmware of Kirk. We
+> have other big problems with Kirk which were majorly fixed by upgrading the
+> firmware to version 6.00 dvl-sr1 IP1200[07-60600.07], Bootcode[365], HW[10]
+> 16384/16384. You can download this firmware at Kirk webpage.
+>
+> We tried skinny protocol and it is enough for Kirk DECT solution, because
+> all the major advantages of chan_sccp are not included in the Kirk
+> distribution.
+>
+> Try the new firmware, if you did not already run it.
+>
+> Kind regards
+>
+> Marcus Robichon
+>
+> Lab Logistics Group GmbH
+> -----Urspr?ngliche Nachricht-----
+> Von: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Remco
+> Barendse
+> Gesendet: Mittwoch, 22. August 2007 08:53
+> An: chan-sccp-b-discussion at lists.sourceforge.net
+> Cc: chan-sccp-users at lists.berlios.de
+> Betreff: [Chan-sccp-users] Latest chan-sccp
+>
+> Hi all!!
+>
+> During the last few months i have seen some talks about patches, fixes and
+> updates to chan-sccp(b). There was even some discussion about
+> consolidating them, is there a version available anywhere that has all the
+> fixes included?
+>
+> I am still on Asterisk 1.2.24 and don't need any special features, just
+> place and receive calls.
+>
+> My current problem with chan-sccp is that i am using a Kirk Dect IP 600
+> V2 with SCCP. The Kirk seems to work, i can register handsets to it and
+> they can make outgoing calls. I am using the handsets at home, so i want
+> to ring all handsets when a call comes in. Only 5 handsets ring, the
+> other 6 stay silent, always the same handsets stay silent.
+>
+> I believe my setup is different from most people on this list, because
+> registration of all handsets (lines / devices) will come from one single
+> ip address only.
+>
+> Most people will use normal phones, and i guess not more than 1 - 3
+> registrations per phone.
+>
+> Can anyone confirm this problem?
+>
+> Would i be better off using built in skinny now of Asterisk 1.2 or 1.4 or
+> should chan-sccp still work for me?. There were some other messages of
+> people on the list using the Kirk, but also with only a few handsets.
+>
+> I assume that the issue in chan-sccp would be minor, if anyone would be
+> willing to fix it for a reasonable fee i would also be interested in that.
+>
+> Thanks all!!
+> Remco
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+
+From davidded at davidded.de  Thu Aug 23 01:39:29 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Thu, 23 Aug 2007 01:39:29 +0200
+Subject: [Chan-sccp-users] Received calls issue solved
+In-Reply-To: <E0EC7D6DD04A614BB52E24FB6735F224033FDE@goofy.bison.keenserver.nl>
+References: <E0EC7D6DD04A614BB52E24FB6735F224033FDE@goofy.bison.keenserver.nl>
+Message-ID: <9197E894-C339-4339-9084-B9DF2FE35122@davidded.de>
+
+Hi,
+
+I was finally fed up of my Received Calls list being empty on the  
+more recent phones. I just did a delicate side-by-side comparison of  
+chan_sccp's behaviour and Steven's dump. Steven, thanks again for the  
+file.
+
+The issue is that the new phones record the call only if they get an  
+OFFHOOK callstate message before the CONNECTED callstate message.  
+Hmm... Maybe the semantics have changed here.
+
+I have made a patch for the issue. Please let me know if it worked  
+for you.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: recvdCalls.diff
+Type: application/octet-stream
+Size: 311 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070823/4d885fd7/attachment.obj>
+-------------- next part --------------
+Regards,
+-David.
+
+On 09.11.2006, at 22:03, Steven Lam, KeenServer wrote:
+
+> Hi,
+>
+> Don't know if this helps, i used ethereal to see what happens when  
+> a 7970 receives a call when hooked up to a real CCM.
+>
+> Atteched is a ethereal dump.
+>
+> Steven.
+>
+> -----Oorspronkelijk bericht-----
+> Van: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp- 
+> users-bounces at lists.berlios.de] Namens Steinringer, Christian
+> Verzonden: woensdag 8 november 2006 11:23
+> Aan: chan-sccp-users at lists.berlios.de
+> Onderwerp: Re: [Chan-sccp-users] {Spam}{0/10} Re: {Spam}{0/10}  
+> CompanyDirectory
+>
+> Hi!
+>
+> Fine that all works ;-) Received calls i don?t know I am working on it
+>
+> Anyone other has ideas ? 
+> <7970_receiving_call_from_141_on_CCM41.cap>___________________________ 
+> ____________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From sccp-list at puzzled.xs4all.nl  Thu Aug 23 02:05:28 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Thu, 23 Aug 2007 02:05:28 +0200
+Subject: [Chan-sccp-users] Received calls issue solved
+In-Reply-To: <9197E894-C339-4339-9084-B9DF2FE35122@davidded.de>
+References: <E0EC7D6DD04A614BB52E24FB6735F224033FDE@goofy.bison.keenserver.nl>
+	<9197E894-C339-4339-9084-B9DF2FE35122@davidded.de>
+Message-ID: <1187827528.6308.5.camel@localhost.localdomain>
+
+Hi David,
+
+On Thu, 2007-08-23 at 01:39 +0200, David Dederscheck wrote: 
+> Hi,
+> 
+> I was finally fed up of my Received Calls list being empty on the  
+> more recent phones. I just did a delicate side-by-side comparison of  
+> chan_sccp's behaviour and Steven's dump. Steven, thanks again for the  
+> file.
+> 
+> The issue is that the new phones record the call only if they get an  
+> OFFHOOK callstate message before the CONNECTED callstate message.  
+> Hmm... Maybe the semantics have changed here.
+> 
+> I have made a patch for the issue. Please let me know if it worked  
+> for you.
+
+Thanks for spending the time on this, much appreciated. I tested your
+patch with chan_sccp-20060408, asterisk 1.2.15 and a Cisco 7961G with
+stock ancient firmware (3.something iirc). And it worked like a charm :)
+Great job!
+
+Thanks and regards,
+Patrick
+
+
+
+From mlists at c-net.it  Thu Aug 23 10:49:19 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Thu, 23 Aug 2007 10:49:19 +0200
+Subject: [Chan-sccp-users] Received calls issue solved
+In-Reply-To: <9197E894-C339-4339-9084-B9DF2FE35122@davidded.de>
+References: <E0EC7D6DD04A614BB52E24FB6735F224033FDE@goofy.bison.keenserver.nl>
+	<9197E894-C339-4339-9084-B9DF2FE35122@davidded.de>
+Message-ID: <46CD4A0F.3060006@c-net.it>
+
+David Dederscheck ha scritto:
+> The issue is that the new phones record the call only if they get an 
+> OFFHOOK callstate message before the CONNECTED callstate message. 
+> Hmm... Maybe the semantics have changed here.
+
+The phone should be in a offhook state 'cause you picked up the handset
+
+Sergio
+
+
+From davidded at davidded.de  Thu Aug 23 22:16:38 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Thu, 23 Aug 2007 22:16:38 +0200
+Subject: [Chan-sccp-users] Received calls issue solved
+In-Reply-To: <46CD4A0F.3060006@c-net.it>
+References: <E0EC7D6DD04A614BB52E24FB6735F224033FDE@goofy.bison.keenserver.nl>
+	<9197E894-C339-4339-9084-B9DF2FE35122@davidded.de>
+	<46CD4A0F.3060006@c-net.it>
+Message-ID: <D0C5A6A9-DCD0-437A-A24D-42732FC040CB@davidded.de>
+
+Hi Sergio,
+
+you may be right that this is how the semantics have been devised by  
+Cisco.
+However, I didn't pick up the handset when I tried this, so this is  
+at least not specific to that case.
+
+I would rather suspect them to enable logging of a call even if no  
+connection was established. This could for instance be the case if a  
+call arrived with an operator asking if you want to pay for the  
+called person. This might be signalled even w/o a connected state. Or  
+what would you say?
+
+Regards,
+-David.
+
+On Aug 23, 2007, at 10:49 AM, Sergio Chersovani wrote:
+
+> David Dederscheck ha scritto:
+>> The issue is that the new phones record the call only if they get an
+>> OFFHOOK callstate message before the CONNECTED callstate message.
+>> Hmm... Maybe the semantics have changed here.
+>
+> The phone should be in a offhook state 'cause you picked up the  
+> handset
+>
+> Sergio
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From molnar at connexis.com  Fri Aug 24 11:44:29 2007
+From: molnar at connexis.com (Gergely =?iso-8859-1?q?Moln=E1r?=)
+Date: Fri, 24 Aug 2007 11:44:29 +0200
+Subject: [Chan-sccp-users] questions
+Message-ID: <200708241144.33609.molnar@connexis.com>
+
+Hi All,
+
+
+I work for a company where we have cca. 100 Cisco 7940G phones running 
+SIP.
+Recently I was asked about using the original skinny firmware (what 
+these phones has) with Asterisk to cut down the costs.
+(For using SIP licences are needed.)
+
+After installing Asterisk 1.4.10 (on Debian etch) and chan_sccp 
+20060408 I was able to make and receive calls. (Also call parking 
+worked fine.)
+(I had to apply a patch on chan_sccp otherwise it couldn't compile.)
+
+
+However it seems working I have a few questions:
+
+- is there a newer version of chan_sccp?
+- reload support?
+- asterisk realtime support?
+- which firmware version should be used on the phone? (I've tried 
+v7-2-3 and v8-0-7)
+- can chan_sccp be used in a production environment?
+
+Currently reloading the sccp.conf is made by unloading and loading the 
+chan_sccp.so. There are two problems with this:
+- once the module is unloaded, the phones immediately loss the 
+connection to asterisk. (New phones cannot be registered. 
+transparently, which is not acceptable in a production environment.)
+- sometimes when the module is unloaded asterisk crashes.
+
+
+Thanks for the answers in advance.
+
+
+Best regards,
+
+	Gergely
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: This is a digitally signed message part.
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070824/55071ea4/attachment.pgp>
+

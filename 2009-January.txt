@@ -1,0 +1,86 @@
+From mrfexy at gmail.com  Wed Jan 28 18:54:26 2009
+From: mrfexy at gmail.com (Mr Fexy)
+Date: Wed, 28 Jan 2009 12:54:26 -0500
+Subject: [Chan-sccp-users] chan-sccp-b realtime support?
+Message-ID: <db755ed60901280954h28477e5epc668f6f14799b2ff@mail.gmail.com>
+
+I'm attempting to setup an environment where I can plug in a 7960 and
+have asterisk automatically accept it's registration. I know this is
+possible with sip, but I want to use sccp. I found a previous realtime
+patch for an old version of chan-sccp. Has this feature been glossed
+over in chan-sccp-b? Is there a more elegant way to be doing this?
+Thanks!
+
+
+From davidded at davidded.de  Wed Jan 28 19:19:52 2009
+From: davidded at davidded.de (David Dederscheck)
+Date: Wed, 28 Jan 2009 19:19:52 +0100
+Subject: [Chan-sccp-users] chan-sccp-b realtime support?
+In-Reply-To: <db755ed60901280954h28477e5epc668f6f14799b2ff@mail.gmail.com>
+References: <db755ed60901280954h28477e5epc668f6f14799b2ff@mail.gmail.com>
+Message-ID: <0346923E-7B39-4485-9CEA-229A2D9B0037@davidded.de>
+
+Hi,
+
+sccp realtime support is present in chan-sccp.
+
+I suggest you use the v3 branch from svn.
+
+For details on how to setup your tables, please contact me again, I  
+have it all running in my deployment environment.
+
+CU,
+-David.
+
+On 28.01.2009, at 18:54, Mr Fexy wrote:
+
+> I'm attempting to setup an environment where I can plug in a 7960 and
+> have asterisk automatically accept it's registration. I know this is
+> possible with sip, but I want to use sccp. I found a previous realtime
+> patch for an old version of chan-sccp. Has this feature been glossed
+> over in chan-sccp-b? Is there a more elegant way to be doing this?
+> Thanks!
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From scotchy32000 at yahoo.com  Wed Jan 28 19:30:38 2009
+From: scotchy32000 at yahoo.com (Scot Meyer)
+Date: Wed, 28 Jan 2009 10:30:38 -0800 (PST)
+Subject: [Chan-sccp-users] chan-sccp-b realtime support?
+Message-ID: <145328.47605.qm@web32006.mail.mud.yahoo.com>
+
+It's there make sure you are on the latest code.
+?
+Scot
+
+--- On Wed, 1/28/09, Mr Fexy <mrfexy at gmail.com> wrote:
+
+
+From: Mr Fexy <mrfexy at gmail.com>
+Subject: [Chan-sccp-users] chan-sccp-b realtime support?
+To: chan-sccp-users at lists.berlios.de
+Date: Wednesday, January 28, 2009, 11:54 AM
+
+
+I'm attempting to setup an environment where I can plug in a 7960 and
+have asterisk automatically accept it's registration. I know this is
+possible with sip, but I want to use sccp. I found a previous realtime
+patch for an old version of chan-sccp. Has this feature been glossed
+over in chan-sccp-b? Is there a more elegant way to be doing this?
+Thanks!
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+      
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090128/46d91ba2/attachment.html>
+

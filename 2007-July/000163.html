@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] I've finally had to give up with chan_sccp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20I%27ve%20finally%20had%20to%20give%20up%20with%20chan_sccp&In-Reply-To=%3C21105065.1183574296512.JavaMail.root%40mail.linkdc.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000164.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] I've finally had to give up with chan_sccp</H1>
+    <B>Martin Sutherland</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20I%27ve%20finally%20had%20to%20give%20up%20with%20chan_sccp&In-Reply-To=%3C21105065.1183574296512.JavaMail.root%40mail.linkdc.co.uk%3E"
+       TITLE="[Chan-sccp-users] I've finally had to give up with chan_sccp">martin at linkdc.co.uk
+       </A><BR>
+    <I>Wed Jul  4 20:38:16 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000164.html">[Chan-sccp-users] I've finally had to give up with chan_sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear list members,
+ 
+After a year of struggling for a year in an office with 24 Cisco 7940s/chan_sccp-20060408 + 2 patches/Asterisk 1.2.x, I've finally had to convert the phones to SIP. I really didn't want to do this but even with the latest Asterisk 1.2.x I was getting messages about deadlocks being avoided and the whole system ceasing to work until re-boot. The problems are always connected with transferring calls.
+ 
+I was using P00307020400 firmware on the handsets, Asterisk 1.2.18, chan_sccp-20060408 + 2 patches. Perhaps I should have changed the protocolversion in sccp.conf, but there is a limit to how much messing around you can do in a live office environment.
+ 
+Changing to SIP has had some real downsides. Instead of using Cisco 9714s, I now have to buy Polycom IP601 phones + sidecars, blind transfers seem to result in dead silence, sometimes phones don't seem to know when the other end has hung up etc.
+ 
+Is there anyone out there still using Asterisk 1.2.x with chan_sccp in a typical environment where incoming calls are answered by one or two people and then transferred as needed?
+ 
+Unless I am mistaken, all development of chan_sccp has been aimed at compatability with Asterisk 1.4.x and the forum is now in german which I find hard to understand.
+ 
+Thank you for all your comments.
+ 
+Martin
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070704/92407cbd/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070704/92407cbd/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000164.html">[Chan-sccp-users] I've finally had to give up with chan_sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] R: chan_sccp and 7970
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20R%3A%20chan_sccp%20and%207970&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E82%40THEBRAIN1.drs.ca%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000246.html">
+   <LINK REL="Next"  HREF="000249.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] R: chan_sccp and 7970</H1>
+    <B>Zuber, Jonathan</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20R%3A%20chan_sccp%20and%207970&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E82%40THEBRAIN1.drs.ca%3E"
+       TITLE="[Chan-sccp-users] R: chan_sccp and 7970">jzuber at drs.ca
+       </A><BR>
+    <I>Mon Jul 30 21:46:43 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000246.html">[Chan-sccp-users] R:  chan_sccp and 7970
+</A></li>
+        <LI>Next message: <A HREF="000249.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#248">[ date ]</a>
+              <a href="thread.html#248">[ thread ]</a>
+              <a href="subject.html#248">[ subject ]</a>
+              <a href="author.html#248">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ok here is sccp.conf (general and 1 phone and 1 line)
+[general]
+servername = Asterisk           ; show this name on the device registration
+keepalive = 60                  ; phone keep alive message evey 60 secs.
+Used to check the voicemail
+debug = 10                      ; console debug level. 1 =&gt; 10
+context = default
+dateFormat = D/M/YA             ; M-D-Y in any order. Use M/D/Ya (for 12h
+format)
+bindaddr = 10.3.3.235           ; replace with the ip address of the
+asterisk server (RTP important param)
+port = 2000                     ; listen on port 2000 (Skinny, default)
+disallow=all                    ; First disallow all codecs
+allow=ulaw                      ;
+firstdigittimeout = 16          ; dialing timeout for the 1st digit
+digittimeout = 8                ; more digits
+autoanswer_ring_time = 1        ; ringing time in seconds for the
+autoanswer, the default is 0
+autoanswer_tone = 0x32         
+remotehangup_tone = 0x32        ; passive hangup notification. 0 for none
+transfer_tone = 0               ; confirmation tone on transfer. Works only
+between SCCP devices
+callwaiting_tone = 0x2d         ; sets to 0 to disable the callwaiting tone
+musicclass=default              ; Sets the default music on hold class
+language=en                     ; Default language setting
+permit=10.3.0.0/255.255.0.0     ; Accept class C 172.31.0.0
+dnd = off                       
+rtptos = 184                    ; sets the default rtp packets TOS
+echocancel = on                 ; sets the phone echocancel for all devices
+silencesuppression = off        ; sets the silence suppression for all
+devices
+trustphoneip = no               ; The phone has a ip address. It could be
+private, so if the phone is behind NAT
+tos = 0x68                      ; call control packets tos (0x68 Assured
+forwarding)
+earlyrtp = none         ; valid options: none, offhook, dial, ringout.
+default is none.
+private = on                    ; permit the private function softkey
+
+[devices]
+type        = 7971              ; device type (see below)
+autologin   = 2006              ; lines list. You can add an empty line for
+an empty button (7960, 7970, 7940, 7920)
+description = 2006              ; internal description. Not important
+tzoffset = 0
+transfer = on                   ; enable or disable the transfer capability.
+It does remove the transfer softkey
+cfwdall = off                   ; activate the callforward stuff and
+softkeys
+cfwdbusy = off
+dtmfmode = outofband            ; inband or outofband. outofband is the
+native cisco dtmf tone play.
+deny=0.0.0.0/0.0.0.0            ; Same as general
+permit=10.3.3.247/255.255.0.0     ; This device can register only using this
+ip address
+dnd = off                     
+trustphoneip = yes               ; The phone has a ip address. It could be
+private, so if the phone is behind NAT
+private = on                    ; permit the private function softkey for
+this device
+
+speeddial = 2003,speeddial-2003
+speeddial = 2004,speeddial-2004
+device =&gt; SEP001BD52D0885
+
+[lines]
+id          = 2006              ;
+pin         = 1234              ;
+label       = 7971              ; button line label (7960, 7970, 7940, 7920)
+description = Line 7971         ; top display description
+context     = default
+incominglimit = 4               ; more than 1 incoming call = call waiting.
+transfer = on                   ; per line transfer capability. on, off, 1,
+0
+mailbox = 2006                  ; voicemail.conf (syntax:
+vmbox[@context][:folder])
+vmnum = 600                     ; speeddial for voicemail administration,
+just a number to dial
+cid_name = 7971 2006            ; caller id name
+cid_num = 2006
+secondary_dialtone_digits = 9   ; digits for the secondary dialtone (max 9
+digits)
+secondary_dialtone_tone = 0x22  ; outside dialtone
+musicclass = default              ; Sets the default music on hold class
+language = en                     ; Default language setting
+rtptos = 184                    ; sets the the rtp packets TOS for this line
+echocancel = on                 ; sets the phone echocancel for this line
+silencesuppression = off        ; sets the silence suppression for this line
+line =&gt; 2006
+
+And i have a [default] section in extentions.conf
+
+And from extensions_additional.conf
+
+exten =&gt; 2001,1,Dial(SCCP/2001,10,r)
+exten =&gt; 2001,n,Hangup()
+exten =&gt; 2002,1,Dial(SCCP/2002,10,r)
+exten =&gt; 2002,n,Hangup()
+exten =&gt; 2003,hint,SCCP/2003
+exten =&gt; 2003,1,Dial(SCCP/2003,10,r)
+exten =&gt; 2003,n,Hangup()
+exten =&gt; 2004,1,Dial(SCCP/2004,10,r)
+exten =&gt; 2004,n,Hangup()
+exten =&gt; 2005,1,Dial(SCCP/2005,10,r)
+exten =&gt; 2005,n,Hangup()
+exten =&gt; 2006,1,Dial(SCCP/2006,10,r)
+exten =&gt; 2006,n,Hangup()
+
+Thanks for the help!
+
+
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From:	Lacy Moore - Aspendora [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">aspendora at gmail.com</A>]
+</I>&gt;<i> Sent:	Monday, July 30, 2007 3:37 PM
+</I>&gt;<i> To:	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject:	Re: [Chan-sccp-users] R: chan_sccp and 7970
+</I>&gt;<i> 
+</I>&gt;<i> On 7/30/07, Zuber, Jonathan &lt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>&gt;&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 	Can anyone else with a 7970 confirm that when they enter digits to
+</I>&gt;<i> place a
+</I>&gt;<i> 	call they see a blue screen pop up and show you the digits you are
+</I>&gt;<i> typing? 
+</I>&gt;<i> 	Thanks!
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> I'm using a 7970 and everything works fine except the received calls.
+</I>&gt;<i> Using current version of Asterisk 1.2 with chan_sccp20060408 with current
+</I>&gt;<i> patches and latest 7970 firmware.
+</I>&gt;<i>  
+</I>&gt;<i> Try posting your sccp.conf and the relevant section of your
+</I>&gt;<i> extensions.conf and maybe we can see what the problem is.  
+</I>&gt;<i> 
+</I>&gt;<i>   &lt;&lt; File: ATT394954.txt &gt;&gt; 
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000246.html">[Chan-sccp-users] R:  chan_sccp and 7970
+</A></li>
+	<LI>Next message: <A HREF="000249.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#248">[ date ]</a>
+              <a href="thread.html#248">[ thread ]</a>
+              <a href="subject.html#248">[ subject ]</a>
+              <a href="author.html#248">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

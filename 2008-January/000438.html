@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] A Couple of SCCP questions:
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20A%20Couple%20of%20SCCP%20questions%3A&In-Reply-To=%3C1af012b10801180652m27bc0b1fvdbfe768d09116a1b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000437.html">
+   <LINK REL="Next"  HREF="000439.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] A Couple of SCCP questions:</H1>
+    <B>Gerry Hull</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20A%20Couple%20of%20SCCP%20questions%3A&In-Reply-To=%3C1af012b10801180652m27bc0b1fvdbfe768d09116a1b%40mail.gmail.com%3E"
+       TITLE="[Chan-sccp-users] A Couple of SCCP questions:">gerry.hull at gmail.com
+       </A><BR>
+    <I>Fri Jan 18 15:52:31 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000437.html">[Chan-sccp-users] chan-sccp-b-20071213 misses conf/sccp.conf
+</A></li>
+        <LI>Next message: <A HREF="000439.html">[Chan-sccp-users]  Asterisk and Deadlocks: maybe a solution.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#438">[ date ]</a>
+              <a href="thread.html#438">[ thread ]</a>
+              <a href="subject.html#438">[ subject ]</a>
+              <a href="author.html#438">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey folks,
+
+I'm running SCCP Version 20071130 on Asterisk 1.4.17 (CentOS 5) (PiaF
+distribution)
+I'm currently running a variety of 7960 and 7921g phones...
+
+I've looked all over the net, and cannot find good information anywhere...
+
+How in the heck do I enable multiple lines on the 7921? Here's my SCCP.conf:
+
+I only see line 222 on the phone.  Lines 223 and 224 are configured in
+Asterisk/FreePBX.
+What am I missing?
+
+I presume I can use the same approach for desk phones.
+
+A direct reply is appreciated!!
+
+Thanks,
+
+Gerry
+
+; (SCCP*)
+;
+; An implementation of Skinny Client Control Protocol (SCCP)
+;
+; Sergio Chersovani (<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">mlists at c-net.it</A>)
+; <A HREF="http://chan-sccp.belios.de">http://chan-sccp.belios.de</A>
+;
+[general]
+servername = Gerry's PBX   ; show this name on the device registration
+keepalive = 30    ; phone keep alive message evey 60 secs. Used to check the
+voicemail
+debug = 1    ; console debug level. 1 =&gt; 10
+context = from-internal
+DateFormat = D.M.YA                    ; M-D-Y in any order (5 chars max)
+bindaddr = 192.168.1.60                ; replace with the ip address of the
+asterisk server
+port = 2000                                 ; listen on port 2000 (Skinny,
+default)
+debug = 0
+accountcode=skinny                      ; accountcode to ease billing
+callwaiting_tone = 0x2d                 ; sets to 0 to disable the
+callwaiting tone
+language=en                               ; Default language setting this
+setting also sets the voicemailbox language
+echocancel = on                           ; sets the phone echocancel for
+all devices
+silencesuppression = off                ; sets the silence suppression for
+all devices
+cfwdall = on                                 ; activate the callforward ALL
+stuff and softkeys
+cfwdbusy = on                              ; activate the callforward BUSY
+stuff and softkeys
+private = off                                 ; permit the private function
+softkey
+dnd = on                                     ; turn on the dnd softkey for
+all devices. Valid values are  &quot;off&quot;, &quot;on&quot; (busy signal), &quot;reject&quot; (busy
+signal), &quot;silent&quot; (ringer = silent)
+mwioncall = on                             ; Set the MWI on call lamp signal
+on phone
+mwilamp=on
+
+[devices]
+type        = 7921
+description = Gerry WiFi
+tzoffset    = 0
+autologin   = 222,223,224
+private = off
+trustphoneip=no
+device =&gt; SEP001E4A3F2E27
+[lines]
+id            = 222                                  ; future use
+pin           = 1234                                 ; future use
+label         = 222                                 ; button line label
+(7960, 7970, 7940, 7920)
+description   = Gerry Ext 222                             ; top diplay
+description
+callwaiting   = 1
+incominglimit = 3                                  ; more than 1 incoming
+call = call waiting
+mailbox       = 9222                              ; voicemail.conf (syntax:
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">vmbox at context</A>:folder)
+vmnum         = *86                             ; speeddial for voicemail
+administration, just a number to dial
+cid_name      = Gerry Ext 222                            ; caller id name
+cid_num       = 222
+line =&gt; 222
+id            = 223
+pin           = 1234
+label         = 223
+description   = Gerry Ext 223
+callwaiting   = 1
+incominglimit = 3
+mailbox       = 9223
+vmnum         = *86
+cid_name      = Gerry Exit 223
+cis_num       = 223
+line =&gt; 223
+id            = 224
+pin           = 1234
+label         = 224
+description   = Gerry Ext 224
+callwaiting   = 1
+incominglimit = 3
+mailbox       = 9224
+vmnum         = *86
+cid_name      = Gerry Exit 224
+cis_num       = 224
+line =&gt; 224
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20080118/a4c89484/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20080118/a4c89484/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000437.html">[Chan-sccp-users] chan-sccp-b-20071213 misses conf/sccp.conf
+</A></li>
+	<LI>Next message: <A HREF="000439.html">[Chan-sccp-users]  Asterisk and Deadlocks: maybe a solution.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#438">[ date ]</a>
+              <a href="thread.html#438">[ thread ]</a>
+              <a href="subject.html#438">[ subject ]</a>
+              <a href="author.html#438">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

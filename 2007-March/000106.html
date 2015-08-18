@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] chan_sccp, 30VIP
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%2C%2030VIP&In-Reply-To=%3Ccdae243a0703291656p45c8eba4oca06b0353291c2cd%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000105.html">
+   <LINK REL="Next"  HREF="000107.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] chan_sccp, 30VIP</H1>
+    <B>Chris Nighswonger</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%2C%2030VIP&In-Reply-To=%3Ccdae243a0703291656p45c8eba4oca06b0353291c2cd%40mail.gmail.com%3E"
+       TITLE="[Chan-sccp-users] chan_sccp, 30VIP">cnighswonger at foundations.edu
+       </A><BR>
+    <I>Fri Mar 30 01:56:23 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000105.html">[Chan-sccp-users] chan_sccp, 30VIP
+</A></li>
+        <LI>Next message: <A HREF="000107.html">[Chan-sccp-users] 7960 Upgrade
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#106">[ date ]</a>
+              <a href="thread.html#106">[ thread ]</a>
+              <a href="subject.html#106">[ subject ]</a>
+              <a href="author.html#106">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 3/29/07, Hughes, Sam &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">shughes at nationsholdinggroup.com</A>&gt; wrote:
+&gt;<i> Set autologin=51235
+</I>
+That did it!
+
+Thanks Sam.
+
+Chris
+
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of Chris
+</I>&gt;<i> Nighswonger
+</I>&gt;<i> Sent: Thursday, March 29, 2007 12:40 PM
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: [Chan-sccp-users] chan_sccp, 30VIP
+</I>&gt;<i>
+</I>&gt;<i> Hi,
+</I>&gt;<i>  Does anyone on the list have 30VIP's configured and working with
+</I>&gt;<i> chan_sccp on * 1.4.x? I have been able to patch and compile chan_sccp
+</I>&gt;<i> for 1.4. It loads and the 30 registers fine. From there I get a
+</I>&gt;<i> variety of flavors of &quot;No lines registered on....&quot; when taking the
+</I>&gt;<i> phone offhook and pressing any keys. Here is some of my sccp.conf:
+</I>&gt;<i>
+</I>&gt;<i> [devices]
+</I>&gt;<i>
+</I>&gt;<i> type=30
+</I>&gt;<i> autologin=line51235
+</I>&gt;<i> keepalive = 60
+</I>&gt;<i> dtmfmode = inband
+</I>&gt;<i> imageversion = P002L2J2
+</I>&gt;<i> device =&gt; SEP000196C00D3F
+</I>&gt;<i>
+</I>&gt;<i> [lines]
+</I>&gt;<i> id = 51235
+</I>&gt;<i> pin = 1234
+</I>&gt;<i> context = from-vip51235
+</I>&gt;<i> incominglimit = 2
+</I>&gt;<i> line =&gt; 51235
+</I>&gt;<i>
+</I>&gt;<i>  Also, any suggestions as to what features of the 30VIP are supported
+</I>&gt;<i> by chan_sccp would be appriciated.
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i> Chris
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>
+
+-- 
+Chris Nighswonger
+Network &amp; Systems Director
+Foundations Bible College &amp; Seminary
+www.foundations.edu
+www.fbcradio.org
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">cnighswonger at foundations.edu</A>
+V:910-892-8761
+C:919-820-5473
+-------------
+NOTICE: The information contained in this electronic mail message is
+intended only for the use of the intended recipient, and may also be
+protected by the Electronic Communications Privacy Act, 18 USC
+Sections 2510-2521. If the reader of this message is not the intended
+recipient, you are hereby notified that any dissemination,
+distribution or copying of this communication is strictly prohibited.
+If you have received this communication in error, please reply to the
+sender, and delete the original message. Thank you.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000105.html">[Chan-sccp-users] chan_sccp, 30VIP
+</A></li>
+	<LI>Next message: <A HREF="000107.html">[Chan-sccp-users] 7960 Upgrade
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#106">[ date ]</a>
+              <a href="thread.html#106">[ thread ]</a>
+              <a href="subject.html#106">[ subject ]</a>
+              <a href="author.html#106">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

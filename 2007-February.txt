@@ -1,0 +1,339 @@
+From thomatis2 at llnl.gov  Wed Feb 28 21:27:30 2007
+From: thomatis2 at llnl.gov (Michel Thomatis)
+Date: Wed, 28 Feb 2007 12:27:30 -0800
+Subject: [Chan-sccp-users] Can't Install Asterisk SCCP channel driver?
+Message-ID: <01cd01c75b76$df060250$9d1206f0$@gov>
+
+I am having problems try to install the Asterisk SCCP channel driver.  I
+used majority of the
+
+steps posted on http://chan-sccp.berlios.de
+
+ 
+
+wget ftp://ftp.berlios.de/pub/chan-sccp/chan_sccp-20060408.tar.bz2
+
+tar xvjf chan_sccp-20060408.tar.bz2
+
+cd chan_sccp-20060408
+
+make clean
+
+make install
+
+ 
+
+ 
+
+Doing a "make install" I get the following error & messages (I tried yes and
+no for Build PARK and PICKUP functions):
+
+ 
+
+[root at rhel01tra chan_sccp-20060408]# make install
+
+sh ./create_config.sh "/usr/include"
+
+Checking Asterisk version...
+
+Build PARK functions (y/n)[n]?n
+
+Build PICKUP functions (y/n)[n]?n
+
+ * found 'struct ast_channel_tech'
+
+ * found 'ast_bridged_channel'
+
+ * found 'struct ast_callerid'
+
+ * found 'AST_MAX_CONTEXT'
+
+ * found 'MAX_MUSICCLASS'
+
+ * no 'AST_MAX_ACCOUNT_CODE'
+
+ * found 'AST_CONTROL_HOLD'
+
+ * found 'ast_config_load'
+
+ * found 'ast_copy_string'
+
+ * found 'AST_FLAG_MOH'
+
+ * found endian.h
+
+ * found strings.h
+
+ * found new ast_app_has_voicemail
+
+ * found new ast_get_hint
+
+ * found new devicestate.h
+
+ * found AST_DEVICE_RINGING
+
+ * found 'ast_group_t'
+
+ * found 'ast_app_separate_args'
+
+ * found AST_EXTENSION_RINGING
+
+ * found ast_string_field_funcs
+
+ * found new ast_cli_generator definition
+
+config.h complete.
+
+Now compiling .... chan_sccp.c          1507 lines 
+
+chan_sccp.c: In function `reload_config':
+
+chan_sccp.c:1274: error: incompatible type for argument 1 of `ast_inet_ntoa'
+
+chan_sccp.c:1274: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1281: error: incompatible type for argument 1 of `ast_inet_ntoa'
+
+chan_sccp.c:1281: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1285: error: incompatible type for argument 1 of `ast_inet_ntoa'
+
+chan_sccp.c:1285: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1292: error: incompatible type for argument 1 of `ast_inet_ntoa'
+
+chan_sccp.c:1292: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c: At top level:
+
+chan_sccp.c:1328: warning: no previous prototype for 'reload'
+
+chan_sccp.c:1332: warning: function declaration isn't a prototype
+
+chan_sccp.c:1395: warning: function declaration isn't a prototype
+
+chan_sccp.c: In function `unload_module':
+
+chan_sccp.c:1448: error: incompatible type for argument 1 of `ast_inet_ntoa'
+
+chan_sccp.c:1448: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c: At top level:
+
+chan_sccp.c:1493: warning: function declaration isn't a prototype
+
+chan_sccp.c:1501: warning: function declaration isn't a prototype
+
+chan_sccp.c:1505: warning: function declaration isn't a prototype
+
+make: *** [.tmp/chan_sccp.o] Error 1
+
+ 
+
+ 
+
+ 
+
+My question .... is there any additional step(s) that need to be done,
+install, or configured to get this going?  
+
+ 
+
+Any help and suggestions with this would be very grateful? 
+
+ 
+
+Thanks in advanced
+
+ 
+
+CP
+
+ 
+
+BTW - I'm running Asterisk 1.4.0 and Linux kernel 2.6
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070228/84e2ab33/attachment.html>
+
+From shughes at nationsholdinggroup.com  Wed Feb 28 21:45:58 2007
+From: shughes at nationsholdinggroup.com (Hughes, Sam)
+Date: Wed, 28 Feb 2007 12:45:58 -0800
+Subject: [Chan-sccp-users] Can't Install Asterisk SCCP channel driver?
+In-Reply-To: <01cd01c75b76$df060250$9d1206f0$@gov>
+Message-ID: <F7B2AB32C2D1574B98FB144C5E76A3F005974CFC@svrlae2k3.nationsholdinggroup.com>
+
+Chan_sccp isn't compatible with Asterisk 1.4.
+
+ 
+
+________________________________
+
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Michel
+Thomatis
+Sent: Wednesday, February 28, 2007 12:28 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] Can't Install Asterisk SCCP channel driver?
+
+ 
+
+I am having problems try to install the Asterisk SCCP channel driver.  I
+used majority of the
+
+steps posted on http://chan-sccp.berlios.de
+
+ 
+
+wget ftp://ftp.berlios.de/pub/chan-sccp/chan_sccp-20060408.tar.bz2
+
+tar xvjf chan_sccp-20060408.tar.bz2
+
+cd chan_sccp-20060408
+
+make clean
+
+make install
+
+ 
+
+ 
+
+Doing a "make install" I get the following error & messages (I tried yes
+and no for Build PARK and PICKUP functions):
+
+ 
+
+[root at rhel01tra chan_sccp-20060408]# make install
+
+sh ./create_config.sh "/usr/include"
+
+Checking Asterisk version...
+
+Build PARK functions (y/n)[n]?n
+
+Build PICKUP functions (y/n)[n]?n
+
+ * found 'struct ast_channel_tech'
+
+ * found 'ast_bridged_channel'
+
+ * found 'struct ast_callerid'
+
+ * found 'AST_MAX_CONTEXT'
+
+ * found 'MAX_MUSICCLASS'
+
+ * no 'AST_MAX_ACCOUNT_CODE'
+
+ * found 'AST_CONTROL_HOLD'
+
+ * found 'ast_config_load'
+
+ * found 'ast_copy_string'
+
+ * found 'AST_FLAG_MOH'
+
+ * found endian.h
+
+ * found strings.h
+
+ * found new ast_app_has_voicemail
+
+ * found new ast_get_hint
+
+ * found new devicestate.h
+
+ * found AST_DEVICE_RINGING
+
+ * found 'ast_group_t'
+
+ * found 'ast_app_separate_args'
+
+ * found AST_EXTENSION_RINGING
+
+ * found ast_string_field_funcs
+
+ * found new ast_cli_generator definition
+
+config.h complete.
+
+Now compiling .... chan_sccp.c          1507 lines 
+
+chan_sccp.c: In function `reload_config':
+
+chan_sccp.c:1274: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1274: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1281: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1281: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1285: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1285: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1292: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1292: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c: At top level:
+
+chan_sccp.c:1328: warning: no previous prototype for 'reload'
+
+chan_sccp.c:1332: warning: function declaration isn't a prototype
+
+chan_sccp.c:1395: warning: function declaration isn't a prototype
+
+chan_sccp.c: In function `unload_module':
+
+chan_sccp.c:1448: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1448: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c: At top level:
+
+chan_sccp.c:1493: warning: function declaration isn't a prototype
+
+chan_sccp.c:1501: warning: function declaration isn't a prototype
+
+chan_sccp.c:1505: warning: function declaration isn't a prototype
+
+make: *** [.tmp/chan_sccp.o] Error 1
+
+ 
+
+ 
+
+ 
+
+My question .... is there any additional step(s) that need to be done,
+install, or configured to get this going?  
+
+ 
+
+Any help and suggestions with this would be very grateful? 
+
+ 
+
+Thanks in advanced
+
+ 
+
+CP
+
+ 
+
+BTW - I'm running Asterisk 1.4.0 and Linux kernel 2.6
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070228/47406666/attachment.html>
+

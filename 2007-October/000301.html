@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Comparing versions of chan_sccp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Comparing%20versions%20of%20chan_sccp&In-Reply-To=%3C19881137.1191754522126.JavaMail.root%40mail.linkdc.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000303.html">
+   <LINK REL="Next"  HREF="000302.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Comparing versions of chan_sccp</H1>
+    <B>Martin Sutherland</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Comparing%20versions%20of%20chan_sccp&In-Reply-To=%3C19881137.1191754522126.JavaMail.root%40mail.linkdc.co.uk%3E"
+       TITLE="[Chan-sccp-users] Comparing versions of chan_sccp">martin at linkdc.co.uk
+       </A><BR>
+    <I>Sun Oct  7 12:55:22 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000303.html">[Chan-sccp-users] Cisco 7970 Placed Calls
+</A></li>
+        <LI>Next message: <A HREF="000302.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#301">[ date ]</a>
+              <a href="thread.html#301">[ thread ]</a>
+              <a href="subject.html#301">[ subject ]</a>
+              <a href="author.html#301">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear list members,
+ 
+I've placed the Asterisk 1.2 version of chan_sccp that I use on an FTP server as follows:
+ 
+Server IP: 80.168.79.8
+login name: chan-sccp
+login pass: chan-sccp
+ 
+I would be very grateful if someone could compare this with the 20060408 to see the changes. I have found this to be the most stable version so far, although there are still crashes every few days. I was comtemplating upgrading to 1.4, but really worry that the current 1.4 version may actually crash more often with the setup that I use (7940s, 7960s, 7960+7914s with call parking, voicemail etc). Asterisk 1.2 seems to die after a deadlock has been avoided! I've heard that Asterisk 1.4 gets a seg fault.
+ 
+I have given up using paging to handsets (I use the sound card in the server connected to amp and loudspeakers), since it seems to kill the 7914 - presumably so many extensions changing status at the same time is too much.
+ 
+I have recently purchased a 7920 wireless phone (watch out, you have to order the battery separately!). So far the voicemail indication doesn't seem to work and my patch to prevent crashes after a redial tone/timeout for 7960+7914 causes real problems. I need to do more work on this. I'll probably end up using the new Snom m3 DECT SIP phones for my mobile users.
+ 
+We really need to strive to get a version that only crashes once per week. Already one of my customers has converted to SIP and has never looked back (no crashes for months). I would like to help in this effort as much as possible, but am not a C programmer.
+ 
+Best regards,
+ 
+Martin
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071007/d38e8153/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071007/d38e8153/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000303.html">[Chan-sccp-users] Cisco 7970 Placed Calls
+</A></li>
+	<LI>Next message: <A HREF="000302.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#301">[ date ]</a>
+              <a href="thread.html#301">[ thread ]</a>
+              <a href="subject.html#301">[ subject ]</a>
+              <a href="author.html#301">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

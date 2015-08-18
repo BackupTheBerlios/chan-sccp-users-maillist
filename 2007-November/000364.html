@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Two small patches and a new dialplan application
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Two%20small%20patches%20and%20a%20new%20dialplan%20application&In-Reply-To=%3C4732DBAD.8040906%40matflow.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000367.html">
+   <LINK REL="Next"  HREF="000365.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Two small patches and a new dialplan application</H1>
+    <B>Frank Segtrop</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Two%20small%20patches%20and%20a%20new%20dialplan%20application&In-Reply-To=%3C4732DBAD.8040906%40matflow.net%3E"
+       TITLE="[Chan-sccp-users] Two small patches and a new dialplan application">fs at matflow.net
+       </A><BR>
+    <I>Thu Nov  8 10:49:33 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000367.html">[Chan-sccp-users] Various issues + Call for Patches
+</A></li>
+        <LI>Next message: <A HREF="000365.html">[Chan-sccp-users] Various
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#364">[ date ]</a>
+              <a href="thread.html#364">[ thread ]</a>
+              <a href="subject.html#364">[ subject ]</a>
+              <a href="author.html#364">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+here are a two more patches, both adressing segfaults which are very
+rare but still happen:
+
+This one addresses gpickup again, I had one segfault with my previous
+patch, this new one fixes that:
+
+--- chan_sccp-20071009-DD/sccp_pbx.c        2007-10-30
+18:05:42.910102970 +0100
++++ chan_sccp-20071009-DD.mod/sccp_pbx.c    2007-11-02
+09:10:02.028890828 +0100
+@@ -743,7 +743,7 @@
+                return NULL;
+        }
+
+-       if (strncmp(c-&gt;device-&gt;id,&quot;SEP&quot;,3)!=0 &amp;&amp;
+strncmp(c-&gt;device-&gt;id,&quot;ATA&quot;,3)!=0) {
++       if (strlen(c-&gt;device-&gt;id)&lt;3 || (
+strncmp(c-&gt;device-&gt;id,&quot;SEP&quot;,3)!=0 &amp;&amp; strncmp(c-&gt;device-&gt;id,&quot;ATA&quot;,3)!=0)) {
+
+
+Then, I had one segfault when putting a call on hold which can be fixed
+here:
+
+--- chan_sccp-20071009-DD/sccp_channel.c    2007-10-29
+10:28:37.365078170 +0100
++++ chan_sccp-20071009-DD-mod/sccp_channel.c        2007-11-05
+14:05:25.308957028 +0100
+@@ -551,7 +551,14 @@
+        sccp_indicate_lock(c, SCCP_CHANNELSTATE_HOLD);
+
+ #ifdef CS_AST_CONTROL_HOLD
++       ast_mutex_lock(&amp;d-&gt;lock);
++       if (!c-&gt;owner) {
++                sccp_log(1)(VERBOSE_PREFIX_3 &quot;C owner disappeared!
+Can't free ressources\n&quot;);
++               ast_mutex_unlock(&amp;d-&gt;lock);
++               return 0;
++       }
+        ast_queue_control(c-&gt;owner, AST_CONTROL_HOLD);
++       ast_mutex_unlock(&amp;d-&gt;lock);
+ #endif
+        return 1;
+ }
+
+
+I also added a new dialplan application called &quot;SetMessage&quot;. It allows
+you to send a message to the calling device. I use it to display call
+forwarding to a device, because I could not use the native call
+forwarding. The call forwarding here only acts on external calls, but
+not on internal calls. However, the application can be used to display
+other messages as well.
+
+In the dialplan, simply use SetMessage(theMessage) to set a message, and
+SetMessage() to remove the message.
+
+This is the patch:
+
+--- chan_sccp-20071009-DD/chan_sccp.c       2007-10-09
+15:35:41.000000000 +0200
++++ chan_sccp-20071009-DD-mod/chan_sccp.c   2007-11-07
+17:29:02.378888155 +0100
+@@ -1481,6 +1481,42 @@
+        return 0;
+ }
+
++static char *sccp_setmessage_descrip = &quot;  SetMessage(\&quot;Message\&quot;) sets
+a display message for use with chan_sccp\n&quot;;
++
++static int sccp_setmessage_exec(struct ast_channel *chan, void *data) {
++        char tmp[256] = &quot;&quot;;
++        sccp_channel_t * c = CS_AST_CHANNEL_PVT(chan);
++       sccp_device_t * d;
++
++#ifndef CS_AST_HAS_TECH_PVT
++        if (strcasecmp(chan-&gt;type, &quot;SCCP&quot;) != 0)
++                return 0;
++#else
++        if (strcasecmp(chan-&gt;tech-&gt;type, &quot;SCCP&quot;) != 0)
++                return 0;
++#endif
++
++        if (!data || !c ||!c-&gt;device)
++                return 0;
++
++        sccp_copy_string(tmp, (char *)data, sizeof(tmp));
++
++       d = c-&gt;device;
++       ast_mutex_lock(&amp;d-&gt;lock);
++       if (strlen(tmp)&gt;0)
++               sccp_dev_displayprinotify(d,tmp,0,0);
++       else
++               sccp_dev_displayprinotify(d,&quot;Message off&quot;,0,1); //turn
+message off
++       ast_mutex_unlock(&amp;d-&gt;lock);
++        //ast_callerid_parse(tmp, &amp;name, &amp;num);
++
++        //
++        //sccp_channel_set_calledparty(c, name, num);
++
++        return 0;
++}
++
++
+ static int load_module(void) {
+        /* make globals */
+        sccp_globals = malloc(sizeof(struct sccp_global_vars));
+@@ -1539,6 +1575,7 @@
+
+        sccp_register_cli();
+        ast_register_application(&quot;SetCalledParty&quot;,
+sccp_setcalledparty_exec, &quot;Sets the name of the called party&quot;,
+sccp_setcalledparty_descrip);
++       ast_register_application(&quot;SetMessage&quot;, sccp_setmessage_exec,
+&quot;Sets a message on the calling device&quot;, sccp_setmessage_descrip);
+        return 0;
+ }
+
+@@ -1554,6 +1591,7 @@
+        ast_channel_unregister(&quot;SCCP&quot;);
+ #endif
+        ast_unregister_application(&quot;SetCalledParty&quot;);
++       ast_unregister_application(&quot;SetMessage&quot;);
+        sccp_unregister_cli();
+
+        ast_mutex_lock(&amp;GLOB(channels_lock));
+
+
+Regards,
+Frank
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000367.html">[Chan-sccp-users] Various issues + Call for Patches
+</A></li>
+	<LI>Next message: <A HREF="000365.html">[Chan-sccp-users] Various
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#364">[ date ]</a>
+              <a href="thread.html#364">[ thread ]</a>
+              <a href="subject.html#364">[ subject ]</a>
+              <a href="author.html#364">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

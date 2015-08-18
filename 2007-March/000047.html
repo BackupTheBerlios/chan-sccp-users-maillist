@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%201.2%20%26%20Cisco%207940/60%20and%20GroupPickup&In-Reply-To=%3C20070303223242.46140%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000045.html">
+   <LINK REL="Next"  HREF="000042.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup</H1>
+    <B>Marcello Ceschia</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%201.2%20%26%20Cisco%207940/60%20and%20GroupPickup&In-Reply-To=%3C20070303223242.46140%40gmx.net%3E"
+       TITLE="[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup">Marcello.Ceschia at gmx.net
+       </A><BR>
+    <I>Sat Mar  3 23:32:42 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000045.html">[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+</A></li>
+        <LI>Next message: <A HREF="000042.html">[Chan-sccp-users] Can't Install Asterisk SCCP channel driver?	(Marcello Ceschia)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#47">[ date ]</a>
+              <a href="thread.html#47">[ thread ]</a>
+              <a href="subject.html#47">[ subject ]</a>
+              <a href="author.html#47">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think the group pickup works a litle bit different.
+If you have a an active call and you press the park softkey, asterisk will tell you the number of the parkposition (e.g. 701) -&gt; call ist parked and your line is hanged up.
+Now, if you want to get the parked call back -&gt; press GPickUp -&gt; enter the announced number (701) and you have the call back.
+
+This is how the group pickup works.
+
+have a nice weekend
+-------- Original-Nachricht --------
+Datum: Sat, 3 Mar 2007 14:29:56 -0600
+Von: &quot;Lacy Moore - Aspendora&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">aspendora at gmail.com</A>&gt;
+An: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+CC: 
+Betreff: Re: [Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+
+&gt;<i> On 3/3/07, Steve J. Walker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">SteveW at bucks.net</A>&gt; wrote:
+</I>&gt;<i> &gt; Hi Marchello, All,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks, that worked a treat but leaves me one question does the SCCP
+</I>&gt;<i> &gt; driver support the call pickup/group pickup, I know that *8&lt;ext&gt; works
+</I>&gt;<i> &gt; (Which is *) but how any where do you tell the sccp driver what the call
+</I>&gt;<i> &gt; groups and pickup groups are?
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> &gt;From my understanding of the CM implementation of call pickup is that
+</I>&gt;<i> you pick up the phone, press the group pickup, then hang up.  Your
+</I>&gt;<i> phone will then ring showing the caller ID information and then you
+</I>&gt;<i> can either answer or let it go (I interpreted letting it go to mean
+</I>&gt;<i> that continue based on what it should have done without the pickup, in
+</I>&gt;<i> other words, it does not go to your voicemail.)
+</I>&gt;<i> 
+</I>&gt;<i> This is just my understanding.  I have not tried this yet.  I'll give
+</I>&gt;<i> this a shot sometime this weekend to see exactly how it works.
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+-- 
+&quot;Feel free&quot; - 5 GB Mailbox, 50 FreeSMS/Monat ...
+Jetzt GMX ProMail testen: www.gmx.net/de/go/mailfooter/promail-out
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000045.html">[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+</A></li>
+	<LI>Next message: <A HREF="000042.html">[Chan-sccp-users] Can't Install Asterisk SCCP channel driver?	(Marcello Ceschia)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#47">[ date ]</a>
+              <a href="thread.html#47">[ thread ]</a>
+              <a href="subject.html#47">[ subject ]</a>
+              <a href="author.html#47">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

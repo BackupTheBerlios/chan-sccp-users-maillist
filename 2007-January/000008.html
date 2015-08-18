@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] chan_sccp and asterisk 1.4.0
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%20asterisk%201.4.0&In-Reply-To=%3C459F1B68.5040801%40deakin.edu.au%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000007.html">
+   <LINK REL="Next"  HREF="000009.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] chan_sccp and asterisk 1.4.0</H1>
+    <B>David Rhodes</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%20asterisk%201.4.0&In-Reply-To=%3C459F1B68.5040801%40deakin.edu.au%3E"
+       TITLE="[Chan-sccp-users] chan_sccp and asterisk 1.4.0">drhodes at deakin.edu.au
+       </A><BR>
+    <I>Sat Jan  6 04:45:44 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000007.html">[Chan-sccp-users] Bounty
+</A></li>
+        <LI>Next message: <A HREF="000009.html">[Chan-sccp-users] chan_sccp and asterisk 1.4.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8">[ date ]</a>
+              <a href="thread.html#8">[ thread ]</a>
+              <a href="subject.html#8">[ subject ]</a>
+              <a href="author.html#8">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I have a working chan_sccp with Asterisk 1.4.0. I have posted my patch
+is posted at <A HREF="https://developer.berlios.de/patch/index.php.">https://developer.berlios.de/patch/index.php.</A>  It is
+against the svn (which is why it is such a small patch :). I only have a
+limited setup to test against, so please beware, but so far so good :)
+
+As for why?  Well me, I want more integration with the other channels
+(gtalk etc).., so 1.4.0 is a natural progression and have the ability to
+break this one :)
+If it was prod I would probably hold off. 
+
+Oh, and I went to chan_skinny initially with 1.4.0, but didn't want to
+spend time converting the configs. (too lazy?)
+
+Regards
+
+David
+
+
+
+Hi,
+
+ 
+
+we are using chan_sccp with * 1.2.14, 35 Cisco phones and it works quite
+well. Why should we change to Asterisk 1.4. I can not find any reason at
+this time. Awaiting that chan_skinny is developing with all the features of
+chan_sccp is the most common way for us. 
+
+ 
+
+Can someone explain the main difference between both Asterisk versions? We
+are likely to support the chan_sccp as well as the chan_skinny solution, but
+it has to work. 
+ and even more the code should under GPL afterwards.
+
+ 
+
+We are also a German company and paying via Paypal is not the problem, but
+getting an invoice :-)
+
+ 
+
+Have a nice day, 
+
+ 
+
+Awaiting your comments
+
+ 
+
+Marcus
+
+ 
+
+ 
+
+  _____  
+
+Von: chan-sccp-users-bounces at lists.berlios.de &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>&gt;
+[mailto:chan-sccp-users-bounces at lists.berlios.de &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>&gt;] Im Auftrag von Dietmar G.
+Matzke
+Gesendet: Freitag, 5. Januar 2007 13:52
+An: chan-sccp-users at lists.berlios.de &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>&gt;
+Betreff: Re: [Chan-sccp-users] Bounty
+
+ 
+
+Hi
+
+we, the SEC-u-DIS GmbH (Germany), will support this LAST attempt to keep/get
+SCCP alive for the community and us.
+
+Thus, we will DOUBLE Jay&#180;s bountys by  offering additional honeypots:
+
+For solution 1): 100 USD
+
+For solution 2): 500 USD (OUR PREFERENCE)
+
+Conditions: As mentioned by Jay!
+
+Dietmar
+
+
+Am 05.01.2007 11:04 Uhr schrieb &quot;Jay R. Worthington&quot; unter
+&lt;jayrworthington at gmail.com &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>&gt;&gt;:
+
+Hi
+
+in a last attempt to get a working, usable SCCP channel for asterisk 1.4,
+i'm offering two bountys:
+
+
+1. $100 USD (PayPal)
+
+- patch against chan_sccp 20060408
+- GPL (obviously)
+
+
+2. $500 USD (PayPal) 
+
+- patch against chan_skinny from asterisk 1.4
+- properly disclamed to digium for inclusion in the official asterisk svn
+- includes all features of chan_sccp
+
+
+The first one should be pretty easy, the loader work has already been done
+and is available at
+<A HREF="https://svn.sourceforge.net/svnroot/pbxcc/modules/chan_sccp,">https://svn.sourceforge.net/svnroot/pbxcc/modules/chan_sccp,</A> so it's just
+the rtp stuff that has to be done. I guess a look at how the changes where
+done to chan_skinny would help. Bounty can be collected after i've done the
+first successfull call (without crash ;-)). 
+
+The second one will be much harder, you more-or-less have to rebuild all
+features from scratch, based on chan_skinny. Technically, i dont care how it
+is done, if someone can convince/bribe Sergio to disclame his patches you
+can safe a lot of time and work. Bounty can be collected after inclusion in
+the digium svn with all features of chan_sccp. 
+
+If you wish to collect the second bounty, please contact me in advance.
+
+Jay....
+
+  _____  
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>&gt;
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070105/d8967836/attachment-0001.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070105/d8967836/attachment-0001.html</A> 
+
+------------------------------------------------------------------------
+
+    * Previous message: [Chan-sccp-users] Bounty &lt;002841.html&gt;
+    * *Messages sorted by:* [ date ] &lt;date.html#2842&gt; [ thread ]
+      &lt;thread.html#2842&gt; [ subject ] &lt;subject.html#2842&gt; [ author ]
+      &lt;author.html#2842&gt;
+
+
+-- 
+David Rhodes,  Network Unit Leader
+Information Technology Services Division
+Deakin University Waterfront Campus Victoria 3217 Australia
+Phone:   03 5227 8912 International: +61 3 52278912
+Fax:     03 5227 8866 International: +61 3 5227 8866
+E-mail:  <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">david.rhodes at deakin.edu.au</A>
+Website: <A HREF="http://www.deakin.edu.au">http://www.deakin.edu.au</A>
+Deakin University CRICOS Provider Code 00113B (Vic)
+
+Important Notice: The contents of this email transmission, including any attachments, are intended solely for the named addressee and are confidential; any unauthorised use, reproduction or storage of the contents and any attachments is expressly prohibited. If you have received this transmission in error, please delete it and any attachments from your system immediately and advise the sender by return email or telephone. Deakin University does not warrant that this email and any attachments are error or virus free. 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000007.html">[Chan-sccp-users] Bounty
+</A></li>
+	<LI>Next message: <A HREF="000009.html">[Chan-sccp-users] chan_sccp and asterisk 1.4.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8">[ date ]</a>
+              <a href="thread.html#8">[ thread ]</a>
+              <a href="subject.html#8">[ subject ]</a>
+              <a href="author.html#8">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] chan_sccp for Asterisk 1.4.6
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20for%20Asterisk%201.4.6&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E70%40THEBRAIN1.drs.ca%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000174.html">
+   <LINK REL="Next"  HREF="000176.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] chan_sccp for Asterisk 1.4.6</H1>
+    <B>Zuber, Jonathan</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20for%20Asterisk%201.4.6&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E70%40THEBRAIN1.drs.ca%3E"
+       TITLE="[Chan-sccp-users] chan_sccp for Asterisk 1.4.6">jzuber at drs.ca
+       </A><BR>
+    <I>Thu Jul 12 22:26:34 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000174.html">[Chan-sccp-users] chan_sccp for Asterisk 1.4.6
+</A></li>
+        <LI>Next message: <A HREF="000176.html">[Chan-sccp-users] chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+There is this one:
+
+in chan_sccp.c
+ast_inet_ntoa(iabuf, sizeof(iabuf), GLOB(bindaddr.sin_addr))
+
+which is the same as in older asterisk versions (at least in 1.2.X)
+
+in new Asterisk version:
+ast_inet_ntoa(peer-&gt;addr.sin_addr)
+
+and others are similar in nature.
+
+I believe there is a change between Asterisk 1.4.4 and 1.4.6, as many people
+say the newest chan_sccp driver (20060804) works.
+
+
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From:	Ceschia, Marcello [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Marcello.Ceschia at gmx.net</A>]
+</I>&gt;<i> Sent:	Thursday, July 12, 2007 4:15 PM
+</I>&gt;<i> To:	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject:	Re: [Chan-sccp-users] chan_sccp for Asterisk 1.4.6
+</I>&gt;<i> 
+</I>&gt;<i> I can have a look on it.
+</I>&gt;<i> Do you know which functions where changed? So I dont have to search for ;)
+</I>&gt;<i> 
+</I>&gt;<i>  Marcello
+</I>&gt;<i> 
+</I>&gt;<i> Am Donnerstag, 12. Juli 2007 20:21 schrieb Zuber, Jonathan:
+</I>&gt;<i> &gt; Is there any support for the new Asterisk version?  Certain functions
+</I>&gt;<i> have
+</I>&gt;<i> &gt; changed and require more or less arguments.  If there is no support,
+</I>&gt;<i> will
+</I>&gt;<i> &gt; there be support in the future?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Chan-sccp-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000174.html">[Chan-sccp-users] chan_sccp for Asterisk 1.4.6
+</A></li>
+	<LI>Next message: <A HREF="000176.html">[Chan-sccp-users] chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

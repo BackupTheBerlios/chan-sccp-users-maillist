@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Possible to dial user at domain addresses?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Possible%20to%20dial%20user%40domain%20addresses%3F&In-Reply-To=%3C1195063241.11697.7.camel%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000384.html">
+   <LINK REL="Next"  HREF="000386.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Possible to dial user at domain addresses?</H1>
+    <B>Patrick</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Possible%20to%20dial%20user%40domain%20addresses%3F&In-Reply-To=%3C1195063241.11697.7.camel%40localhost.localdomain%3E"
+       TITLE="[Chan-sccp-users] Possible to dial user at domain addresses?">sccp-list at puzzled.xs4all.nl
+       </A><BR>
+    <I>Wed Nov 14 19:00:41 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000384.html">[Chan-sccp-users] Has the fix for re-dial/invalid number been	incorporated into chan_sccp-b?
+</A></li>
+        <LI>Next message: <A HREF="000386.html">[Chan-sccp-users] Testing chan_sccp to its limits
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#385">[ date ]</a>
+              <a href="thread.html#385">[ thread ]</a>
+              <a href="subject.html#385">[ subject ]</a>
+              <a href="author.html#385">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I have lightly used the 20071111 release with asterisk 1.4.13 and so far
+everything seems to work well :)
+
+About my question:
+
+A SIP call from for example <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">foo at bar.org</A> comes into my asterisk server
+and is forwarded to the 7961G running SCCP firmware:
+
+sip call -&gt; asterisk -&gt; 7961G/SCCP
+
+On the asterisk server I set the CALLERID(num) to <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">foo at bar.org</A> before
+forwarding the call to the 7961G. On the 7961G it shows <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">foo at bar.org</A> in
+the display when the call comes in and it also shows up as the number in
+the missed/received calls menus.
+
+Now if want to call back to that address, I go to the missed or received
+calls menu, select it and press dial. This does not work.
+
+Is it possible to make this work?
+
+Thanks and regards,
+Patrick
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000384.html">[Chan-sccp-users] Has the fix for re-dial/invalid number been	incorporated into chan_sccp-b?
+</A></li>
+	<LI>Next message: <A HREF="000386.html">[Chan-sccp-users] Testing chan_sccp to its limits
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#385">[ date ]</a>
+              <a href="thread.html#385">[ thread ]</a>
+              <a href="subject.html#385">[ subject ]</a>
+              <a href="author.html#385">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

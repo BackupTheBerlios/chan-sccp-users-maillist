@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7921 Registration Problem
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20Registration%20Problem&In-Reply-To=%3C052e01c832c9%249a198c40%244400000a%40phil%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000400.html">
+   <LINK REL="Next"  HREF="000402.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7921 Registration Problem</H1>
+    <B>-Phil-</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20Registration%20Problem&In-Reply-To=%3C052e01c832c9%249a198c40%244400000a%40phil%3E"
+       TITLE="[Chan-sccp-users] 7921 Registration Problem">phil at ingineerix.com
+       </A><BR>
+    <I>Thu Nov 29 21:51:23 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000400.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+        <LI>Next message: <A HREF="000402.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#401">[ date ]</a>
+              <a href="thread.html#401">[ thread ]</a>
+              <a href="subject.html#401">[ subject ]</a>
+              <a href="author.html#401">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>That is what's causing your Audio RX issue.
+
+Not all NAT implementations break SCCP, but many do.  For instance, a 
+generic linux-based router will break it, but loading DD-WRT (linux based) 
+on a linksys router will work properly with it.
+
+Set your 7921 in the DMZ if you can, then try it.  I bet it works!
+
+-Phil
+----- Original Message ----- 
+From: &quot;Russ Woodman&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">russ at natcotech.com</A>&gt;
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Sent: Thursday, November 29, 2007 12:19 PM
+Subject: Re: [Chan-sccp-users] 7921 Registration Problem
+
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> At this particular moment, it is behind NAT, yes.
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Russ
+</I>&gt;<i>
+</I>&gt;<i> (-Phil-) wrote:
+</I>&gt;&gt;<i> Is the 7921 behind NAT by chance?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> -Phil
+</I>&gt;&gt;<i> ----- Original Message ----- 
+</I>&gt;&gt;<i> From: &quot;Russ Woodman&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">russ at natcotech.com</A>&gt;
+</I>&gt;&gt;<i> To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;&gt;<i> Sent: Thursday, November 29, 2007 9:49 AM
+</I>&gt;&gt;<i> Subject: Re: [Chan-sccp-users] 7921 Registration Problem
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Hi,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> With the help of a good friend, I managed to get past the problem. It
+</I>&gt;&gt;&gt;<i> turns out that because I'm using a 64-bit machine for my Asterisk
+</I>&gt;&gt;&gt;<i> server, there is a bug in the code in sccp_socket.c. I have submitted a
+</I>&gt;&gt;&gt;<i> patch via the SourceForge bug tracker for this issue. Now the phone
+</I>&gt;&gt;&gt;<i> registers fine and I can make and receive calls, however I am dealing
+</I>&gt;&gt;&gt;<i> with a one-way audio problem.  The 7921G sends audio but will not
+</I>&gt;&gt;&gt;<i> receive, no matter which way the call was initiated.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Regards,
+</I>&gt;&gt;&gt;<i> Russ
+</I>&gt;&gt;&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> Russ Woodman
+</I>&gt;<i> Systems Administrator
+</I>&gt;<i> NATCO Technologies
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000400.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+	<LI>Next message: <A HREF="000402.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#401">[ date ]</a>
+              <a href="thread.html#401">[ thread ]</a>
+              <a href="subject.html#401">[ subject ]</a>
+              <a href="author.html#401">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

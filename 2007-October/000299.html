@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Shared lines implementation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Shared%20lines%20implementation&In-Reply-To=%3C56a990d20710041422x429be29mef9c29221bd2640%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000298.html">
+   <LINK REL="Next"  HREF="000300.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Shared lines implementation</H1>
+    <B>Lacy Moore</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Shared%20lines%20implementation&In-Reply-To=%3C56a990d20710041422x429be29mef9c29221bd2640%40mail.gmail.com%3E"
+       TITLE="[Chan-sccp-users] Shared lines implementation">aspendora at gmail.com
+       </A><BR>
+    <I>Thu Oct  4 23:22:39 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000298.html">[Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes
+</A></li>
+        <LI>Next message: <A HREF="000300.html">[Chan-sccp-users] Cisco 7970 Placed Calls
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#299">[ date ]</a>
+              <a href="thread.html#299">[ thread ]</a>
+              <a href="subject.html#299">[ subject ]</a>
+              <a href="author.html#299">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/26/07, Steve J. Walker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">SteveW at bucks.net</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Afternoon Sergio, all.
+</I>&gt;<i>
+</I>&gt;<i> I would be very interested in seeing how the local driver can be used to
+</I>&gt;<i> emulate a shared line. Would this mean that say 7940's with two lines
+</I>&gt;<i> can have one shared between users and one as the local ext?
+</I>&gt;<i>
+</I>&gt;<i> An example configuration for the Asterisk local driver and chan_sccp
+</I>&gt;<i> would be nice - maybe someone could post it then to one of the WIKI's
+</I>&gt;<i> that's about which deals with SCCP and Asterisk?
+</I>&gt;<i>
+</I>&gt;<i> If it can emulate it properly it might be a better bet than fudging the
+</I>&gt;<i> sccp driver to work as SLA?
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i>
+</I>&gt;<i> Steve
+</I>
+
+I'm curious about this as well.
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> &gt; From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> [mailto:chan-sccp-users-
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">bounces at lists.berlios.de</A>] On Behalf Of Sergio Chersovani
+</I>&gt;<i> &gt; Sent: 28 July 2007 20:25
+</I>&gt;<i> &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-b-discussion at lists.sourceforge.net</A>
+</I>&gt;<i> &gt; Subject: Re: [Chan-sccp-users] Shared lines implementation
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Marcello Ceschia ha scritto:
+</I>&gt;<i> &gt; &gt; I started implementing shared line functionality to chan_sccp a few
+</I>&gt;<i> &gt; month ago.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; shared line feature can be emulated with the asterisk local channel
+</I>&gt;<i> &gt; driver
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="http://www.voip-info.org/wiki/view/Asterisk+local+channels">http://www.voip-info.org/wiki/view/Asterisk+local+channels</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm running it in my office environment with no problems
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Chan-sccp-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071004/bbd5dded/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071004/bbd5dded/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000298.html">[Chan-sccp-users] Please can we co-ordinate improvements	to	chan_sccp/7914 woes
+</A></li>
+	<LI>Next message: <A HREF="000300.html">[Chan-sccp-users] Cisco 7970 Placed Calls
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#299">[ date ]</a>
+              <a href="thread.html#299">[ thread ]</a>
+              <a href="subject.html#299">[ subject ]</a>
+              <a href="author.html#299">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

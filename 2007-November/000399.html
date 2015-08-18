@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7921 Registration Problem
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20Registration%20Problem&In-Reply-To=%3C04d401c832b0%24c8d208a0%244400000a%40phil%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000398.html">
+   <LINK REL="Next"  HREF="000400.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7921 Registration Problem</H1>
+    <B>-Phil-</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20Registration%20Problem&In-Reply-To=%3C04d401c832b0%24c8d208a0%244400000a%40phil%3E"
+       TITLE="[Chan-sccp-users] 7921 Registration Problem">phil at ingineerix.com
+       </A><BR>
+    <I>Thu Nov 29 18:53:44 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000398.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+        <LI>Next message: <A HREF="000400.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#399">[ date ]</a>
+              <a href="thread.html#399">[ thread ]</a>
+              <a href="subject.html#399">[ subject ]</a>
+              <a href="author.html#399">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Is the 7921 behind NAT by chance?
+
+-Phil
+----- Original Message ----- 
+From: &quot;Russ Woodman&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">russ at natcotech.com</A>&gt;
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Sent: Thursday, November 29, 2007 9:49 AM
+Subject: Re: [Chan-sccp-users] 7921 Registration Problem
+
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> With the help of a good friend, I managed to get past the problem. It
+</I>&gt;<i> turns out that because I'm using a 64-bit machine for my Asterisk
+</I>&gt;<i> server, there is a bug in the code in sccp_socket.c. I have submitted a
+</I>&gt;<i> patch via the SourceForge bug tracker for this issue. Now the phone
+</I>&gt;<i> registers fine and I can make and receive calls, however I am dealing
+</I>&gt;<i> with a one-way audio problem.  The 7921G sends audio but will not
+</I>&gt;<i> receive, no matter which way the call was initiated.
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Russ
+</I>&gt;<i>
+</I>&gt;<i> Russ Woodman wrote:
+</I>&gt;&gt;<i> Hi,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Unfortunately the higher SCCP debug level didn't real yield more
+</I>&gt;&gt;<i> information. Here is what repeats now:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> [Nov 29 08:54:12]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+</I>&gt;&gt;<i> [Nov 29 08:54:12]     -- SCCP: Using ip 205.167.xxx.xxx
+</I>&gt;&gt;<i> [Nov 29 08:54:14] WARNING[4433]: sccp_socket.c:54 sccp_read_data: SCCP:
+</I>&gt;&gt;<i> read() returned Bad address
+</I>&gt;&gt;<i> [Nov 29 08:54:14]     -- SCCP: Old session marked down
+</I>&gt;&gt;<i> [Nov 29 08:54:14]     -- SCCP: Killing Session 12.199.xxx.xxx
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This happens with a network that is P/NAT'd and one that isn't so it's
+</I>&gt;&gt;<i> not a problem with that. I can't find any documentation that leads to a
+</I>&gt;&gt;<i> solution either. I've checked the source code of sccp_socket.c where the
+</I>&gt;&gt;<i> error resides, but the error description and the reason for it are
+</I>&gt;&gt;<i> pretty cryptic to me.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> It seems like this must be something simple but so far I'm stuck.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Regards,
+</I>&gt;&gt;<i> Russ
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> David Dederscheck wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Hi Russ,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> this looks strange to me. I'm not sure what causes it. Could you maybe
+</I>&gt;&gt;&gt;<i> get me a bit more log output by typing &quot;sccp debug 10&quot; in the console
+</I>&gt;&gt;&gt;<i> and then try to register again?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Unfortunately I haven't such a phone at hand to try as well. I
+</I>&gt;&gt;&gt;<i> remember, however, Marcus thinking about getting one himself. What
+</I>&gt;&gt;&gt;<i> about it, Marcus?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Regards,
+</I>&gt;&gt;&gt;<i> -David.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> Russ Woodman
+</I>&gt;<i> Systems Administrator
+</I>&gt;<i> NATCO Technologies
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000398.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+	<LI>Next message: <A HREF="000400.html">[Chan-sccp-users] 7921 Registration Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#399">[ date ]</a>
+              <a href="thread.html#399">[ thread ]</a>
+              <a href="subject.html#399">[ subject ]</a>
+              <a href="author.html#399">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

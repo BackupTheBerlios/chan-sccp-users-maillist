@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Can't Install Asterisk SCCP channel driver?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Can%27t%20Install%20Asterisk%20SCCP%20channel%20driver%3F&In-Reply-To=%3CF7B2AB32C2D1574B98FB144C5E76A3F005974CFC%40svrlae2k3.nationsholdinggroup.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000033.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Can't Install Asterisk SCCP channel driver?</H1>
+    <B>Hughes, Sam</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Can%27t%20Install%20Asterisk%20SCCP%20channel%20driver%3F&In-Reply-To=%3CF7B2AB32C2D1574B98FB144C5E76A3F005974CFC%40svrlae2k3.nationsholdinggroup.com%3E"
+       TITLE="[Chan-sccp-users] Can't Install Asterisk SCCP channel driver?">shughes at nationsholdinggroup.com
+       </A><BR>
+    <I>Wed Feb 28 21:45:58 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000033.html">[Chan-sccp-users] Can't Install Asterisk SCCP channel driver?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#34">[ date ]</a>
+              <a href="thread.html#34">[ thread ]</a>
+              <a href="subject.html#34">[ subject ]</a>
+              <a href="author.html#34">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Chan_sccp isn't compatible with Asterisk 1.4.
+
+ 
+
+________________________________
+
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of Michel
+Thomatis
+Sent: Wednesday, February 28, 2007 12:28 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: [Chan-sccp-users] Can't Install Asterisk SCCP channel driver?
+
+ 
+
+I am having problems try to install the Asterisk SCCP channel driver.  I
+used majority of the
+
+steps posted on <A HREF="http://chan-sccp.berlios.de">http://chan-sccp.berlios.de</A>
+
+ 
+
+wget <A HREF="ftp://ftp.berlios.de/pub/chan-sccp/chan_sccp-20060408.tar.bz2">ftp://ftp.berlios.de/pub/chan-sccp/chan_sccp-20060408.tar.bz2</A>
+
+tar xvjf chan_sccp-20060408.tar.bz2
+
+cd chan_sccp-20060408
+
+make clean
+
+make install
+
+ 
+
+ 
+
+Doing a &quot;make install&quot; I get the following error &amp; messages (I tried yes
+and no for Build PARK and PICKUP functions):
+
+ 
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">root at rhel01tra</A> chan_sccp-20060408]# make install
+
+sh ./create_config.sh &quot;/usr/include&quot;
+
+Checking Asterisk version...
+
+Build PARK functions (y/n)[n]?n
+
+Build PICKUP functions (y/n)[n]?n
+
+ * found 'struct ast_channel_tech'
+
+ * found 'ast_bridged_channel'
+
+ * found 'struct ast_callerid'
+
+ * found 'AST_MAX_CONTEXT'
+
+ * found 'MAX_MUSICCLASS'
+
+ * no 'AST_MAX_ACCOUNT_CODE'
+
+ * found 'AST_CONTROL_HOLD'
+
+ * found 'ast_config_load'
+
+ * found 'ast_copy_string'
+
+ * found 'AST_FLAG_MOH'
+
+ * found endian.h
+
+ * found strings.h
+
+ * found new ast_app_has_voicemail
+
+ * found new ast_get_hint
+
+ * found new devicestate.h
+
+ * found AST_DEVICE_RINGING
+
+ * found 'ast_group_t'
+
+ * found 'ast_app_separate_args'
+
+ * found AST_EXTENSION_RINGING
+
+ * found ast_string_field_funcs
+
+ * found new ast_cli_generator definition
+
+config.h complete.
+
+Now compiling .... chan_sccp.c          1507 lines 
+
+chan_sccp.c: In function `reload_config':
+
+chan_sccp.c:1274: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1274: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1281: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1281: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1285: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1285: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c:1292: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1292: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c: At top level:
+
+chan_sccp.c:1328: warning: no previous prototype for 'reload'
+
+chan_sccp.c:1332: warning: function declaration isn't a prototype
+
+chan_sccp.c:1395: warning: function declaration isn't a prototype
+
+chan_sccp.c: In function `unload_module':
+
+chan_sccp.c:1448: error: incompatible type for argument 1 of
+`ast_inet_ntoa'
+
+chan_sccp.c:1448: error: too many arguments to function `ast_inet_ntoa'
+
+chan_sccp.c: At top level:
+
+chan_sccp.c:1493: warning: function declaration isn't a prototype
+
+chan_sccp.c:1501: warning: function declaration isn't a prototype
+
+chan_sccp.c:1505: warning: function declaration isn't a prototype
+
+make: *** [.tmp/chan_sccp.o] Error 1
+
+ 
+
+ 
+
+ 
+
+My question .... is there any additional step(s) that need to be done,
+install, or configured to get this going?  
+
+ 
+
+Any help and suggestions with this would be very grateful? 
+
+ 
+
+Thanks in advanced
+
+ 
+
+CP
+
+ 
+
+BTW - I'm running Asterisk 1.4.0 and Linux kernel 2.6
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070228/47406666/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070228/47406666/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000033.html">[Chan-sccp-users] Can't Install Asterisk SCCP channel driver?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#34">[ date ]</a>
+              <a href="thread.html#34">[ thread ]</a>
+              <a href="subject.html#34">[ subject ]</a>
+              <a href="author.html#34">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,76 @@
+From karoly.romvari at citi.com  Thu Dec 11 16:59:49 2008
+From: karoly.romvari at citi.com (Romvari, Karoly )
+Date: Thu, 11 Dec 2008 16:59:49 +0100
+Subject: [Chan-sccp-users] FW: Direct rtp
+Message-ID: <1CC16DF0D4071949924E84D987F9F5430FEE6F2E@exhumb02.eur.nsroot.net>
+
+
+
+
+> Hi Guys,
+> 
+> I am newbie to chan_sccp and asterisk, but i have some working sccp
+> phones registered with asterisk using chan_sccp. I am just qurious
+> wheter there is a chance to use "direct rtp" between two sccp
+> endpoints. I tried, and it is possible with SIP, but did't find any
+> solution for SCCP. Any ideas?
+> 
+> Thanks,
+> Karoly Romvari
+> 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20081211/52e632cd/attachment.html>
+
+From mobile at nhm.it  Sat Dec 13 11:37:44 2008
+From: mobile at nhm.it (Federico Santulli)
+Date: Sat, 13 Dec 2008 11:37:44 +0100
+Subject: [Chan-sccp-users] FW: Direct rtp
+In-Reply-To: <1CC16DF0D4071949924E84D987F9F5430FEE6F2E@exhumb02.eur.nsroot.net>
+References: <1CC16DF0D4071949924E84D987F9F5430FEE6F2E@exhumb02.eur.nsroot.net>
+Message-ID: <58DFD66FA59E4E5B99A258D2F1D6A38D@PCFreddy>
+
+FW: Direct rtpHello Romvari,
+
+i just added direct RTP support in SVN branches/v2
+
+Take care it works only on asterisk 1.6.
+
+Btw, i hope you can join newer mailing list on sourceforge. 
+
+Please visit www.chan-sccp.org for more informations.
+
+Thank you for your interest in chan-sccp-b.
+
+Federico
+  ----- Original Message ----- 
+  From: Romvari, Karoly 
+  To: chan-sccp-users at lists.berlios.de 
+  Sent: Thursday, December 11, 2008 4:59 PM
+  Subject: [Chan-sccp-users] FW: Direct rtp
+
+
+
+
+
+
+  Hi Guys, 
+
+  I am newbie to chan_sccp and asterisk, but i have some working sccp phones registered with asterisk using chan_sccp. I am just qurious wheter there is a chance to use "direct rtp" between two sccp endpoints. I tried, and it is possible with SIP, but did't find any solution for SCCP. Any ideas?
+
+  Thanks, 
+  Karoly Romvari 
+
+
+
+------------------------------------------------------------------------------
+
+
+  _______________________________________________
+  Chan-sccp-users mailing list
+  Chan-sccp-users at lists.berlios.de
+  https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20081213/1724066f/attachment.html>
+

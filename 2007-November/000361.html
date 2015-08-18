@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Various issues
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Various%20issues&In-Reply-To=%3C18357747.111194446481000.JavaMail.root%40mail.linkdc.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000360.html">
+   <LINK REL="Next"  HREF="000362.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Various issues</H1>
+    <B>Martin Sutherland</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Various%20issues&In-Reply-To=%3C18357747.111194446481000.JavaMail.root%40mail.linkdc.co.uk%3E"
+       TITLE="[Chan-sccp-users] Various issues">martin at linkdc.co.uk
+       </A><BR>
+    <I>Wed Nov  7 15:41:21 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000360.html">[Chan-sccp-users] Direct to VM gone?
+</A></li>
+        <LI>Next message: <A HREF="000362.html">[Chan-sccp-users] Various issues + Call for Patches
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#361">[ date ]</a>
+              <a href="thread.html#361">[ thread ]</a>
+              <a href="subject.html#361">[ subject ]</a>
+              <a href="author.html#361">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear list members,
+
+Latest chan_sccp - I nearly lost my biggest customer yesterday over phone system reliability problems. I would be very grateful to know when it will be possible to download the latest chan_sccp for Asterisk 1.4 complete with any known good patches - it really is critical that I can move forward in the next two weeks. I know that some versions have been attached to previous postings, but I am not really confident of applying patches. What reason (perhaps only time) that the current tree can not be released?
+
+Phone firmware versions - Any chance we can get agreement on the best firmware versions for the various models?
+
+DST/locale settings - Can anyone explain what files are needed to correctly localise Cisco phone 7940/7941/7960/7961 etc. During UK DST time all my 7940/7960 phones showed the correct time and my 7961 phone was 1 hour out. Now that DST has ended, all my 7940/7960s are 1 hour out and 7961 is correct! I would like my 7961 to show the date in UK format eg. d/m/y as my 7940/7960 already do (taken from sccp.conf). I know that there was a change in the way locale settings are used between 7940/7960 series and 7941/7961 series. I have access to Cisco downloads.
+
+Caller id when transferring calls - I have also noticed that incoming caller id is lost when a call is transferred (assisted transfer). My users would expect to see the details of the original caller after the incoming call has been connected. I always thought that this was one of the benefits of the sccp that the PBX can re-write the display as necessary and thus change the info displayed?
+
+Cisco router with CME 4 available - I am happy to donate a Cisco 1721 router complete with CME 4 to anyone who can really use it to further the cause of integration. This does list models 7941/7961 etc. I am happy to send this via courier to anywhere in Europe. I purchased this to debug how the lights on 7914s are controlled to allow more functionality in chan_sccp, but will propbably never get the time to do this.
+
+UK PRI/ISDN30 settings - Is there anyone else in the UK using Digium E1 cards with PRI/ISDN30 lines? I have had a recent issue with one customer where customers ringing in were getting a busy signal and yet Asterisk/Zaptel showed no issues. I guess I need to debug PRI stuff, but this is fairly complex. I would be interested to know what settings anyone else uses for:
+
+Timing source (I'm sure BT told me that the exchange should always provide the timing source)
+Reset B channels: On or Off
+Distance from NTE
+Echo settings
+
+Many thanks.
+
+Martin
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000360.html">[Chan-sccp-users] Direct to VM gone?
+</A></li>
+	<LI>Next message: <A HREF="000362.html">[Chan-sccp-users] Various issues + Call for Patches
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#361">[ date ]</a>
+              <a href="thread.html#361">[ thread ]</a>
+              <a href="subject.html#361">[ subject ]</a>
+              <a href="author.html#361">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

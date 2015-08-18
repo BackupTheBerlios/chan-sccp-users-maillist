@@ -1,0 +1,28 @@
+From max.luka at gmail.com  Fri Jun 19 19:06:33 2009
+From: max.luka at gmail.com (Maxim Y. Yemelyanov)
+Date: Fri, 19 Jun 2009 20:06:33 +0300
+Subject: [Chan-sccp-users] Cisco 7970 + chan-sccp: no audio,
+	keeps unregistering
+Message-ID: <0CE9DAE5-38E4-4B15-9EDC-2A4670BFD13F@gmail.com>
+
+Hello list users!
+
+I've got problem connecting Cisco 7970 to Asterisk with chan-sccp-b.
+While 7960 & 7940 working flawlessly, with 7970 I cannot get audio on  
+calls, or phone just freezes on call with no audio, or freezes just  
+after first attempt to make a call; also phone just keep dropping  
+connection to server with : "unregister request sent"
+
+While playing with sccp.conf I've encountered, that different  
+protocolversion= variables gives various results: sometimes call goes  
+through, sometimes phone works a bit longer than before.
+
+Tried different versions of chan-sccp-b -- no help.
+
+
+Thanks in advance,
+help is greatly appreciated
+
+max
+
+

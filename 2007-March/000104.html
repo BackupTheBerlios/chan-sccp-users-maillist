@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] chan_sccp, 30VIP
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%2C%2030VIP&In-Reply-To=%3Ccdae243a0703291239x58a10813he40544e1f2d11352%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000103.html">
+   <LINK REL="Next"  HREF="000105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] chan_sccp, 30VIP</H1>
+    <B>Chris Nighswonger</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%2C%2030VIP&In-Reply-To=%3Ccdae243a0703291239x58a10813he40544e1f2d11352%40mail.gmail.com%3E"
+       TITLE="[Chan-sccp-users] chan_sccp, 30VIP">cnighswonger at foundations.edu
+       </A><BR>
+    <I>Thu Mar 29 21:39:55 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000103.html">[Chan-sccp-users] Wireless Cisco phones
+</A></li>
+        <LI>Next message: <A HREF="000105.html">[Chan-sccp-users] chan_sccp, 30VIP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+  Does anyone on the list have 30VIP's configured and working with
+chan_sccp on * 1.4.x? I have been able to patch and compile chan_sccp
+for 1.4. It loads and the 30 registers fine. From there I get a
+variety of flavors of &quot;No lines registered on....&quot; when taking the
+phone offhook and pressing any keys. Here is some of my sccp.conf:
+
+[devices]
+
+type=30
+autologin=line51235
+keepalive = 60
+dtmfmode = inband
+imageversion = P002L2J2
+device =&gt; SEP000196C00D3F
+
+[lines]
+id = 51235
+pin = 1234
+context = from-vip51235
+incominglimit = 2
+line =&gt; 51235
+
+  Also, any suggestions as to what features of the 30VIP are supported
+by chan_sccp would be appriciated.
+
+Thanks,
+Chris
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000103.html">[Chan-sccp-users] Wireless Cisco phones
+</A></li>
+	<LI>Next message: <A HREF="000105.html">[Chan-sccp-users] chan_sccp, 30VIP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

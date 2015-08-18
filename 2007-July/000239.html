@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Confusion between Group pickup and parking
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Confusion%20between%20Group%20pickup%20and%20parking&In-Reply-To=%3C17523796.1185565114041.JavaMail.root%40mail.linkdc.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000238.html">
+   <LINK REL="Next"  HREF="000240.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Confusion between Group pickup and parking</H1>
+    <B>Martin Sutherland</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Confusion%20between%20Group%20pickup%20and%20parking&In-Reply-To=%3C17523796.1185565114041.JavaMail.root%40mail.linkdc.co.uk%3E"
+       TITLE="[Chan-sccp-users] Confusion between Group pickup and parking">martin at linkdc.co.uk
+       </A><BR>
+    <I>Fri Jul 27 21:38:34 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000238.html">[Chan-sccp-users] Shared lines
+</A></li>
+        <LI>Next message: <A HREF="000240.html">[Chan-sccp-users] Shared lines implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#239">[ date ]</a>
+              <a href="thread.html#239">[ thread ]</a>
+              <a href="subject.html#239">[ subject ]</a>
+              <a href="author.html#239">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear list members,
+
+A while back I remember someone saying that Group pickup was related to parking and I just read another message on a similar motion. Unless I have completely missed the point, these are two very different things. Group pickup allows you to answer a call that is not actually ringing on your handset provided that your extension is an admin of a pickup group that contains an extension that is ringing - this facility is mostly provided within the channel driver - I am not sure if it works between channel drivers. 
+
+Parking is an Asterisk feature that allow an active call to be moved to a virtual extension and then moved back to another real extension. This is used where a caller wants to hold for someone rather than use voicemail and allows the initial call handler to &quot;detach&quot; from the call. Paging is often used to alert the recipient that a call is parked for them. The call will however come back to the call handler after a specified amount of time.
+
+As I understand, chan_sccp handles group pickup but does not get involved in parking calls or getting calls from a call park.
+
+Please could more knowledgeable members agree or deny the above.
+
+Regards,
+
+Martin
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070727/94b1fab8/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070727/94b1fab8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000238.html">[Chan-sccp-users] Shared lines
+</A></li>
+	<LI>Next message: <A HREF="000240.html">[Chan-sccp-users] Shared lines implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#239">[ date ]</a>
+              <a href="thread.html#239">[ thread ]</a>
+              <a href="subject.html#239">[ subject ]</a>
+              <a href="author.html#239">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] asterisk crash, dead device
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20asterisk%20crash%2C%20dead%20device&In-Reply-To=%3C01459B225347E04A9896E75D1CE204110101D817%40hermes.ifc.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000157.html">
+   <LINK REL="Next"  HREF="000159.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] asterisk crash, dead device</H1>
+    <B>Laurent MELE</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20asterisk%20crash%2C%20dead%20device&In-Reply-To=%3C01459B225347E04A9896E75D1CE204110101D817%40hermes.ifc.local%3E"
+       TITLE="[Chan-sccp-users] asterisk crash, dead device">lmele at INFOCLIP.FR
+       </A><BR>
+    <I>Wed May 16 12:26:55 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000157.html">[Chan-sccp-users] asterisk crash, dead device
+</A></li>
+        <LI>Next message: <A HREF="000159.html">[Chan-sccp-users] asterisk crash, dead device
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#158">[ date ]</a>
+              <a href="thread.html#158">[ thread ]</a>
+              <a href="subject.html#158">[ subject ]</a>
+              <a href="author.html#158">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi Daniel,
+
+ 
+
+I dont think that your problem is related to chan_sccp but maybe to zaptel (I had same).
+
+Is there any deadlock messages before that  ?
+
+ 
+
+Is there any pri or bri devices in your asterisk box ? 
+
+ 
+
+ 
+
+- --
+
+Laurent Mele
+
+ 
+
+De : <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] De la part de Daniel Schlager
+Envoy&#233; : mercredi 16 mai 2007 12:15
+&#192; : <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Objet : [Chan-sccp-users] asterisk crash, dead device
+
+ 
+
+Hello,
+
+ 
+
+asterisk crash after dead device message from sccp_socket.c
+
+ 
+
+Asterisk 1.2.13 + chan_sccp version 20060408
+
+ 
+
+&gt;<i> 30 Cisco 7970G in the office
+</I>
++ 3 Cisco 7970G behind a Cisco PIX (VPN tunneling)
+
+ 
+
+sometimes but not always if the vpn tunnel disconnects i can see that entry in 
+
+/var/log/asterisk/messages
+
+ 
+
+Apr 16 13:05:42 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+Apr 16 13:09:33 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+Apr 16 13:11:06 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-357
+
+Apr 16 13:12:28 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+Apr 16 13:16:44 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-369
+
+Apr 16 13:17:06 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-370
+
+Apr 16 13:18:17 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+Apr 16 13:19:53 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-372
+
+Apr 16 13:19:54 ERROR[6054] sccp_channel.c: SEP001818BF3B7F can't put on hold an inactive channel 123-372
+
+Apr 16 13:21:06 WARNING[6054] sccp_socket.c: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+ 
+
+after that the asterisk remove all phones (not only the dead one)!!! 
+
+ 
+
+asterisk*CLI&gt; sccp show lines
+
+asterisk*CLI&gt; 
+
+NAME             DEVICE           MWI  Chs  Active Channel  
+
+================ ================ ==== ==== =================================================
+
+ 
+
+^^ is empty
+
+ 
+
+the only way to get asterisk running is to reboot the server.
+
+ 
+
+i didn't understand that because we have an office with about 6 phones (same hardware, same software &amp; configuration) and no problems since over 6 months but in the big office with over 30 phones, the system is crashing sometimes every day!! i think chan_sccp are getting very instable if there are more phones connected
+
+ 
+
+has anyone the same problem and can help me?
+
+ 
+
+ 
+
+thanks
+
+ 
+
+Daniel
+
+ 
+
+ 
+
+- - 
+
+Mit freundlichen Gr&#252;&#223;en,
+
+Daniel Schlager
+
+ 
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: 9.6.1 (Build 1012)
+
+wj8DBQFGStxvYQLM6r0zcxoRAsvTAJ9wxYkJCQl7c2j57quNuKIzzIR5yACfeBBE
+bd8+j6DvgzeNB2Sz+8OkHwg=
+=1YBT
+-----END PGP SIGNATURE-----
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: PGPexch.htm.pgp
+Type: application/octet-stream
+Size: 3404 bytes
+Desc: PGPexch.htm.pgp
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070516/9e690528/attachment.obj">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070516/9e690528/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000157.html">[Chan-sccp-users] asterisk crash, dead device
+</A></li>
+	<LI>Next message: <A HREF="000159.html">[Chan-sccp-users] asterisk crash, dead device
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#158">[ date ]</a>
+              <a href="thread.html#158">[ thread ]</a>
+              <a href="subject.html#158">[ subject ]</a>
+              <a href="author.html#158">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

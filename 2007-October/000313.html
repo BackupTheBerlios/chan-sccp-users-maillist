@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Asterisk is hanging with iax2 and	chan_sccp-20071004-DD
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%20is%20hanging%20with%20iax2%20and%0A%09chan_sccp-20071004-DD&In-Reply-To=%3C470B8463.1010009%40lusiewicz.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000304.html">
+   <LINK REL="Next"  HREF="000314.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Asterisk is hanging with iax2 and	chan_sccp-20071004-DD</H1>
+    <B>Damian Lusiewicz</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%20is%20hanging%20with%20iax2%20and%0A%09chan_sccp-20071004-DD&In-Reply-To=%3C470B8463.1010009%40lusiewicz.de%3E"
+       TITLE="[Chan-sccp-users] Asterisk is hanging with iax2 and	chan_sccp-20071004-DD">chan-sccp.berlios.de at lusiewicz.de
+       </A><BR>
+    <I>Tue Oct  9 15:38:43 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000304.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+        <LI>Next message: <A HREF="000314.html">[Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp-20071004-DD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#313">[ date ]</a>
+              <a href="thread.html#313">[ thread ]</a>
+              <a href="subject.html#313">[ subject ]</a>
+              <a href="author.html#313">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>David Dederscheck schrieb:
+&gt;<i> Martin,
+</I>&gt;<i> 
+</I>&gt;<i> maybe you would like to the current version for 1.4 Marcello and I have
+</I>&gt;<i> assembled from our and recent patches. Note that this version runs
+</I>&gt;<i> without crashes in both Marcello's and mine testing environments,
+</I>&gt;<i> comprised of the same kind of devices you use.
+</I>
+Hello David,
+
+after a while we have got a hanging asterisk. Following we see on the CLI:
+
+    -- SEP0016Cxxxxxxx: Answer the channel 211-642
+    -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">250 at SEP0016Cxxxxxxx-641</A>
+    -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+    -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+SCCP/211-00000282
+    -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+    -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1&lt;MASQ&gt;
+    -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets sent:
+474 rcvd:
+461 lost: 0 jitter: 0 latency: 3
+[Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:54] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:55] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:56] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:57] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:58] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:59] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+[Oct  9 13:18:59] NOTICE[27088]: chan_iax2.c:946 __schedule_action: Out
+of idle
+IAX2 threads for scheduling!
+[Oct  9 13:19:00] NOTICE[27089]: chan_iax2.c:6375 socket_read: Out of
+idle IAX2
+threads for I/O, pausing!
+
+The above message is displayed until we kill the asterisk process.
+
+
+&gt;<i> I attached the current tree for you to try, despite it will only work
+</I>&gt;<i> with * 1.4 as of now. We shall back-port it once...
+</I>&gt;<i> 
+</I>
+
+@David: maybe you have got an further idea, how to solve this? Many
+thanks for your help so far.
+
+Best regards
+Damian Lusiewicz
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000304.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+	<LI>Next message: <A HREF="000314.html">[Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp-20071004-DD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#313">[ date ]</a>
+              <a href="thread.html#313">[ thread ]</a>
+              <a href="subject.html#313">[ subject ]</a>
+              <a href="author.html#313">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

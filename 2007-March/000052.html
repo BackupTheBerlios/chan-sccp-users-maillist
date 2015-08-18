@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] SCCP Phone through NAT
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20SCCP%20Phone%20through%20NAT&In-Reply-To=%3C45EDD87B.3080603%40networkoblivion.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000051.html">
+   <LINK REL="Next"  HREF="000054.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] SCCP Phone through NAT</H1>
+    <B>Peder @ NetworkOblivion</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20SCCP%20Phone%20through%20NAT&In-Reply-To=%3C45EDD87B.3080603%40networkoblivion.com%3E"
+       TITLE="[Chan-sccp-users] SCCP Phone through NAT">peder at networkoblivion.com
+       </A><BR>
+    <I>Tue Mar  6 22:09:15 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000051.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+        <LI>Next message: <A HREF="000054.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>FYI, Fortinet and Netscreen both claim to support SCCP in their newer 
+releases of software, although I haven't actually tried either one. 
+Outside of Cisco hardware, those are the only firewalls that I have seen 
+that actually claim to support it.
+
+Peder
+
+
+Mike Tubby wrote:
+&gt;<i> The general problem with this set up is that you end up with either no audio 
+</I>&gt;<i> or one-way audio...
+</I>&gt;<i> 
+</I>&gt;<i> SCCP is built on ASN.1 and is NAT encumbered, by this I mean that the SCCP 
+</I>&gt;<i> protocol (TCP/2000) conveys IP addresses/port numbers for the RTP stream to 
+</I>&gt;<i> setup inside the ASN.1 -- if you want this to work I think you'll need a 
+</I>&gt;<i> Cisco router like the 837-K9 (or a dumb Etherner modem and a PIX firewall) 
+</I>&gt;<i> and have to use the &quot;protocol fixup skinny&quot; feature so that the router(or 
+</I>&gt;<i> pix) correctly modifies the SCCP payload data while in transit...
+</I>&gt;<i> 
+</I>&gt;<i> Mike
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ----- Original Message ----- 
+</I>&gt;<i> From: &quot;Patrick Mowry&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">pmowry at getgds.com</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;<i> Sent: Tuesday, March 06, 2007 7:26 PM
+</I>&gt;<i> Subject: [Chan-sccp-users] SCCP Phone through NAT
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Hello,
+</I>&gt;&gt;<i>  I noticed in the release notes for chan_sccp that NAT support was
+</I>&gt;&gt;<i> added awhile back.  Now I have an actual use for it.  I cannot setup a
+</I>&gt;&gt;<i> VPN between two sites since neither side has a static IP.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> So I wanted to setup Asterisk with ports forwarded from the local
+</I>&gt;&gt;<i> firewall to be connected to by a 7940 behind a DSL router, also doing
+</I>&gt;&gt;<i> NAT.  I would configured the phone to connect to a hostname (using
+</I>&gt;&gt;<i> dyndns.org I assume) and have the SCCP ports forwarded to it as well
+</I>&gt;&gt;<i> since I only need one phone at the remote site.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Anyone ever try something like this?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Thanks,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> -Patrick
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Chan-sccp-users mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+-- 
+
+Network stuff you didn't know....
+<A HREF="http://www.networkoblivion.com">http://www.networkoblivion.com</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000051.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+	<LI>Next message: <A HREF="000054.html">[Chan-sccp-users] SCCP Phone through NAT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

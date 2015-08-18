@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Various
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Various&In-Reply-To=%3C792897337FC81944BA4097ABD708977103F8D82A%40pdc.bnsnet.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000365.html">
+   <LINK REL="Next"  HREF="000387.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Various</H1>
+    <B>Steve J. Walker</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Various&In-Reply-To=%3C792897337FC81944BA4097ABD708977103F8D82A%40pdc.bnsnet.co.uk%3E"
+       TITLE="[Chan-sccp-users] Various">SteveW at bucks.net
+       </A><BR>
+    <I>Thu Nov  8 11:38:12 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000365.html">[Chan-sccp-users] Various
+</A></li>
+        <LI>Next message: <A HREF="000387.html">[Chan-sccp-users] Various
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#366">[ date ]</a>
+              <a href="thread.html#366">[ thread ]</a>
+              <a href="subject.html#366">[ subject ]</a>
+              <a href="author.html#366">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi David,
+
+&gt;<i> Can anyone recommend firmware versions for 7941/7961 (fairly hard to
+</I>&gt;<i> work out what the
+</I>&gt;<i> version number is from the filenames!). As you say, there seems to be
+</I>&gt;<i> little point in using
+</I>&gt;<i> the latest firmware unless you are actually working with Call Manager.
+</I>
+We have a couple of 7941's and use 7941-7961 SCCP 7.0.3:
+
+cnu41.2-7-6-26.sbn
+CVM41.2-0-2-26.sbn
+Jar41.2-9-2-26.sbn
+TERM41.7-0-3-0S.loads
+term41.default.loads
+term61.default.loads
+
+For all phones we use:
+
+&lt;dateTemplate&gt;D.M.Y&lt;/dateTemplate&gt;
+&lt;timeZone&gt;W. Europe Standard/Daylight Time&lt;/timeZone&gt;
+
+The 7940's / 60's are fine for the 7941/70's they need this in
+chan_sccp.conf:
+
+tzoffset    = -1
+
+To show the correct time :-)
+
+&gt;<i> Timezones - My server's clock is on UTC/GMT and correctly changes the
+</I>&gt;<i> local time for DST.
+</I>&gt;<i> As you say, I thought 7940/7960s just take the local time via sccp and
+</I>&gt;<i> also take the date
+</I>
+Hope that helps
+
+Steve 
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000365.html">[Chan-sccp-users] Various
+</A></li>
+	<LI>Next message: <A HREF="000387.html">[Chan-sccp-users] Various
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#366">[ date ]</a>
+              <a href="thread.html#366">[ thread ]</a>
+              <a href="subject.html#366">[ subject ]</a>
+              <a href="author.html#366">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

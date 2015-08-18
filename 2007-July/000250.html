@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] R: chan_sccp and 7970
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20R%3A%20chan_sccp%20and%207970&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E83%40THEBRAIN1.drs.ca%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000249.html">
+   <LINK REL="Next"  HREF="000251.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] R: chan_sccp and 7970</H1>
+    <B>Zuber, Jonathan</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20R%3A%20chan_sccp%20and%207970&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E83%40THEBRAIN1.drs.ca%3E"
+       TITLE="[Chan-sccp-users] R: chan_sccp and 7970">jzuber at drs.ca
+       </A><BR>
+    <I>Mon Jul 30 22:23:31 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000249.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+        <LI>Next message: <A HREF="000251.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#250">[ date ]</a>
+              <a href="thread.html#250">[ thread ]</a>
+              <a href="subject.html#250">[ subject ]</a>
+              <a href="author.html#250">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have this...
+
+[default]
+
+include =&gt; ext-local
+
+then under extensions_additional.conf I have my 
+exten =&gt; 2001,1,Dial(SCCP/2001,10,r)
+exten =&gt; 2001,n,Hangup()
+exten =&gt; 2002,1,Dial(SCCP/2002,10,r)   ....
+
+under the [ext-local]  
+
+Which I believe is set up correctly
+
+
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From:	Lacy Moore - Aspendora [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">aspendora at gmail.com</A>]
+</I>&gt;<i> Sent:	Monday, July 30, 2007 4:13 PM
+</I>&gt;<i> To:	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject:	Re: [Chan-sccp-users] R: chan_sccp and 7970
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> On 7/30/07, Zuber, Jonathan &lt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>&gt;&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 	Ok here is sccp.conf (general and 1 phone and 1 line)
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i> Ok, first question...  Are you using static IPs for the phones?  You've
+</I>&gt;<i> told it in sccp.conf that the phone can only be the IP address you have
+</I>&gt;<i> listed.
+</I>&gt;<i>  
+</I>&gt;<i> Second, I'm assuming this is a Trixbox and/or FreePBX system.  I believe
+</I>&gt;<i> the default context for the extensions is from-internal.  The context
+</I>&gt;<i> named default in extensions.conf may not be referencing (including) the
+</I>&gt;<i> corresponding context in extensions_additional.conf.  
+</I>&gt;<i>  
+</I>&gt;<i> Make sure you have something similar to this:
+</I>&gt;<i>  
+</I>&gt;<i> extensions.conf:
+</I>&gt;<i> #include extensions_additional.conf
+</I>&gt;<i>  
+</I>&gt;<i> [default]
+</I>&gt;<i> include =&gt; additional_default
+</I>&gt;<i>  
+</I>&gt;<i> ...
+</I>&gt;<i>  
+</I>&gt;<i>  
+</I>&gt;<i> extensions_additional.conf
+</I>&gt;<i> [additional_default]
+</I>&gt;<i> exten =&gt; 2001 ... and so on as you posted before
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i>   &lt;&lt; File: ATT395276.txt &gt;&gt; 
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000249.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+	<LI>Next message: <A HREF="000251.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#250">[ date ]</a>
+              <a href="thread.html#250">[ thread ]</a>
+              <a href="subject.html#250">[ subject ]</a>
+              <a href="author.html#250">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,3554 @@
+From davidded at davidded.de  Thu Nov  1 10:26:34 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Thu, 1 Nov 2007 10:26:34 +0100
+Subject: [Chan-sccp-users] Success with Asterisk 1.4.13 with
+	chan_sccp-20071009-DD and two small fixes
+In-Reply-To: <47289E44.5050303@matflow.net>
+References: <47289E44.5050303@matflow.net>
+Message-ID: <C589E3AA-7EB0-4778-8CA0-A208603D00CF@davidded.de>
+
+Hi Frank,
+
+thank you very much - We'll do that asap. It seems to me that you've  
+brought us a big step forward towards a preliminary release on the  
+sourceforge project website, which hopefully will yield us even more  
+fixes and also new problems we don't even know yet ;-)
+
+Well, but seriously, there are still some minor issues with the  
+directories lists, which we haven't identified yet. I found that  
+sometimes calls don't get registered in the lists at all, but this  
+seems rather minor to me. Also, internal ringing cadences don't seem  
+to work any more, which is annoying to me as I need it.
+
+@Marcello: Could you please merge these two fixes if you have the  
+time? Please use my last posted tree as the base version.
+
+Regards,
+-David.
+
+On 31.10.2007, at 16:24, Frank Segtrop wrote:
+
+> Hi,
+>
+> I can confirm that Asterisk 1.4.13 works very well with
+> chan_sccp-20071009-DD, except for blind transfers and GPickUps.
+>
+> The blind transfer crashes can be fixed with this small patch of
+> sccp_channel.c:
+>
+> --- chan_sccp-20071009-DD/sccp_channel.c        2007-10-02
+> 18:33:20.000000000 +0200
+> +++ chan_sccp-20071009-DD-mod/sccp_channel.c    2007-10-25
+> 10:28:37.365078170 +0100
+> @@ -888,10 +888,18 @@
+>
+>         }
+>
+> -       ast_queue_hangup(peer->owner);
+> +        ast_mutex_lock(&d->lock);
+> +        if (peer->owner)
+> +                ast_queue_hangup(peer->owner);
+> +        else {
+> +                sccp_log(1)(VERBOSE_PREFIX_3 "Peer owner disappeared!
+> Can't free ressources\n");
+> +                ast_mutex_unlock(&d->lock);
+> +                return;
+> +        }
+> +
+>         ast_mutex_unlock(&transferee->lock);
+>
+> -       ast_mutex_lock(&d->lock);
+> +       //ast_mutex_lock(&d->lock);
+>         d->transfer_channel = NULL;
+>         ast_mutex_unlock(&d->lock);
+>
+>
+> GPickUp crashes as well, this hack fixes that for me:
+>
+> --- chan_sccp-20071009-DD/sccp_pbx.c    2007-10-04  
+> 18:18:14.000000000 +0200
+> +++ chan_sccp-20071009-DD-mod/sccp_pbx.c        2007-10-25
+> 18:05:42.910102970 +0100
+> @@ -728,9 +728,10 @@
+>         uint8_t res_exten = 0, res_wait = 0, res_timeout = 0;
+>
+>         /*sccp_log(1)( VERBOSE_PREFIX_3 "CS_AST_CHANNEL_PVT: %s\n",
+> chan->tech_pvt);*/
+> -
+> +
+> +
+>         c = CS_AST_CHANNEL_PVT(chan);
+> -       if (!c) {
+> +       if (!c || !c->device || !c->device->id) {
+>                 /* let's go out as soon as possibile */
+>                 if (!ast_test_flag(chan, AST_FLAG_ZOMBIE)) {
+>                         ast_log(LOG_ERROR, "SCCP: return from the dial
+> thread. No sccp channel available for %s\n", (chan) ? chan->name :
+> "(null)");
+> @@ -741,6 +742,19 @@
+>                 }
+>                 return NULL;
+>         }
+> +
+> +       if (strncmp(c->device->id,"SEP",3)!=0 &&
+> strncmp(c->device->id,"ATA",3)!=0) {
+> +                if (!ast_test_flag(chan, AST_FLAG_ZOMBIE)) {
+> +                        sccp_log(1)( VERBOSE_PREFIX_3 "SCCP: return
+> from the dial thread. No sccp channel available for %s\n", (chan) ?
+> chan->name : "(null)");
+> +                        if (chan)
+> +                                ast_hangup(chan);
+> +                } else {
+> +                        sccp_log(1)( VERBOSE_PREFIX_3 "SCCP: return
+> from the dial thread. No sccp channel available for zombie\n");
+> +                }
+> +                return NULL;
+> +
+> +
+> +       }
+>
+>         /* this is an outgoung call */
+>         ast_mutex_lock(&c->lock);
+>
+>
+> With these two fixes, there are no more deadlocks or segfaults at all.
+> David and Marcello, if you like, you can add any of these fixes into
+> your code.
+>
+> Thanks!
+>
+> --Frank
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From Marcello.Ceschia at gmx.net  Thu Nov  1 14:22:55 2007
+From: Marcello.Ceschia at gmx.net (Ceschia, Marcello)
+Date: Thu, 1 Nov 2007 14:22:55 +0100
+Subject: [Chan-sccp-users] Success with Asterisk 1.4.13 with
+	chan_sccp-20071009-DD and two small fixes
+In-Reply-To: <C589E3AA-7EB0-4778-8CA0-A208603D00CF@davidded.de>
+References: <47289E44.5050303@matflow.net>
+	<C589E3AA-7EB0-4778-8CA0-A208603D00CF@davidded.de>
+Message-ID: <200711011422.56186.Marcello.Ceschia@gmx.net>
+
+Am Donnerstag, 1. November 2007 schrieb David Dederscheck:
+> @Marcello: Could you please merge these two fixes if you have the ?
+> time? Please use my last posted tree as the base version.
+
+Ok. I did it for 1.2 yesterday und will do it for 1.4 today.
+
+ Marcello
+
+
+From m.robichon at llg.de  Thu Nov  1 14:34:10 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Thu, 1 Nov 2007 14:34:10 +0100 
+Subject: [Chan-sccp-users] Success with Asterisk 1.4.13 with
+	chan_sccp	-20071009-DD and two small fixes
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106683EF3@lhu01.llg.de>
+
+Perfect.
+
+Marcus Robichon
+
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Ceschia,
+Marcello
+Gesendet: Donnerstag, 1. November 2007 14:23
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] Success with Asterisk 1.4.13 with
+chan_sccp-20071009-DD and two small fixes
+
+Am Donnerstag, 1. November 2007 schrieb David Dederscheck:
+> @Marcello: Could you please merge these two fixes if you have the ?
+> time? Please use my last posted tree as the base version.
+
+Ok. I did it for 1.2 yesterday und will do it for 1.4 today.
+
+ Marcello
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071101/8623dd4c/attachment.html>
+
+From sccp-list at puzzled.xs4all.nl  Fri Nov  2 16:26:20 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Fri, 02 Nov 2007 16:26:20 +0100
+Subject: [Chan-sccp-users] Where to download chan_sccp-20071009-DD ?
+Message-ID: <1194017180.2852.6.camel@localhost.localdomain>
+
+Hi,
+
+Where can I download chan_sccp-20071009-DD? I could not find it on
+http://chan-sccp.berlios.de/ and googling for chan_sccp-20071009-DD gave
+no results.
+
+I would like to test this release plus the 2 fixes that were reported on
+the list on a 7961G with asterisk 1.4.13.
+
+Thanks and regards,
+Patrick
+
+
+
+From SteveW at bucks.net  Fri Nov  2 16:30:51 2007
+From: SteveW at bucks.net (Steve J. Walker)
+Date: Fri, 2 Nov 2007 15:30:51 -0000
+Subject: [Chan-sccp-users] Where to download chan_sccp-20071009-DD ?
+References: <1194017180.2852.6.camel@localhost.localdomain>
+Message-ID: <792897337FC81944BA4097ABD708977103CAE880@pdc.bnsnet.co.uk>
+
+Hi Patrick,
+
+There was a post on this list by David (10/10/2007) that contained the
+ZIP attachment.
+
+The subject was "Re: [Chan-sccp-users] Asterisk is hanging with iax2
+and	chan_sccp-20071004-DD"
+
+regards,
+
+Steve Walker
+
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-
+> bounces at lists.berlios.de] On Behalf Of Patrick
+> Sent: 02 November 2007 15:26
+> To: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] Where to download chan_sccp-20071009-DD ?
+> 
+> Hi,
+> 
+> Where can I download chan_sccp-20071009-DD? I could not find it on
+> http://chan-sccp.berlios.de/ and googling for chan_sccp-20071009-DD
+> gave
+> no results.
+> 
+> I would like to test this release plus the 2 fixes that were reported
+> on
+> the list on a 7961G with asterisk 1.4.13.
+> 
+> Thanks and regards,
+> Patrick
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From Marcello.Ceschia at gmx.net  Fri Nov  2 17:20:08 2007
+From: Marcello.Ceschia at gmx.net (Ceschia, Marcello)
+Date: Fri, 2 Nov 2007 17:20:08 +0100
+Subject: [Chan-sccp-users] Where to download chan_sccp-20071009-DD ?
+In-Reply-To: <1194017180.2852.6.camel@localhost.localdomain>
+References: <1194017180.2852.6.camel@localhost.localdomain>
+Message-ID: <200711021720.08427.Marcello.Ceschia@gmx.net>
+
+Hi Patrick ,
+
+give use some time and we make a release.
+
+ Marcello
+
+Am Freitag, 2. November 2007 schrieb Patrick:
+> Hi,
+>
+> Where can I download chan_sccp-20071009-DD? I could not find it on
+> http://chan-sccp.berlios.de/ and googling for chan_sccp-20071009-DD gave
+> no results.
+>
+> I would like to test this release plus the 2 fixes that were reported on
+> the list on a 7961G with asterisk 1.4.13.
+>
+> Thanks and regards,
+> Patrick
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: chan_sccp-1.4-20071101.tar.gz
+Type: application/x-tgz
+Size: 97176 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071102/8e9c3cfa/attachment.bin>
+
+From aspendora at gmail.com  Fri Nov  2 20:07:14 2007
+From: aspendora at gmail.com (Lacy Moore)
+Date: Fri, 2 Nov 2007 14:07:14 -0500
+Subject: [Chan-sccp-users] Transfers
+Message-ID: <56a990d20711021207s5aa10eb0t77c72171da99c2a0@mail.gmail.com>
+
+I've noticed that on internal transfers (at least SCCP to SCCP), the caller
+ID information gets updated.  I've also noticed that on external calls, the
+caller ID info is not updated.  Has anyone got it working so that it is
+updated in both situations?
+
+Thanks!
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071102/2f0491d0/attachment.html>
+
+From mlists at c-net.it  Fri Nov  2 21:16:01 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Fri, 02 Nov 2007 21:16:01 +0100
+Subject: [Chan-sccp-users] Transfers
+In-Reply-To: <56a990d20711021207s5aa10eb0t77c72171da99c2a0@mail.gmail.com>
+References: <56a990d20711021207s5aa10eb0t77c72171da99c2a0@mail.gmail.com>
+Message-ID: <472B8581.9080303@c-net.it>
+
+Lacy Moore ha scritto:
+> I've noticed that on internal transfers (at least SCCP to SCCP), the 
+> caller ID information gets updated.  I've also noticed that on 
+> external calls, the caller ID info is not updated.  Has anyone got it 
+> working so that it is updated in both situations?
+
+When I wrote the transfer code there was no ways to collect the callerid 
+from asterisk channels, maybe something changed in the meantime.
+
+Sergio
+
+
+
+From aspendora at gmail.com  Fri Nov  2 21:55:55 2007
+From: aspendora at gmail.com (Lacy Moore)
+Date: Fri, 2 Nov 2007 15:55:55 -0500
+Subject: [Chan-sccp-users] Transfers
+In-Reply-To: <472B8581.9080303@c-net.it>
+References: <56a990d20711021207s5aa10eb0t77c72171da99c2a0@mail.gmail.com>
+	<472B8581.9080303@c-net.it>
+Message-ID: <56a990d20711021355l55dd07bcg98302a0e05288a@mail.gmail.com>
+
+On 11/2/07, Sergio Chersovani <mlists at c-net.it> wrote:
+>
+>
+> When I wrote the transfer code there was no ways to collect the callerid
+> from asterisk channels, maybe something changed in the meantime.
+
+
+Actually, I was wrong.  The caller ID info is passing, sometimes.  I can't
+see a pattern yet.
+
+I was pretty sure the caller id info was updating on transfers, until
+earlier.  I thought it may have had something to do with using the 7914 to
+dial the extension I'm trying to transfer to, but that worked as well.
+Right now, all transfers are working correctly.  I don't get it.  Ealier
+they weren't.
+
+I'm using the same methods of testing, same phones as before.
+
+I was going live with this system this weekend, but I may put it off until I
+can see a pattern.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071102/0f0cd617/attachment.html>
+
+From sccp-list at puzzled.xs4all.nl  Mon Nov  5 12:54:29 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Mon, 05 Nov 2007 12:54:29 +0100
+Subject: [Chan-sccp-users] This patch still needed for 20071004-DD?
+Message-ID: <1194263669.4405.5.camel@luna.puzzled.xs4all.nl>
+
+Hi,
+
+With chan_sccp-20060408 I used the patch below. Can't really recall what
+it is for. Is this patch still needed with chan_sccp-20071004-DD?
+
+Thanks,
+Patrick
+
+diff -uNr chan_sccp-20071004-DD.org/sccp_pbx.c chan_sccp-20071004-DD/sccp_pbx.c
+--- chan_sccp-20071004-DD.org/sccp_pbx.c	2007-10-04 18:18:14.000000000 +0200
++++ chan_sccp-20071004-DD/sccp_pbx.c	2007-11-05 02:35:04.000000000 +0100
+@@ -422,7 +422,12 @@
+ 
+ 	ast_mutex_lock(&c->lock);
+ 	sccp_log(10)(VERBOSE_PREFIX_3 "%s: Asterisk indicate '%d' (%s) condition on channel %s\n", DEV_ID_LOG(c->device), ind, sccp_control2str(ind), ast->name);
+-	if (c->state == SCCP_CHANNELSTATE_CONNECTED) {
++
++	if (c->state == SCCP_CHANNELSTATE_CONNECTED)
++#ifdef CS_AST_CONTROL_HOLD
++	if (ind != AST_CONTROL_UNHOLD && ind != AST_CONTROL_HOLD)
++#endif
++	{
+ 		/* let's asterisk emulate it */
+ 		ast_mutex_unlock(&c->lock);
+ 		return -1;
+@@ -431,6 +436,9 @@
+ 	
+ 	/* when the rtp media stream is open we will let asterisk emulate the tones */
+ 	if (c->rtp)
++#ifdef CS_AST_CONTROL_HOLD
++	if (ind != AST_CONTROL_UNHOLD && ind != AST_CONTROL_HOLD)
++#endif
+ 		res = -1;
+ 
+ 	switch(ind) {
+
+
+
+
+
+From SteveW at bucks.net  Mon Nov  5 13:19:39 2007
+From: SteveW at bucks.net (Steve J. Walker)
+Date: Mon, 5 Nov 2007 12:19:39 -0000
+Subject: [Chan-sccp-users] New phones and chan_sccp support?
+Message-ID: <792897337FC81944BA4097ABD708977103F8D73F@pdc.bnsnet.co.uk>
+
+Hi All,
+
+I have noticed that Cisco retailers (in the UK) are now listing 7945G,
+7965G, 7962G, 7942G & 7975G's phones. I must say the 7945G looks pretty
+cool with the 7970 style display. 
+
+Will these be supported by a later version of chan_sccp at all? Or will
+someone need a CCM/E and these phones to see if anything has changed
+protocol wise?
+
+I assume (maybe wrongly) they are in the same family as the 7941,61,71?
+Feature wise they look the same as the early prefixed models they
+replace bar the physical update to the button layout and the colour
+screens on some.
+
+Regards,
+
+--
+
+Steve
+
+
+From aspendora at gmail.com  Mon Nov  5 23:57:58 2007
+From: aspendora at gmail.com (Lacy Moore)
+Date: Mon, 5 Nov 2007 16:57:58 -0600
+Subject: [Chan-sccp-users] Success with Asterisk 1.4.13 with
+	chan_sccp-20071009-DD and two small fixes
+In-Reply-To: <C589E3AA-7EB0-4778-8CA0-A208603D00CF@davidded.de>
+References: <47289E44.5050303@matflow.net>
+	<C589E3AA-7EB0-4778-8CA0-A208603D00CF@davidded.de>
+Message-ID: <56a990d20711051457y78ffe0a3r6008777a68d8f031@mail.gmail.com>
+
+On Nov 1, 2007 3:26 AM, David Dederscheck <davidded at davidded.de> wrote:
+
+>
+> Well, but seriously, there are still some minor issues with the
+> directories lists, which we haven't identified yet. I found that
+> sometimes calls don't get registered in the lists at all, but this
+> seems rather minor to me. Also, internal ringing cadences don't seem
+> to work any more, which is annoying to me as I need it.
+>
+> David,
+
+What do you mean by internal ringing cadences?  If you mean setting the
+ringer= to inside, outside, feature, silent, or urgent, that seems to work
+for me with Asterisk 1.4 and the last version of chan_sccp posted to the
+list using 7961's.  I have not tried the 7960's yet, though.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071105/dbf5a067/attachment.html>
+
+From davidded at davidded.de  Tue Nov  6 00:46:10 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Tue, 6 Nov 2007 00:46:10 +0100
+Subject: [Chan-sccp-users] Success with Asterisk 1.4.13 with
+	chan_sccp-20071009-DD and two small fixes
+In-Reply-To: <56a990d20711051457y78ffe0a3r6008777a68d8f031@mail.gmail.com>
+References: <47289E44.5050303@matflow.net>
+	<C589E3AA-7EB0-4778-8CA0-A208603D00CF@davidded.de>
+	<56a990d20711051457y78ffe0a3r6008777a68d8f031@mail.gmail.com>
+Message-ID: <F17CBEBE-5076-4CBB-AFD8-F43D8D42CA71@davidded.de>
+
+Hi Lacy,
+
+yes, I mean the ringer=inside et al. settings. Luckily they do work  
+-- I was in error, although I haven't tested them thoroughly yet. The  
+problem I perceived was me writing `internal' instead of `inside'.
+
+Regards,
+-David.
+
+On Nov 5, 2007, at 11:57 PM, Lacy Moore wrote:
+
+>
+>
+> On Nov 1, 2007 3:26 AM, David Dederscheck <davidded at davidded.de>  
+> wrote:
+>
+> Well, but seriously, there are still some minor issues with the
+> directories lists, which we haven't identified yet. I found that
+> sometimes calls don't get registered in the lists at all, but this
+> seems rather minor to me. Also, internal ringing cadences don't seem
+> to work any more, which is annoying to me as I need it.
+>
+> David,
+>
+> What do you mean by internal ringing cadences?  If you mean setting  
+> the ringer= to inside, outside, feature, silent, or urgent, that  
+> seems to work for me with Asterisk 1.4 and the last version of  
+> chan_sccp posted to the list using 7961's.  I have not tried the  
+> 7960's yet, though.
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071106/82e01370/attachment.html>
+
+From davidded at davidded.de  Tue Nov  6 00:51:25 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Tue, 6 Nov 2007 00:51:25 +0100
+Subject: [Chan-sccp-users] New phones and chan_sccp support?
+In-Reply-To: <792897337FC81944BA4097ABD708977103F8D73F@pdc.bnsnet.co.uk>
+References: <792897337FC81944BA4097ABD708977103F8D73F@pdc.bnsnet.co.uk>
+Message-ID: <0AFF0508-8130-40B2-A227-D77B299959EE@davidded.de>
+
+Hi Steve,
+
+I'd be very keen to try as soon as the first cheap offers appear on  
+eBay ;-)
+
+But seriously, I'd assume that a lot will work fine except some minor  
+adjustments. And yes, we may need a CCM/E to fix these. Got one  
+running somewhere?
+
+By the way I doubt that the new phones are a lot better than the 7970  
+series -- I actually don't like the buttons to get more cluttered and  
+thus fragile as it could be with the new 5-way switch.
+
+Apropos -- did any of you find a sensible application for the  
+horizontal directions of the 7970's 4-way switch? I only did so in  
+choosing the background image. On the other hand, it would be quite  
+decadent to add a 4-way switch just for that.
+
+-David.
+
+On Nov 5, 2007, at 1:19 PM, Steve J. Walker wrote:
+
+> Hi All,
+>
+> I have noticed that Cisco retailers (in the UK) are now listing 7945G,
+> 7965G, 7962G, 7942G & 7975G's phones. I must say the 7945G looks  
+> pretty
+> cool with the 7970 style display.
+>
+> Will these be supported by a later version of chan_sccp at all? Or  
+> will
+> someone need a CCM/E and these phones to see if anything has changed
+> protocol wise?
+>
+> I assume (maybe wrongly) they are in the same family as the  
+> 7941,61,71?
+> Feature wise they look the same as the early prefixed models they
+> replace bar the physical update to the button layout and the colour
+> screens on some.
+>
+> Regards,
+>
+> --
+>
+> Steve
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From davidded at davidded.de  Tue Nov  6 00:57:17 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Tue, 6 Nov 2007 00:57:17 +0100
+Subject: [Chan-sccp-users] This patch still needed for 20071004-DD?
+In-Reply-To: <1194263669.4405.5.camel@luna.puzzled.xs4all.nl>
+References: <1194263669.4405.5.camel@luna.puzzled.xs4all.nl>
+Message-ID: <5E801FE5-AFE0-492D-83F3-45467B47A971@davidded.de>
+
+Hi Patrick,
+
+I'm not sure. I'd suggest you digg the archives for it. I didn't find  
+a corresponding patch like that and would also be curious about its  
+purpose.
+
+Anyways, who sent this patch?
+
+Regards,
+-David.
+
+
+On Nov 5, 2007, at 12:54 PM, Patrick wrote:
+
+> Hi,
+>
+> With chan_sccp-20060408 I used the patch below. Can't really recall  
+> what
+> it is for. Is this patch still needed with chan_sccp-20071004-DD?
+>
+> Thanks,
+> Patrick
+>
+> diff -uNr chan_sccp-20071004-DD.org/sccp_pbx.c chan_sccp-20071004- 
+> DD/sccp_pbx.c
+> --- chan_sccp-20071004-DD.org/sccp_pbx.c	2007-10-04  
+> 18:18:14.000000000 +0200
+> +++ chan_sccp-20071004-DD/sccp_pbx.c	2007-11-05 02:35:04.000000000  
+> +0100
+> @@ -422,7 +422,12 @@
+>
+>  	ast_mutex_lock(&c->lock);
+>  	sccp_log(10)(VERBOSE_PREFIX_3 "%s: Asterisk indicate '%d' (%s)  
+> condition on channel %s\n", DEV_ID_LOG(c->device), ind,  
+> sccp_control2str(ind), ast->name);
+> -	if (c->state == SCCP_CHANNELSTATE_CONNECTED) {
+> +
+> +	if (c->state == SCCP_CHANNELSTATE_CONNECTED)
+> +#ifdef CS_AST_CONTROL_HOLD
+> +	if (ind != AST_CONTROL_UNHOLD && ind != AST_CONTROL_HOLD)
+> +#endif
+> +	{
+>  		/* let's asterisk emulate it */
+>  		ast_mutex_unlock(&c->lock);
+>  		return -1;
+> @@ -431,6 +436,9 @@
+>  	
+>  	/* when the rtp media stream is open we will let asterisk emulate  
+> the tones */
+>  	if (c->rtp)
+> +#ifdef CS_AST_CONTROL_HOLD
+> +	if (ind != AST_CONTROL_UNHOLD && ind != AST_CONTROL_HOLD)
+> +#endif
+>  		res = -1;
+>
+>  	switch(ind) {
+>
+>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From aspendora at gmail.com  Tue Nov  6 19:46:12 2007
+From: aspendora at gmail.com (Lacy Moore)
+Date: Tue, 6 Nov 2007 12:46:12 -0600
+Subject: [Chan-sccp-users] Transfers
+In-Reply-To: <56a990d20711021355l55dd07bcg98302a0e05288a@mail.gmail.com>
+References: <56a990d20711021207s5aa10eb0t77c72171da99c2a0@mail.gmail.com>
+	<472B8581.9080303@c-net.it>
+	<56a990d20711021355l55dd07bcg98302a0e05288a@mail.gmail.com>
+Message-ID: <56a990d20711061046i79250fb3qe5e726d5cab7f918@mail.gmail.com>
+
+It appears the first call placed after Asterisk starts (not from a restart
+now, but from a service asterisk restart or a full reboot of the system)
+does not transfer the caller id information from an outside call (on a
+transferred call).  It shows the caller ID of the caller who iniated the
+transfer.  However, the rest of the calls show the caller id on transfers.
+
+On Nov 2, 2007 2:55 PM, Lacy Moore <aspendora at gmail.com> wrote:
+
+>
+>
+>  On 11/2/07, Sergio Chersovani <mlists at c-net.it> wrote:
+> >
+> >
+> > When I wrote the transfer code there was no ways to collect the callerid
+> > from asterisk channels, maybe something changed in the meantime.
+>
+>
+> Actually, I was wrong.  The caller ID info is passing, sometimes.  I can't
+> see a pattern yet.
+>
+> I was pretty sure the caller id info was updating on transfers, until
+> earlier.  I thought it may have had something to do with using the 7914 to
+> dial the extension I'm trying to transfer to, but that worked as well.
+> Right now, all transfers are working correctly.  I don't get it.  Ealier
+> they weren't.
+>
+> I'm using the same methods of testing, same phones as before.
+>
+> I was going live with this system this weekend, but I may put it off until
+> I can see a pattern.
+>
+
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071106/f96c7571/attachment.html>
+
+From mlists at c-net.it  Tue Nov  6 19:47:01 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Tue, 06 Nov 2007 19:47:01 +0100
+Subject: [Chan-sccp-users] New phones and chan_sccp support?
+In-Reply-To: <792897337FC81944BA4097ABD708977103F8D73F@pdc.bnsnet.co.uk>
+References: <792897337FC81944BA4097ABD708977103F8D73F@pdc.bnsnet.co.uk>
+Message-ID: <4730B6A5.4010105@c-net.it>
+
+Steve J. Walker ha scritto:
+> I have noticed that Cisco retailers (in the UK) are now listing 7945G,
+> 7965G, 7962G, 7942G & 7975G's phones. I must say the 7945G looks pretty
+> cool with the 7970 style display. 
+>   
+
+The protocol is the same so they should work as expected
+
+> Will these be supported by a later version of chan_sccp at all? Or will
+> someone need a CCM/E and these phones to see if anything has changed
+> protocol wise?
+>   
+
+the chan_sccp channel driver doesn't know the new phone model code so it 
+would be nice to have a packet cap of the phone registration to the 
+asterisk/sccp server
+
+Sergio Chersovani
+
+
+From aspendora at gmail.com  Tue Nov  6 19:54:18 2007
+From: aspendora at gmail.com (Lacy Moore)
+Date: Tue, 6 Nov 2007 12:54:18 -0600
+Subject: [Chan-sccp-users] Direct to VM gone?
+Message-ID: <56a990d20711061054q4eda0d52w96f07260c11b9b20@mail.gmail.com>
+
+Using the latest chan_sccp for 1.4, and the Direct to Voicemail button is
+gone.  There is a DirTrfr button that doesn't appear to do anything.  Am I
+missng something here?  So far, this version looks good.  I had a crash once
+during a transfer as soon as the system started, but other than that things
+are looking real good.
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071106/2fe85c6d/attachment.html>
+
+From martin at linkdc.co.uk  Wed Nov  7 15:41:21 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Wed, 7 Nov 2007 14:41:21 +0000 (GMT)
+Subject: [Chan-sccp-users] Various issues
+Message-ID: <18357747.111194446481000.JavaMail.root@mail.linkdc.co.uk>
+
+Dear list members,
+
+Latest chan_sccp - I nearly lost my biggest customer yesterday over phone system reliability problems. I would be very grateful to know when it will be possible to download the latest chan_sccp for Asterisk 1.4 complete with any known good patches - it really is critical that I can move forward in the next two weeks. I know that some versions have been attached to previous postings, but I am not really confident of applying patches. What reason (perhaps only time) that the current tree can not be released?
+
+Phone firmware versions - Any chance we can get agreement on the best firmware versions for the various models?
+
+DST/locale settings - Can anyone explain what files are needed to correctly localise Cisco phone 7940/7941/7960/7961 etc. During UK DST time all my 7940/7960 phones showed the correct time and my 7961 phone was 1 hour out. Now that DST has ended, all my 7940/7960s are 1 hour out and 7961 is correct! I would like my 7961 to show the date in UK format eg. d/m/y as my 7940/7960 already do (taken from sccp.conf). I know that there was a change in the way locale settings are used between 7940/7960 series and 7941/7961 series. I have access to Cisco downloads.
+
+Caller id when transferring calls - I have also noticed that incoming caller id is lost when a call is transferred (assisted transfer). My users would expect to see the details of the original caller after the incoming call has been connected. I always thought that this was one of the benefits of the sccp that the PBX can re-write the display as necessary and thus change the info displayed?
+
+Cisco router with CME 4 available - I am happy to donate a Cisco 1721 router complete with CME 4 to anyone who can really use it to further the cause of integration. This does list models 7941/7961 etc. I am happy to send this via courier to anywhere in Europe. I purchased this to debug how the lights on 7914s are controlled to allow more functionality in chan_sccp, but will propbably never get the time to do this.
+
+UK PRI/ISDN30 settings - Is there anyone else in the UK using Digium E1 cards with PRI/ISDN30 lines? I have had a recent issue with one customer where customers ringing in were getting a busy signal and yet Asterisk/Zaptel showed no issues. I guess I need to debug PRI stuff, but this is fairly complex. I would be interested to know what settings anyone else uses for:
+
+Timing source (I'm sure BT told me that the exchange should always provide the timing source)
+Reset B channels: On or Off
+Distance from NTE
+Echo settings
+
+Many thanks.
+
+Martin
+
+
+From davidded at davidded.de  Thu Nov  8 02:45:53 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Thu, 8 Nov 2007 02:45:53 +0100
+Subject: [Chan-sccp-users] Various issues + Call for Patches
+In-Reply-To: <18357747.111194446481000.JavaMail.root@mail.linkdc.co.uk>
+References: <18357747.111194446481000.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <242E027B-8E34-4481-A224-16EAC8608A9C@davidded.de>
+
+Hi Martin,
+
+On 07.11.2007, at 15:41, Martin Sutherland wrote:
+
+> Dear list members,
+>
+> Latest chan_sccp
+
+do you mean the latest berlios release for 1.2 or the latest post on  
+this list?
+
+> - I nearly lost my biggest customer yesterday over phone system  
+> reliability problems. I would be very grateful to know when it will  
+> be possible to download the latest chan_sccp for Asterisk 1.4  
+> complete with any known good patches - it really is critical that I  
+> can move forward in the next two weeks. I know that some versions  
+> have been attached to previous postings, but I am not really  
+> confident of applying patches. What reason (perhaps only time) that  
+> the current tree can not be released?
+
+Well, of course it bails down to time. However, Marcello and I have  
+agreed that our initial release shall compile with both asterisk 1.2  
+and 1.4 so that future patches will only have to be applied against  
+one tree. Apart from that we're ready for a release.
+
+Beyond that we're still waiting for input by all the other commited  
+people who have created other versions of chan_sccp, especially those  
+working with asterisk 1.4. As we created a fork of the berlios  
+chan_sccp to bring this work forward, we don't want it merely to be  
+based on "our stuff" because we started it.
+
+So on this occasion again: Please submit your patches or tell about  
+your custom version of chan_sccp. We really with to re-unite all the  
+useful however "stray" patches and pieces of code out there. I know  
+how much work it is to actually identify the changes entered  
+quick&dirty into one's own source tree, but it's definitely worth it.
+
+Attached to this mail is the most recent version of Marcello's and  
+mine joint work. I just added a feature that I had to unravel from my  
+own legacy 1.2 tree: Using the global option "recorddigittimeoutchar  
+= on", the '#' to terminate variable-length numbers as they commonly  
+occur in European countries, is recorded to the call logs if it was  
+dialed at first. So redialing works without manual post-dialing the #  
+from the logs.
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: chan_sccp-asterisk-1.4-20071107.tar.gz
+Type: application/x-gzip
+Size: 97912 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071108/2bb71830/attachment.bin>
+-------------- next part --------------
+> Phone firmware versions - Any chance we can get agreement on the  
+> best firmware versions for the various models?
+
+I have found that firmware version 7.2.2 works quite stable for the  
+7940 and 7960. Although the 8.0.4 version seems to be stable too, I  
+did not see a noticeable benefit in using this version. Please  
+correct me if I missed an important issue.
+
+Apart from that the most recent versions should be allright since we  
+solved the directories issues. If you get any trouble nevertheless,  
+just ask to the list what version is "known good" to the others members.
+
+>
+> DST/locale settings - Can anyone explain what files are needed to  
+> correctly localise Cisco phone 7940/7941/7960/7961 etc. During UK  
+> DST time all my 7940/7960 phones showed the correct time and my  
+> 7961 phone was 1 hour out. Now that DST has ended, all my  
+> 7940/7960s are 1 hour out and 7961 is correct! I would like my 7961  
+> to show the date in UK format eg. d/m/y as my 7940/7960 already do  
+> (taken from sccp.conf). I know that there was a change in the way  
+> locale settings are used between 7940/7960 series and 7941/7961  
+> series. I have access to Cisco downloads.
+
+AFAIK the 7940/60s don't get the timezone information whatsoever.  
+They just display the local time of the asterisk server, don't they?  
+So you should check your server for that issue.
+
+The 7941/61/70s all use the following settings for the timezone/ 
+display issue:
+
+     <dateTimeSetting>
+         <name>CMLocal</name>
+         <dateTemplate>D.M.Y</dateTemplate>
+         <timeZone>W. Europe Standard/Daylight Time</timeZone>
+     </dateTimeSetting>
+
+Insert this just with a valid timezone string insted of W. Europe...  
+before the <callManagerGroup> tag of your xml config. At the end of  
+this mail I have compiled a list of valid timezone entries from the  
+simplevoip wiki at http://voip-info.simplevoip.info/wiki/ 
+indexfff5cb0c28a9053c5a7e89e7cdc3d1f0.html? 
+comment_page=7&page_id=3242&maxComments=10&comments_maxComments=10&comme 
+nts_sort_mode=commentDate_desc&comments_style=flat
+
+> Caller id when transferring calls - I have also noticed that  
+> incoming caller id is lost when a call is transferred (assisted  
+> transfer). My users would expect to see the details of the original  
+> caller after the incoming call has been connected. I always thought  
+> that this was one of the benefits of the sccp that the PBX can re- 
+> write the display as necessary and thus change the info displayed?
+
+Yes, but it also has to be implemented correctly, which was not so  
+easy at the time Sergio had to do it. He commented on that issue just  
+recently on the list. But I'm convinced that it's possible and not a  
+great deal of work to get the feature working as you request it.
+
+> Cisco router with CME 4 available - I am happy to donate a Cisco  
+> 1721 router complete with CME 4 to anyone who can really use it to  
+> further the cause of integration. This does list models 7941/7961  
+> etc. I am happy to send this via courier to anywhere in Europe. I  
+> purchased this to debug how the lights on 7914s are controlled to  
+> allow more functionality in chan_sccp, but will propbably never get  
+> the time to do this.
+
+In fact, it would be very helpful to have such a router available to  
+get forward with the newer protocol versions and more advanced  
+features, which includes distinctive ringing, feature buttons,  
+conference calls and shared lines. We have observed that minor things  
+like the order of messages being sent can be important, which cannot  
+always be guessed easily.
+
+As Marcello and I currently don't have a CallManager at hand, and  
+also lack IT administrator friends who occasionally might record a  
+network trace, we could really use it to get on with the new  
+features. We would be very grateful to accept your offer.
+
+
+> UK PRI/ISDN30 settings - Is there anyone else in the UK using  
+> Digium E1 cards with PRI/ISDN30 lines? I have had a recent issue  
+> with one customer where customers ringing in were getting a busy  
+> signal and yet Asterisk/Zaptel showed no issues. I guess I need to  
+> debug PRI stuff, but this is fairly complex. I would be interested  
+> to know what settings anyone else uses for:
+>
+> Timing source (I'm sure BT told me that the exchange should always  
+> provide the timing source)
+> Reset B channels: On or Off
+> Distance from NTE
+> Echo settings
+
+I'm not using any PRI cards, but I use bristuff's hfc zaptel drivers  
+connected to bri ISDN PSTN. If the E1 card is the only device  
+connected to the PRI trunk, which seems like the only common  
+configuration one would use, I wouldn't expect such problems though.  
+Are you sure the busy signal at the customer's site wasn't due to  
+congestion of BT's network?
+
+>
+> Many thanks.
+>
+> Martin
+
+Regards,
+-David.
+
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+Edit >> The following time zones are also for the 7970 and can  
+replace UTC Standard/Daylight Time for your local time zone but must  
+be written precicely as follows including caps and punctuation (any  
+deviation from the following will result in the time being  
+automatically returned to UTC):
+
+Dateline Standard Time
+Samoa Standard Time
+Hawaiian Standard Time
+Alaskan Standard/Daylight Time
+Pacific Standard/Daylight Time
+Mountain Standard/Daylight Time
+US Mountain Standard Time
+Central Standard/Daylight Time
+Mexico Standard/Daylight Time
+Canada Central Standard Time
+SA Pacific Standard Time
+Eastern Standard/Daylight Time
+US Eastern Standard Time
+Atlantic Standard/Daylight Time
+SA Western Standard Time
+Newfoundland Standard/Daylight Time
+South America Standard/Daylight Time
+SA Eastern Standard Time
+Mid-Atlantic Standard/Daylight Time
+Azores Standard/Daylight Time
+GMT Standard/Daylight Time
+Greenwich Standard Time
+W. Europe Standard/Daylight Time
+GTB Standard/Daylight Time
+Egypt Standard/Daylight Time
+E. Europe Standard/Daylight Time
+Romance Standard/Daylight Time
+Central Europe Standard/Daylight Time
+South Africa Standard Time
+Jerusalem Standard/Daylight Time
+Saudi Arabia Standard Time
+Russian Standard/Daylight Time
+Iran Standard/Daylight Time
+Caucasus Standard/Daylight Time
+Arabian Standard Time
+Afghanistan Standard Time
+West Asia Standard Time
+Ekaterinburg Standard Time
+India Standard Time
+Central Asia Standard Time
+SE Asia Standard Time
+China Standard/Daylight Time
+Taipei Standard Time
+Tokyo Standard Time
+Cen. Australia Standard/Daylight Time
+AUS Central Standard Time
+E. Australia Standard Time
+AUS Eastern Standard/Daylight Time
+West Pacific Standard Time
+Tasmania Standard/Daylight Time
+Central Pacific Standard Time
+Fiji Standard Time
+New Zealand Standard/Daylight Time
+
+From m.robichon at llg.de  Thu Nov  8 06:29:20 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Thu, 8 Nov 2007 06:29:20 +0100 
+Subject: [Chan-sccp-users] Various issues + Call for Patches
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC5110668428D@LHU01>
+
+Hallo David,
+hallo Martin,
+
+we are very happy with the latest version. We added the transfer and the
+group pickup fix and all our problems seem to disappear. 
+
+Even if there are some minor issues I agree that this version of chan_sccp
+is no longer a release candidate. It is a release!
+
+Thanks a lot for this great work especially to David, Mardello and of course
+the father of chan_sccp Sergio.
+
+Have a nice day.
+
+Marcus Robichon
+ 
+Lab Logistics Group GmbH
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von David
+Dederscheck
+Gesendet: Donnerstag, 8. November 2007 02:46
+An: chan-sccp-users at lists.berlios.de
+Cc: chan-sccp-b-discussion at lists.sourceforge.net
+Betreff: Re: [Chan-sccp-users] Various issues + Call for Patches
+
+Hi Martin,
+
+On 07.11.2007, at 15:41, Martin Sutherland wrote:
+
+> Dear list members,
+>
+> Latest chan_sccp
+
+do you mean the latest berlios release for 1.2 or the latest post on  
+this list?
+
+> - I nearly lost my biggest customer yesterday over phone system  
+> reliability problems. I would be very grateful to know when it will  
+> be possible to download the latest chan_sccp for Asterisk 1.4  
+> complete with any known good patches - it really is critical that I  
+> can move forward in the next two weeks. I know that some versions  
+> have been attached to previous postings, but I am not really  
+> confident of applying patches. What reason (perhaps only time) that  
+> the current tree can not be released?
+
+Well, of course it bails down to time. However, Marcello and I have  
+agreed that our initial release shall compile with both asterisk 1.2  
+and 1.4 so that future patches will only have to be applied against  
+one tree. Apart from that we're ready for a release.
+
+Beyond that we're still waiting for input by all the other commited  
+people who have created other versions of chan_sccp, especially those  
+working with asterisk 1.4. As we created a fork of the berlios  
+chan_sccp to bring this work forward, we don't want it merely to be  
+based on "our stuff" because we started it.
+
+So on this occasion again: Please submit your patches or tell about  
+your custom version of chan_sccp. We really with to re-unite all the  
+useful however "stray" patches and pieces of code out there. I know  
+how much work it is to actually identify the changes entered  
+quick&dirty into one's own source tree, but it's definitely worth it.
+
+Attached to this mail is the most recent version of Marcello's and  
+mine joint work. I just added a feature that I had to unravel from my  
+own legacy 1.2 tree: Using the global option "recorddigittimeoutchar  
+= on", the '#' to terminate variable-length numbers as they commonly  
+occur in European countries, is recorded to the call logs if it was  
+dialed at first. So redialing works without manual post-dialing the #  
+from the logs.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071108/c2f588bb/attachment.html>
+
+From fs at matflow.net  Thu Nov  8 10:49:33 2007
+From: fs at matflow.net (Frank Segtrop)
+Date: Thu, 08 Nov 2007 10:49:33 +0100
+Subject: [Chan-sccp-users] Two small patches and a new dialplan application
+Message-ID: <4732DBAD.8040906@matflow.net>
+
+Hi,
+
+here are a two more patches, both adressing segfaults which are very
+rare but still happen:
+
+This one addresses gpickup again, I had one segfault with my previous
+patch, this new one fixes that:
+
+--- chan_sccp-20071009-DD/sccp_pbx.c        2007-10-30
+18:05:42.910102970 +0100
++++ chan_sccp-20071009-DD.mod/sccp_pbx.c    2007-11-02
+09:10:02.028890828 +0100
+@@ -743,7 +743,7 @@
+                return NULL;
+        }
+
+-       if (strncmp(c->device->id,"SEP",3)!=0 &&
+strncmp(c->device->id,"ATA",3)!=0) {
++       if (strlen(c->device->id)<3 || (
+strncmp(c->device->id,"SEP",3)!=0 && strncmp(c->device->id,"ATA",3)!=0)) {
+
+
+Then, I had one segfault when putting a call on hold which can be fixed
+here:
+
+--- chan_sccp-20071009-DD/sccp_channel.c    2007-10-29
+10:28:37.365078170 +0100
++++ chan_sccp-20071009-DD-mod/sccp_channel.c        2007-11-05
+14:05:25.308957028 +0100
+@@ -551,7 +551,14 @@
+        sccp_indicate_lock(c, SCCP_CHANNELSTATE_HOLD);
+
+ #ifdef CS_AST_CONTROL_HOLD
++       ast_mutex_lock(&d->lock);
++       if (!c->owner) {
++                sccp_log(1)(VERBOSE_PREFIX_3 "C owner disappeared!
+Can't free ressources\n");
++               ast_mutex_unlock(&d->lock);
++               return 0;
++       }
+        ast_queue_control(c->owner, AST_CONTROL_HOLD);
++       ast_mutex_unlock(&d->lock);
+ #endif
+        return 1;
+ }
+
+
+I also added a new dialplan application called "SetMessage". It allows
+you to send a message to the calling device. I use it to display call
+forwarding to a device, because I could not use the native call
+forwarding. The call forwarding here only acts on external calls, but
+not on internal calls. However, the application can be used to display
+other messages as well.
+
+In the dialplan, simply use SetMessage(theMessage) to set a message, and
+SetMessage() to remove the message.
+
+This is the patch:
+
+--- chan_sccp-20071009-DD/chan_sccp.c       2007-10-09
+15:35:41.000000000 +0200
++++ chan_sccp-20071009-DD-mod/chan_sccp.c   2007-11-07
+17:29:02.378888155 +0100
+@@ -1481,6 +1481,42 @@
+        return 0;
+ }
+
++static char *sccp_setmessage_descrip = "  SetMessage(\"Message\") sets
+a display message for use with chan_sccp\n";
++
++static int sccp_setmessage_exec(struct ast_channel *chan, void *data) {
++        char tmp[256] = "";
++        sccp_channel_t * c = CS_AST_CHANNEL_PVT(chan);
++       sccp_device_t * d;
++
++#ifndef CS_AST_HAS_TECH_PVT
++        if (strcasecmp(chan->type, "SCCP") != 0)
++                return 0;
++#else
++        if (strcasecmp(chan->tech->type, "SCCP") != 0)
++                return 0;
++#endif
++
++        if (!data || !c ||!c->device)
++                return 0;
++
++        sccp_copy_string(tmp, (char *)data, sizeof(tmp));
++
++       d = c->device;
++       ast_mutex_lock(&d->lock);
++       if (strlen(tmp)>0)
++               sccp_dev_displayprinotify(d,tmp,0,0);
++       else
++               sccp_dev_displayprinotify(d,"Message off",0,1); //turn
+message off
++       ast_mutex_unlock(&d->lock);
++        //ast_callerid_parse(tmp, &name, &num);
++
++        //
++        //sccp_channel_set_calledparty(c, name, num);
++
++        return 0;
++}
++
++
+ static int load_module(void) {
+        /* make globals */
+        sccp_globals = malloc(sizeof(struct sccp_global_vars));
+@@ -1539,6 +1575,7 @@
+
+        sccp_register_cli();
+        ast_register_application("SetCalledParty",
+sccp_setcalledparty_exec, "Sets the name of the called party",
+sccp_setcalledparty_descrip);
++       ast_register_application("SetMessage", sccp_setmessage_exec,
+"Sets a message on the calling device", sccp_setmessage_descrip);
+        return 0;
+ }
+
+@@ -1554,6 +1591,7 @@
+        ast_channel_unregister("SCCP");
+ #endif
+        ast_unregister_application("SetCalledParty");
++       ast_unregister_application("SetMessage");
+        sccp_unregister_cli();
+
+        ast_mutex_lock(&GLOB(channels_lock));
+
+
+Regards,
+Frank
+
+
+From martin at linkdc.co.uk  Thu Nov  8 11:29:35 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Thu, 8 Nov 2007 10:29:35 +0000 (GMT)
+Subject: [Chan-sccp-users] Various
+Message-ID: <16900225.01194517775702.JavaMail.root@mail.linkdc.co.uk>
+
+David,
+
+Many thanks for your reply to my email.
+
+If you give me your address, then I'll send off the router.
+
+Latest version of chan_sccp - Are you saying that berlios has the latest version for
+Asterisk 1.2 and your tree is the latest version for 1.4? I'm getting confused about
+this. I appreciate that you want to have one tree for 1.2/1.4 which is a good thing, 
+but I'll take your source as a 1.4 only solution at the moment. Which fixes do you
+think are missing from your tree?
+
+My contribution recently submitted was a fix for the 7960+7914 lost hangup event
+after a re-dial/invalid extension, but it sounds like no one else has had this problem?
+
+Can anyone recommend firmware versions for 7941/7961 (fairly hard to work out what the
+version number is from the filenames!). As you say, there seems to be little point in using
+the latest firmware unless you are actually working with Call Manager.
+
+Timezones - My server's clock is on UTC/GMT and correctly changes the local time for DST.
+As you say, I thought 7940/7960s just take the local time via sccp and also take the date
+format from sccp messages. The 7941/7961/7970/7971 etc seem to pay more attention to the
+config files. I'll try specifying the correct time zone in the config files as you suggest.
+
+Regards,
+
+Martin
+
+
+
+From SteveW at bucks.net  Thu Nov  8 11:38:12 2007
+From: SteveW at bucks.net (Steve J. Walker)
+Date: Thu, 8 Nov 2007 10:38:12 -0000
+Subject: [Chan-sccp-users] Various
+References: <16900225.01194517775702.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <792897337FC81944BA4097ABD708977103F8D82A@pdc.bnsnet.co.uk>
+
+Hi David,
+
+> Can anyone recommend firmware versions for 7941/7961 (fairly hard to
+> work out what the
+> version number is from the filenames!). As you say, there seems to be
+> little point in using
+> the latest firmware unless you are actually working with Call Manager.
+
+We have a couple of 7941's and use 7941-7961 SCCP 7.0.3:
+
+cnu41.2-7-6-26.sbn
+CVM41.2-0-2-26.sbn
+Jar41.2-9-2-26.sbn
+TERM41.7-0-3-0S.loads
+term41.default.loads
+term61.default.loads
+
+For all phones we use:
+
+<dateTemplate>D.M.Y</dateTemplate>
+<timeZone>W. Europe Standard/Daylight Time</timeZone>
+
+The 7940's / 60's are fine for the 7941/70's they need this in
+chan_sccp.conf:
+
+tzoffset    = -1
+
+To show the correct time :-)
+
+> Timezones - My server's clock is on UTC/GMT and correctly changes the
+> local time for DST.
+> As you say, I thought 7940/7960s just take the local time via sccp and
+> also take the date
+
+Hope that helps
+
+Steve 
+
+
+From mlists at c-net.it  Thu Nov  8 13:54:56 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Thu, 08 Nov 2007 13:54:56 +0100
+Subject: [Chan-sccp-users] Various issues + Call for Patches
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC5110668428D@LHU01>
+References: <F3F77C7BD63C8C488186EE2E5BC5110668428D@LHU01>
+Message-ID: <47330720.6020707@c-net.it>
+
+Marcus Robichon ha scritto:
+>
+> Thanks a lot for this great work especially to David, Mardello and of 
+> course the father of chan_sccp Sergio.
+>
+
+they did a good work for the bug fixes
+
+I'm collecting all the patches and verifying the code and testing it on 
+my phones.
+
+I want to support the 1.2 branch too
+
+So the updated tarball should be posted saturday or sunday
+
+Sergio
+
+
+From root at nizon.ca  Fri Nov  9 13:50:48 2007
+From: root at nizon.ca (Paul)
+Date: Fri, 9 Nov 2007 06:50:48 -0600
+Subject: [Chan-sccp-users] 7970 Hints
+Message-ID: <022a01c822cf$27980cf0$76c826d0$@ca>
+
+I was playing with hints on my 7970 this morning and it appears the LED
+indicator does not work.
+
+The display still shows the phone being picked up.
+
+No issues on my 7961, still getting that friendly red indicator.
+
+ 
+
+Anyone else have a 7970 with this problem?
+
+ 
+
+Running 2007-11-07
+
+Phone is running 8.0.4SR3AS
+
+ 
+
+-Paul
+
+ 
+
+Paul Reichart
+
+Chief Operating Officer
+
+Voi Networks Inc
+
+t (204) 272-6099
+
+p.reichart at voinetworks.ca
+
+www.voinetworks.ca
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071109/b4607adf/attachment.html>
+
+From s.lam at keensystems.eu  Fri Nov  9 14:32:16 2007
+From: s.lam at keensystems.eu (Steven Lam, KeenSystems BV)
+Date: Fri, 9 Nov 2007 14:32:16 +0100
+Subject: [Chan-sccp-users] 7970 Hints
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22414FC3E@goofy.bison.keenserver.nl>
+
+Hi,
+ 
+I have a site running a mixture of 7900 phones including 7x 7970 with no
+problem at all.
+7970 load is: TERM70.7-0-2SR1S
+SCCP: 20060202
+Asterisk: 1.2.14-BRIstuffed
+ 
+Steven
+
+________________________________
+
+Van: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Namens Paul
+Verzonden: vrijdag 9 november 2007 13:51
+Aan: chan-sccp-users at lists.berlios.de
+Onderwerp: [Chan-sccp-users] 7970 Hints
+
+
+
+I was playing with hints on my 7970 this morning and it appears the LED
+indicator does not work.
+
+The display still shows the phone being picked up.
+
+No issues on my 7961, still getting that friendly red indicator.
+
+ 
+
+Anyone else have a 7970 with this problem?
+
+ 
+
+Running 2007-11-07
+
+Phone is running 8.0.4SR3AS
+
+ 
+
+-Paul
+
+ 
+
+Paul Reichart
+
+Chief Operating Officer
+
+Voi Networks Inc
+
+t (204) 272-6099
+
+p.reichart at voinetworks.ca
+
+www.voinetworks.ca
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071109/6ba8485f/attachment.html>
+
+From root at nizon.ca  Sat Nov 10 07:21:22 2007
+From: root at nizon.ca (Paul)
+Date: Sat, 10 Nov 2007 00:21:22 -0600
+Subject: [Chan-sccp-users] 7970 Hints
+In-Reply-To: <E0EC7D6DD04A614BB52E24FB6735F22414FC3E@goofy.bison.keenserver.nl>
+References: <E0EC7D6DD04A614BB52E24FB6735F22414FC3E@goofy.bison.keenserver.nl>
+Message-ID: <024d01c82361$ea594d20$bf0be760$@ca>
+
+Guess I need to go back to 7.0.2
+
+ 
+
+ 
+
+Paul Reichart
+
+Chief Operating Officer
+
+Voi Networks Inc
+
+t (204) 272-6099
+
+p.reichart at voinetworks.ca
+
+www.voinetworks.ca
+
+ 
+
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Steven Lam,
+KeenSystems BV
+Sent: Friday, November 09, 2007 7:32 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] 7970 Hints
+
+ 
+
+Hi,
+
+ 
+
+I have a site running a mixture of 7900 phones including 7x 7970 with no
+problem at all.
+
+7970 load is: TERM70.7-0-2SR1S
+
+SCCP: 20060202
+
+Asterisk: 1.2.14-BRIstuffed
+
+ 
+
+Steven
+
+ 
+
+  _____  
+
+Van: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Namens Paul
+Verzonden: vrijdag 9 november 2007 13:51
+Aan: chan-sccp-users at lists.berlios.de
+Onderwerp: [Chan-sccp-users] 7970 Hints
+
+I was playing with hints on my 7970 this morning and it appears the LED
+indicator does not work.
+
+The display still shows the phone being picked up.
+
+No issues on my 7961, still getting that friendly red indicator.
+
+ 
+
+Anyone else have a 7970 with this problem?
+
+ 
+
+Running 2007-11-07
+
+Phone is running 8.0.4SR3AS
+
+ 
+
+-Paul
+
+ 
+
+Paul Reichart
+
+Chief Operating Officer
+
+Voi Networks Inc
+
+t (204) 272-6099
+
+p.reichart at voinetworks.ca
+
+www.voinetworks.ca
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071110/a973b8ff/attachment.html>
+
+From davidded at davidded.de  Sat Nov 10 10:15:19 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sat, 10 Nov 2007 10:15:19 +0100
+Subject: [Chan-sccp-users] 7970 Hints
+In-Reply-To: <024d01c82361$ea594d20$bf0be760$@ca>
+References: <E0EC7D6DD04A614BB52E24FB6735F22414FC3E@goofy.bison.keenserver.nl>
+	<024d01c82361$ea594d20$bf0be760$@ca>
+Message-ID: <5069F967-54EB-4314-866A-8DCA3AC1B8D8@davidded.de>
+
+Hi Paul,
+
+I'd like to try that firmware version of yours to verify if it's  
+really the firmware which causes the problems with the hints. I also  
+have another issue that all newer firmware releases for the 7970  
+cause the loading of png images to take very long.
+
+Maybe you could send me your firmware image for testing.
+
+Regards,
+-David.
+
+
+On Nov 10, 2007, at 7:21 AM, Paul wrote:
+
+> Guess I need to go back to 7.0.2
+>
+>
+>
+>
+>
+> Paul Reichart
+>
+> Chief Operating Officer
+>
+> Voi Networks Inc
+>
+> t (204) 272-6099
+>
+> p.reichart at voinetworks.ca
+>
+> www.voinetworks.ca
+>
+>
+>
+> From: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp- 
+> users-bounces at lists.berlios.de] On Behalf Of Steven Lam,  
+> KeenSystems BV
+> Sent: Friday, November 09, 2007 7:32 AM
+> To: chan-sccp-users at lists.berlios.de
+> Subject: Re: [Chan-sccp-users] 7970 Hints
+>
+>
+>
+> Hi,
+>
+>
+>
+> I have a site running a mixture of 7900 phones including 7x 7970  
+> with no problem at all.
+>
+> 7970 load is: TERM70.7-0-2SR1S
+>
+> SCCP: 20060202
+>
+> Asterisk: 1.2.14-BRIstuffed
+>
+>
+>
+> Steven
+>
+>
+>
+> Van: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp- 
+> users-bounces at lists.berlios.de] Namens Paul
+> Verzonden: vrijdag 9 november 2007 13:51
+> Aan: chan-sccp-users at lists.berlios.de
+> Onderwerp: [Chan-sccp-users] 7970 Hints
+>
+> I was playing with hints on my 7970 this morning and it appears the  
+> LED indicator does not work.
+>
+> The display still shows the phone being picked up.
+>
+> No issues on my 7961, still getting that friendly red indicator.
+>
+>
+>
+> Anyone else have a 7970 with this problem?
+>
+>
+>
+> Running 2007-11-07
+>
+> Phone is running 8.0.4SR3AS
+>
+>
+>
+> -Paul
+>
+>
+>
+> Paul Reichart
+>
+> Chief Operating Officer
+>
+> Voi Networks Inc
+>
+> t (204) 272-6099
+>
+> p.reichart at voinetworks.ca
+>
+> www.voinetworks.ca
+>
+>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071110/d67d5481/attachment.html>
+
+From root at nizon.ca  Sat Nov 10 13:29:54 2007
+From: root at nizon.ca (Paul)
+Date: Sat, 10 Nov 2007 06:29:54 -0600
+Subject: [Chan-sccp-users] 7970 Hints
+In-Reply-To: <5069F967-54EB-4314-866A-8DCA3AC1B8D8@davidded.de>
+References: <E0EC7D6DD04A614BB52E24FB6735F22414FC3E@goofy.bison.keenserver.nl>	<024d01c82361$ea594d20$bf0be760$@ca>
+	<5069F967-54EB-4314-866A-8DCA3AC1B8D8@davidded.de>
+Message-ID: <026701c82395$66160ec0$32422c40$@ca>
+
+It seems I've misplaced my zip file containing the needed files L
+
+Anyone have a CCO account? ;)
+
+ 
+
+ 
+
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+Dederscheck
+Sent: Saturday, November 10, 2007 3:15 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] 7970 Hints
+
+ 
+
+Hi Paul,
+
+ 
+
+I'd like to try that firmware version of yours to verify if it's really the
+firmware which causes the problems with the hints. I also have another issue
+that all newer firmware releases for the 7970 cause the loading of png
+images to take very long.
+
+ 
+
+Maybe you could send me your firmware image for testing.
+
+ 
+
+Regards,
+
+-David.
+
+ 
+
+ 
+
+On Nov 10, 2007, at 7:21 AM, Paul wrote:
+
+
+
+
+
+Guess I need to go back to 7.0.2
+
+ 
+
+ 
+
+Paul Reichart
+
+Chief Operating Officer
+
+Voi Networks Inc
+
+t (204) 272-6099
+
+p.reichart at voinetworks.ca
+
+www.voinetworks.ca
+
+ 
+
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Steven Lam,
+KeenSystems BV
+Sent: Friday, November 09, 2007 7:32 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] 7970 Hints
+
+ 
+
+Hi,
+
+ 
+
+I have a site running a mixture of 7900 phones including 7x 7970 with no
+problem at all.
+
+7970 load is: TERM70.7-0-2SR1S
+
+SCCP: 20060202
+
+Asterisk: 1.2.14-BRIstuffed
+
+ 
+
+Steven
+
+ 
+
+  _____  
+
+Van: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Namens Paul
+Verzonden: vrijdag 9 november 2007 13:51
+Aan: chan-sccp-users at lists.berlios.de
+Onderwerp: [Chan-sccp-users] 7970 Hints
+
+I was playing with hints on my 7970 this morning and it appears the LED
+indicator does not work.
+
+The display still shows the phone being picked up.
+
+No issues on my 7961, still getting that friendly red indicator.
+
+ 
+
+Anyone else have a 7970 with this problem?
+
+ 
+
+Running 2007-11-07
+
+Phone is running 8.0.4SR3AS
+
+ 
+
+-Paul
+
+ 
+
+Paul Reichart
+
+Chief Operating Officer
+
+Voi Networks Inc
+
+t (204) 272-6099
+
+p.reichart at voinetworks.ca
+
+www.voinetworks.ca
+
+ 
+
+_______________________________________________
+
+Chan-sccp-users mailing list
+
+Chan-sccp-users at lists.berlios.de
+
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071110/2626a517/attachment.html>
+
+From swannie at swannie.net  Sat Nov 10 15:50:15 2007
+From: swannie at swannie.net (Brian Swan)
+Date: Sat, 10 Nov 2007 08:50:15 -0600
+Subject: [Chan-sccp-users] 7970 Hints
+In-Reply-To: <mailman.677.1194686188.16726.chan-sccp-users@lists.berlios.de>
+References: <mailman.677.1194686188.16726.chan-sccp-users@lists.berlios.de>
+Message-ID: <7435727A-3A1A-4F68-8DBD-8155AAA0FDD2@swannie.net>
+
+I have several 7970's here running SCCP70.8-3-2S with no problems.
+
+Brian
+
+> Date: Fri, 9 Nov 2007 14:32:16 +0100
+> From: "Steven Lam, KeenSystems BV" <s.lam at keensystems.eu>
+> Subject: Re: [Chan-sccp-users] 7970 Hints
+> To: <chan-sccp-users at lists.berlios.de>
+> Message-ID:
+> 	<E0EC7D6DD04A614BB52E24FB6735F22414FC3E at goofy.bison.keenserver.nl>
+> Content-Type: text/plain; charset="us-ascii"
+>
+> Hi,
+>
+> I have a site running a mixture of 7900 phones including 7x 7970  
+> with no
+> problem at all.
+> 7970 load is: TERM70.7-0-2SR1S
+> SCCP: 20060202
+> Asterisk: 1.2.14-BRIstuffed
+>
+> Steven
+
+
+
+From root at nizon.ca  Sun Nov 11 00:39:21 2007
+From: root at nizon.ca (Paul)
+Date: Sat, 10 Nov 2007 17:39:21 -0600
+Subject: [Chan-sccp-users] 7970 Hints
+In-Reply-To: <7435727A-3A1A-4F68-8DBD-8155AAA0FDD2@swannie.net>
+References: <mailman.677.1194686188.16726.chan-sccp-users@lists.berlios.de>
+	<7435727A-3A1A-4F68-8DBD-8155AAA0FDD2@swannie.net>
+Message-ID: <027b01c823f2$eb7b18f0$c2714ad0$@ca>
+
+Got a copy? :P
+
+-Paul
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Brian Swan
+Sent: Saturday, November 10, 2007 8:50 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] 7970 Hints
+
+I have several 7970's here running SCCP70.8-3-2S with no problems.
+
+Brian
+
+> Date: Fri, 9 Nov 2007 14:32:16 +0100
+> From: "Steven Lam, KeenSystems BV" <s.lam at keensystems.eu>
+> Subject: Re: [Chan-sccp-users] 7970 Hints
+> To: <chan-sccp-users at lists.berlios.de>
+> Message-ID:
+> 	<E0EC7D6DD04A614BB52E24FB6735F22414FC3E at goofy.bison.keenserver.nl>
+> Content-Type: text/plain; charset="us-ascii"
+>
+> Hi,
+>
+> I have a site running a mixture of 7900 phones including 7x 7970  
+> with no
+> problem at all.
+> 7970 load is: TERM70.7-0-2SR1S
+> SCCP: 20060202
+> Asterisk: 1.2.14-BRIstuffed
+>
+> Steven
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From davidded at davidded.de  Sun Nov 11 20:57:34 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sun, 11 Nov 2007 20:57:34 +0100
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+Message-ID: <2170D50A-C470-4ABD-9848-7F4A4B4FA818@davidded.de>
+
+Hi all,
+
+finally we have a release of chan-sccp-b which compiles out-of-the- 
+box on both Asterisk 1.4 and 1.2 - you just have to type make to do  
+so. There is not much of an updated documentation yet, so don't  
+hesitate to ask here in the first place if you've got any questions  
+as to the new features (which you probably are already using ;-).
+
+Please check our project site on sourceforge to download it:
+
+http://sourceforge.net/projects/chan-sccp-b/
+
+We will soon move our codebase to the sourceforge svn server so you  
+can stay even more up-to-date with what we're doing or even checkin  
+some changes yourself. Please let us know if you'd like to be added  
+as a project developer.
+
+In the meantime we hope you enjoy this first "real" release and are  
+anxious for feedback if it worked for you.
+
+Regards,
+-David.
+
+
+From s.lam at keensystems.eu  Mon Nov 12 16:01:06 2007
+From: s.lam at keensystems.eu (Steven Lam, KeenSystems BV)
+Date: Mon, 12 Nov 2007 16:01:06 +0100
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22414FC43@goofy.bison.keenserver.nl>
+
+I can't believe it... the best news i have heard after 08-04-2006, i am
+one day behind reading my mail and still i am the first to reply...
+
+I think this is great, many thanks to all responsible for this release.
+
+This evening i'll give it a try...
+
+Steven.
+PS. David i know i still owe you a backtrace...
+
+-----Oorspronkelijk bericht-----
+Van: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Namens David
+Dederscheck
+Verzonden: zondag 11 november 2007 20:58
+Aan: chan-sccp-b-discussion at lists.sourceforge.net;
+chan-sccp-b-releases at lists.sourceforge.net
+CC: chan-sccp-users at lists.berlios.de
+Onderwerp: [Chan-sccp-users] Chan-SCCP-B Release issued
+
+Hi all,
+
+finally we have a release of chan-sccp-b which compiles out-of-the- box
+on both Asterisk 1.4 and 1.2 - you just have to type make to do so.
+There is not much of an updated documentation yet, so don't hesitate to
+ask here in the first place if you've got any questions as to the new
+features (which you probably are already using ;-).
+
+Please check our project site on sourceforge to download it:
+
+http://sourceforge.net/projects/chan-sccp-b/
+
+We will soon move our codebase to the sourceforge svn server so you can
+stay even more up-to-date with what we're doing or even checkin some
+changes yourself. Please let us know if you'd like to be added as a
+project developer.
+
+In the meantime we hope you enjoy this first "real" release and are
+anxious for feedback if it worked for you.
+
+Regards,
+-David.
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From sccp-list at puzzled.xs4all.nl  Mon Nov 12 20:28:39 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Mon, 12 Nov 2007 20:28:39 +0100
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+In-Reply-To: <E0EC7D6DD04A614BB52E24FB6735F22414FC43@goofy.bison.keenserver.nl>
+References: <E0EC7D6DD04A614BB52E24FB6735F22414FC43@goofy.bison.keenserver.nl>
+Message-ID: <1194895719.15432.8.camel@localhost.localdomain>
+
+
+On Mon, 2007-11-12 at 16:01 +0100, Steven Lam, KeenSystems BV wrote:
+> I can't believe it... the best news i have heard after 08-04-2006, i am
+> one day behind reading my mail and still i am the first to reply...
+> 
+> I think this is great, many thanks to all responsible for this release.
+> 
+> This evening i'll give it a try...
+
+Excellent news indeed. Thanks to all involved for this new release and
+your continued efforts! I'll update my chan_sccp tomorrow and will let
+you know how it goes.
+
+Regards,
+Patrick
+
+
+
+From pmowry at getgds.com  Mon Nov 12 20:59:24 2007
+From: pmowry at getgds.com (Patrick Mowry)
+Date: Mon, 12 Nov 2007 13:59:24 -0600
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+References: <E0EC7D6DD04A614BB52E24FB6735F22414FC43@goofy.bison.keenserver.nl>
+	<1194895719.15432.8.camel@localhost.localdomain>
+Message-ID: <4C792A099259634C83F97067671B37FE02470C2B@GDSEXC.gds.pri>
+
+I tend to fall into the if it ain't broke, don't fix it.  But I'm only using Asterisk at home so I'm not a good test case anyway.  But your release has given me a reason to play with things again ;)  I'll setup Asterisk in vmware and give it a try with my meager setup and both versions of Asterisk.
+
+  I have access to 7911, 7936, 7940/60 and 7941/61-G-GE phones.  If you would like me to do any testing or packet captures let me know.  They are brand new and I'll be installing them with a CallManager 6 Business Edition server.  But I can test with my home * system too.
+
+-Patrick
+
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de on behalf of Patrick
+Sent: Mon 11/12/2007 1:28 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] Chan-SCCP-B Release issued
+ 
+
+On Mon, 2007-11-12 at 16:01 +0100, Steven Lam, KeenSystems BV wrote:
+> I can't believe it... the best news i have heard after 08-04-2006, i am
+> one day behind reading my mail and still i am the first to reply...
+> 
+> I think this is great, many thanks to all responsible for this release.
+> 
+> This evening i'll give it a try...
+
+Excellent news indeed. Thanks to all involved for this new release and
+your continued efforts! I'll update my chan_sccp tomorrow and will let
+you know how it goes.
+
+Regards,
+Patrick
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: winmail.dat
+Type: application/ms-tnef
+Size: 3489 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071112/86b346ff/attachment.bin>
+
+From s.lam at keensystems.eu  Mon Nov 12 23:59:28 2007
+From: s.lam at keensystems.eu (Steven Lam, KeenSystems BV)
+Date: Mon, 12 Nov 2007 23:59:28 +0100
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+References: <2170D50A-C470-4ABD-9848-7F4A4B4FA818@davidded.de>
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22402A7C9@goofy.bison.keenserver.nl>
+
+Hi,
+
+Here my first findings compiling/running on
+*1.2.14-BRIstuffed-0.3.0-PRE-1y:
+- create_config.sh included in the tar.gz is not executable
+- the tar.gz contains config.h so create_config.sh does not do anything
+- On line 49 of create_config.sh $REALTIME_USEABLE=0 should be
+REALTIME_USEABLE=0
+- I see the pickup patch from Frank Segtrop is applied, but group pickup
+still crashes my * :-(
+As soon as I solved my bt problem I'll send a full bt.
+
+The testing continuous ;-)
+
+Steven.
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+Dederscheck
+Sent: zondag 11 november 2007 20:58
+To: chan-sccp-b-discussion at lists.sourceforge.net;
+chan-sccp-b-releases at lists.sourceforge.net
+Cc: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+
+Hi all,
+
+finally we have a release of chan-sccp-b which compiles out-of-the- 
+box on both Asterisk 1.4 and 1.2 - you just have to type make to do  
+so. There is not much of an updated documentation yet, so don't  
+hesitate to ask here in the first place if you've got any questions  
+as to the new features (which you probably are already using ;-).
+
+Please check our project site on sourceforge to download it:
+
+http://sourceforge.net/projects/chan-sccp-b/
+
+We will soon move our codebase to the sourceforge svn server so you  
+can stay even more up-to-date with what we're doing or even checkin  
+some changes yourself. Please let us know if you'd like to be added  
+as a project developer.
+
+In the meantime we hope you enjoy this first "real" release and are  
+anxious for feedback if it worked for you.
+
+Regards,
+-David.
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From davidded at davidded.de  Tue Nov 13 00:26:46 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Tue, 13 Nov 2007 00:26:46 +0100
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+In-Reply-To: <E0EC7D6DD04A614BB52E24FB6735F22402A7C9@goofy.bison.keenserver.nl>
+References: <2170D50A-C470-4ABD-9848-7F4A4B4FA818@davidded.de>
+	<E0EC7D6DD04A614BB52E24FB6735F22402A7C9@goofy.bison.keenserver.nl>
+Message-ID: <CC94AD1E-78E1-4E03-B16A-ECD9EFA83750@davidded.de>
+
+Hi Steve,
+
+thanks for the fast and useful feedback. Indeed some issues we shall  
+resolve very shortly, hopefully then already with a solution for your  
+GPickup crash. So please send a lot of  backtraces ;-)
+
+But seriously, it's all the great feedback from you all on these  
+lists which finally made this release possible. And we hope that  
+there will be even more feedback now that there is an "official"  
+release.
+
+Regards,
+-David.
+
+On 12.11.2007, at 23:59, Steven Lam, KeenSystems BV wrote:
+
+> Hi,
+>
+> Here my first findings compiling/running on
+> *1.2.14-BRIstuffed-0.3.0-PRE-1y:
+> - create_config.sh included in the tar.gz is not executable
+> - the tar.gz contains config.h so create_config.sh does not do  
+> anything
+> - On line 49 of create_config.sh $REALTIME_USEABLE=0 should be
+> REALTIME_USEABLE=0
+> - I see the pickup patch from Frank Segtrop is applied, but group  
+> pickup
+> still crashes my * :-(
+> As soon as I solved my bt problem I'll send a full bt.
+>
+> The testing continuous ;-)
+>
+> Steven.
+>
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+> Dederscheck
+> Sent: zondag 11 november 2007 20:58
+> To: chan-sccp-b-discussion at lists.sourceforge.net;
+> chan-sccp-b-releases at lists.sourceforge.net
+> Cc: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+>
+> Hi all,
+>
+> finally we have a release of chan-sccp-b which compiles out-of-the-
+> box on both Asterisk 1.4 and 1.2 - you just have to type make to do
+> so. There is not much of an updated documentation yet, so don't
+> hesitate to ask here in the first place if you've got any questions
+> as to the new features (which you probably are already using ;-).
+>
+> Please check our project site on sourceforge to download it:
+>
+> http://sourceforge.net/projects/chan-sccp-b/
+>
+> We will soon move our codebase to the sourceforge svn server so you
+> can stay even more up-to-date with what we're doing or even checkin
+> some changes yourself. Please let us know if you'd like to be added
+> as a project developer.
+>
+> In the meantime we hope you enjoy this first "real" release and are
+> anxious for feedback if it worked for you.
+>
+> Regards,
+> -David.
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From root at nizon.ca  Tue Nov 13 02:42:33 2007
+From: root at nizon.ca (Paul)
+Date: Mon, 12 Nov 2007 19:42:33 -0600
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+In-Reply-To: <CC94AD1E-78E1-4E03-B16A-ECD9EFA83750@davidded.de>
+References: <2170D50A-C470-4ABD-9848-7F4A4B4FA818@davidded.de>	<E0EC7D6DD04A614BB52E24FB6735F22402A7C9@goofy.bison.keenserver.nl>
+	<CC94AD1E-78E1-4E03-B16A-ECD9EFA83750@davidded.de>
+Message-ID: <02fd01c82596$765b34b0$63119e10$@ca>
+
+As soon as I pick up the receiver on my 7970 asterisk crashes.
+My 7970 also seems to crash and reboot itself too.
+You jerks destroyed my network!
+Jokes :)
+
+I shall do some debugging and reporting when I'm a little less tired. 
+
+Paul
+
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+Dederscheck
+Sent: Monday, November 12, 2007 5:27 PM
+To: chan-sccp-users at lists.berlios.de
+Cc: chan-sccp-b-discussion at lists.sourceforge.net
+Subject: Re: [Chan-sccp-users] Chan-SCCP-B Release issued
+
+Hi Steve,
+
+thanks for the fast and useful feedback. Indeed some issues we shall  
+resolve very shortly, hopefully then already with a solution for your  
+GPickup crash. So please send a lot of  backtraces ;-)
+
+But seriously, it's all the great feedback from you all on these  
+lists which finally made this release possible. And we hope that  
+there will be even more feedback now that there is an "official"  
+release.
+
+Regards,
+-David.
+
+On 12.11.2007, at 23:59, Steven Lam, KeenSystems BV wrote:
+
+> Hi,
+>
+> Here my first findings compiling/running on
+> *1.2.14-BRIstuffed-0.3.0-PRE-1y:
+> - create_config.sh included in the tar.gz is not executable
+> - the tar.gz contains config.h so create_config.sh does not do  
+> anything
+> - On line 49 of create_config.sh $REALTIME_USEABLE=0 should be
+> REALTIME_USEABLE=0
+> - I see the pickup patch from Frank Segtrop is applied, but group  
+> pickup
+> still crashes my * :-(
+> As soon as I solved my bt problem I'll send a full bt.
+>
+> The testing continuous ;-)
+>
+> Steven.
+>
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+> Dederscheck
+> Sent: zondag 11 november 2007 20:58
+> To: chan-sccp-b-discussion at lists.sourceforge.net;
+> chan-sccp-b-releases at lists.sourceforge.net
+> Cc: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+>
+> Hi all,
+>
+> finally we have a release of chan-sccp-b which compiles out-of-the-
+> box on both Asterisk 1.4 and 1.2 - you just have to type make to do
+> so. There is not much of an updated documentation yet, so don't
+> hesitate to ask here in the first place if you've got any questions
+> as to the new features (which you probably are already using ;-).
+>
+> Please check our project site on sourceforge to download it:
+>
+> http://sourceforge.net/projects/chan-sccp-b/
+>
+> We will soon move our codebase to the sourceforge svn server so you
+> can stay even more up-to-date with what we're doing or even checkin
+> some changes yourself. Please let us know if you'd like to be added
+> as a project developer.
+>
+> In the meantime we hope you enjoy this first "real" release and are
+> anxious for feedback if it worked for you.
+>
+> Regards,
+> -David.
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From lehn at planet-ic.de  Tue Nov 13 17:36:32 2007
+From: lehn at planet-ic.de (Sebastian Lehn)
+Date: Tue, 13 Nov 2007 17:36:32 +0100
+Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+In-Reply-To: <E0EC7D6DD04A614BB52E24FB6735F22402A7C9@goofy.bison.keenserver.nl>
+References: <2170D50A-C470-4ABD-9848-7F4A4B4FA818@davidded.de>
+	<E0EC7D6DD04A614BB52E24FB6735F22402A7C9@goofy.bison.keenserver.nl>
+Message-ID: <4739D290.4060608@planet-ic.de>
+
+Hi Steven,
+
+
+i've had the same problems like you at beginning of my tests. As my solution, see attached patch for
+create_config.sh
+
+My steps are:
+- make clean
+-- will delete config.h
+- make
+- make install
+
+Note: create_config.sh needs not to be executable, because it is called in makefile per
+sh ./create_config.sh
+
+I will test the release over the next days and send an extra report on this list.
+
+Sebastian
+
+Steven Lam, KeenSystems BV schrieb:
+> Hi,
+> 
+> Here my first findings compiling/running on
+> *1.2.14-BRIstuffed-0.3.0-PRE-1y:
+> - create_config.sh included in the tar.gz is not executable
+> - the tar.gz contains config.h so create_config.sh does not do anything
+> - On line 49 of create_config.sh $REALTIME_USEABLE=0 should be
+> REALTIME_USEABLE=0
+> - I see the pickup patch from Frank Segtrop is applied, but group pickup
+> still crashes my * :-(
+> As soon as I solved my bt problem I'll send a full bt.
+> 
+> The testing continuous ;-)
+> 
+> Steven.
+> 
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of David
+> Dederscheck
+> Sent: zondag 11 november 2007 20:58
+> To: chan-sccp-b-discussion at lists.sourceforge.net;
+> chan-sccp-b-releases at lists.sourceforge.net
+> Cc: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] Chan-SCCP-B Release issued
+> 
+> Hi all,
+> 
+> finally we have a release of chan-sccp-b which compiles out-of-the- 
+> box on both Asterisk 1.4 and 1.2 - you just have to type make to do  
+> so. There is not much of an updated documentation yet, so don't  
+> hesitate to ask here in the first place if you've got any questions  
+> as to the new features (which you probably are already using ;-).
+> 
+> Please check our project site on sourceforge to download it:
+> 
+> http://sourceforge.net/projects/chan-sccp-b/
+> 
+> We will soon move our codebase to the sourceforge svn server so you  
+> can stay even more up-to-date with what we're doing or even checkin  
+> some changes yourself. Please let us know if you'd like to be added  
+> as a project developer.
+> 
+> In the meantime we hope you enjoy this first "real" release and are  
+> anxious for feedback if it worked for you.
+> 
+> Regards,
+> -David.
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+-- 
+//
+// IT- & Software-Systemhaus, Internet Service und Web Agentur
+//
+// Sebastian Lehn, Netzwerkadministrator, LPIC-2, MCSA MESSAGING
+// PLANET IC GmbH, Haus 4, Hagenower Strasse 73, 19061 Schwerin
+// Registergericht Schwerin HRB 6762, Gesch?ftsf?hrer Andreas Scher
+// Telefon 0385 30200 200, Telefax 0385 30200 190, Internet www.planet-ic.de
+//
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: create_config.patch
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071113/aeea4e4b/attachment.ksh>
+
+From martin at linkdc.co.uk  Wed Nov 14 10:58:36 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Wed, 14 Nov 2007 09:58:36 +0000 (GMT)
+Subject: [Chan-sccp-users] Has the fix for re-dial/invalid number been
+ incorporated into chan_sccp-b?
+Message-ID: <28743023.91195034316975.JavaMail.root@mail.linkdc.co.uk>
+
+Dear David,
+
+Once again my biggest customer's system has crashed caused by an invalid number situation on the Cisco wireless handset. I do remember reading that someone on this list had solved these problems by not allowing a line/channel to be set to a invalid number/re-dial status. Do you remember incorporating any patch that deals with this?
+
+Regards,
+
+Martin
+
+
+
+From davidded at davidded.de  Wed Nov 14 17:17:39 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Wed, 14 Nov 2007 17:17:39 +0100
+Subject: [Chan-sccp-users] Has the fix for re-dial/invalid number been
+	incorporated into chan_sccp-b?
+In-Reply-To: <28743023.91195034316975.JavaMail.root@mail.linkdc.co.uk>
+References: <28743023.91195034316975.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <AAABBFB5-CE17-437C-9C5E-904FF630975C@davidded.de>
+
+Hi Martin,
+
+yes, we included the patch dealing with the invalid number condition,  
+and I can't remember any problems related to it to occuring since then.
+
+In the meantime, I also received the router and just started to make  
+myself familiar with it. Many thanks again for that generous  
+donation, and hopefully we will soon be able to resolve the remaining  
+(protocol based) issues with its help.
+
+By the way -- does the installed CME 4 support meetme conferences?  
+Marcello and I would like to have a look at those in the near future.
+
+But now, to the end of debugging, it would also be very if you could  
+run asterisk from gdb and reproduce the problem.
+
+This is done as follows:
+
+1. Shut down your asterisk task
+2. Run asterisk in gdb:
+
+gdb asterisk
+(gdb) set args -vf
+(gdb) run
+Starting program: /usr/sbin/asterisk -vf
+
+....
+Asterisk crashes
+...
+
+(gdb) bt
+
+Then, please mail the backtrace that follows as well as the firmware  
+version you're running on your phone.
+
+I post this procedure once more to both lists even though you and  
+many others may be familiar with it. However, there had been some  
+requests as how to do these traces, so I think it might be helpful.
+
+Regards and many thanks again,
+-David.
+
+On 14.11.2007, at 10:58, Martin Sutherland wrote:
+
+> Dear David,
+>
+> Once again my biggest customer's system has crashed caused by an  
+> invalid number situation on the Cisco wireless handset. I do  
+> remember reading that someone on this list had solved these  
+> problems by not allowing a line/channel to be set to a invalid  
+> number/re-dial status. Do you remember incorporating any patch that  
+> deals with this?
+>
+> Regards,
+>
+> Martin
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From sccp-list at puzzled.xs4all.nl  Wed Nov 14 19:00:41 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Wed, 14 Nov 2007 19:00:41 +0100
+Subject: [Chan-sccp-users] Possible to dial user@domain addresses?
+Message-ID: <1195063241.11697.7.camel@localhost.localdomain>
+
+Hi,
+
+I have lightly used the 20071111 release with asterisk 1.4.13 and so far
+everything seems to work well :)
+
+About my question:
+
+A SIP call from for example foo at bar.org comes into my asterisk server
+and is forwarded to the 7961G running SCCP firmware:
+
+sip call -> asterisk -> 7961G/SCCP
+
+On the asterisk server I set the CALLERID(num) to foo at bar.org before
+forwarding the call to the 7961G. On the 7961G it shows foo at bar.org in
+the display when the call comes in and it also shows up as the number in
+the missed/received calls menus.
+
+Now if want to call back to that address, I go to the missed or received
+calls menu, select it and press dial. This does not work.
+
+Is it possible to make this work?
+
+Thanks and regards,
+Patrick
+
+
+
+
+From Pastuszak.P at emssatcom.com  Wed Nov 14 22:29:03 2007
+From: Pastuszak.P at emssatcom.com (Pastuszak, Pawel(IT))
+Date: Wed, 14 Nov 2007 16:29:03 -0500
+Subject: [Chan-sccp-users] Testing chan_sccp to its limits
+Message-ID: <06AA2ADF031A124989DC78DACF04C57E0792D3@ex2003can6.ems-tcanada.com>
+
+Did anyone test the channel driver to it maximum hole?
+
+ 
+
+Or is there any could automate a test like this?
+
+ 
+
+What I'm doing is to determine if the chan_sccp is stable or more stable
+then SIP.
+
+ 
+
+ 
+
+ 
+
+
+Thanks,
+
+Pawel.
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071114/c529f489/attachment.html>
+
+From kelly at eriecoast.com  Fri Nov 16 22:53:57 2007
+From: kelly at eriecoast.com (Kelly Opal)
+Date: Fri, 16 Nov 2007 16:53:57 -0500
+Subject: [Chan-sccp-users] Various
+References: <16900225.01194517775702.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <00e301c8289b$304fb0b0$0dcc8143@eriecoast.com>
+
+Hi
+    Well I installed the new sccp driver.First thing I found (minor) was 
+that in chan_sccp.c line 224 there needs to be an else if statement instead 
+of an if statement. The if began on line 222. That fixed the inside ringer 
+problem. Then all was good until I tried to transfer to anther phone (blind 
+transfer). It killed asterisk, sent all of my sip phones (gxp2000 horrible 
+phones) into some kind of loop. I had to reboot everything but the 7960 
+never came back up.
+
+My build was
+    make clean
+    make
+    make install
+
+    I noticed there is a patch directory. I know this is a stupid question, 
+but just to be safe. Do I need to apply those patch's or are they just there 
+to show what has already been applied.
+
+As I get more info on the crash I will post it.
+
+Thanks
+
+Kelly
+
+
+----- Original Message ----- 
+From: "Martin Sutherland" <martin at linkdc.co.uk>
+To: "chan-sccp-users" <chan-sccp-users at lists.berlios.de>
+Sent: Thursday, November 08, 2007 5:29 AM
+Subject: [Chan-sccp-users] Various
+
+
+> David,
+>
+> Many thanks for your reply to my email.
+>
+> If you give me your address, then I'll send off the router.
+>
+> Latest version of chan_sccp - Are you saying that berlios has the latest 
+> version for
+> Asterisk 1.2 and your tree is the latest version for 1.4? I'm getting 
+> confused about
+> this. I appreciate that you want to have one tree for 1.2/1.4 which is a 
+> good thing,
+> but I'll take your source as a 1.4 only solution at the moment. Which 
+> fixes do you
+> think are missing from your tree?
+>
+> My contribution recently submitted was a fix for the 7960+7914 lost hangup 
+> event
+> after a re-dial/invalid extension, but it sounds like no one else has had 
+> this problem?
+>
+> Can anyone recommend firmware versions for 7941/7961 (fairly hard to work 
+> out what the
+> version number is from the filenames!). As you say, there seems to be 
+> little point in using
+> the latest firmware unless you are actually working with Call Manager.
+>
+> Timezones - My server's clock is on UTC/GMT and correctly changes the 
+> local time for DST.
+> As you say, I thought 7940/7960s just take the local time via sccp and 
+> also take the date
+> format from sccp messages. The 7941/7961/7970/7971 etc seem to pay more 
+> attention to the
+> config files. I'll try specifying the correct time zone in the config 
+> files as you suggest.
+>
+> Regards,
+>
+> Martin
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+
+From davidded at davidded.de  Fri Nov 16 22:17:05 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Fri, 16 Nov 2007 22:17:05 +0100
+Subject: [Chan-sccp-users] Various
+In-Reply-To: <00e301c8289b$304fb0b0$0dcc8143@eriecoast.com>
+References: <16900225.01194517775702.JavaMail.root@mail.linkdc.co.uk>
+	<00e301c8289b$304fb0b0$0dcc8143@eriecoast.com>
+Message-ID: <7536E718-D35C-44A1-84DD-FBE99DA5FBB9@davidded.de>
+
+Hi Kelly,
+
+On 16.11.2007, at 22:53, Kelly Opal wrote:
+
+> Hi
+>     Well I installed the new sccp driver.First thing I found  
+> (minor) was
+> that in chan_sccp.c line 224 there needs to be an else if statement  
+> instead
+> of an if statement. The if began on line 222. That fixed the inside  
+> ringer
+> problem.
+
+Thank you very much! I was desperately looking for a fix to that.
+
+> Then all was good until I tried to transfer to anther phone (blind
+> transfer).
+Well, there really seems to be a problem with transfer. I think the  
+merge must have messed something up, we shall urgently work at this.
+
+> It killed asterisk, sent all of my sip phones (gxp2000 horrible
+> phones) into some kind of loop. I had to reboot everything but the  
+> 7960
+> never came back up.
+Hmm, this doesn't sound good. Have you pulled the power yet? I hope  
+your phone starts working again...
+
+> My build was
+>     make clean
+>     make
+>     make install
+>
+>     I noticed there is a patch directory. I know this is a stupid  
+> question,
+> but just to be safe. Do I need to apply those patch's or are they  
+> just there
+> to show what has already been applied.
+
+Not a stupid question at all. This directory contains patches Sergio  
+originally supplied with his releases. I gues Marcello just kept it  
+when he created the archive for the release.
+
+> As I get more info on the crash I will post it.
+
+Already many thanks in advance,
+-David.
+
+>
+> Thanks
+>
+> Kelly
+>
+>
+> ----- Original Message -----
+> From: "Martin Sutherland" <martin at linkdc.co.uk>
+> To: "chan-sccp-users" <chan-sccp-users at lists.berlios.de>
+> Sent: Thursday, November 08, 2007 5:29 AM
+> Subject: [Chan-sccp-users] Various
+>
+>
+>> David,
+>>
+>> Many thanks for your reply to my email.
+>>
+>> If you give me your address, then I'll send off the router.
+>>
+>> Latest version of chan_sccp - Are you saying that berlios has the  
+>> latest
+>> version for
+>> Asterisk 1.2 and your tree is the latest version for 1.4? I'm getting
+>> confused about
+>> this. I appreciate that you want to have one tree for 1.2/1.4  
+>> which is a
+>> good thing,
+>> but I'll take your source as a 1.4 only solution at the moment. Which
+>> fixes do you
+>> think are missing from your tree?
+>>
+>> My contribution recently submitted was a fix for the 7960+7914  
+>> lost hangup
+>> event
+>> after a re-dial/invalid extension, but it sounds like no one else  
+>> has had
+>> this problem?
+>>
+>> Can anyone recommend firmware versions for 7941/7961 (fairly hard  
+>> to work
+>> out what the
+>> version number is from the filenames!). As you say, there seems to be
+>> little point in using
+>> the latest firmware unless you are actually working with Call  
+>> Manager.
+>>
+>> Timezones - My server's clock is on UTC/GMT and correctly changes the
+>> local time for DST.
+>> As you say, I thought 7940/7960s just take the local time via sccp  
+>> and
+>> also take the date
+>> format from sccp messages. The 7941/7961/7970/7971 etc seem to pay  
+>> more
+>> attention to the
+>> config files. I'll try specifying the correct time zone in the config
+>> files as you suggest.
+>>
+>> Regards,
+>>
+>> Martin
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From davidded at davidded.de  Sun Nov 18 03:24:20 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sun, 18 Nov 2007 03:24:20 +0100
+Subject: [Chan-sccp-users] Sourceforge SVN now online
+Message-ID: <DA60F019-D38F-4162-903C-C4879AD7C95C@davidded.de>
+
+Hi,
+
+Marcello just migrated our development tree to our Sourceforge  
+project repository. Feel free to check out the latest changes we made  
+to chan-sccp-b but please beware that there may at any time be  
+untested or unstable code inside the repository.
+
+https://chan-sccp-b.svn.sourceforge.net/svnroot/chan-sccp-b
+
+We just added the "select" feature tonight to mark calls for later  
+joining or unattended transfer. You can already select calls (a nice  
+checkmark appears next to them), but that's it for now. We still need  
+to fix unselecting calls as they are hung up, but apart from that  
+everything's working nicely.
+
+See you,
+-David.
+
+
+From m.robichon at llg.de  Fri Nov 23 11:57:13 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Fri, 23 Nov 2007 11:57:13 +0100
+Subject: [Chan-sccp-users]  Second telephonecall is taken at first
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106684C66@lhu01.llg.de>
+
+Hi,
+
+we recognize a little bug. If you get a second telephone call and you pickup
+the phone without choosing which call you would like to answer, the newest
+one is taken. We think it would make sense that the oldest one is taken at
+first. Of course you can toggle between both calls. But in the daily work
+you forget to do so.
+
+Maybe this can be fixed quite easily, if all agree to the strategy first in
+first taken.
+
+Have a nice day.
+
+-- Beside everything is working fine :-) ---
+
+Marcus Robichon
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071123/52806603/attachment.html>
+
+From peder at networkoblivion.com  Fri Nov 23 14:11:57 2007
+From: peder at networkoblivion.com (Peder @ NetworkOblivion)
+Date: Fri, 23 Nov 2007 07:11:57 -0600
+Subject: [Chan-sccp-users] Second telephonecall is taken at first
+In-Reply-To: <F3F77C7BD63C8C488186EE2E5BC51106684C66@lhu01.llg.de>
+References: <F3F77C7BD63C8C488186EE2E5BC51106684C66@lhu01.llg.de>
+Message-ID: <4746D19D.8010300@networkoblivion.com>
+
+First call would be best.
+
+Marcus Robichon wrote:
+> Hi,
+> 
+> we recognize a little bug. If you get a second telephone call and you 
+> pickup the phone without choosing which call you would like to answer, 
+> the newest one is taken. We think it would make sense that the oldest 
+> one is taken at first. Of course you can toggle between both calls. But 
+> in the daily work you forget to do so.
+> 
+> Maybe this can be fixed quite easily, if all agree to the strategy first 
+> in first taken.
+> 
+> Have a nice day.
+> 
+> -- Beside everything is working fine :-) ---
+> 
+> Marcus Robichon
+>  
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From davidded at davidded.de  Fri Nov 23 20:11:09 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Fri, 23 Nov 2007 20:11:09 +0100
+Subject: [Chan-sccp-users] Second telephonecall is taken at first
+In-Reply-To: <4746D19D.8010300@networkoblivion.com>
+References: <F3F77C7BD63C8C488186EE2E5BC51106684C66@lhu01.llg.de>
+	<4746D19D.8010300@networkoblivion.com>
+Message-ID: <64D2F759-1C83-41EA-972C-F95B3D931FF7@davidded.de>
+
+Hi,
+
+it's not a bug, it's a missing feature ;-)
+
+I added your issue as a feature request on our sourceforge tracker. It  
+may be easy to fix, but I'll have to take a look at the code first.  
+I'll keep you apprised.
+
+-David.
+
+
+
+On 23.11.2007, at 14:11, Peder @ NetworkOblivion wrote:
+
+> First call would be best.
+>
+> Marcus Robichon wrote:
+>> Hi,
+>>
+>> we recognize a little bug. If you get a second telephone call and you
+>> pickup the phone without choosing which call you would like to  
+>> answer,
+>> the newest one is taken. We think it would make sense that the oldest
+>> one is taken at first. Of course you can toggle between both calls.  
+>> But
+>> in the daily work you forget to do so.
+>>
+>> Maybe this can be fixed quite easily, if all agree to the strategy  
+>> first
+>> in first taken.
+>>
+>> Have a nice day.
+>>
+>> -- Beside everything is working fine :-) ---
+>>
+>> Marcus Robichon
+>>
+>>
+>>
+>> ------------------------------------------------------------------------
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From davidded at davidded.de  Fri Nov 23 20:29:15 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Fri, 23 Nov 2007 20:29:15 +0100
+Subject: [Chan-sccp-users] To which list shall we post?
+Message-ID: <3F5C9256-F23A-42F0-BAA0-A10AA1358B83@davidded.de>
+
+Hi,
+
+an inevitable issue we're running into lately is related to fact that  
+we now have two different mailing lists on the same topic.
+In time we will most certainly start losing feedback if we only post  
+to one list, on the other hand posts to both lists can be annoying or  
+even distracting for those people who subscribed to both.
+
+To make life easier for all of us, I'd suggest that everybody on the  
+berlios list who is somehow to participate in development or  
+deployment of the _new_ chan-sccp-b driver should join the sourceforge  
+list and post messages regarding that project only to that list.
+
+Please don't get me wrong: I do not seek to discourage use of the  
+berlios list at all. However, people who recently learned about chan- 
+sccp-b on Sourceforge should also have a chance to participate in the  
+development discussions.
+
+Kind regards,
+-David.
+
+
+From m.robichon at llg.de  Fri Nov 23 21:33:45 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Fri, 23 Nov 2007 21:33:45 +0100
+Subject: [Chan-sccp-users] To which list shall we post?
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC51106684CAB@lhu01.llg.de>
+
+Hi David,
+
+I personally don?t like the sourceforge mailinglists. The mails from
+sourceforge are split in 4 different files on our system. I guess this has
+something to do with incompatibility of sourceforge and postfix/Exchange.
+
+If all of us should move to sourceforge, then Sergio should cancel the
+mailing list on Berlios. 
+
+
+Marcus Robichon
+ 
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von David
+Dederscheck
+Gesendet: Freitag, 23. November 2007 20:29
+An: chan-sccp-users at lists.berlios.de
+Betreff: [Chan-sccp-users] To which list shall we post?
+
+Hi,
+
+an inevitable issue we're running into lately is related to fact that  
+we now have two different mailing lists on the same topic.
+In time we will most certainly start losing feedback if we only post  
+to one list, on the other hand posts to both lists can be annoying or  
+even distracting for those people who subscribed to both.
+
+To make life easier for all of us, I'd suggest that everybody on the  
+berlios list who is somehow to participate in development or  
+deployment of the _new_ chan-sccp-b driver should join the sourceforge  
+list and post messages regarding that project only to that list.
+
+Please don't get me wrong: I do not seek to discourage use of the  
+berlios list at all. However, people who recently learned about chan- 
+sccp-b on Sourceforge should also have a chance to participate in the  
+development discussions.
+
+Kind regards,
+-David.
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071123/753ffae4/attachment.html>
+
+From russ at natcotech.com  Tue Nov 27 20:54:16 2007
+From: russ at natcotech.com (Russ Woodman)
+Date: Tue, 27 Nov 2007 13:54:16 -0600
+Subject: [Chan-sccp-users] 7921 Registration Problem
+Message-ID: <474C75E8.8030201@natcotech.com>
+
+Hi,
+
+I have chan_sccp.so loaded in my Asterisk server, 1.4.7, and configured.
+Everything loads up and looks good, but when my 7921 attempts to
+register with Asterisk, I get the following output from the Asterisk server:
+
+[Nov 27 13:52:18]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+[Nov 27 13:52:18]     -- SCCP: Using ip 205.167.xxx.xxx
+[Nov 27 13:52:20] WARNING[4433]: sccp_socket.c:54 sccp_read_data: SCCP:
+read() returned Bad address
+
+This information repeats and the phone never registers. Here is some
+information from SCCP:
+
+ldhl-voip1*CLI> sccp show devices
+ldhl-voip1*CLI>
+NAME             ADDRESS         MAC              Reg. State
+================ =============== ================ ==========
+Phone7905        --              SEP00119341E684  None     
+Russ Woodman Wireless --              SEP001BD458240D  None     
+
+Any help would be appreciated.
+
+Regards,
+Russ
+
+-- 
+Russ Woodman
+Systems Administrator
+NATCO Technologies
+
+
+
+From davidded at davidded.de  Thu Nov 29 04:35:35 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Thu, 29 Nov 2007 04:35:35 +0100
+Subject: [Chan-sccp-users] 7921 Registration Problem
+In-Reply-To: <474C75E8.8030201@natcotech.com>
+References: <474C75E8.8030201@natcotech.com>
+Message-ID: <E26304C1-8668-4828-BE2F-AFC9337E1C84@davidded.de>
+
+Hi Russ,
+
+this looks strange to me. I'm not sure what causes it. Could you maybe  
+get me a bit more log output by typing "sccp debug 10" in the console  
+and then try to register again?
+
+Unfortunately I haven't such a phone at hand to try as well. I  
+remember, however, Marcus thinking about getting one himself. What  
+about it, Marcus?
+
+Regards,
+-David.
+
+
+On 27.11.2007, at 20:54, Russ Woodman wrote:
+
+> Hi,
+>
+> I have chan_sccp.so loaded in my Asterisk server, 1.4.7, and  
+> configured.
+> Everything loads up and looks good, but when my 7921 attempts to
+> register with Asterisk, I get the following output from the Asterisk  
+> server:
+>
+> [Nov 27 13:52:18]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+> [Nov 27 13:52:18]     -- SCCP: Using ip 205.167.xxx.xxx
+> [Nov 27 13:52:20] WARNING[4433]: sccp_socket.c:54 sccp_read_data:  
+> SCCP:
+> read() returned Bad address
+>
+> This information repeats and the phone never registers. Here is some
+> information from SCCP:
+>
+> ldhl-voip1*CLI> sccp show devices
+> ldhl-voip1*CLI>
+> NAME             ADDRESS         MAC              Reg. State
+> ================ =============== ================ ==========
+> Phone7905        --              SEP00119341E684  None
+> Russ Woodman Wireless --              SEP001BD458240D  None
+>
+> Any help would be appreciated.
+>
+> Regards,
+> Russ
+>
+> -- 
+> Russ Woodman
+> Systems Administrator
+> NATCO Technologies
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From russ at natcotech.com  Thu Nov 29 15:56:45 2007
+From: russ at natcotech.com (Russ Woodman)
+Date: Thu, 29 Nov 2007 08:56:45 -0600
+Subject: [Chan-sccp-users] 7921 Registration Problem
+In-Reply-To: <E26304C1-8668-4828-BE2F-AFC9337E1C84@davidded.de>
+References: <474C75E8.8030201@natcotech.com>
+	<E26304C1-8668-4828-BE2F-AFC9337E1C84@davidded.de>
+Message-ID: <474ED32D.1000206@natcotech.com>
+
+Hi,
+
+Unfortunately the higher SCCP debug level didn't real yield more
+information. Here is what repeats now:
+
+[Nov 29 08:54:12]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+[Nov 29 08:54:12]     -- SCCP: Using ip 205.167.xxx.xxx
+[Nov 29 08:54:14] WARNING[4433]: sccp_socket.c:54 sccp_read_data: SCCP:
+read() returned Bad address
+[Nov 29 08:54:14]     -- SCCP: Old session marked down
+[Nov 29 08:54:14]     -- SCCP: Killing Session 12.199.xxx.xxx
+
+This happens with a network that is P/NAT'd and one that isn't so it's
+not a problem with that. I can't find any documentation that leads to a
+solution either. I've checked the source code of sccp_socket.c where the
+error resides, but the error description and the reason for it are
+pretty cryptic to me.
+
+It seems like this must be something simple but so far I'm stuck.
+
+Regards,
+Russ
+
+David Dederscheck wrote:
+> Hi Russ,
+>
+> this looks strange to me. I'm not sure what causes it. Could you maybe  
+> get me a bit more log output by typing "sccp debug 10" in the console  
+> and then try to register again?
+>
+> Unfortunately I haven't such a phone at hand to try as well. I  
+> remember, however, Marcus thinking about getting one himself. What  
+> about it, Marcus?
+>
+> Regards,
+> -David.
+>
+>
+> On 27.11.2007, at 20:54, Russ Woodman wrote:
+>
+>   
+>> Hi,
+>>
+>> I have chan_sccp.so loaded in my Asterisk server, 1.4.7, and  
+>> configured.
+>> Everything loads up and looks good, but when my 7921 attempts to
+>> register with Asterisk, I get the following output from the Asterisk  
+>> server:
+>>
+>> [Nov 27 13:52:18]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+>> [Nov 27 13:52:18]     -- SCCP: Using ip 205.167.xxx.xxx
+>> [Nov 27 13:52:20] WARNING[4433]: sccp_socket.c:54 sccp_read_data:  
+>> SCCP:
+>> read() returned Bad address
+>>
+>> This information repeats and the phone never registers. Here is some
+>> information from SCCP:
+>>
+>> ldhl-voip1*CLI> sccp show devices
+>> ldhl-voip1*CLI>
+>> NAME             ADDRESS         MAC              Reg. State
+>> ================ =============== ================ ==========
+>> Phone7905        --              SEP00119341E684  None
+>> Russ Woodman Wireless --              SEP001BD458240D  None
+>>
+>> Any help would be appreciated.
+>>
+>> Regards,
+>> Russ
+>>
+>> -- 
+>> Russ Woodman
+>> Systems Administrator
+>> NATCO Technologies
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>     
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>   
+
+-- 
+Russ Woodman
+Systems Administrator
+NATCO Technologies
+
+
+
+From russ at natcotech.com  Thu Nov 29 18:49:35 2007
+From: russ at natcotech.com (Russ Woodman)
+Date: Thu, 29 Nov 2007 11:49:35 -0600
+Subject: [Chan-sccp-users] 7921 Registration Problem
+In-Reply-To: <474ED32D.1000206@natcotech.com>
+References: <474C75E8.8030201@natcotech.com>	<E26304C1-8668-4828-BE2F-AFC9337E1C84@davidded.de>
+	<474ED32D.1000206@natcotech.com>
+Message-ID: <474EFBAF.5010104@natcotech.com>
+
+Hi,
+
+With the help of a good friend, I managed to get past the problem. It
+turns out that because I'm using a 64-bit machine for my Asterisk
+server, there is a bug in the code in sccp_socket.c. I have submitted a
+patch via the SourceForge bug tracker for this issue. Now the phone
+registers fine and I can make and receive calls, however I am dealing
+with a one-way audio problem.  The 7921G sends audio but will not
+receive, no matter which way the call was initiated.
+
+Regards,
+Russ
+
+Russ Woodman wrote:
+> Hi,
+>
+> Unfortunately the higher SCCP debug level didn't real yield more
+> information. Here is what repeats now:
+>
+> [Nov 29 08:54:12]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+> [Nov 29 08:54:12]     -- SCCP: Using ip 205.167.xxx.xxx
+> [Nov 29 08:54:14] WARNING[4433]: sccp_socket.c:54 sccp_read_data: SCCP:
+> read() returned Bad address
+> [Nov 29 08:54:14]     -- SCCP: Old session marked down
+> [Nov 29 08:54:14]     -- SCCP: Killing Session 12.199.xxx.xxx
+>
+> This happens with a network that is P/NAT'd and one that isn't so it's
+> not a problem with that. I can't find any documentation that leads to a
+> solution either. I've checked the source code of sccp_socket.c where the
+> error resides, but the error description and the reason for it are
+> pretty cryptic to me.
+>
+> It seems like this must be something simple but so far I'm stuck.
+>
+> Regards,
+> Russ
+>
+> David Dederscheck wrote:
+>   
+>> Hi Russ,
+>>
+>> this looks strange to me. I'm not sure what causes it. Could you maybe  
+>> get me a bit more log output by typing "sccp debug 10" in the console  
+>> and then try to register again?
+>>
+>> Unfortunately I haven't such a phone at hand to try as well. I  
+>> remember, however, Marcus thinking about getting one himself. What  
+>> about it, Marcus?
+>>
+>> Regards,
+>> -David.
+>>     
+-- 
+Russ Woodman
+Systems Administrator
+NATCO Technologies
+
+
+
+From phil at ingineerix.com  Thu Nov 29 18:53:44 2007
+From: phil at ingineerix.com (-Phil-)
+Date: Thu, 29 Nov 2007 09:53:44 -0800
+Subject: [Chan-sccp-users] 7921 Registration Problem
+References: <474C75E8.8030201@natcotech.com>	<E26304C1-8668-4828-BE2F-AFC9337E1C84@davidded.de><474ED32D.1000206@natcotech.com>
+	<474EFBAF.5010104@natcotech.com>
+Message-ID: <04d401c832b0$c8d208a0$4400000a@phil>
+
+Is the 7921 behind NAT by chance?
+
+-Phil
+----- Original Message ----- 
+From: "Russ Woodman" <russ at natcotech.com>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Thursday, November 29, 2007 9:49 AM
+Subject: Re: [Chan-sccp-users] 7921 Registration Problem
+
+
+> Hi,
+>
+> With the help of a good friend, I managed to get past the problem. It
+> turns out that because I'm using a 64-bit machine for my Asterisk
+> server, there is a bug in the code in sccp_socket.c. I have submitted a
+> patch via the SourceForge bug tracker for this issue. Now the phone
+> registers fine and I can make and receive calls, however I am dealing
+> with a one-way audio problem.  The 7921G sends audio but will not
+> receive, no matter which way the call was initiated.
+>
+> Regards,
+> Russ
+>
+> Russ Woodman wrote:
+>> Hi,
+>>
+>> Unfortunately the higher SCCP debug level didn't real yield more
+>> information. Here is what repeats now:
+>>
+>> [Nov 29 08:54:12]     -- SCCP: Accepted connection from 12.199.xxx.xxx
+>> [Nov 29 08:54:12]     -- SCCP: Using ip 205.167.xxx.xxx
+>> [Nov 29 08:54:14] WARNING[4433]: sccp_socket.c:54 sccp_read_data: SCCP:
+>> read() returned Bad address
+>> [Nov 29 08:54:14]     -- SCCP: Old session marked down
+>> [Nov 29 08:54:14]     -- SCCP: Killing Session 12.199.xxx.xxx
+>>
+>> This happens with a network that is P/NAT'd and one that isn't so it's
+>> not a problem with that. I can't find any documentation that leads to a
+>> solution either. I've checked the source code of sccp_socket.c where the
+>> error resides, but the error description and the reason for it are
+>> pretty cryptic to me.
+>>
+>> It seems like this must be something simple but so far I'm stuck.
+>>
+>> Regards,
+>> Russ
+>>
+>> David Dederscheck wrote:
+>>
+>>> Hi Russ,
+>>>
+>>> this looks strange to me. I'm not sure what causes it. Could you maybe
+>>> get me a bit more log output by typing "sccp debug 10" in the console
+>>> and then try to register again?
+>>>
+>>> Unfortunately I haven't such a phone at hand to try as well. I
+>>> remember, however, Marcus thinking about getting one himself. What
+>>> about it, Marcus?
+>>>
+>>> Regards,
+>>> -David.
+>>>
+> -- 
+> Russ Woodman
+> Systems Administrator
+> NATCO Technologies
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+
+From russ at natcotech.com  Thu Nov 29 21:19:37 2007
+From: russ at natcotech.com (Russ Woodman)
+Date: Thu, 29 Nov 2007 14:19:37 -0600
+Subject: [Chan-sccp-users] 7921 Registration Problem
+In-Reply-To: <04d401c832b0$c8d208a0$4400000a@phil>
+References: <474C75E8.8030201@natcotech.com>	<E26304C1-8668-4828-BE2F-AFC9337E1C84@davidded.de><474ED32D.1000206@natcotech.com>	<474EFBAF.5010104@natcotech.com>
+	<04d401c832b0$c8d208a0$4400000a@phil>
+Message-ID: <474F1ED9.3040205@natcotech.com>
+
+Hi,
+
+At this particular moment, it is behind NAT, yes.
+
+Regards,
+Russ
+
+(-Phil-) wrote:
+> Is the 7921 behind NAT by chance?
+>
+> -Phil
+> ----- Original Message ----- 
+> From: "Russ Woodman" <russ at natcotech.com>
+> To: <chan-sccp-users at lists.berlios.de>
+> Sent: Thursday, November 29, 2007 9:49 AM
+> Subject: Re: [Chan-sccp-users] 7921 Registration Problem
+>
+>
+>   
+>> Hi,
+>>
+>> With the help of a good friend, I managed to get past the problem. It
+>> turns out that because I'm using a 64-bit machine for my Asterisk
+>> server, there is a bug in the code in sccp_socket.c. I have submitted a
+>> patch via the SourceForge bug tracker for this issue. Now the phone
+>> registers fine and I can make and receive calls, however I am dealing
+>> with a one-way audio problem.  The 7921G sends audio but will not
+>> receive, no matter which way the call was initiated.
+>>
+>> Regards,
+>> Russ
+>>     
+-- 
+Russ Woodman
+Systems Administrator
+NATCO Technologies
+
+
+
+From phil at ingineerix.com  Thu Nov 29 21:51:23 2007
+From: phil at ingineerix.com (-Phil-)
+Date: Thu, 29 Nov 2007 12:51:23 -0800
+Subject: [Chan-sccp-users] 7921 Registration Problem
+References: <474C75E8.8030201@natcotech.com>	<E26304C1-8668-4828-BE2F-AFC9337E1C84@davidded.de><474ED32D.1000206@natcotech.com>	<474EFBAF.5010104@natcotech.com><04d401c832b0$c8d208a0$4400000a@phil>
+	<474F1ED9.3040205@natcotech.com>
+Message-ID: <052e01c832c9$9a198c40$4400000a@phil>
+
+That is what's causing your Audio RX issue.
+
+Not all NAT implementations break SCCP, but many do.  For instance, a 
+generic linux-based router will break it, but loading DD-WRT (linux based) 
+on a linksys router will work properly with it.
+
+Set your 7921 in the DMZ if you can, then try it.  I bet it works!
+
+-Phil
+----- Original Message ----- 
+From: "Russ Woodman" <russ at natcotech.com>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Thursday, November 29, 2007 12:19 PM
+Subject: Re: [Chan-sccp-users] 7921 Registration Problem
+
+
+> Hi,
+>
+> At this particular moment, it is behind NAT, yes.
+>
+> Regards,
+> Russ
+>
+> (-Phil-) wrote:
+>> Is the 7921 behind NAT by chance?
+>>
+>> -Phil
+>> ----- Original Message ----- 
+>> From: "Russ Woodman" <russ at natcotech.com>
+>> To: <chan-sccp-users at lists.berlios.de>
+>> Sent: Thursday, November 29, 2007 9:49 AM
+>> Subject: Re: [Chan-sccp-users] 7921 Registration Problem
+>>
+>>
+>>
+>>> Hi,
+>>>
+>>> With the help of a good friend, I managed to get past the problem. It
+>>> turns out that because I'm using a 64-bit machine for my Asterisk
+>>> server, there is a bug in the code in sccp_socket.c. I have submitted a
+>>> patch via the SourceForge bug tracker for this issue. Now the phone
+>>> registers fine and I can make and receive calls, however I am dealing
+>>> with a one-way audio problem.  The 7921G sends audio but will not
+>>> receive, no matter which way the call was initiated.
+>>>
+>>> Regards,
+>>> Russ
+>>>
+> -- 
+> Russ Woodman
+> Systems Administrator
+> NATCO Technologies
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+
+From mlists at c-net.it  Fri Nov 30 23:16:28 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Fri, 30 Nov 2007 23:16:28 +0100
+Subject: [Chan-sccp-users] 7921 Registration Problem
+In-Reply-To: <474ED32D.1000206@natcotech.com>
+References: <474C75E8.8030201@natcotech.com>	<E26304C1-8668-4828-BE2F-AFC9337E1C84@davidded.de>
+	<474ED32D.1000206@natcotech.com>
+Message-ID: <47508BBC.1000405@c-net.it>
+
+Russ Woodman ha scritto:
+> Unfortunately the higher SCCP debug level didn't real yield more
+> information. Here is what repeats now:
+>   
+
+trustphoneip = no in your sccp.conf device configuration
+restart asterisk
+and try your phone again
+
+Sergio Chersovani
+
+

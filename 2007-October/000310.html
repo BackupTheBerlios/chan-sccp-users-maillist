@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Phone loads
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Phone%20loads&In-Reply-To=%3C19275446.1191924618017.JavaMail.root%40mail.linkdc.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000309.html">
+   <LINK REL="Next"  HREF="000311.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Phone loads</H1>
+    <B>Martin Sutherland</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Phone%20loads&In-Reply-To=%3C19275446.1191924618017.JavaMail.root%40mail.linkdc.co.uk%3E"
+       TITLE="[Chan-sccp-users] Phone loads">martin at linkdc.co.uk
+       </A><BR>
+    <I>Tue Oct  9 12:10:18 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000309.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+        <LI>Next message: <A HREF="000311.html">[Chan-sccp-users] German Language with 7971
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#310">[ date ]</a>
+              <a href="thread.html#310">[ thread ]</a>
+              <a href="subject.html#310">[ subject ]</a>
+              <a href="author.html#310">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear list members,
+ 
+I really am looking forward to trying Marcello/David'd Asterisk 1.4 chan_sccp. The missing bit of info is that we need to know what firmware you are running on the various models of phone and which protocol version is being used. Hopefully if I run the same then I can expect the same results.
+ 
+An update on the 7960+7914 dial timeout/invalid number problem (onhook missed). I have had this problem with 7960 phone load 7.2.4, 8.0.1 &amp; 8.0.5 and 7914 load 5.0.1 &amp; 5.0.3. I also had another strange problem with the oldest version just listed with assisted transfer. Whilst speaking to the person to which you want to transfer the calls, after about a minute the Transfer option on the display just changed to TransVM and made it impossible to transfer the call! This did go away with the newer firmware. The solution that I developed for the missed onhook event after invalid number/timeout problem is to detect an active line/channel in the redial/invalid state in the offhook event and issue an onhook as follows in sccp_actions.c
+ 
+void sccp_handle_offhook(sccp_session_t * s, sccp_moo_t * r) {
+        sccp_line_t * l;
+        sccp_channel_t * c;
+        sccp_device_t * d = s-&gt;device;
+        if (!d)
+                return;
+/*************************************************************************************************/
+        if ( (c = sccp_channel_get_active(d)) ) {
+                if (c-&gt;callstate = SCCP_CHANNELSTATE_INVALIDNUMBER) {
+                        if (!strcasecmp(d-&gt;config_type, &quot;7914&quot;)) {
+                                sccp_log(1) (VERBOSE_PREFIX_3 &quot;%s: Taken Offhook having just had an invalid number situation. Terminate the call\n&quot;, d-&gt;id);
+                                sccp_channel_endcall(c);
+                                } else {
+                                sccp_log(1)(VERBOSE_PREFIX_3 &quot;%s: Taken Offhook with a call (%d) in progress. Skip it!\n&quot;,d-&gt;id,c-&gt;callid);
+                                }
+                } else {
+                sccp_log(1)(VERBOSE_PREFIX_3 &quot;%s: Taken Offhook with a call (%d) in progess. Skip it!\n&quot;, d-&gt;id, c-&gt;callid);
+                }
+                return;
+        }
+/**************************************************************************************************/
+ 
+ 
+An update on the 7920 wireless phone...strangly after entering a number and pressing the green send key, chan_sccp detects the send key and sets up a line and sets internal status to offhook and instructs the phone to go offhook; then the phone suddenly sends an offhook message. Internally the line seems to be marked as an invalid number so my patch for 7914 prevents any dialing working - strangely calls to voicemail worked perfectly. I had to re-write the fix for the 7914 above to only apply when phone model was 7914.
+ 
+Regards,
+ 
+Martin
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071009/09602237/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071009/09602237/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000309.html">[Chan-sccp-users] Comparing versions of chan_sccp
+</A></li>
+	<LI>Next message: <A HREF="000311.html">[Chan-sccp-users] German Language with 7971
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#310">[ date ]</a>
+              <a href="thread.html#310">[ thread ]</a>
+              <a href="subject.html#310">[ subject ]</a>
+              <a href="author.html#310">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

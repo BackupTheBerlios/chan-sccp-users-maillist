@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Monitor ZAP channel with SCCP hint() system
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Monitor%20ZAP%20channel%20with%20SCCP%20hint%28%29%20system&In-Reply-To=%3C75FED65405B63042BA25F3F6E9230C1F11EBF1%40msexch.bnsnet.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000435.html">
+   <LINK REL="Next"  HREF="000437.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Monitor ZAP channel with SCCP hint() system</H1>
+    <B>Steve J. Walker</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Monitor%20ZAP%20channel%20with%20SCCP%20hint%28%29%20system&In-Reply-To=%3C75FED65405B63042BA25F3F6E9230C1F11EBF1%40msexch.bnsnet.co.uk%3E"
+       TITLE="[Chan-sccp-users] Monitor ZAP channel with SCCP hint() system">SteveW at bucks.net
+       </A><BR>
+    <I>Wed Jan  9 11:39:15 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000435.html">[Chan-sccp-users] Monitor ZAP channel with SCCP hint() system
+</A></li>
+        <LI>Next message: <A HREF="000437.html">[Chan-sccp-users] chan-sccp-b-20071213 misses conf/sccp.conf
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#436">[ date ]</a>
+              <a href="thread.html#436">[ thread ]</a>
+              <a href="subject.html#436">[ subject ]</a>
+              <a href="author.html#436">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi David,
+
+Limited seems pretty limited, so it would seem there is no way to
+monitor the channel status then from ZAP (we have * 1.2) properly.
+That's a shame.
+
+Not being able to see the callstate (as such) makes monitoring them
+pointless from what I can see as you would have no idea what the lines
+(ZAP channels) are doing.
+
+It would be nice if magically-o-matically you could assign the buttons
+on the 7970s to the ZAP channels and see what they are doing and
+pressing one gives that line or answers that line, if you see what I
+mean.
+
+As in an incoming call on ZAP/1-2 lights button 3 on the phone pressing
+it answers the call. pressing the button again puts it on hold - I am
+guessing CCME would do that from reading about it but not * &amp; chan_sccp.
+
+I wonder is the chan_local driver would be a better way, not sure how
+supported this is in 1.2 - I am reluctant to goto 1.4 as we have a fully
+working 1.2 which is both stable and usable.
+
+Would using local() channels mapped to ZAP channels work better hinted?
+or is there a way to have the ZAP channels mapped to native SCCP
+channels and get the same button functionallity that way.
+
+Dunno!
+
+Regards,
+
+Steve 
+
+
+&gt;<i> basically, the answer is yes, but limited. Limited in that you cannot
+</I>&gt;<i> see the number of the call or whether it is ringing, connected or in
+</I>&gt;<i> whatever way active. But yes, it is possible and works -- just setup a
+</I>&gt;<i> hinted speeddial and define a hint for the corresponding zaptel
+</I>&gt;<i> channel. I'm not sure if this works without bristuff, however, so
+</I>&gt;<i> maybe you should just check out.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Regards,
+</I>&gt;<i> -David
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> On 09.01.2008, at 10:30, Steve J. Walker wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Hi all,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Happy New Year and all that.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I have been wondering if this is possible with * and chan_sccp. We
+</I>&gt;<i> &gt; have
+</I>&gt;<i> &gt; a mixed 7940/60/70 system working fine. We have 6 channels delivered
+</I>&gt;<i> &gt; over a E1 PRI to the * box and it is all working fine.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; What I would like to know if I had say a 7970G and had the buttons
+</I>&gt;<i> set
+</I>&gt;<i> &gt; as line 1 Ext, line 2 DDI, then the other 6 buttons could they be
+</I>&gt;<i> &gt; set to
+</I>&gt;<i> &gt; hint the 6 real ZAP channels? so that an incoming call on the ZAP(1)
+</I>&gt;<i> &gt; say
+</I>&gt;<i> &gt; could be seen by the phone? is something like this possible?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; We have it set currently that incoming calls ring both receptions
+</I>&gt;<i> &gt; which
+</I>&gt;<i> &gt; is fine - but if we could see the ZAP channels on the other handsets
+</I>&gt;<i> &gt; that would be great.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Maybe even for the 7960s + 7914s see the ZAP's on the buttons on the
+</I>&gt;<i> &gt; sidecar? Not sure if anyone has done this or even if it is possible.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; An example or pointers would be great.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Regards,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt;
+</I>---------------------------------------------------------------------
+&gt;<i> ---
+</I>&gt;<i> &gt; Steve Walker       | Bucks Net Services Limited  | <A HREF="http://">http://</A>
+</I>&gt;<i> &gt; www.bucks.net
+</I>&gt;<i> &gt; Technical Support  | 27 &amp; 30 Edison Road         | <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">support at bucks.net</A>
+</I>&gt;<i> &gt;                   | Aylesbury, Bucks, HP19 8TE  | Admin - 0871 408
+</I>&gt;<i> &gt; 3801
+</I>&gt;<i> &gt;                   | Switchboard - 08450 042481  | Sales - 0871 408
+</I>&gt;<i> &gt; 3802
+</I>&gt;<i> &gt;
+</I>---------------------------------------------------------------------
+&gt;<i> ---
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Our company accepts no liability for the content of this email, or
+</I>&gt;<i> for
+</I>&gt;<i> &gt; the consequences of any actions taken on the basis of the
+</I>information
+&gt;<i> &gt; provided, unless that information is subsequently confirmed in
+</I>&gt;<i> &gt; writing.
+</I>&gt;<i> &gt; Any views or opinions presented in this email are solely those of
+</I>the
+&gt;<i> &gt; author and do not necessarily represent those of the company.
+</I>&gt;<i> WARNING:
+</I>&gt;<i> &gt; Computer viruses can be transmitted via email. The recipient should
+</I>&gt;<i> &gt; check this email and any attachments for the presence of viruses.
+</I>The
+&gt;<i> &gt; company accepts no liability for any damage caused by any virus
+</I>&gt;<i> &gt; transmitted by this email.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Chan-sccp-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000435.html">[Chan-sccp-users] Monitor ZAP channel with SCCP hint() system
+</A></li>
+	<LI>Next message: <A HREF="000437.html">[Chan-sccp-users] chan-sccp-b-20071213 misses conf/sccp.conf
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#436">[ date ]</a>
+              <a href="thread.html#436">[ thread ]</a>
+              <a href="subject.html#436">[ subject ]</a>
+              <a href="author.html#436">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

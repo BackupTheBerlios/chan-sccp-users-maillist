@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Blind transfer crashes fixed?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Blind%20transfer%20crashes%20fixed%3F&In-Reply-To=%3C47257A64.3040001%40matflow.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000340.html">
+   <LINK REL="Next"  HREF="000342.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Blind transfer crashes fixed?</H1>
+    <B>Frank Segtrop</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Blind%20transfer%20crashes%20fixed%3F&In-Reply-To=%3C47257A64.3040001%40matflow.net%3E"
+       TITLE="[Chan-sccp-users] Blind transfer crashes fixed?">fs at matflow.net
+       </A><BR>
+    <I>Mon Oct 29 07:15:00 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000340.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+        <LI>Next message: <A HREF="000342.html">[Chan-sccp-users] Success with Asterisk 1.4.13 with chan_sccp-20071009-DD and two small fixes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#341">[ date ]</a>
+              <a href="thread.html#341">[ thread ]</a>
+              <a href="subject.html#341">[ subject ]</a>
+              <a href="author.html#341">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+my quick fix worked quite well, but it was not really addressing the
+problem, which is ast_queue_hangup(peer-&gt;owner), as some people on this
+list have found out long ago already.
+
+So, I tried this old patch from Geoff Thornton:
+
+
+        if (peer-&gt;owner)
+                ast_queue_hangup(peer-&gt;owner);
+        else {
+                sccp_log(1)(VERBOSE_PREFIX_3 &quot;Peer owner disappeared!
+Can't free ressources\n&quot;);
+                return;
+        }
+        ast_mutex_lock(&amp;d-&gt;lock);
+
+However, asterisk still crashed once at ast_queue_hangup. Now, I have this:
+
+        ast_mutex_lock(&amp;d-&gt;lock);
+        if (peer-&gt;owner)
+                ast_queue_hangup(peer-&gt;owner);
+        else {
+                sccp_log(1)(VERBOSE_PREFIX_3 &quot;Peer owner disappeared!
+Can't free ressources\n&quot;);
+                ast_mutex_unlock(&amp;d-&gt;lock);
+                return;
+        }
+        ast_mutex_unlock(&amp;transferee-&gt;lock);
+        d-&gt;transfer_channel = NULL;
+        ast_mutex_unlock(&amp;d-&gt;lock);
+
+
+--Frank
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000340.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+	<LI>Next message: <A HREF="000342.html">[Chan-sccp-users] Success with Asterisk 1.4.13 with chan_sccp-20071009-DD and two small fixes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#341">[ date ]</a>
+              <a href="thread.html#341">[ thread ]</a>
+              <a href="subject.html#341">[ subject ]</a>
+              <a href="author.html#341">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

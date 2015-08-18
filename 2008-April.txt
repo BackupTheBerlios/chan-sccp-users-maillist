@@ -1,0 +1,13 @@
+From ljjimenez at gmail.com  Thu Apr 10 14:43:05 2008
+From: ljjimenez at gmail.com (Luis Jimenez)
+Date: Thu, 10 Apr 2008 08:43:05 -0400
+Subject: [Chan-sccp-users] Did you stopped development?
+Message-ID: <a5f67c5f0804100543u57b09378r829e62eaed293981@mail.gmail.com>
+
+I still have problems with some channel locks using Cisco 7910.
+
+Thanks.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20080410/6abb5aa8/attachment.html>
+

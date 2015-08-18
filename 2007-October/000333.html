@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Crash with after lot of registrations
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Crash%20with%20after%20lot%20of%20registrations&In-Reply-To=%3CE0EC7D6DD04A614BB52E24FB6735F22414FBCF%40goofy.bison.keenserver.nl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000331.html">
+   <LINK REL="Next"  HREF="000334.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Crash with after lot of registrations</H1>
+    <B>Steven Lam, KeenServer</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Crash%20with%20after%20lot%20of%20registrations&In-Reply-To=%3CE0EC7D6DD04A614BB52E24FB6735F22414FBCF%40goofy.bison.keenserver.nl%3E"
+       TITLE="[Chan-sccp-users] Crash with after lot of registrations">s.lam at keenserver.nl
+       </A><BR>
+    <I>Wed Oct 17 21:14:22 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000331.html">[Chan-sccp-users] Kirk Wireless Server 600v3
+</A></li>
+        <LI>Next message: <A HREF="000334.html">[Chan-sccp-users] Crash with after lot of registrations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#333">[ date ]</a>
+              <a href="thread.html#333">[ thread ]</a>
+              <a href="subject.html#333">[ subject ]</a>
+              <a href="author.html#333">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+ 
+I upscaled a chan_sccp configuration to about 60 devices, everything
+works as it should.
+There is one small problem, when a lot of devices register within
+something like one or two seconds asterisk crashes :-(
+If they register spread over say 5 seconds, there is no problem.
+ 
+You can generate this behavior by killing a perfectly working asterisk
+and restart immediately.
+ 
+Atached is the sccp.conf and the output of the console... (crash.log)
+I have been traying to find the problem but i'm stuck.
+ 
+Could it be the machine is low on memory?? a cat /proc/meminfo tells me:
+MemTotal:       255844 kB
+MemFree:          4088 kB
+Buffers:        223208 kB
+Cached:           8812 kB
+SwapCached:          0 kB
+Active:          11976 kB
+Inactive:       225188 kB
+HighTotal:           0 kB
+HighFree:            0 kB
+LowTotal:       255844 kB
+LowFree:          4088 kB
+SwapTotal:           0 kB
+SwapFree:            0 kB
+Dirty:               0 kB
+Writeback:           0 kB
+Mapped:           8824 kB
+Slab:             8312 kB
+CommitLimit:    127920 kB
+Committed_AS:     9232 kB
+PageTables:        276 kB
+VmallocTotal:   778216 kB
+VmallocUsed:      5692 kB
+VmallocChunk:   772160 kB
+ 
+All help is welkom.
+ 
+Steven.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: crash.log
+Type: application/octet-stream
+Size: 11327 bytes
+Desc: crash.log
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment.obj">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment.obj</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: sccp.conf
+Type: application/octet-stream
+Size: 34952 bytes
+Desc: sccp.conf
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment-0001.obj">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071017/c74d0567/attachment-0001.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000331.html">[Chan-sccp-users] Kirk Wireless Server 600v3
+</A></li>
+	<LI>Next message: <A HREF="000334.html">[Chan-sccp-users] Crash with after lot of registrations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#333">[ date ]</a>
+              <a href="thread.html#333">[ thread ]</a>
+              <a href="subject.html#333">[ subject ]</a>
+              <a href="author.html#333">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

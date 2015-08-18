@@ -1,0 +1,733 @@
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.0.1331727719.29954.chan-sccp-users@lists.berlios.de>
+
+you pick up the phone, press the group pickup, then hang up.  Your
+phone will then ring showing the caller ID information and then you
+can either answer or let it go (I interpreted letting it go to mean
+that continue based on what it should have done without the pickup, in
+other words, it does not go to your voicemail.)
+
+This is just my understanding.  I have not tried this yet.  I'll give
+this a shot sometime this weekend to see exactly how it works.
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.1.1331727719.29954.chan-sccp-users@lists.berlios.de>
+
+just the firmware upgrade is not enough.
+
+The older phones like the 7940 and 7960 do not need a firware upgrade. 
+Details for the phones are at:
+
+http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice09186a00807d3d9e.shtml
+
+-Patrick
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de 
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of (?Phil?)
+Sent: Tuesday, March 13, 2007 2:11 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Thanks for the tips, but I rebooted the entire box. No changes. Test phone 
+is a 7970, maybe there is something that needs updating in the Locale?
+
+-Phil
+----- Original Message ----- 
+From: Hughes, Sam
+To: chan-sccp-users at lists.berlios.de
+Sent: Tuesday, March 13, 2007 11:58 AM
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Yeah, the phones get the time from the server. Many services only read from 
+/etc/locatime on startup. Have you tried rebooting the server or restarting 
+Asterisk? If the phones aren't receiving the tzoffset changes then sccp.conf 
+hasn't been reloaded.
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de 
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of (?Phil?)
+Sent: Tuesday, March 13, 2007 11:54 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] New DST error?
+
+My asterisk (linux) server smoothly handled the new daylight savings time 
+switchover, and has the correct time, but all the SCCP phones seem to have 
+the time still "stuck" one hour earlier. Anyone else experiencing this?
+
+Doesn't the phone get it's time from the server? Reboots don't seem to 
+effect it, nor does a temp fix by using the tzoffset configuration variable.
+
+-Phil
+________________________________________
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.2.1331727719.29954.chan-sccp-users@lists.berlios.de>
+
+if
+just the firmware upgrade is not enough.
+
+The older phones like the 7940 and 7960 do not need a firware upgrade.
+Details for the phones are at:
+
+http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice=
+091
+86a00807d3d9e.shtml
+
+-Patrick
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of =
+(=A4Phil=A4)
+Sent: Tuesday, March 13, 2007 2:11 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Thanks for the tips, but I rebooted the entire box.=A0 No changes.=A0=A0 =
+Test
+phone is a 7970, maybe there is something that needs updating in the =
+Locale?
+=A0
+-Phil
+----- Original Message -----=20
+From: Hughes, Sam=20
+To: chan-sccp-users at lists.berlios.de=20
+Sent: Tuesday, March 13, 2007 11:58 AM
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Yeah, the phones get the time from the server.=A0 Many services only =
+read from
+/etc/locatime on startup.=A0 Have you tried rebooting the server or =
+restarting
+Asterisk?=A0 If the phones aren't receiving the tzoffset changes then
+sccp.conf hasn't been reloaded.
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of =
+(=A4Phil=A4)
+Sent: Tuesday, March 13, 2007 11:54 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] New DST error?
+
+My asterisk (linux) server smoothly handled the new daylight savings =
+time
+switchover, and has the correct time, but all the SCCP phones seem to =
+have
+the time still "stuck" one hour earlier.=A0 Anyone else experiencing =
+this?
+=A0
+Doesn't the phone get it's time from the server?=A0=A0 Reboots don't =
+seem to
+effect it, nor does a temp fix by using the tzoffset configuration =
+variable.
+=A0
+-Phil
+________________________________________
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.3.1331727719.29954.chan-sccp-users@lists.berlios.de>
+
+if
+just the firmware upgrade is not enough.
+
+The older phones like the 7940 and 7960 do not need a firware upgrade.
+Details for the phones are at:
+
+http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice=
+091
+86a00807d3d9e.shtml
+
+-Patrick
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of =
+(=A4Phil=A4)
+Sent: Tuesday, March 13, 2007 2:11 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Thanks for the tips, but I rebooted the entire box.=A0 No changes.=A0=A0 =
+Test
+phone is a 7970, maybe there is something that needs updating in the =
+Locale?
+=A0
+-Phil
+----- Original Message -----=20
+From: Hughes, Sam=20
+To: chan-sccp-users at lists.berlios.de=20
+Sent: Tuesday, March 13, 2007 11:58 AM
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Yeah, the phones get the time from the server.=A0 Many services only =
+read from
+/etc/locatime on startup.=A0 Have you tried rebooting the server or =
+restarting
+Asterisk?=A0 If the phones aren't receiving the tzoffset changes then
+sccp.conf hasn't been reloaded.
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of =
+(=A4Phil=A4)
+Sent: Tuesday, March 13, 2007 11:54 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] New DST error?
+
+My asterisk (linux) server smoothly handled the new daylight savings =
+time
+switchover, and has the correct time, but all the SCCP phones seem to =
+have
+the time still "stuck" one hour earlier.=A0 Anyone else experiencing =
+this?
+=A0
+Doesn't the phone get it's time from the server?=A0=A0 Reboots don't =
+seem to
+effect it, nor does a temp fix by using the tzoffset configuration =
+variable.
+=A0
+-Phil
+________________________________________
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.4.1331727719.29954.chan-sccp-users@lists.berlios.de>
+
+just the firmware upgrade is not enough.
+
+The older phones like the 7940 and 7960 do not need a firware upgrade. 
+Details for the phones are at:
+
+http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice09186a00807d3d9e.shtml
+
+-Patrick
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de 
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of (?Phil?)
+Sent: Tuesday, March 13, 2007 2:11 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Thanks for the tips, but I rebooted the entire box. No changes. Test phone 
+is a 7970, maybe there is something that needs updating in the Locale?
+
+-Phil
+----- Original Message ----- 
+From: Hughes, Sam
+To: chan-sccp-users at lists.berlios.de
+Sent: Tuesday, March 13, 2007 11:58 AM
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Yeah, the phones get the time from the server. Many services only read from 
+/etc/locatime on startup. Have you tried rebooting the server or restarting 
+Asterisk? If the phones aren't receiving the tzoffset changes then sccp.conf 
+hasn't been reloaded.
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de 
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of (?Phil?)
+Sent: Tuesday, March 13, 2007 11:54 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] New DST error?
+
+My asterisk (linux) server smoothly handled the new daylight savings time 
+switchover, and has the correct time, but all the SCCP phones seem to have 
+the time still "stuck" one hour earlier. Anyone else experiencing this?
+
+Doesn't the phone get it's time from the server? Reboots don't seem to 
+effect it, nor does a temp fix by using the tzoffset configuration variable.
+
+-Phil
+________________________________________
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.5.1331727719.29954.chan-sccp-users@lists.berlios.de>
+
+if=20
+just the firmware upgrade is not enough.
+
+The older phones like the 7940 and 7960 do not need a firware upgrade.=20
+Details for the phones are at:
+
+http://www.cisco.com/en/US/products/hw/phones/ps379/products_field_notice=
+091
+86a00807d3d9e.shtml
+
+-Patrick
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de=20
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of =
+(=A4Phil=A4)
+Sent: Tuesday, March 13, 2007 2:11 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Thanks for the tips, but I rebooted the entire box. No changes. Test =
+phone=20
+is a 7970, maybe there is something that needs updating in the Locale?
+
+-Phil
+----- Original Message -----=20
+From: Hughes, Sam
+To: chan-sccp-users at lists.berlios.de
+Sent: Tuesday, March 13, 2007 11:58 AM
+Subject: Re: [Chan-sccp-users] New DST error?
+
+Yeah, the phones get the time from the server. Many services only read =
+from=20
+/etc/locatime on startup. Have you tried rebooting the server or =
+restarting=20
+Asterisk? If the phones aren't receiving the tzoffset changes then =
+sccp.conf
+
+hasn't been reloaded.
+
+________________________________________
+From: chan-sccp-users-bounces at lists.berlios.de=20
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of =
+(=A4Phil=A4)
+Sent: Tuesday, March 13, 2007 11:54 AM
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] New DST error?
+
+My asterisk (linux) server smoothly handled the new daylight savings =
+time=20
+switchover, and has the correct time, but all the SCCP phones seem to =
+have=20
+the time still "stuck" one hour earlier. Anyone else experiencing this?
+
+Doesn't the phone get it's time from the server? Reboots don't seem to=20
+effect it, nor does a temp fix by using the tzoffset configuration =
+variable.
+
+-Phil
+________________________________________
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.6.1331727720.29954.chan-sccp-users@lists.berlios.de>
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.7.1331727724.29954.chan-sccp-users@lists.berlios.de>
+
+the device it is just a 7914 with scroll buttons and a colour display.
+
+I assume that they button count(er) can just be increased in chan_sccp
+to allow for those two types? It looks like they do not do anything
+extra (tech) wise.
+
+Trying it would be the best way. We have 7970s at the mo and two 7960s
+with 7914s. I might get a 7916 to go with a 7970 and see how it works
+under CCME and chan_sccp.
+
+Depends on funds :-)
+
+Regards,
+
+Steve=20
+
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-
+> bounces at lists.berlios.de] On Behalf Of Steinringer, Christian
+> Sent: 09 September 2008 12:10
+> To: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] (no subject)
+>=20
+> Hello!
+>=20
+> Has anyone get running Cisco 7916 Expansion Module with chan_sccp?
+Cisco
+> 7914 works great
+>=20
+> Br,
+> christian
+> Die Information in dieser Nachricht ist vertraulich und
+ausschliesslich fuer
+> den Adressaten bestimmt. Der Empfaenger dieser Nachricht, der nicht
+der
+> Adressat, einer seiner Mitarbeiter oder sein Empfangsbevollmaechtigter
+ist,
+> wird hiermit davon in Kenntnis gesetzt, dass er deren Inhalt nicht
+verwenden,
+> weitergeben oder reproduzieren darf. Sollten Sie diese Nachricht
+irrtuemlich
+> erhalten haben, benachrichtigen Sie uns bitte unverzueglich per
+Telefon und
+> retournieren Sie uns die Nachricht per E-Mail/Fax.
+>=20
+>=20
+> The information contained in this e-mail is privileged and
+confidential and is
+> for the exclusive use of the addressee. The person who receives this
+e-mail
+> and who is not the addressee, one of his employees or an agent
+entitled to
+> hand it over to the addressee, is informed that he may not use,
+disclose or
+> reproduce the contents thereof. If you have received this
+communication by
+> mistake, please let us know by telephone without delay and send it
+back to us
+> by e-mail/fax.
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.8.1331727724.29954.chan-sccp-users@lists.berlios.de>
+
+the device it is just a 7914 with scroll buttons and a colour display.
+
+I assume that they button count(er) can just be increased in chan_sccp
+to allow for those two types? It looks like they do not do anything
+extra (tech) wise.
+
+Trying it would be the best way. We have 7970s at the mo and two 7960s
+with 7914s. I might get a 7916 to go with a 7970 and see how it works
+under CCME and chan_sccp.
+
+Depends on funds :-)
+
+Regards,
+
+Steve=20
+
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-
+> bounces at lists.berlios.de] On Behalf Of Steinringer, Christian
+> Sent: 09 September 2008 12:10
+> To: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] (no subject)
+>=20
+> Hello!
+>=20
+> Has anyone get running Cisco 7916 Expansion Module with chan_sccp?
+Cisco
+> 7914 works great
+>=20
+> Br,
+> christian
+> Die Information in dieser Nachricht ist vertraulich und
+ausschliesslich fuer
+> den Adressaten bestimmt. Der Empfaenger dieser Nachricht, der nicht
+der
+> Adressat, einer seiner Mitarbeiter oder sein Empfangsbevollmaechtigter
+ist,
+> wird hiermit davon in Kenntnis gesetzt, dass er deren Inhalt nicht
+verwenden,
+> weitergeben oder reproduzieren darf. Sollten Sie diese Nachricht
+irrtuemlich
+> erhalten haben, benachrichtigen Sie uns bitte unverzueglich per
+Telefon und
+> retournieren Sie uns die Nachricht per E-Mail/Fax.
+>=20
+>=20
+> The information contained in this e-mail is privileged and
+confidential and is
+> for the exclusive use of the addressee. The person who receives this
+e-mail
+> and who is not the addressee, one of his employees or an agent
+entitled to
+> hand it over to the addressee, is informed that he may not use,
+disclose or
+> reproduce the contents thereof. If you have received this
+communication by
+> mistake, please let us know by telephone without delay and send it
+back to us
+> by e-mail/fax.
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+Die Information in dieser Nachricht ist vertraulich und ausschliesslich f=
+uer den Adressaten bestimmt. Der Empfaenger dieser Nachricht, der nicht d=
+er Adressat, einer seiner Mitarbeiter oder sein Empfangsbevollmaechtigter=
+ ist, wird hiermit davon in Kenntnis gesetzt, dass er deren Inhalt nicht =
+verwenden, weitergeben oder reproduzieren darf. Sollten Sie diese Nachric=
+ht irrtuemlich erhalten haben, benachrichtigen Sie uns bitte unverzueglic=
+h per Telefon und retournieren Sie uns die Nachricht per E-Mail/Fax.
+
+
+The information contained in this e-mail is privileged and confidential a=
+nd is for the exclusive use of the addressee. The person who receives thi=
+s e-mail and who is not the addressee, one of his employees or an agent e=
+ntitled to hand it over to the addressee, is informed that he may not use=
+, disclose or reproduce the contents thereof. If you have received this c=
+ommunication by mistake, please let us know by telephone without delay an=
+d send it back to us by e-mail/fax.
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.9.1331727724.29954.chan-sccp-users@lists.berlios.de>
+
+lines setup when it registers, the sccp debug 10 should show how many
+lines sccp "thinks" you should have vs what you are using.
+
+Do you see anything using "sccp debug 10" as the console when it
+registers?=20
+
+-- conf --
+
+type        =3D 7921
+description =3D 7921WiFi
+autologin   =3D 801
+speeddial   =3D 805,805,805 at from-internal
+speeddial   =3D 806,806,806 at from-internal
+private     =3D off
+device =3D> SEPetcetcetc
+
+line =3D> 801
+id            =3D 801
+pin           =3D 1234
+label         =3D 801
+description   =3D Tech WiFi
+context       =3D from-internal
+callwaiting   =3D 1
+incominglimit =3D 2
+mailbox       =3D 801
+vmnum         =3D *97
+cid_name      =3D Tech WiFi
+cid_num       =3D 801
+line =3D> 801
+
+Regards,
+
+Steve=20
+
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de=20
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf=20
+> Of OCG Technical Support
+> Sent: 12 September 2008 20:22
+> To: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] 7921 max lines & speed dials
+>=20
+> I'm setting up a Cisco 7921 and now want to add a second line=20
+> to the phone.
+> In my SCCP.conf file I have:
+> autologin   =3D 235,299
+>=20
+> However, on reloading SCCP the phone fails to login to the=20
+> second line with this error:
+> [Sep 12 12:46:49] WARNING[12224]: sccp_actions.c:185=20
+> sccp_handle_register:
+> SEP001BD457F8B1: Failed to autolog into 299: Max available=20
+> lines phone limit reached 299
+>=20
+> How do I set the max number of lines?  As well, I want to add=20
+> speed dials to the phone, but they don't appear on the phone.=20
+>  I have added lines like
+> this:
+> speeddial   =3D 123,test
+> speeddial   =3D 260,Bob
+>=20
+> in the [device] section for my 7921, but the speed dials do=20
+> NOT appear on the menu (click right from the main screen). =20
+> Am I missing something obvious here?
+>=20
+> Thanks,
+> MD
+>=20
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>=20
+
+
+From bogus@does.not.exist.com  Wed Mar 14 13:21:59 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 12:21:59 -0000
+Subject: No subject
+Message-ID: <mailman.10.1331727724.29954.chan-sccp-users@lists.berlios.de>
+
+lines setup when it registers, the sccp debug 10 should show how many
+lines sccp "thinks" you should have vs what you are using.
+
+Do you see anything using "sccp debug 10" as the console when it
+registers?
+
+-- conf --
+
+type        = 7921
+description = 7921WiFi
+autologin   = 801
+speeddial   = 805,805,805 at from-internal
+speeddial   = 806,806,806 at from-internal
+private     = off
+device => SEPetcetcetc
+
+line => 801
+id            = 801
+pin           = 1234
+label         = 801
+description   = Tech WiFi
+context       = from-internal
+callwaiting   = 1
+incominglimit = 2
+mailbox       = 801
+vmnum         = *97
+cid_name      = Tech WiFi
+cid_num       = 801
+line => 801
+
+Regards,
+
+Steve
+
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf
+> Of OCG Technical Support
+> Sent: 12 September 2008 20:22
+> To: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] 7921 max lines & speed dials
+>
+> I'm setting up a Cisco 7921 and now want to add a second line
+> to the phone.
+> In my SCCP.conf file I have:
+> autologin   = 235,299
+>
+> However, on reloading SCCP the phone fails to login to the
+> second line with this error:
+> [Sep 12 12:46:49] WARNING[12224]: sccp_actions.c:185
+> sccp_handle_register:
+> SEP001BD457F8B1: Failed to autolog into 299: Max available
+> lines phone limit reached 299
+>
+> How do I set the max number of lines?  As well, I want to add
+> speed dials to the phone, but they don't appear on the phone.
+>  I have added lines like
+> this:
+> speeddial   = 123,test
+> speeddial   = 260,Bob
+>
+> in the [device] section for my 7921, but the speed dials do
+> NOT appear on the menu (click right from the main screen).
+> Am I missing something obvious here?
+>
+> Thanks,
+> MD
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+

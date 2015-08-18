@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] chan_sccp and 7970
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%207970&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E79%40THEBRAIN1.drs.ca%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000181.html">
+   <LINK REL="Next"  HREF="000192.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] chan_sccp and 7970</H1>
+    <B>Zuber, Jonathan</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%207970&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E79%40THEBRAIN1.drs.ca%3E"
+       TITLE="[Chan-sccp-users] chan_sccp and 7970">jzuber at drs.ca
+       </A><BR>
+    <I>Wed Jul 18 21:47:11 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000181.html">[Chan-sccp-users] chan_sccp and 7970
+</A></li>
+        <LI>Next message: <A HREF="000192.html">[Chan-sccp-users] chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#184">[ date ]</a>
+              <a href="thread.html#184">[ thread ]</a>
+              <a href="subject.html#184">[ subject ]</a>
+              <a href="author.html#184">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I did not make a firmware update -&gt; currently on phone I have 
+Load File -&gt; TERM70.DEFAULT
+App Load ID -&gt; Jar70.2-9-1-45.sbn
+JVM Load ID -&gt; CVM70.2-0-1-45.sbn
+OS Load ID -&gt; cnu70.2-7-5-50.sbn
+Boot Load ID 7970_020706.bin
+
+In my tftpboot I have my separate SEP&lt;mac&gt;.cnf.xml files
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From:	Hakan Evirgen [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">hakan at nets.at</A>]
+</I>&gt;<i> Sent:	Wednesday, July 18, 2007 2:35 PM
+</I>&gt;<i> To:	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject:	Re: [Chan-sccp-users] chan_sccp and 7970
+</I>&gt;<i> 
+</I>&gt;<i> Hi Jonathan,
+</I>&gt;<i> 
+</I>&gt;<i> maybe there is a malfunction in your phone. Did you make an update of its
+</I>&gt;<i> firmware?
+</I>&gt;<i> 
+</I>&gt;<i> Regards,
+</I>&gt;<i> Hakan
+</I>&gt;<i> 
+</I>&gt;<i> &gt;-----Original Message-----
+</I>&gt;<i> &gt;From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:chan-sccp-users-
+</I>&gt;<i> &gt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">bounces at lists.berlios.de</A>] On Behalf Of Ceschia, Marcello
+</I>&gt;<i> &gt;Sent: Wednesday, July 18, 2007 8:34 PM
+</I>&gt;<i> &gt;To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;Subject: Re: [Chan-sccp-users] chan_sccp and 7970
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Hello Jonathan,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;after reading your email, I tried to rebuild the problem.
+</I>&gt;<i> &gt;I use cisco 7971 on asterisk 1.4.7.1 and the chan_sccp-Version for
+</I>&gt;<i> &gt;asterisk
+</I>&gt;<i> &gt;1.4.7. I have no problem using the dial-button.
+</I>&gt;<i> &gt;Do you have some logs on console (set verbose 4)?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Marcello
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Am Mittwoch, 18. Juli 2007 19:10 schrieb Zuber, Jonathan:
+</I>&gt;<i> &gt;&gt; Hello all,
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; 	Not sure if this is a chan_sccp issue or an Asterisk issue, or maybe
+</I>&gt;<i> &gt;&gt; just a cisco 7970 issue, but here it is:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; 	I have been working on this problem for a couple days now, and was
+</I>&gt;<i> &gt;&gt; looking for a little help.  I am running a Cisco 7970 IP phone, using
+</I>&gt;<i> &gt;SCCP,
+</I>&gt;<i> &gt;&gt; and a tftp server running Asterisk 1.4.6.  I have everything compiled,
+</I>&gt;<i> &gt;a
+</I>&gt;<i> &gt;&gt; new chan_sccp (the patched one that works with Asterisk 1.4.4+), and my
+</I>&gt;<i> &gt;&gt; phones connect properly to Asterisk, speedials pop up and everything.
+</I>&gt;<i> &gt;The
+</I>&gt;<i> &gt;&gt; speeddials even work! They will dial the extensions I programmed into
+</I>&gt;<i> &gt;them
+</I>&gt;<i> &gt;&gt; no problem.  However, when I try to just do a regular dial, a &quot;dial&quot;
+</I>&gt;<i> &gt;screen
+</I>&gt;<i> &gt;&gt; pops up, shows me the digits I dialed, then does nothing. This screen
+</I>&gt;<i> &gt;has 3
+</I>&gt;<i> &gt;&gt; softbuttons, a cancel, a &lt;&lt; (backspace) and a &quot;Dial&quot; softbutton.  The
+</I>&gt;<i> &gt;&gt; cancel and &lt;&lt; work just fine, but the Dial softbutton does nothing.  I
+</I>&gt;<i> &gt;am
+</I>&gt;<i> &gt;&gt; monitoring asterisk on full debug, and I see no indication that it is
+</I>&gt;<i> &gt;&gt; receiving the digits from the phone.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; 	Any help is much appreciated, and thanks in advance.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Jonathan Zuber
+</I>&gt;<i> &gt;&gt; _______________________________________________
+</I>&gt;<i> &gt;&gt; Chan-sccp-users mailing list
+</I>&gt;<i> &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> &gt;_______________________________________________
+</I>&gt;<i> &gt;Chan-sccp-users mailing list
+</I>&gt;<i> &gt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000181.html">[Chan-sccp-users] chan_sccp and 7970
+</A></li>
+	<LI>Next message: <A HREF="000192.html">[Chan-sccp-users] chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#184">[ date ]</a>
+              <a href="thread.html#184">[ thread ]</a>
+              <a href="subject.html#184">[ subject ]</a>
+              <a href="author.html#184">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

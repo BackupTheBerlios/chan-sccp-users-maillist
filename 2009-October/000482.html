@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20FW%3A%20Cisco%207960%20with%20SCCP%20and%20asterisk&In-Reply-To=%3C00A24AA921915B4D99E90311BC1632F00D43FF%40exchange2k3.five-fifteen.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000481.html">
+   <LINK REL="Next"  HREF="000483.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk</H1>
+    <B>Juan A. Quintana</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20FW%3A%20Cisco%207960%20with%20SCCP%20and%20asterisk&In-Reply-To=%3C00A24AA921915B4D99E90311BC1632F00D43FF%40exchange2k3.five-fifteen.local%3E"
+       TITLE="[Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk">jquintana at simplifieditsolutions.com
+       </A><BR>
+    <I>Fri Oct 23 07:45:19 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000481.html">[Chan-sccp-users] Cisco 7960 with SCCP and asterisk
+</A></li>
+        <LI>Next message: <A HREF="000483.html">[Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#482">[ date ]</a>
+              <a href="thread.html#482">[ thread ]</a>
+              <a href="subject.html#482">[ subject ]</a>
+              <a href="author.html#482">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks to all who have replied to my question.
+
+ 
+
+I think I may have made some progress in my situation. Below is the
+output I get now.
+
+ 
+
+NAME             DEVICE           MWI  Chs  Active Channel
+
+================ ================ ==== ====
+=================================================
+
+6000             --               OFF  0    --
+
+
+trixbox*CLI&gt; sccp show devices
+
+trixbox*CLI&gt;
+
+NAME             ADDRESS         MAC              Reg. State
+
+================ =============== ================ ==========
+
+TEST             10.0.0.100      SEP00136090A798  Ok
+
+ 
+
+If I understand this correctly the phone is registering with asterisk
+but the phone isn't configured to use extension 6000?
+
+ 
+
+Thanks in advance for any help, it is truly appreciated!
+
+ 
+
+Juan A. Quintana 
+
+www.simplifieditsolutions.com &lt;<A HREF="http://www.simplifieditsolutions.com/">http://www.simplifieditsolutions.com/</A>&gt; 
+
+Simplified IT Solutions
+Network Consultant 
+
+8002 Thorncroft Manor Ln
+Richmond, TX 77407
+ 
+ 
+
+E-mail:
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jquintana at simplifieditsolutions.com</A>
+&lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jquintana at simplifieditsolutions.com</A>&gt;  
+
+	                               Office: 
+
+                               832.798.5989 
+
+We do IT right.
+
+ 
+
+  &lt;<A HREF="http://www.twitter.com/simplifiedIT">http://www.twitter.com/simplifiedIT</A>&gt; 
+
+ 
+
+The information contained in this E-mail message is privileged,
+confidential, and may be protected from disclosure; please be aware that
+any other use, printing, copying, disclosure or dissemination of this
+communication may be subject to legal restriction or sanction. If you
+think that you have received this e-mail message in error, please reply
+to the sender.
+
+This E-mail message and any attachments hereto have been scanned for
+viruses and are believed to be free of any virus or other defect that
+might affect any computer system into which it is received and opened.
+However, it is the responsibility of the recipient to ensure that it is
+virus free and no responsibility is accepted by Simplified IT Solutions
+for any loss or damage arising in any way from its use.
+
+ 
+
+From: Juan A. Quintana 
+Sent: Thursday, October 22, 2009 5:25 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Cisco 7960 with SCCP and asterisk
+
+ 
+
+Hello, all.
+
+ 
+
+I am trying to configure some Cisco 7960G phones to work with sccp and
+asterisk. I have successfully loaded the sccp driver on the asterisk
+machine. I have also loaded the sccp firmware on the phone. My problem
+is that the phone is not registering with the asterisk machine.
+
+ 
+
+I have tried asking for help on the trixbox forums and pbxinaflash
+forums as well but have not gotten the help I need.
+
+ 
+
+You can see the two links here: 
+<A HREF="http://pbxinaflash.com/forum/showthread.php?t=5807">http://pbxinaflash.com/forum/showthread.php?t=5807</A> and 
+<A HREF="http://trixbox.org/forums/trixbox-forums/jobs-board/need-cisco-7960-work">http://trixbox.org/forums/trixbox-forums/jobs-board/need-cisco-7960-work</A>
+-sccp 
+
+ 
+
+I am willing to pay for this if someone can help me out. I am
+desperately trying to get it work.
+
+
+Thanks!
+
+ 
+
+Juan A. Quintana 
+
+www.simplifieditsolutions.com &lt;<A HREF="http://www.simplifieditsolutions.com/">http://www.simplifieditsolutions.com/</A>&gt; 
+
+Simplified IT Solutions
+Network Consultant 
+
+8002 Thorncroft Manor Ln
+Richmond, TX 77407
+ 
+ 
+
+E-mail:
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jquintana at simplifieditsolutions.com</A>
+&lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jquintana at simplifieditsolutions.com</A>&gt;  
+
+	                               Office: 
+
+                               832.798.5989 
+
+We do IT right.
+
+ 
+
+ &lt;<A HREF="http://www.twitter.com/simplifiedIT">http://www.twitter.com/simplifiedIT</A>&gt; 
+
+ 
+
+The information contained in this E-mail message is privileged,
+confidential, and may be protected from disclosure; please be aware that
+any other use, printing, copying, disclosure or dissemination of this
+communication may be subject to legal restriction or sanction. If you
+think that you have received this e-mail message in error, please reply
+to the sender.
+
+This E-mail message and any attachments hereto have been scanned for
+viruses and are believed to be free of any virus or other defect that
+might affect any computer system into which it is received and opened.
+However, it is the responsibility of the recipient to ensure that it is
+virus free and no responsibility is accepted by Simplified IT Solutions
+for any loss or damage arising in any way from its use.
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/16fabf6b/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/16fabf6b/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: image001.png
+Type: image/png
+Size: 20527 bytes
+Desc: image001.png
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/16fabf6b/attachment.png">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/16fabf6b/attachment.png</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000481.html">[Chan-sccp-users] Cisco 7960 with SCCP and asterisk
+</A></li>
+	<LI>Next message: <A HREF="000483.html">[Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#482">[ date ]</a>
+              <a href="thread.html#482">[ thread ]</a>
+              <a href="subject.html#482">[ subject ]</a>
+              <a href="author.html#482">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

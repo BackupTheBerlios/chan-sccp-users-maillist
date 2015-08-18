@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] New DST error?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20New%20DST%20error%3F&In-Reply-To=%3C45F6FE01.4070709%40acm.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000092.html">
+   <LINK REL="Next"  HREF="000076.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] New DST error?</H1>
+    <B>Carlos G Mendioroz</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20New%20DST%20error%3F&In-Reply-To=%3C45F6FE01.4070709%40acm.org%3E"
+       TITLE="[Chan-sccp-users] New DST error?">tron at acm.org
+       </A><BR>
+    <I>Tue Mar 13 20:39:45 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000092.html">[Chan-sccp-users] 7970 Backlight
+</A></li>
+        <LI>Next message: <A HREF="000076.html">[Chan-sccp-users] 7970 + 7914
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I guess you need to reboot the PHONE.
+AFAIK, phones take the time at startup and keep the time from there...
+
+
+(&#164;Phil&#164;) @ 13/3/2007 16:10 -0300 dixit:
+&gt;<i> Thanks for the tips, but I rebooted the entire box.  No changes.   Test
+</I>&gt;<i> phone is a 7970, maybe there is something that needs updating in the Locale?
+</I>&gt;<i>  
+</I>&gt;<i> -Phil-Phil
+</I>&gt;<i> 
+</I>&gt;<i>     ----- Original Message -----
+</I>&gt;<i>     *From:* Hughes, Sam &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">shughes at nationsholdinggroup.com</A>&gt;
+</I>&gt;<i>     *To:* <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i>     &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;<i>     *Sent:* Tuesday, March 13, 2007 11:58 AM
+</I>&gt;<i>     *Subject:* Re: [Chan-sccp-users] New DST error?
+</I>&gt;<i> 
+</I>&gt;<i>     Yeah, the phones get the time from the server.  Many services only
+</I>&gt;<i>     read from /etc/locatime on startup.  Have you tried rebooting the
+</I>&gt;<i>     server or restarting Asterisk?  If the phones aren&#8217;t receiving the
+</I>&gt;<i>     tzoffset changes then sccp.conf hasn&#8217;t been reloaded.
+</I>&gt;<i> 
+</I>&gt;<i>      
+</I>&gt;<i> 
+</I>&gt;<i>     ------------------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i>     *From:* <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i>     &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>&gt;
+</I>&gt;<i>     [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] *On Behalf Of
+</I>&gt;<i>     *(&#164;Phil&#164;)
+</I>&gt;<i>     *Sent:* Tuesday, March 13, 2007 11:54 AM
+</I>&gt;<i>     *To:* <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i>     *Subject:* [Chan-sccp-users] New DST error?
+</I>&gt;<i> 
+</I>&gt;<i>      
+</I>&gt;<i> 
+</I>&gt;<i>     My asterisk (linux) server smoothly handled the new daylight savings
+</I>&gt;<i>     time switchover, and has the correct time, but all the SCCP phones
+</I>&gt;<i>     seem to have the time still &quot;stuck&quot; one hour earlier.  Anyone else
+</I>&gt;<i>     experiencing this?
+</I>&gt;<i> 
+</I>&gt;<i>      
+</I>&gt;<i> 
+</I>&gt;<i>     Doesn't the phone get it's time from the server?   Reboots don't
+</I>&gt;<i>     seem to effect it, nor does a temp fix by using the tzoffset
+</I>&gt;<i>     configuration variable.
+</I>&gt;<i> 
+</I>&gt;<i>      
+</I>&gt;<i> 
+</I>&gt;<i>     -Phil-Phil
+</I>&gt;<i> 
+</I>&gt;<i>     ------------------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i>     _______________________________________________
+</I>&gt;<i>     Chan-sccp-users mailing list
+</I>&gt;<i>     <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i>     <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+-- 
+Carlos G Mendioroz  &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">tron at acm.org</A>&gt;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000092.html">[Chan-sccp-users] 7970 Backlight
+</A></li>
+	<LI>Next message: <A HREF="000076.html">[Chan-sccp-users] 7970 + 7914
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

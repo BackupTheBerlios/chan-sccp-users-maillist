@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Shared lines implementation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Shared%20lines%20implementation&In-Reply-To=%3C56a990d20708020908j5fb0e4a2lf6770b5517a647de%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000264.html">
+   <LINK REL="Next"  HREF="000267.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Shared lines implementation</H1>
+    <B>Lacy Moore - Aspendora</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Shared%20lines%20implementation&In-Reply-To=%3C56a990d20708020908j5fb0e4a2lf6770b5517a647de%40mail.gmail.com%3E"
+       TITLE="[Chan-sccp-users] Shared lines implementation">aspendora at gmail.com
+       </A><BR>
+    <I>Thu Aug  2 18:08:15 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000264.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+        <LI>Next message: <A HREF="000267.html">[Chan-sccp-users] Shared lines implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#266">[ date ]</a>
+              <a href="thread.html#266">[ thread ]</a>
+              <a href="subject.html#266">[ subject ]</a>
+              <a href="author.html#266">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 7/30/07, Hughes, Sam &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">shughes at nationsholdinggroup.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Asterisk 1.4 has a shared line appearance feature.  I've played around
+</I>&gt;<i> with it a little.  It doesn't work if you dial a SCCP channel directly,
+</I>&gt;<i> but you can dial a Local extension that calls the SCCP device.
+</I>&gt;<i>
+</I>&gt;<i> The problem I had with this is that the speeddials in Chan_SCCP won't
+</I>&gt;<i> work if the line shows as busy.  Maybe someone has already fixed this.
+</I>&gt;<i> I'm running  chan_sccp-20060408 but haven't kept up with all the
+</I>&gt;<i> patches.
+</I>
+
+As Sergio said, that's a part of the Skinny protocol.  The behavior is the
+same on Call Manager.  One thing that would be nice, though, is to show the
+ringing state on the speeddial that has hints.  And then further, be able to
+press the button and pickup the call (similar to what the GXP-2000 can do).
+This is something that can be done with Call Manager.  Although, I kinda
+like Sergio's implementation better than Call Manager's.
+
+Call Manager has shared lines, but you have to put the call on hold, and
+then pick up the call elsewhere.  The problem with Call Manager's shared
+lines is that it is just shared lines.  In other words, you can
+t do the monitoring of extensions the way Sergio has implemented things.
+And, with it being shared lines, all phones showing that line ring.
+
+Now, if it was possible to mix and match.  It would be nice to be able to
+put the call on hold and then all other extensions monitoring that line
+could then pick up the call.  That would be neat.  But first, I'd rather
+start with being able to pick up a ringing extension.
+
+As it is, you can use Asterisk's builtin pickup.  The way I do it now is you
+see the call come in, and then dial ** plus extension (the same pattern that
+the GXP sends).  It would be more user friendly to just press the ringing
+button.
+
+Even as it is, it's nice in a setup where you don't want your line to ring
+at another phone, but you do want to be able to answer your phone from
+another phone.  You can hear your phone ringing, look at the phone where you
+are and see the caller id info, if you want to answer, just dial the pickup
+sequence for your extension.
+
+
+
+-----Original Message-----
+&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">peder at networkoblivion.com</A>
+</I>&gt;<i> Sent: Saturday, July 28, 2007 1:11 PM
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] Shared lines implementation
+</I>&gt;<i>
+</I>&gt;<i> How do you emulate it with the local channel driver?  I read that page
+</I>&gt;<i> and didn't see anything like that.
+</I>&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Sergio Chersovani&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">mlists at c-net.it</A>&gt;
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-b-discussion at lists.sourceforge.net</A>
+</I>&gt;<i> Sent: Saturday, July 28, 2007 2:25:19 PM (GMT-0600) America/Mexico_City
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] Shared lines implementation
+</I>&gt;<i>
+</I>&gt;<i> Marcello Ceschia ha scritto:
+</I>&gt;<i> &gt; I started implementing shared line functionality to chan_sccp a few
+</I>&gt;<i> month ago.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> shared line feature can be emulated with the asterisk local channel
+</I>&gt;<i> driver
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://www.voip-info.org/wiki/view/Asterisk+local+channels">http://www.voip-info.org/wiki/view/Asterisk+local+channels</A>
+</I>&gt;<i>
+</I>&gt;<i> I'm running it in my office environment with no problems
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070802/d16f73de/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070802/d16f73de/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000264.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+	<LI>Next message: <A HREF="000267.html">[Chan-sccp-users] Shared lines implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#266">[ date ]</a>
+              <a href="thread.html#266">[ thread ]</a>
+              <a href="subject.html#266">[ subject ]</a>
+              <a href="author.html#266">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

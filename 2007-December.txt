@@ -1,0 +1,1986 @@
+From stefan at chan-sccp.org  Fri Dec  7 21:37:45 2007
+From: stefan at chan-sccp.org (Stefan Gofferje)
+Date: Fri, 07 Dec 2007 22:37:45 +0200
+Subject: [Chan-sccp-users] Back to life
+Message-ID: <4759AF19.4020806@chan-sccp.org>
+
+Hei everybody!
+
+Finally, I managed to get Internet again (only GPRS yet...), so I'm back
+to the list.
+
+First of all... As some might know, I have moved to Finland and my
+personal situation changed dramatically, so I have absolutely no time
+and peace to maintain chan-sccp.org any more.
+
+So if really nobody is willing to take it over, I will unregister the
+domain and then it will likely drop to some domain-grabber company
+putting porn ads there or something... :-).
+
+So, anybody interested? Just drop me a mail!
+
+Yst?ll?visin terveisin,
+Stefan
+
+-- 
+ (o_   Stefan Gofferje            | SCLT, MCP, CCSA
+ //\   Reg'd Linux User #247167   | VCP #2263
+ V_/_  chan-sccp.org - the unofficial asterisk & SCCP site
+
+
+From s.lam at keensystems.eu  Fri Dec  7 21:50:09 2007
+From: s.lam at keensystems.eu (Steven Lam, KeenSystems BV)
+Date: Fri, 7 Dec 2007 21:50:09 +0100
+Subject: [Chan-sccp-users] Back to life
+References: <4759AF19.4020806@chan-sccp.org>
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22402A7FF@goofy.bison.keenserver.nl>
+
+Hi,
+
+If someone is willing to maintain the page, I can take care of the hosting.
+Or if nobody can maintain the page I can put up a temporary page.
+
+Steven.
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Stefan Gofferje
+Sent: vrijdag 7 december 2007 21:38
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] Back to life
+
+Hei everybody!
+
+Finally, I managed to get Internet again (only GPRS yet...), so I'm back
+to the list.
+
+First of all... As some might know, I have moved to Finland and my
+personal situation changed dramatically, so I have absolutely no time
+and peace to maintain chan-sccp.org any more.
+
+So if really nobody is willing to take it over, I will unregister the
+domain and then it will likely drop to some domain-grabber company
+putting porn ads there or something... :-).
+
+So, anybody interested? Just drop me a mail!
+
+Yst?ll?visin terveisin,
+Stefan
+
+-- 
+ (o_   Stefan Gofferje            | SCLT, MCP, CCSA
+ //\   Reg'd Linux User #247167   | VCP #2263
+ V_/_  chan-sccp.org - the unofficial asterisk & SCCP site
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From hakan at nets.at  Sat Dec  8 02:35:13 2007
+From: hakan at nets.at (Hakan Evirgen)
+Date: Sat, 8 Dec 2007 02:35:13 +0100
+Subject: [Chan-sccp-users] Back to life
+In-Reply-To: <E0EC7D6DD04A614BB52E24FB6735F22402A7FF@goofy.bison.keenserver.nl>
+References: <4759AF19.4020806@chan-sccp.org>
+	<E0EC7D6DD04A614BB52E24FB6735F22402A7FF@goofy.bison.keenserver.nl>
+Message-ID: <005701c8393a$95339050$bf9ab0f0$@at>
+
+Hi!
+
+I can also offer a hosting fort the webpage. But I will not have time
+maintain the webpage or maybe have a little time irregularly.
+
+Hakan Evirgen
+nets.at network systems
+Anton-Baumgartnerstra?e 44/C1/2105   A-1230 Wien
+Tel: +43 (699) 13 22 87 10  Fax: +43 (699) 43 22 87 10
+Web: http://www.nets.at    Email: office at nets.at
+
+Beratung, Schulung, Hardware & Software Verkauf und Support
+Kommunikation: xDSL, Standleitung, Telefonie & Telefonanlagen, WLAN, WAN
+Rechenzentrum: Serverhousing, Virtuelle Server, Serververmietung, Rootserver
+Internet: Webspace, Email, Webdesign
+Netzwerke: Planung, Installation, Aufbau & Erweiterung, Administration
+Programmierung: Serveranwendungen, Applikationen, Datenbanksysteme
+Knowhow: Windows 95/98/NT/2000/XP/2003/Vista, Linux, Mac OS X, Embedded,
+Pocket PC
+
+
+>-----Original Message-----
+>From: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-users-
+>bounces at lists.berlios.de] On Behalf Of Steven Lam, KeenSystems BV
+>Sent: Friday, December 07, 2007 9:50 PM
+>To: chan-sccp-users at lists.berlios.de
+>Subject: Re: [Chan-sccp-users] Back to life
+>
+>Hi,
+>
+>If someone is willing to maintain the page, I can take care of the
+>hosting.
+>Or if nobody can maintain the page I can put up a temporary page.
+>
+>Steven.
+>
+>-----Original Message-----
+>From: chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-users-
+>bounces at lists.berlios.de] On Behalf Of Stefan Gofferje
+>Sent: vrijdag 7 december 2007 21:38
+>To: chan-sccp-users at lists.berlios.de
+>Subject: [Chan-sccp-users] Back to life
+>
+>Hei everybody!
+>
+>Finally, I managed to get Internet again (only GPRS yet...), so I'm back
+>to the list.
+>
+>First of all... As some might know, I have moved to Finland and my
+>personal situation changed dramatically, so I have absolutely no time
+>and peace to maintain chan-sccp.org any more.
+>
+>So if really nobody is willing to take it over, I will unregister the
+>domain and then it will likely drop to some domain-grabber company
+>putting porn ads there or something... :-).
+>
+>So, anybody interested? Just drop me a mail!
+>
+>Yst?ll?visin terveisin,
+>Stefan
+>
+>--
+> (o_   Stefan Gofferje            | SCLT, MCP, CCSA
+> //\   Reg'd Linux User #247167   | VCP #2263
+> V_/_  chan-sccp.org - the unofficial asterisk & SCCP site
+>_______________________________________________
+>Chan-sccp-users mailing list
+>Chan-sccp-users at lists.berlios.de
+>https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>_______________________________________________
+>Chan-sccp-users mailing list
+>Chan-sccp-users at lists.berlios.de
+>https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From mobile at nhm.it  Sat Dec  8 12:41:18 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Sat, 8 Dec 2007 12:41:18 +0100
+Subject: [Chan-sccp-users] Back to life
+In-Reply-To: <4759AF19.4020806@chan-sccp.org>
+References: <4759AF19.4020806@chan-sccp.org>
+Message-ID: <8E75336A53224D19A74A43185608BA8D@London>
+
+stefan, i can mantain the site for all you for free.
+
+Please let me know if you were interested.
+
+Federico Santulli
+Italy
+
+----- Original Message ----- 
+From: "Stefan Gofferje" <stefan at chan-sccp.org>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Friday, December 07, 2007 9:37 PM
+Subject: [Chan-sccp-users] Back to life
+
+
+Hei everybody!
+
+Finally, I managed to get Internet again (only GPRS yet...), so I'm back
+to the list.
+
+First of all... As some might know, I have moved to Finland and my
+personal situation changed dramatically, so I have absolutely no time
+and peace to maintain chan-sccp.org any more.
+
+So if really nobody is willing to take it over, I will unregister the
+domain and then it will likely drop to some domain-grabber company
+putting porn ads there or something... :-).
+
+So, anybody interested? Just drop me a mail!
+
+Yst?ll?visin terveisin,
+Stefan
+
+-- 
+ (o_   Stefan Gofferje            | SCLT, MCP, CCSA
+ //\   Reg'd Linux User #247167   | VCP #2263
+ V_/_  chan-sccp.org - the unofficial asterisk & SCCP site
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users 
+
+
+
+From mobile at nhm.it  Sat Dec  8 13:13:37 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Sat, 8 Dec 2007 13:13:37 +0100
+Subject: [Chan-sccp-users] 7914 and lights
+In-Reply-To: <8E75336A53224D19A74A43185608BA8D@London>
+References: <4759AF19.4020806@chan-sccp.org>
+	<8E75336A53224D19A74A43185608BA8D@London>
+Message-ID: <27F973385FF34C55A86896AD4AC129FB@London>
+
+I would like to configure extension hint to let the lights on
+7914 interface to power up when a user is busy, but i can't find any
+documentation around.
+
+Can anyone help ?
+
+Thanks in advance.
+
+
+
+From s.lam at keensystems.eu  Sat Dec  8 13:29:23 2007
+From: s.lam at keensystems.eu (Steven Lam, KeenSystems BV)
+Date: Sat, 8 Dec 2007 13:29:23 +0100
+Subject: [Chan-sccp-users] 7914 and lights
+References: <4759AF19.4020806@chan-sccp.org><8E75336A53224D19A74A43185608BA8D@London>
+	<27F973385FF34C55A86896AD4AC129FB@London>
+Message-ID: <E0EC7D6DD04A614BB52E24FB6735F22402A802@goofy.bison.keenserver.nl>
+
+Hi,
+
+In the SEPXXXXXXXXXXXX.cnf.xml for the phone add the addon module like
+this:
+<addOnModules>
+<addOnModule idx="1">
+<loadInformation>S00105000300</loadInformation>
+</addOnModule>
+
+In the sccp.conf add the 7960 lite this:
+type            = 7914
+autologin       = 1139
+description     = Test-Phone
+speeddial       =
+speeddial       =
+speeddial       =
+speeddial       =
+speeddial       =
+speeddial       = 1111,Peter,1111 at intern
+speeddial       = 1114,Daphne,1114 at intern
+speeddial       = 1118,Dennis,1118 at intern
+speeddial       = 1120,Dick,1120 at intern
+speeddial       = 1121,Sandra,1121 at intern
+speeddial       = 1125,Marco,1125 at intern
+speeddial       = 1126,Patrick,1126 at intern
+speeddial       = 1131,Marian,1131 at intern
+speeddial       = 1132,Leidy,1132 at intern
+speeddial       = 1161,Snijzaal,1161 at intern
+speeddial       = 1157,Slachtzaal,1157 at intern
+speeddial       = 1171,Henk,1171 at intern
+speeddial       = 1164,Kantoor KDS,1164 at intern
+speeddial       = 1155,TD,1155 at intern
+device => SEPXXXXXXXXXXXX
+
+Steven.
+
+-----Original Message-----
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Federico
+Santulli
+Sent: zaterdag 8 december 2007 13:14
+To: chan-sccp-users at lists.berlios.de
+Subject: [Chan-sccp-users] 7914 and lights
+
+I would like to configure extension hint to let the lights on
+7914 interface to power up when a user is busy, but i can't find any
+documentation around.
+
+Can anyone help ?
+
+Thanks in advance.
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From mobile at nhm.it  Sat Dec  8 18:20:25 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Sat, 8 Dec 2007 18:20:25 +0100
+Subject: [Chan-sccp-users] 7914 and lights
+In-Reply-To: <E0EC7D6DD04A614BB52E24FB6735F22402A802@goofy.bison.keenserver.nl>
+References: <4759AF19.4020806@chan-sccp.org><8E75336A53224D19A74A43185608BA8D@London><27F973385FF34C55A86896AD4AC129FB@London>
+	<E0EC7D6DD04A614BB52E24FB6735F22402A802@goofy.bison.keenserver.nl>
+Message-ID: <7919C3061DE649818AFB0DDB2C442C45@London>
+
+I'm using a mixed type of sccp, zap and sip channels.
+
+Is there something in extensions.conf or sip.conf i should set ?
+
+Thanks
+
+Federico
+
+----- Original Message ----- 
+From: "Steven Lam, KeenSystems BV" <s.lam at keensystems.eu>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Saturday, December 08, 2007 1:29 PM
+Subject: Re: [Chan-sccp-users] 7914 and lights
+
+
+> Hi,
+> 
+> In the SEPXXXXXXXXXXXX.cnf.xml for the phone add the addon module like
+> this:
+> <addOnModules>
+> <addOnModule idx="1">
+> <loadInformation>S00105000300</loadInformation>
+> </addOnModule>
+> 
+> In the sccp.conf add the 7960 lite this:
+> type            = 7914
+> autologin       = 1139
+> description     = Test-Phone
+> speeddial       =
+> speeddial       =
+> speeddial       =
+> speeddial       =
+> speeddial       =
+> speeddial       = 1111,Peter,1111 at intern
+> speeddial       = 1114,Daphne,1114 at intern
+> speeddial       = 1118,Dennis,1118 at intern
+> speeddial       = 1120,Dick,1120 at intern
+> speeddial       = 1121,Sandra,1121 at intern
+> speeddial       = 1125,Marco,1125 at intern
+> speeddial       = 1126,Patrick,1126 at intern
+> speeddial       = 1131,Marian,1131 at intern
+> speeddial       = 1132,Leidy,1132 at intern
+> speeddial       = 1161,Snijzaal,1161 at intern
+> speeddial       = 1157,Slachtzaal,1157 at intern
+> speeddial       = 1171,Henk,1171 at intern
+> speeddial       = 1164,Kantoor KDS,1164 at intern
+> speeddial       = 1155,TD,1155 at intern
+> device => SEPXXXXXXXXXXXX
+> 
+> Steven.
+> 
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Federico
+> Santulli
+> Sent: zaterdag 8 december 2007 13:14
+> To: chan-sccp-users at lists.berlios.de
+> Subject: [Chan-sccp-users] 7914 and lights
+> 
+> I would like to configure extension hint to let the lights on
+> 7914 interface to power up when a user is busy, but i can't find any
+> documentation around.
+> 
+> Can anyone help ?
+> 
+> Thanks in advance.
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From phil at ingineerix.com  Sat Dec  8 18:41:29 2007
+From: phil at ingineerix.com (-Phil-)
+Date: Sat, 8 Dec 2007 09:41:29 -0800
+Subject: [Chan-sccp-users] 7914 and lights
+References: <4759AF19.4020806@chan-sccp.org><8E75336A53224D19A74A43185608BA8D@London><27F973385FF34C55A86896AD4AC129FB@London><E0EC7D6DD04A614BB52E24FB6735F22402A802@goofy.bison.keenserver.nl>
+	<7919C3061DE649818AFB0DDB2C442C45@London>
+Message-ID: <083101c839c1$911bf8e0$4400000a@phil>
+
+You must make sure you are using the hint subsystem.
+
+There is a lot of documentation online.
+
+Here is some info:
+http://www.voip-info.org/wiki/index.php?page=Asterisk+standard+extensions
+
+-Phil
+----- Original Message ----- 
+From: "Federico Santulli" <mobile at nhm.it>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Saturday, December 08, 2007 9:20 AM
+Subject: Re: [Chan-sccp-users] 7914 and lights
+
+
+> I'm using a mixed type of sccp, zap and sip channels.
+> 
+> Is there something in extensions.conf or sip.conf i should set ?
+> 
+> Thanks
+> 
+> Federico
+> 
+> ----- Original Message ----- 
+> From: "Steven Lam, KeenSystems BV" <s.lam at keensystems.eu>
+> To: <chan-sccp-users at lists.berlios.de>
+> Sent: Saturday, December 08, 2007 1:29 PM
+> Subject: Re: [Chan-sccp-users] 7914 and lights
+> 
+> 
+>> Hi,
+>> 
+>> In the SEPXXXXXXXXXXXX.cnf.xml for the phone add the addon module like
+>> this:
+>> <addOnModules>
+>> <addOnModule idx="1">
+>> <loadInformation>S00105000300</loadInformation>
+>> </addOnModule>
+>> 
+>> In the sccp.conf add the 7960 lite this:
+>> type            = 7914
+>> autologin       = 1139
+>> description     = Test-Phone
+>> speeddial       =
+>> speeddial       =
+>> speeddial       =
+>> speeddial       =
+>> speeddial       =
+>> speeddial       = 1111,Peter,1111 at intern
+>> speeddial       = 1114,Daphne,1114 at intern
+>> speeddial       = 1118,Dennis,1118 at intern
+>> speeddial       = 1120,Dick,1120 at intern
+>> speeddial       = 1121,Sandra,1121 at intern
+>> speeddial       = 1125,Marco,1125 at intern
+>> speeddial       = 1126,Patrick,1126 at intern
+>> speeddial       = 1131,Marian,1131 at intern
+>> speeddial       = 1132,Leidy,1132 at intern
+>> speeddial       = 1161,Snijzaal,1161 at intern
+>> speeddial       = 1157,Slachtzaal,1157 at intern
+>> speeddial       = 1171,Henk,1171 at intern
+>> speeddial       = 1164,Kantoor KDS,1164 at intern
+>> speeddial       = 1155,TD,1155 at intern
+>> device => SEPXXXXXXXXXXXX
+>> 
+>> Steven.
+>> 
+>> -----Original Message-----
+>> From: chan-sccp-users-bounces at lists.berlios.de
+>> [mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Federico
+>> Santulli
+>> Sent: zaterdag 8 december 2007 13:14
+>> To: chan-sccp-users at lists.berlios.de
+>> Subject: [Chan-sccp-users] 7914 and lights
+>> 
+>> I would like to configure extension hint to let the lights on
+>> 7914 interface to power up when a user is busy, but i can't find any
+>> documentation around.
+>> 
+>> Can anyone help ?
+>> 
+>> Thanks in advance.
+>> 
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>> 
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+
+
+From stefan at chan-sccp.org  Sat Dec  8 19:32:00 2007
+From: stefan at chan-sccp.org (Stefan Gofferje)
+Date: Sat, 08 Dec 2007 20:32:00 +0200
+Subject: [Chan-sccp-users] Back to life
+In-Reply-To: <4759AF19.4020806@chan-sccp.org>
+References: <4759AF19.4020806@chan-sccp.org>
+Message-ID: <475AE320.9010507@chan-sccp.org>
+
+Thanks for the offers so far. Maybe I should make clear, what I am
+searching for.
+
+The domain should either
+
+1) be sold to a company which does business with Asterisk and maybe also
+chan-sccp
+
+2) be given to a group of motivated people who are involved with chan-sccp
+
+My original intention was to support the project by providing a website
+with documentations, help, latest patches and a webforum because as I am
+not a programmer, this was the best way for me to support it.
+Just having the domain idling on a server is not what I want. Actually
+this is what is happening now and I am not happy with that.
+I look for some people who would continue the project in the original
+spirit, either privately or commercially.
+
+T: Stefan
+
+
+-- 
+ (o_   Stefan Gofferje            | SCLT, MCP, CCSA
+ //\   Reg'd Linux User #247167   | VCP #2263
+ V_/_  chan-sccp.org - the unofficial asterisk & SCCP site
+
+
+From mobile at nhm.it  Mon Dec 10 10:29:50 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Mon, 10 Dec 2007 10:29:50 +0100
+Subject: [Chan-sccp-users] Back to life
+In-Reply-To: <475AE320.9010507@chan-sccp.org>
+References: <4759AF19.4020806@chan-sccp.org> <475AE320.9010507@chan-sccp.org>
+Message-ID: <D79214AD5C8243779640EA7E798E9F37@London>
+
+Stefan, i'm available to help the project.
+
+Please let me know.
+
+Thanks in Advance.
+
+
+----- Original Message ----- 
+From: "Stefan Gofferje" <stefan at chan-sccp.org>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Saturday, December 08, 2007 7:32 PM
+Subject: Re: [Chan-sccp-users] Back to life
+
+
+> Thanks for the offers so far. Maybe I should make clear, what I am
+> searching for.
+>
+> The domain should either
+>
+> 1) be sold to a company which does business with Asterisk and maybe also
+> chan-sccp
+>
+> 2) be given to a group of motivated people who are involved with chan-sccp
+>
+> My original intention was to support the project by providing a website
+> with documentations, help, latest patches and a webforum because as I am
+> not a programmer, this was the best way for me to support it.
+> Just having the domain idling on a server is not what I want. Actually
+> this is what is happening now and I am not happy with that.
+> I look for some people who would continue the project in the original
+> spirit, either privately or commercially.
+>
+> T: Stefan
+>
+>
+> -- 
+> (o_   Stefan Gofferje            | SCLT, MCP, CCSA
+> //\   Reg'd Linux User #247167   | VCP #2263
+> V_/_  chan-sccp.org - the unofficial asterisk & SCCP site
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users 
+
+
+
+From lehn at planet-ic.de  Mon Dec 10 11:31:26 2007
+From: lehn at planet-ic.de (Sebastian Lehn)
+Date: Mon, 10 Dec 2007 11:31:26 +0100
+Subject: [Chan-sccp-users] Back to life
+In-Reply-To: <475AE320.9010507@chan-sccp.org>
+References: <4759AF19.4020806@chan-sccp.org> <475AE320.9010507@chan-sccp.org>
+Message-ID: <475D157E.5020203@planet-ic.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi Stefan,
+
+we are a German ISP using chan-sccp for customer projects and
+our own company telephone system.
+
+We are interested in taking over the domain and the project. Currently we are
+planning to push the project at differing Universities in Mecklenburg-Vorpommern
+to find more people interested in the project.
+
+Please let me know if that sounds good.
+
+Best regards to Finland.
+
+Sebastian Lehn
+
+Stefan Gofferje schrieb:
+> Thanks for the offers so far. Maybe I should make clear, what I am
+> searching for.
+> 
+> The domain should either
+> 
+> 1) be sold to a company which does business with Asterisk and maybe also
+> chan-sccp
+> 
+> 2) be given to a group of motivated people who are involved with chan-sccp
+> 
+> My original intention was to support the project by providing a website
+> with documentations, help, latest patches and a webforum because as I am
+> not a programmer, this was the best way for me to support it.
+> Just having the domain idling on a server is not what I want. Actually
+> this is what is happening now and I am not happy with that.
+> I look for some people who would continue the project in the original
+> spirit, either privately or commercially.
+> 
+> T: Stefan
+> 
+> 
+
+
+- --
+//
+// IT- & Software-Systemhaus, Internet Service und Web Agentur
+//
+// Sebastian Lehn, Netzwerkadministrator, LPIC-2, MCSA MESSAGING
+// PLANET IC GmbH, Haus 4, Hagenower Strasse 73, 19061 Schwerin
+// Registergericht Schwerin HRB 6762, Gesch?ftsf?hrer Andreas Scher
+// Telefon 0385 30200 200, Telefax 0385 30200 190, Internet www.planet-ic.de
+//
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.7 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFHXRV+iXJBWVDW6mcRArwzAJ9WM7tPsLm1Wj26TIX4182mVNbU6ACeOQn5
+detiYfZjrVBx/MZxap+5XYU=
+=rMMI
+-----END PGP SIGNATURE-----
+
+
+From mobile at nhm.it  Wed Dec 12 16:13:55 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Wed, 12 Dec 2007 16:13:55 +0100
+Subject: [Chan-sccp-users] 7960 and load 8.0.5
+In-Reply-To: <475D157E.5020203@planet-ic.de>
+References: <4759AF19.4020806@chan-sccp.org> <475AE320.9010507@chan-sccp.org>
+	<475D157E.5020203@planet-ic.de>
+Message-ID: <0681F5C1D1D14DBD97B1207D23893DAB@London>
+
+I still have problems with one of latest cisco firmware that hangs phones as 
+it doesn't hangup calls on wrong number, busy or congestion state, locking 
+the display.
+
+I'm using image "cmterm-7940-7960-sccp.8-0-5" (P00308000500).
+
+If anyone tryied or fixed it please let me know.
+
+I made a little patch commenting the set_callstate in sccp_indicate but some 
+of you told it's not the right way.
+
+Can anyone find a solution for my problem ?
+
+Thanks in advance.
+
+Federico Santulli
+
+
+
+From galium123 at hotmail.com  Wed Dec 12 17:59:57 2007
+From: galium123 at hotmail.com (Andreas Anderson)
+Date: Wed, 12 Dec 2007 16:59:57 +0000
+Subject: [Chan-sccp-users] compilation on trunk failes.
+Message-ID: <BAY109-W47526EC4DF783477BF40BE4650@phx.gbl>
+
+
+Hi,i'd love to test the new tcpsip-branch, but the current chan_sccp does not compile. Is there anyone out there who has a patch for it to compile with tunk?Regards,Andreas
+_________________________________________________________________
+Express yourself instantly with MSN Messenger! Download today it's FREE!
+http://messenger.msn.click-url.com/go/onm00200471ave/direct/01/
+
+From stefan at chan-sccp.org  Thu Dec 13 15:57:54 2007
+From: stefan at chan-sccp.org (Stefan Gofferje)
+Date: Thu, 13 Dec 2007 16:57:54 +0200
+Subject: [Chan-sccp-users] Callweaver support?
+Message-ID: <47614872.1020805@chan-sccp.org>
+
+Does the current chan-sccp or chan-sccp-b work with Callweaver? I'm
+currently thinking about a migration...
+
+T:S
+
+-- 
+ (o_   Stefan Gofferje            | SCLT, MCP, CCSA
+ //\   Reg'd Linux User #247167   | VCP #2263
+ V_/_  chan-sccp.org - the unofficial asterisk & SCCP site
+
+
+
+From davidded at davidded.de  Sat Dec 15 13:44:10 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sat, 15 Dec 2007 13:44:10 +0100
+Subject: [Chan-sccp-users] New Release
+In-Reply-To: <C8D61C6568454ACBBE2216EA7B8B3E59@London>
+References: <BAY109-W47526EC4DF783477BF40BE4650@phx.gbl><D429046B-B485-4290-B685-2AFC72D1DAC8@davidded.de>
+	<605F82DB475E459CBBB56060F8F30C24@London>
+	<C8D61C6568454ACBBE2216EA7B8B3E59@London>
+Message-ID: <D3912BAE-7BFC-4E69-8312-DBB26442A085@davidded.de>
+
+Hi,
+
+I almost forgot to mention to the list:
+
+We released chan-sccp-b-20071213, which also includes Fredericos's  
+latest patch.
+
+
+Does anybody have an idea what would be an appropriate replacement  
+for setting the callstate?
+Maybe just a display message?
+
+Thank,
+-David.
+
+
+On Dec 13, 2007, at 11:25 AM, Federico Santulli wrote:
+
+> You forget to comment
+>
+> sccp_channel_set_callstate(c, SKINNY_CALLSTATE_CONGESTION);
+>
+> in SCCP_INDICATE.c section CONGESTION
+>
+> found and killed the bug.
+>
+>
+> ----- Original Message -----
+> From: "Federico Santulli" <mobile at nhm.it>
+> To: <chan-sccp-b-discussion at lists.sourceforge.net>
+> Sent: Thursday, December 13, 2007 11:11 AM
+> Subject: Re: [Chan-sccp-b-discussion] [Chan-sccp-users] 7960 and  
+> load 8.0.5
+>
+>
+>> David,
+>> the problem i have it's related to sccp-sip interfacement cause,  
+>> all the
+>> interns i have are sip
+>> and only the operator console (7960g+1x7914) is SCCP.
+>>
+>> Please take a try and let me know.
+>>
+>> Thanks in advance.
+>>
+>> Federico
+>>
+>>
+>> --------------------------------------------------------------------- 
+>> ----
+>> SF.Net email is sponsored by:
+>> Check out the new SourceForge.net Marketplace.
+>> It's the best place to buy or sell services
+>> for just about anything Open Source.
+>> http://ad.doubleclick.net/clk;164216239;13503038;w?http://sf.net/ 
+>> marketplace
+>> _______________________________________________
+>> Chan-sccp-b-discussion mailing list
+>> Chan-sccp-b-discussion at lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/chan-sccp-b-discussion
+>
+>
+> ---------------------------------------------------------------------- 
+> ---
+> SF.Net email is sponsored by:
+> Check out the new SourceForge.net Marketplace.
+> It's the best place to buy or sell services
+> for just about anything Open Source.
+> http://ad.doubleclick.net/clk;164216239;13503038;w?http://sf.net/ 
+> marketplace
+> _______________________________________________
+> Chan-sccp-b-discussion mailing list
+> Chan-sccp-b-discussion at lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/chan-sccp-b-discussion
+
+
+
+From mobile at nhm.it  Mon Dec 17 09:49:39 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Mon, 17 Dec 2007 09:49:39 +0100
+Subject: [Chan-sccp-users] New Release
+In-Reply-To: <D3912BAE-7BFC-4E69-8312-DBB26442A085@davidded.de>
+References: <BAY109-W47526EC4DF783477BF40BE4650@phx.gbl><D429046B-B485-4290-B685-2AFC72D1DAC8@davidded.de><605F82DB475E459CBBB56060F8F30C24@London><C8D61C6568454ACBBE2216EA7B8B3E59@London>
+	<D3912BAE-7BFC-4E69-8312-DBB26442A085@davidded.de>
+Message-ID: <A7CCEB3A60E74144B4AFC2CAB0BC9D80@London>
+
+Hi all,
+
+I didn't check latest release (i have manually fixed the 20071114 one) but 
+often, during transfers (not blind),
+happens segfault.
+
+How could i check for this ?
+
+Thanks
+
+Federico
+
+----- Original Message ----- 
+From: "David Dederscheck" <davidded at davidded.de>
+To: <chan-sccp-b-discussion at lists.sourceforge.net>
+Cc: <chan-sccp-users at lists.berlios.de>
+Sent: Saturday, December 15, 2007 1:44 PM
+Subject: [Chan-sccp-users] New Release
+
+
+> Hi,
+>
+> I almost forgot to mention to the list:
+>
+> We released chan-sccp-b-20071213, which also includes Fredericos's
+> latest patch.
+>
+>
+> Does anybody have an idea what would be an appropriate replacement
+> for setting the callstate?
+> Maybe just a display message?
+>
+> Thank,
+> -David.
+>
+>
+> On Dec 13, 2007, at 11:25 AM, Federico Santulli wrote:
+>
+>> You forget to comment
+>>
+>> sccp_channel_set_callstate(c, SKINNY_CALLSTATE_CONGESTION);
+>>
+>> in SCCP_INDICATE.c section CONGESTION
+>>
+>> found and killed the bug.
+>>
+>>
+>> ----- Original Message -----
+>> From: "Federico Santulli" <mobile at nhm.it>
+>> To: <chan-sccp-b-discussion at lists.sourceforge.net>
+>> Sent: Thursday, December 13, 2007 11:11 AM
+>> Subject: Re: [Chan-sccp-b-discussion] [Chan-sccp-users] 7960 and
+>> load 8.0.5
+>>
+>>
+>>> David,
+>>> the problem i have it's related to sccp-sip interfacement cause,
+>>> all the
+>>> interns i have are sip
+>>> and only the operator console (7960g+1x7914) is SCCP.
+>>>
+>>> Please take a try and let me know.
+>>>
+>>> Thanks in advance.
+>>>
+>>> Federico
+>>>
+>>>
+>>> --------------------------------------------------------------------- 
+>>> ----
+>>> SF.Net email is sponsored by:
+>>> Check out the new SourceForge.net Marketplace.
+>>> It's the best place to buy or sell services
+>>> for just about anything Open Source.
+>>> http://ad.doubleclick.net/clk;164216239;13503038;w?http://sf.net/
+>>> marketplace
+>>> _______________________________________________
+>>> Chan-sccp-b-discussion mailing list
+>>> Chan-sccp-b-discussion at lists.sourceforge.net
+>>> https://lists.sourceforge.net/lists/listinfo/chan-sccp-b-discussion
+>>
+>>
+>> ---------------------------------------------------------------------- 
+>> ---
+>> SF.Net email is sponsored by:
+>> Check out the new SourceForge.net Marketplace.
+>> It's the best place to buy or sell services
+>> for just about anything Open Source.
+>> http://ad.doubleclick.net/clk;164216239;13503038;w?http://sf.net/
+>> marketplace
+>> _______________________________________________
+>> Chan-sccp-b-discussion mailing list
+>> Chan-sccp-b-discussion at lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/chan-sccp-b-discussion
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users 
+
+
+
+From martin at linkdc.co.uk  Tue Dec 18 01:43:14 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Tue, 18 Dec 2007 00:43:14 +0000 (GMT)
+Subject: [Chan-sccp-users] I give up
+Message-ID: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+
+Dear list members,
+
+I recently tried to move to Asterisk 1.4.x with the latest chan-sccp-b on a system running a mixture of 7940s, 7960s and 7961+7914s and immediately the system crashed when testing assisted transfers. Having primed the end users for some months that a new version was going to solve the crashes every few days, it was a great disappointment and I had to roll back. The decision has now been made to abandon sccp and move to SIP and the Cisco 7961+7914s will be replaced by Polycom IP601s and side cars. Having stuck to my guns over Cisco handsets and native protocol over the last 1.5 years, I have now made the personal decision to move to SIP and will not risk putting any more Cisco handsets in with native protocol and will probably move to Polycom handsets entirely. I very much thank those who have contributed to the effort, but end users will simply not accept that a PBX should have the same reliable as their PCs, and the problems over the last year have damaged my reputation with long standing customers who I provide I.T. support for.
+
+Good luck and best regards,
+
+Martin Sutherland
+
+
+
+From sccp-list at puzzled.xs4all.nl  Tue Dec 18 02:30:59 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Tue, 18 Dec 2007 02:30:59 +0100
+Subject: [Chan-sccp-users] I give up
+In-Reply-To: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+References: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <1197941459.2956.33.camel@luna.puzzled.xs4all.nl>
+
+Hi Martin,
+
+On Tue, 2007-12-18 at 00:43 +0000, Martin Sutherland wrote:
+> Dear list members,
+> 
+> I recently tried to move to Asterisk 1.4.x with the latest chan-sccp-b
+> on a system running a mixture of 7940s, 7960s and 7961+7914s and
+> immediately the system crashed when testing assisted transfers.
+
+I'm sorry to hear that. I'm using Asterisk 1.4 (latest svn) with
+chan-sccp-b 20071111 on a CentOS 5.1 box and Cisco 7961s with factory
+default skinny firmware and have not seen any crashes. Don't think I
+ever tried assisted transfers so can not comment on that functionality
+and thus of little use to you. Without any more info about your setup
+it's difficult to make suggestions (unless you already did that off
+course). Have you thought about hiring one of the core developers to
+sort out the problems?
+
+>  Having primed the end users for some months that a new version was
+> going to solve the crashes every few days, it was a great
+> disappointment and I had to roll back. The decision has now been made
+> to abandon sccp and move to SIP and the Cisco 7961+7914s will be
+> replaced by Polycom IP601s and side cars.
+
+While I'm a happy user of chan-sccp-b and appreciate the hard work of
+the chan-sccp-b community very much I also acknowledge the fact that
+Cisco's Skinny implementation is rather proprietary which makes it quite
+difficult to make this driver work 100% with Cisco phones. Therefor I
+understand your decision to move to Polycom which uses standards based
+SIP and is much more focused on making their products work well with PBX
+vendors including Digium than Cisco will ever be.
+
+>  Having stuck to my guns over Cisco handsets and native protocol over
+> the last 1.5 years, I have now made the personal decision to move to
+> SIP and will not risk putting any more Cisco handsets in with native
+> protocol and will probably move to Polycom handsets entirely.
+
+You sure have hung in there for a long time given your problems. I also
+use SIP phones and am quite happy with them. Hopefully your experience
+will be the same.
+
+>  I very much thank those who have contributed to the effort, but end
+> users will simply not accept that a PBX should have the same reliable
+> as their PCs, and the problems over the last year have damaged my
+> reputation with
+>   long standing customers who I provide I.T. support for.
+
+I hope that your switch to Polycom/SIP will work out for you and your
+customer(s). The Polycom phones have a solid reputation in spite of a
+rather steep configuration learning curve. Prepare to spend some time to
+get the provisioning sorted out. Make sure you get the Polycom phones
+from an official Polycom distributor/reseller that can provide you with
+the latest firmware. FWIW I prefer the IP430 and IP650 because of the
+backlit screens.
+
+Best of luck!
+
+Regards,
+Patrick
+
+
+
+From m.robichon at llg.de  Tue Dec 18 08:09:10 2007
+From: m.robichon at llg.de (Marcus Robichon)
+Date: Tue, 18 Dec 2007 08:09:10 +0100
+Subject: [Chan-sccp-users] I give up
+Message-ID: <F3F77C7BD63C8C488186EE2E5BC511066F0C4F@lhu01.llg.de>
+
+Hi Martin,
+
+I have the same enviorment. Asterisk 1.4.xx, Cisco 7960, 7912, 7914 and Kirk
+Wireless Server. We are productive with our company. This means more then 30
+telephones are running and people are doing blind and assistant transfers,
+without any crashes. In the moment I am not sure which chan_sccp driver I am
+using, but I can provide you with it. Maybe you should give the system a
+last chance.
+
+Have a nice day
+
+Marcus 
+-----Urspr?ngliche Nachricht-----
+Von: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] Im Auftrag von Patrick
+Gesendet: Dienstag, 18. Dezember 2007 02:31
+An: chan-sccp-users at lists.berlios.de
+Betreff: Re: [Chan-sccp-users] I give up
+
+Hi Martin,
+
+On Tue, 2007-12-18 at 00:43 +0000, Martin Sutherland wrote:
+> Dear list members,
+> 
+> I recently tried to move to Asterisk 1.4.x with the latest chan-sccp-b
+> on a system running a mixture of 7940s, 7960s and 7961+7914s and
+> immediately the system crashed when testing assisted transfers.
+
+I'm sorry to hear that. I'm using Asterisk 1.4 (latest svn) with
+chan-sccp-b 20071111 on a CentOS 5.1 box and Cisco 7961s with factory
+default skinny firmware and have not seen any crashes. Don't think I
+ever tried assisted transfers so can not comment on that functionality
+and thus of little use to you. Without any more info about your setup
+it's difficult to make suggestions (unless you already did that off
+course). Have you thought about hiring one of the core developers to
+sort out the problems?
+
+>  Having primed the end users for some months that a new version was
+> going to solve the crashes every few days, it was a great
+> disappointment and I had to roll back. The decision has now been made
+> to abandon sccp and move to SIP and the Cisco 7961+7914s will be
+> replaced by Polycom IP601s and side cars.
+
+While I'm a happy user of chan-sccp-b and appreciate the hard work of
+the chan-sccp-b community very much I also acknowledge the fact that
+Cisco's Skinny implementation is rather proprietary which makes it quite
+difficult to make this driver work 100% with Cisco phones. Therefor I
+understand your decision to move to Polycom which uses standards based
+SIP and is much more focused on making their products work well with PBX
+vendors including Digium than Cisco will ever be.
+
+>  Having stuck to my guns over Cisco handsets and native protocol over
+> the last 1.5 years, I have now made the personal decision to move to
+> SIP and will not risk putting any more Cisco handsets in with native
+> protocol and will probably move to Polycom handsets entirely.
+
+You sure have hung in there for a long time given your problems. I also
+use SIP phones and am quite happy with them. Hopefully your experience
+will be the same.
+
+>  I very much thank those who have contributed to the effort, but end
+> users will simply not accept that a PBX should have the same reliable
+> as their PCs, and the problems over the last year have damaged my
+> reputation with
+>   long standing customers who I provide I.T. support for.
+
+I hope that your switch to Polycom/SIP will work out for you and your
+customer(s). The Polycom phones have a solid reputation in spite of a
+rather steep configuration learning curve. Prepare to spend some time to
+get the provisioning sorted out. Make sure you get the Polycom phones
+from an official Polycom distributor/reseller that can provide you with
+the latest firmware. FWIW I prefer the IP430 and IP650 because of the
+backlit screens.
+
+Best of luck!
+
+Regards,
+Patrick
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071218/18db8402/attachment.html>
+
+From mike at tubby.org  Tue Dec 18 08:51:12 2007
+From: mike at tubby.org (Mike Tubby)
+Date: Tue, 18 Dec 2007 07:51:12 +0000
+Subject: [Chan-sccp-users] I give up
+In-Reply-To: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+References: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <47677BF0.1060204@tubby.org>
+
+Martin,
+
+I run several Asterisk boxes, at work, at home and for various friends 
+and family.
+
+We love Cisco handsets but use them in SIP mode, with SIP firmware, and 
+have 7905s, 7912s, 7940s, 7960s and 7970s all working well with Asterisk 
+without any crashes!  The user interface changes a little to that of the 
+SCCP phones, but everything "just works" as long as you are careful and 
+select the right versions of SIP firmware (not necessarily the latest 
+because Cisco keep twiddling things to work with CCM 5.x)
+
+I recommend that you save your investment in what are high quality 
+phones and change out the firmware to SIP.  If you want to drop me a 
+line off list then I can provide more details.
+
+
+
+Regards
+
+
+
+Mike Tubby
+
+
+Martin Sutherland wrote:
+> Dear list members,
+>
+> I recently tried to move to Asterisk 1.4.x with the latest chan-sccp-b on a system running a mixture of 7940s, 7960s and 7961+7914s and immediately the system crashed when testing assisted transfers. Having primed the end users for some months that a new version was going to solve the crashes every few days, it was a great disappointment and I had to roll back. The decision has now been made to abandon sccp and move to SIP and the Cisco 7961+7914s will be replaced by Polycom IP601s and side cars. Having stuck to my guns over Cisco handsets and native protocol over the last 1.5 years, I have now made the personal decision to move to SIP and will not risk putting any more Cisco handsets in with native protocol and will probably move to Polycom handsets entirely. I very much thank those who have contributed to the effort, but end users will simply not accept that a PBX should have the same reliable as their PCs, and the problems over the last year have damaged my reputation with
+>   long standing customers who I provide I.T. support for.
+>
+> Good luck and best regards,
+>
+> Martin Sutherland
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>   
+
+
+
+
+From mlists at c-net.it  Tue Dec 18 09:38:56 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Tue, 18 Dec 2007 09:38:56 +0100
+Subject: [Chan-sccp-users] I give up
+In-Reply-To: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+References: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <47678720.6090907@c-net.it>
+
+Martin Sutherland ha scritto:
+> I very much thank those who have contributed to the effort, but end users will simply not accept that a PBX should have the same reliable as their PCs, and the problems over the last year have damaged my reputation with
+>   long standing customers who I provide I.T. support for.
+>   
+
+The customer is right, the PBX have to be stable and well tested.
+
+chan_sccp channel driver is an opensource software with no support from 
+cisco, so it is not stable or tested enought for a production environment.
+It could work... it should work... but there could be a configuration 
+problem, a library problem, wrong asterisk compile mix etc etc
+
+Sergio
+
+
+From davidded at davidded.de  Wed Dec 19 01:18:10 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Wed, 19 Dec 2007 01:18:10 +0100
+Subject: [Chan-sccp-users] I give up
+In-Reply-To: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+References: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <4473EFCC-E582-45FF-9E7C-86B677C1FA35@davidded.de>
+
+Hi Martin,
+
+On 18.12.2007, at 01:43, Martin Sutherland wrote:
+
+> Dear list members,
+>
+> I recently tried to move to Asterisk 1.4.x with the latest chan-sccp- 
+> b on a system running a mixture of 7940s, 7960s and 7961+7914s and  
+> immediately the system crashed when testing assisted transfers.
+> Having primed the end users for some months that a new version was  
+> going to solve the crashes every few days, it was a great  
+> disappointment and I had to roll back.
+
+I'm very sad to hear that. This is especially because Marcello and I  
+didn't experience any further crashes related to transfers any more,  
+and we hoped that the current release would be a solid base for most  
+people.
+
+Furthermore, I feel particularly sorry for your situation as you made  
+that generous donation to the both of us. In connection to this, it  
+shall be noted that you thus made possible many of the improvements  
+and new fixed that we lately did. Although we could get on with quite  
+some compatiblity issues and new features, the implementation and  
+debugging is always another issue.
+
+As Asterisk makes vast use of multithreading, debugging becomes a  
+really formidable task, and it will always be. This is where only  
+extensive debugging and the effort of many together trying to find the  
+issues in various scenarious will be able to help; Ideally, running a  
+production system with gdb on a very fast machine.
+
+> The decision has now been made to abandon sccp and move to SIP and  
+> the Cisco 7961+7914s will be replaced by Polycom IP601s and side  
+> cars. Having stuck to my guns over Cisco handsets and native  
+> protocol over the last 1.5 years, I have now made the personal  
+> decision to move to SIP and will not risk putting any more Cisco  
+> handsets in with native protocol and will probably move to Polycom  
+> handsets entirely. I very much thank those who have contributed to  
+> the effort, but end users will simply not accept that a PBX should  
+> have the same reliable as their PCs, and the problems over the last  
+> year have damaged my reputation with
+>  long standing customers who I provide I.T. support for.
+
+I can very well understand your decision, and I'd also suggest you  
+that course of action if your customers have a very high load and  
+can't live with occasional crashes. Although the stability may be  
+quite well in the light of the high load, it may simply not be  
+sufficient for your customers, so you need solutions where you can  
+blame the manufacturer, also in terms of liability. Obviously chan- 
+sccp-b can't provide sufficient stability right now, so you need to  
+look for alternatives. As polycom officially supports asterisk, this  
+should be your choice.
+
+Finally, this should remember all of us that we still have a long way  
+to go. Yet, there's already so much to find along that way that we  
+should pursue it further.
+
+
+Best regards and all the best,
+-David
+
+>
+>
+> Good luck and best regards,
+>
+> Martin Sutherland
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From mobile at nhm.it  Thu Dec 20 22:03:35 2007
+From: mobile at nhm.it (Federico Santulli)
+Date: Thu, 20 Dec 2007 22:03:35 +0100
+Subject: [Chan-sccp-users] I give up
+In-Reply-To: <4473EFCC-E582-45FF-9E7C-86B677C1FA35@davidded.de>
+References: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+	<4473EFCC-E582-45FF-9E7C-86B677C1FA35@davidded.de>
+Message-ID: <AEC3923D57A8448D92110832A99ABBDB@London>
+
+I've got some problems on transfers too, expecially in mixed environments
+SCCP/SIP/IAX.
+
+I didn't recognize the problem at the moment. I looked onto every log but 
+atm
+nothing.
+
+If anyone could suggest me something for debug, the help will be 
+appreciated.
+
+Thanks in advance.
+
+Federico
+
+----- Original Message ----- 
+From: "David Dederscheck" <davidded at davidded.de>
+To: <chan-sccp-users at lists.berlios.de>
+Sent: Wednesday, December 19, 2007 1:18 AM
+Subject: Re: [Chan-sccp-users] I give up
+
+
+> Hi Martin,
+>
+> On 18.12.2007, at 01:43, Martin Sutherland wrote:
+>
+>> Dear list members,
+>>
+>> I recently tried to move to Asterisk 1.4.x with the latest chan-sccp-
+>> b on a system running a mixture of 7940s, 7960s and 7961+7914s and
+>> immediately the system crashed when testing assisted transfers.
+>> Having primed the end users for some months that a new version was
+>> going to solve the crashes every few days, it was a great
+>> disappointment and I had to roll back.
+>
+> I'm very sad to hear that. This is especially because Marcello and I
+> didn't experience any further crashes related to transfers any more,
+> and we hoped that the current release would be a solid base for most
+> people.
+>
+> Furthermore, I feel particularly sorry for your situation as you made
+> that generous donation to the both of us. In connection to this, it
+> shall be noted that you thus made possible many of the improvements
+> and new fixed that we lately did. Although we could get on with quite
+> some compatiblity issues and new features, the implementation and
+> debugging is always another issue.
+>
+> As Asterisk makes vast use of multithreading, debugging becomes a
+> really formidable task, and it will always be. This is where only
+> extensive debugging and the effort of many together trying to find the
+> issues in various scenarious will be able to help; Ideally, running a
+> production system with gdb on a very fast machine.
+>
+>> The decision has now been made to abandon sccp and move to SIP and
+>> the Cisco 7961+7914s will be replaced by Polycom IP601s and side
+>> cars. Having stuck to my guns over Cisco handsets and native
+>> protocol over the last 1.5 years, I have now made the personal
+>> decision to move to SIP and will not risk putting any more Cisco
+>> handsets in with native protocol and will probably move to Polycom
+>> handsets entirely. I very much thank those who have contributed to
+>> the effort, but end users will simply not accept that a PBX should
+>> have the same reliable as their PCs, and the problems over the last
+>> year have damaged my reputation with
+>>  long standing customers who I provide I.T. support for.
+>
+> I can very well understand your decision, and I'd also suggest you
+> that course of action if your customers have a very high load and
+> can't live with occasional crashes. Although the stability may be
+> quite well in the light of the high load, it may simply not be
+> sufficient for your customers, so you need solutions where you can
+> blame the manufacturer, also in terms of liability. Obviously chan-
+> sccp-b can't provide sufficient stability right now, so you need to
+> look for alternatives. As polycom officially supports asterisk, this
+> should be your choice.
+>
+> Finally, this should remember all of us that we still have a long way
+> to go. Yet, there's already so much to find along that way that we
+> should pursue it further.
+>
+>
+> Best regards and all the best,
+> -David
+>
+>>
+>>
+>> Good luck and best regards,
+>>
+>> Martin Sutherland
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users 
+
+
+
+From davidded at davidded.de  Fri Dec 21 02:32:42 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Fri, 21 Dec 2007 02:32:42 +0100
+Subject: [Chan-sccp-users] I give up
+In-Reply-To: <AEC3923D57A8448D92110832A99ABBDB@London>
+References: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+	<4473EFCC-E582-45FF-9E7C-86B677C1FA35@davidded.de>
+	<AEC3923D57A8448D92110832A99ABBDB@London>
+Message-ID: <DBF51A55-CC99-496B-AA28-0C88ADBB2D5F@davidded.de>
+
+Hi,
+
+I also noticed some problems when performing transfers in mixed  
+environments lately. I first thought the issue was due to some  
+unorthodox use of meetme rooms in connection with local channels, but  
+then it also occured with a transfer _to_ a Zap channel.
+
+My problem is characterized by the following phenomenon:
+
+1. You attempt a transfer and it doesn't work. Possibly the phone  
+won't react properly.
+2. If you type "show channels" at the asterisk prompt, it will give  
+you an infinite list of the same channel all over again.
+3. You need to restart asterisk.
+
+The problem seems to occur only with 1.4.
+
+By the way it's pretty nasty that you can really mess up the global  
+channel list of asterisk in such a way.
+
+We shall get working on the problem shorty, but it would be very  
+helpful if any of you could reproduce it  and / or get his/her hands  
+on it.
+
+
+Kind Regards,
+-David.
+
+
+On Dec 20, 2007, at 10:03 PM, Federico Santulli wrote:
+
+> I've got some problems on transfers too, expecially in mixed  
+> environments
+> SCCP/SIP/IAX.
+>
+> I didn't recognize the problem at the moment. I looked onto every  
+> log but
+> atm
+> nothing.
+>
+> If anyone could suggest me something for debug, the help will be
+> appreciated.
+>
+> Thanks in advance.
+>
+> Federico
+>
+> ----- Original Message -----
+> From: "David Dederscheck" <davidded at davidded.de>
+> To: <chan-sccp-users at lists.berlios.de>
+> Sent: Wednesday, December 19, 2007 1:18 AM
+> Subject: Re: [Chan-sccp-users] I give up
+>
+>
+>> Hi Martin,
+>>
+>> On 18.12.2007, at 01:43, Martin Sutherland wrote:
+>>
+>>> Dear list members,
+>>>
+>>> I recently tried to move to Asterisk 1.4.x with the latest chan- 
+>>> sccp-
+>>> b on a system running a mixture of 7940s, 7960s and 7961+7914s and
+>>> immediately the system crashed when testing assisted transfers.
+>>> Having primed the end users for some months that a new version was
+>>> going to solve the crashes every few days, it was a great
+>>> disappointment and I had to roll back.
+>>
+>> I'm very sad to hear that. This is especially because Marcello and I
+>> didn't experience any further crashes related to transfers any more,
+>> and we hoped that the current release would be a solid base for most
+>> people.
+>>
+>> Furthermore, I feel particularly sorry for your situation as you made
+>> that generous donation to the both of us. In connection to this, it
+>> shall be noted that you thus made possible many of the improvements
+>> and new fixed that we lately did. Although we could get on with quite
+>> some compatiblity issues and new features, the implementation and
+>> debugging is always another issue.
+>>
+>> As Asterisk makes vast use of multithreading, debugging becomes a
+>> really formidable task, and it will always be. This is where only
+>> extensive debugging and the effort of many together trying to find  
+>> the
+>> issues in various scenarious will be able to help; Ideally, running a
+>> production system with gdb on a very fast machine.
+>>
+>>> The decision has now been made to abandon sccp and move to SIP and
+>>> the Cisco 7961+7914s will be replaced by Polycom IP601s and side
+>>> cars. Having stuck to my guns over Cisco handsets and native
+>>> protocol over the last 1.5 years, I have now made the personal
+>>> decision to move to SIP and will not risk putting any more Cisco
+>>> handsets in with native protocol and will probably move to Polycom
+>>> handsets entirely. I very much thank those who have contributed to
+>>> the effort, but end users will simply not accept that a PBX should
+>>> have the same reliable as their PCs, and the problems over the last
+>>> year have damaged my reputation with
+>>>  long standing customers who I provide I.T. support for.
+>>
+>> I can very well understand your decision, and I'd also suggest you
+>> that course of action if your customers have a very high load and
+>> can't live with occasional crashes. Although the stability may be
+>> quite well in the light of the high load, it may simply not be
+>> sufficient for your customers, so you need solutions where you can
+>> blame the manufacturer, also in terms of liability. Obviously chan-
+>> sccp-b can't provide sufficient stability right now, so you need to
+>> look for alternatives. As polycom officially supports asterisk, this
+>> should be your choice.
+>>
+>> Finally, this should remember all of us that we still have a long way
+>> to go. Yet, there's already so much to find along that way that we
+>> should pursue it further.
+>>
+>>
+>> Best regards and all the best,
+>> -David
+>>
+>>>
+>>>
+>>> Good luck and best regards,
+>>>
+>>> Martin Sutherland
+>>>
+>>> _______________________________________________
+>>> Chan-sccp-users mailing list
+>>> Chan-sccp-users at lists.berlios.de
+>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From mlists at c-net.it  Fri Dec 21 02:50:37 2007
+From: mlists at c-net.it (Sergio Chersovani)
+Date: Fri, 21 Dec 2007 02:50:37 +0100
+Subject: [Chan-sccp-users] I give up
+In-Reply-To: <DBF51A55-CC99-496B-AA28-0C88ADBB2D5F@davidded.de>
+References: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>	<4473EFCC-E582-45FF-9E7C-86B677C1FA35@davidded.de>	<AEC3923D57A8448D92110832A99ABBDB@London>
+	<DBF51A55-CC99-496B-AA28-0C88ADBB2D5F@davidded.de>
+Message-ID: <476B1BED.2020409@c-net.it>
+
+
+The code has been patched on the hangup code adding a soft hangup 
+instead of a real channel hangup
+
+I the the channels are marked as zombie channels
+
+sergio
+
+David Dederscheck ha scritto:
+> Hi,
+>
+> I also noticed some problems when performing transfers in mixed  
+> environments lately. I first thought the issue was due to some  
+> unorthodox use of meetme rooms in connection with local channels, but  
+> then it also occured with a transfer _to_ a Zap channel.
+>
+> My problem is characterized by the following phenomenon:
+>
+> 1. You attempt a transfer and it doesn't work. Possibly the phone  
+> won't react properly.
+> 2. If you type "show channels" at the asterisk prompt, it will give  
+> you an infinite list of the same channel all over again.
+> 3. You need to restart asterisk.
+>
+> The problem seems to occur only with 1.4.
+>
+> By the way it's pretty nasty that you can really mess up the global  
+> channel list of asterisk in such a way.
+>
+> We shall get working on the problem shorty, but it would be very  
+> helpful if any of you could reproduce it  and / or get his/her hands  
+> on it.
+>
+>
+> Kind Regards,
+> -David.
+>
+>
+> On Dec 20, 2007, at 10:03 PM, Federico Santulli wrote:
+>
+>   
+>> I've got some problems on transfers too, expecially in mixed  
+>> environments
+>> SCCP/SIP/IAX.
+>>
+>> I didn't recognize the problem at the moment. I looked onto every  
+>> log but
+>> atm
+>> nothing.
+>>
+>> If anyone could suggest me something for debug, the help will be
+>> appreciated.
+>>
+>> Thanks in advance.
+>>
+>> Federico
+>>
+>> ----- Original Message -----
+>> From: "David Dederscheck" <davidded at davidded.de>
+>> To: <chan-sccp-users at lists.berlios.de>
+>> Sent: Wednesday, December 19, 2007 1:18 AM
+>> Subject: Re: [Chan-sccp-users] I give up
+>>
+>>
+>>     
+>>> Hi Martin,
+>>>
+>>> On 18.12.2007, at 01:43, Martin Sutherland wrote:
+>>>
+>>>       
+>>>> Dear list members,
+>>>>
+>>>> I recently tried to move to Asterisk 1.4.x with the latest chan- 
+>>>> sccp-
+>>>> b on a system running a mixture of 7940s, 7960s and 7961+7914s and
+>>>> immediately the system crashed when testing assisted transfers.
+>>>> Having primed the end users for some months that a new version was
+>>>> going to solve the crashes every few days, it was a great
+>>>> disappointment and I had to roll back.
+>>>>         
+>>> I'm very sad to hear that. This is especially because Marcello and I
+>>> didn't experience any further crashes related to transfers any more,
+>>> and we hoped that the current release would be a solid base for most
+>>> people.
+>>>
+>>> Furthermore, I feel particularly sorry for your situation as you made
+>>> that generous donation to the both of us. In connection to this, it
+>>> shall be noted that you thus made possible many of the improvements
+>>> and new fixed that we lately did. Although we could get on with quite
+>>> some compatiblity issues and new features, the implementation and
+>>> debugging is always another issue.
+>>>
+>>> As Asterisk makes vast use of multithreading, debugging becomes a
+>>> really formidable task, and it will always be. This is where only
+>>> extensive debugging and the effort of many together trying to find  
+>>> the
+>>> issues in various scenarious will be able to help; Ideally, running a
+>>> production system with gdb on a very fast machine.
+>>>
+>>>       
+>>>> The decision has now been made to abandon sccp and move to SIP and
+>>>> the Cisco 7961+7914s will be replaced by Polycom IP601s and side
+>>>> cars. Having stuck to my guns over Cisco handsets and native
+>>>> protocol over the last 1.5 years, I have now made the personal
+>>>> decision to move to SIP and will not risk putting any more Cisco
+>>>> handsets in with native protocol and will probably move to Polycom
+>>>> handsets entirely. I very much thank those who have contributed to
+>>>> the effort, but end users will simply not accept that a PBX should
+>>>> have the same reliable as their PCs, and the problems over the last
+>>>> year have damaged my reputation with
+>>>>  long standing customers who I provide I.T. support for.
+>>>>         
+>>> I can very well understand your decision, and I'd also suggest you
+>>> that course of action if your customers have a very high load and
+>>> can't live with occasional crashes. Although the stability may be
+>>> quite well in the light of the high load, it may simply not be
+>>> sufficient for your customers, so you need solutions where you can
+>>> blame the manufacturer, also in terms of liability. Obviously chan-
+>>> sccp-b can't provide sufficient stability right now, so you need to
+>>> look for alternatives. As polycom officially supports asterisk, this
+>>> should be your choice.
+>>>
+>>> Finally, this should remember all of us that we still have a long way
+>>> to go. Yet, there's already so much to find along that way that we
+>>> should pursue it further.
+>>>
+>>>
+>>> Best regards and all the best,
+>>> -David
+>>>
+>>>       
+>>>> Good luck and best regards,
+>>>>
+>>>> Martin Sutherland
+>>>>
+>>>> _______________________________________________
+>>>> Chan-sccp-users mailing list
+>>>> Chan-sccp-users at lists.berlios.de
+>>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>>         
+>>> _______________________________________________
+>>> Chan-sccp-users mailing list
+>>> Chan-sccp-users at lists.berlios.de
+>>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>>       
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>     
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+>   
+
+
+
+From aspendora at gmail.com  Fri Dec 21 02:48:43 2007
+From: aspendora at gmail.com (Lacy Moore)
+Date: Thu, 20 Dec 2007 19:48:43 -0600
+Subject: [Chan-sccp-users] I give up
+In-Reply-To: <DBF51A55-CC99-496B-AA28-0C88ADBB2D5F@davidded.de>
+References: <5174563.121197938594168.JavaMail.root@mail.linkdc.co.uk>
+	<4473EFCC-E582-45FF-9E7C-86B677C1FA35@davidded.de>
+	<AEC3923D57A8448D92110832A99ABBDB@London>
+	<DBF51A55-CC99-496B-AA28-0C88ADBB2D5F@davidded.de>
+Message-ID: <56a990d20712201748w30e2e08m28301c5c33fb43b7@mail.gmail.com>
+
+I've had two or three crashes in the past two or three weeks.  So far
+unreproducible.  The last one happened during a blind transfer, but we're
+pretty sure the one before that wasn't related to a transfer.
+
+I've been waiting to see a pattern or something that I could add that would
+be more informative than simply a "me too".
+
+I can say the blind transfer crash occurred with an incoming Zaptel channel
+answered by a 7960, then transferred to an extension that rings a couple of
+times (the dialplan produces the ringing) and then dumps to voicemail.
+
+On Dec 20, 2007 7:32 PM, David Dederscheck <davidded at davidded.de> wrote:
+
+> Hi,
+>
+> I also noticed some problems when performing transfers in mixed
+> environments lately. I first thought the issue was due to some
+> unorthodox use of meetme rooms in connection with local channels, but
+> then it also occured with a transfer _to_ a Zap channel.
+>
+> My problem is characterized by the following phenomenon:
+>
+> 1. You attempt a transfer and it doesn't work. Possibly the phone
+> won't react properly.
+> 2. If you type "show channels" at the asterisk prompt, it will give
+> you an infinite list of the same channel all over again.
+> 3. You need to restart asterisk.
+>
+> The problem seems to occur only with 1.4.
+>
+> By the way it's pretty nasty that you can really mess up the global
+> channel list of asterisk in such a way.
+>
+> We shall get working on the problem shorty, but it would be very
+> helpful if any of you could reproduce it  and / or get his/her hands
+> on it.
+>
+>
+> Kind Regards,
+> -David.
+>
+>
+> On Dec 20, 2007, at 10:03 PM, Federico Santulli wrote:
+>
+> > I've got some problems on transfers too, expecially in mixed
+> > environments
+> > SCCP/SIP/IAX.
+> >
+> > I didn't recognize the problem at the moment. I looked onto every
+> > log but
+> > atm
+> > nothing.
+> >
+> > If anyone could suggest me something for debug, the help will be
+> > appreciated.
+> >
+> > Thanks in advance.
+> >
+> > Federico
+> >
+> > ----- Original Message -----
+> > From: "David Dederscheck" <davidded at davidded.de>
+> > To: <chan-sccp-users at lists.berlios.de>
+> > Sent: Wednesday, December 19, 2007 1:18 AM
+> > Subject: Re: [Chan-sccp-users] I give up
+> >
+> >
+> >> Hi Martin,
+> >>
+> >> On 18.12.2007, at 01:43, Martin Sutherland wrote:
+> >>
+> >>> Dear list members,
+> >>>
+> >>> I recently tried to move to Asterisk 1.4.x with the latest chan-
+> >>> sccp-
+> >>> b on a system running a mixture of 7940s, 7960s and 7961+7914s and
+> >>> immediately the system crashed when testing assisted transfers.
+> >>> Having primed the end users for some months that a new version was
+> >>> going to solve the crashes every few days, it was a great
+> >>> disappointment and I had to roll back.
+> >>
+> >> I'm very sad to hear that. This is especially because Marcello and I
+> >> didn't experience any further crashes related to transfers any more,
+> >> and we hoped that the current release would be a solid base for most
+> >> people.
+> >>
+> >> Furthermore, I feel particularly sorry for your situation as you made
+> >> that generous donation to the both of us. In connection to this, it
+> >> shall be noted that you thus made possible many of the improvements
+> >> and new fixed that we lately did. Although we could get on with quite
+> >> some compatiblity issues and new features, the implementation and
+> >> debugging is always another issue.
+> >>
+> >> As Asterisk makes vast use of multithreading, debugging becomes a
+> >> really formidable task, and it will always be. This is where only
+> >> extensive debugging and the effort of many together trying to find
+> >> the
+> >> issues in various scenarious will be able to help; Ideally, running a
+> >> production system with gdb on a very fast machine.
+> >>
+> >>> The decision has now been made to abandon sccp and move to SIP and
+> >>> the Cisco 7961+7914s will be replaced by Polycom IP601s and side
+> >>> cars. Having stuck to my guns over Cisco handsets and native
+> >>> protocol over the last 1.5 years, I have now made the personal
+> >>> decision to move to SIP and will not risk putting any more Cisco
+> >>> handsets in with native protocol and will probably move to Polycom
+> >>> handsets entirely. I very much thank those who have contributed to
+> >>> the effort, but end users will simply not accept that a PBX should
+> >>> have the same reliable as their PCs, and the problems over the last
+> >>> year have damaged my reputation with
+> >>>  long standing customers who I provide I.T. support for.
+> >>
+> >> I can very well understand your decision, and I'd also suggest you
+> >> that course of action if your customers have a very high load and
+> >> can't live with occasional crashes. Although the stability may be
+> >> quite well in the light of the high load, it may simply not be
+> >> sufficient for your customers, so you need solutions where you can
+> >> blame the manufacturer, also in terms of liability. Obviously chan-
+> >> sccp-b can't provide sufficient stability right now, so you need to
+> >> look for alternatives. As polycom officially supports asterisk, this
+> >> should be your choice.
+> >>
+> >> Finally, this should remember all of us that we still have a long way
+> >> to go. Yet, there's already so much to find along that way that we
+> >> should pursue it further.
+> >>
+> >>
+> >> Best regards and all the best,
+> >> -David
+> >>
+> >>>
+> >>>
+> >>> Good luck and best regards,
+> >>>
+> >>> Martin Sutherland
+> >>>
+> >>> _______________________________________________
+> >>> Chan-sccp-users mailing list
+> >>> Chan-sccp-users at lists.berlios.de
+> >>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> >>
+> >> _______________________________________________
+> >> Chan-sccp-users mailing list
+> >> Chan-sccp-users at lists.berlios.de
+> >> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> >
+> > _______________________________________________
+> > Chan-sccp-users mailing list
+> > Chan-sccp-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+
+
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071220/9c741f00/attachment.html>
+
+From linuxtrap at yahoo.co.in  Sat Dec 29 14:27:08 2007
+From: linuxtrap at yahoo.co.in (satish patel)
+Date: Sat, 29 Dec 2007 13:27:08 +0000 (GMT)
+Subject: [Chan-sccp-users] Asterisk-1.4 with sccp + cisco 7975
+Message-ID: <10093.3091.qm@web8408.mail.in.yahoo.com>
+
+Dear all
+
+              I have successfully implemented Asterisk with sccp  + cisco 7975 and its working gr8 everything working fine but i have some problem when i going to do confrance on ip phone ( cisco 7975 ) there is not enable conf button so is it configure through XML base ?? is there anyone have dont it reply me 
+
+
+$ cat ~/satish/url.txt                                                      
+
+http://www.linuxbug.org
+_____________________________________________________________________________________________________
+
+       
+---------------------------------
+ Share files, take polls, and discuss your passions - all under one roof.  Click here.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071229/0c88d89d/attachment.html>
+
+From davidded at davidded.de  Sat Dec 29 16:07:00 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Sat, 29 Dec 2007 16:07:00 +0100
+Subject: [Chan-sccp-users] Asterisk-1.4 with sccp + cisco 7975
+In-Reply-To: <10093.3091.qm@web8408.mail.in.yahoo.com>
+References: <10093.3091.qm@web8408.mail.in.yahoo.com>
+Message-ID: <E115C339-0D86-4280-814F-639AF42415E0@davidded.de>
+
+Hi Satish,
+
+unfortunately, we have not implemented the native conferencing  
+features yet. There would be various ways to implement it, one of them  
+simply creating a user interface to the meetme conference feature of  
+asterisk through the user interface of the phone.
+
+If you'd be interested in helping develop that feature we'd very much  
+appreciate it.
+
+
+Gru?,
+-David
+
+
+On 29.12.2007, at 14:27, satish patel wrote:
+
+> Dear all
+>
+>               I have successfully implemented Asterisk with sccp  +  
+> cisco 7975 and its working gr8 everything working fine but i have  
+> some problem when i going to do confrance on ip phone ( cisco 7975 )  
+> there is not enable conf button so is it configure through XML  
+> base ?? is there anyone have dont it reply me
+>
+>
+> $ cat ~/satish/url.txt
+>
+> http://www.linuxbug.org
+> _____________________________________________________________________________________________________
+> Share files, take polls, and discuss your passions - all under one  
+> roof. Click here._______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From linuxtrap at yahoo.co.in  Mon Dec 31 12:33:32 2007
+From: linuxtrap at yahoo.co.in (satish patel)
+Date: Mon, 31 Dec 2007 11:33:32 +0000 (GMT)
+Subject: [Chan-sccp-users] Asterisk-1.4 with sccp + cisco 7975
+In-Reply-To: <E115C339-0D86-4280-814F-639AF42415E0@davidded.de>
+Message-ID: <527608.847.qm@web8404.mail.in.yahoo.com>
+
+dear david
+   
+              I have cisco phone 7975 and i have install chan_sccp on asterisk and configure TFTP on asterisk but some time my phone not register and i got this error on phone "Error update Locale" what is this ??? any solution for it  
+
+David Dederscheck <davidded at davidded.de> wrote:
+  Hi Satish,
+
+unfortunately, we have not implemented the native conferencing 
+features yet. There would be various ways to implement it, one of them 
+simply creating a user interface to the meetme conference feature of 
+asterisk through the user interface of the phone.
+
+If you'd be interested in helping develop that feature we'd very much 
+appreciate it.
+
+
+Gru?,
+-David
+
+
+On 29.12.2007, at 14:27, satish patel wrote:
+
+> Dear all
+>
+> I have successfully implemented Asterisk with sccp + 
+> cisco 7975 and its working gr8 everything working fine but i have 
+> some problem when i going to do confrance on ip phone ( cisco 7975 ) 
+> there is not enable conf button so is it configure through XML 
+> base ?? is there anyone have dont it reply me
+>
+>
+> $ cat ~/satish/url.txt
+>
+> http://www.linuxbug.org
+> _____________________________________________________________________________________________________
+> Share files, take polls, and discuss your passions - all under one 
+> roof. Click here._______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+$ cat ~/satish/url.txt                                                      
+
+http://www.linuxbug.org
+_____________________________________________________________________________________________________
+
+       
+---------------------------------
+ 5, 50, 500, 5000 - Store N number of mails in your inbox. Click here.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20071231/9af1e4d1/attachment.html>
+

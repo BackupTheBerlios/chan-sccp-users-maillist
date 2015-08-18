@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%201.2%20%26%20Cisco%207940/60%20and%20GroupPickup&In-Reply-To=%3C792897337FC81944BA4097ABD7089771030A5EF3%40pdc.bnsnet.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000039.html">
+   <LINK REL="Next"  HREF="000045.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup</H1>
+    <B>Steve J. Walker</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%201.2%20%26%20Cisco%207940/60%20and%20GroupPickup&In-Reply-To=%3C792897337FC81944BA4097ABD7089771030A5EF3%40pdc.bnsnet.co.uk%3E"
+       TITLE="[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup">SteveW at bucks.net
+       </A><BR>
+    <I>Sat Mar  3 19:01:05 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000039.html">[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+</A></li>
+        <LI>Next message: <A HREF="000045.html">[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#44">[ date ]</a>
+              <a href="thread.html#44">[ thread ]</a>
+              <a href="subject.html#44">[ subject ]</a>
+              <a href="author.html#44">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Marchello, All,
+
+Thanks, that worked a treat but leaves me one question does the SCCP
+driver support the call pickup/group pickup, I know that *8&lt;ext&gt; works
+(Which is *) but how any where do you tell the sccp driver what the call
+groups and pickup groups are?
+
+I have now 95% of it working as I would like but I see in the chan_sccp
+conf settings for the callpickup and grouppickup = the examples point to
+groups 1,2,4 etc - what do they refer to ? call groups in * or something
+I have missed in the docs?
+
+And amaflags? Is that meant to be set to nothing or =documentation? 
+
+Seems this is one of the hardest parts of the chan_sccp setup is that
+lots of the options are not mentioned anywhere in decent form. 
+
+The example config works but there seems to be lots of options that are
+there and default but nothing written up about them.
+
+Examples are the setup for lines &amp; speedials. Which I have working on my
+7940 and 7960 BUT I am not sure if I have them right. I have followed
+the examples and yes I can make and rx calls and call other ext's but
+comments like autologin= then a line number? 
+
+I have this for me three phones:
+
+[devices]
+
+type        = 7940
+description = Steve
+autologin   = 202
+speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">201,Sarah,201 at from-internal</A>
+transfer    = on
+park        = on
+dtmfmode    = outofband
+device =&gt; SEP0014F2290773
+
+type        = 7940
+description = Peter
+autologin   = 222
+speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">201,Sarah,201 at from-internal</A>
+transfer    = on
+park        = on
+dtmfmode    = outofband
+device =&gt; SEP001319E0EC85
+
+type        = 7960
+description = Sarah
+autologin   = 201
+speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">202,Steve,202 at from-internal</A>
+speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">222,Peter,222 at from-internal</A>
+speeddial   = 
+speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">505,Sales,505 at from-internal</A>
+speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">506,Tech,506 at from-internal</A>
+transfer    = on
+park        = on
+dtmfmode    = outofband
+device =&gt; SEP0013C3BAA90D
+
+[lines]
+id            = 202
+pin           = blahblah
+label         = 202
+description   = Steve
+context       = from-internal
+mailbox       = 202
+vmnum         = *97
+cid_name      = Steve
+cid_num       = 202
+incominglimit = 2
+callgroup     = 1
+pickupgroup   = 1
+line =&gt; 202
+
+id            = 222
+pin           = blahblah
+label         = 222
+description   = Peter
+context       = from-internal
+mailbox       = 222
+vmnum         = *97
+cid_name      = Peter
+cid_num       = 222
+incominglimit = 2
+callgroup     = 1
+pickupgroup   = 1
+line =&gt; 222
+
+id            = 201
+pin           = blahblah
+label         = 201
+description   = Sarah
+context       = from-internal
+mailbox       = 201
+vmnum         = *97
+cid_name      = Sarah
+cid_num       = 201
+incominglimit = 2
+callgroup     = 1
+pickupgroup   = 1
+line =&gt; 201
+
+Now looking at other configs I see comments like:
+
+autologin   = line79052,,line79052	; lines list. You can add an
+empty line which you see on the officail website. Is my config right
+when it comes to lines? And ext's?
+
+Do you create a line with whatever outbound number you want to present
+(we have one E1 and 1 VOIP outbound with different numbers) are they
+config'd as lines?
+
+Like:
+
+[lines]
+
+label       = 084509991001		; button line label (7960, 7970,
+7940, 7920)
+description = Line 08450		; top diplay description
+context     = ????? from-internal ?????
+cid_name = IIS				; caller id name
+cid_num = 084509991001
+;callgroup=1,3-4				; We are in caller
+groups 1,3,4.
+;pickupgroup=1,3-5			; We can do call pickup for call
+groups
+line =&gt; 79051
+
+Would that be a line? If so what's the correct context? from-internal I
+know is an internal call.
+
+And the groups, do they match *'s callgroup and pickupgroups? I have two
+ring groups are they the same? 
+
+Am I thinking that a ring group say 500 would be a callgroup and
+pickupgroup? Or am I reading it wrong?
+
+Sorry for a long winded question but with no one seeming doing a decent
+FAQ! I need to ask at the only place people seem to be covering
+chan_sccp on *.
+
+Thanks
+
+Steve 
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>[mailto:chan-sccp-users-
+&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">bounces at lists.berlios.de</A>] On Behalf Of Marcello Ceschia
+</I>&gt;<i> Sent: 02 March 2007 16:11
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and
+</I>&gt;<i> GroupPickup
+</I>&gt;<i> 
+</I>&gt;<i> The GPickUP softkey is to get a parked call back.
+</I>&gt;<i> E.g. if you park a call, then you will get the announcement of the
+</I>park
+&gt;<i> position (e.g. 701).
+</I>&gt;<i> To get the call back, press GPickUP -&gt; enter 701 (park position)
+</I>&gt;<i> -------- Original-Nachricht --------
+</I>&gt;<i> Datum: Fri, 2 Mar 2007 07:32:20 -0000
+</I>&gt;<i> Von: &quot;Steve J. Walker&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">SteveW at bucks.net</A>&gt;
+</I>&gt;<i> An: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> CC:
+</I>&gt;<i> Betreff: [Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and
+</I>GroupPickup
+&gt;<i> 
+</I>&gt;<i> &gt; Hi All,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Got Asterisk 1.2 up and running fine with chan_sccp and some Cisco
+</I>&gt;<i> &gt; phones without many problems bar one.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The Ciscos have a GPickUP softkey but I cannot for my life get this
+</I>&gt;<i> to
+</I>&gt;<i> &gt; do anything? does anyone have a guide or a FAQ/www page on how this
+</I>&gt;<i> &gt; works.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I have *8(ext) working which is useful but I would like to use the
+</I>&gt;<i> &gt; softkey.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Does the key relate to the callgroup and pickupgroup config
+</I>settings?
+&gt;<i> &gt;
+</I>&gt;<i> &gt; I see in the config mentions of this but as of yet I have never seen
+</I>&gt;<i> the
+</I>&gt;<i> &gt; key do anything other than create a line. If I press it and a valid
+</I>&gt;<i> ext
+</I>&gt;<i> &gt; it rings! Pretty sure that's not right.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Can anyone help out at all?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Steve
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Our company accepts no liability for the content of this email, or
+</I>&gt;<i> for
+</I>&gt;<i> &gt; the consequences of any actions taken on the basis of the
+</I>information
+&gt;<i> &gt; provided, unless that information is subsequently confirmed in
+</I>&gt;<i> writing.
+</I>&gt;<i> &gt; Any views or opinions presented in this email are solely those of
+</I>the
+&gt;<i> &gt; author and do not necessarily represent those of the company.
+</I>&gt;<i> WARNING:
+</I>&gt;<i> &gt; Computer viruses can be transmitted via email. The recipient should
+</I>&gt;<i> &gt; check this email and any attachments for the presence of viruses.
+</I>The
+&gt;<i> &gt; company accepts no liability for any damage caused by any virus
+</I>&gt;<i> &gt; transmitted by this email.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Bucks.Net, 30 Edison Road, Aylesbury, BUCKS, HP19 8TE,
+</I>&gt;<i> &gt; <A HREF="http://www.bucks.net">http://www.bucks.net</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Chan-sccp-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Ist Ihr Browser Vista-kompatibel? Jetzt die neuesten
+</I>&gt;<i> Browser-Versionen downloaden: <A HREF="http://www.gmx.net/de/go/browser">http://www.gmx.net/de/go/browser</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000039.html">[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+</A></li>
+	<LI>Next message: <A HREF="000045.html">[Chan-sccp-users] Asterisk 1.2 &amp; Cisco 7940/60 and GroupPickup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#44">[ date ]</a>
+              <a href="thread.html#44">[ thread ]</a>
+              <a href="subject.html#44">[ subject ]</a>
+              <a href="author.html#44">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

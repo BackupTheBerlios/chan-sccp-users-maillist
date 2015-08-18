@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Has the fix for re-dial/invalid number been	incorporated into chan_sccp-b?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Has%20the%20fix%20for%20re-dial/invalid%20number%20been%0A%09incorporated%20into%20chan_sccp-b%3F&In-Reply-To=%3CAAABBFB5-CE17-437C-9C5E-904FF630975C%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000383.html">
+   <LINK REL="Next"  HREF="000385.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Has the fix for re-dial/invalid number been	incorporated into chan_sccp-b?</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Has%20the%20fix%20for%20re-dial/invalid%20number%20been%0A%09incorporated%20into%20chan_sccp-b%3F&In-Reply-To=%3CAAABBFB5-CE17-437C-9C5E-904FF630975C%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Has the fix for re-dial/invalid number been	incorporated into chan_sccp-b?">davidded at davidded.de
+       </A><BR>
+    <I>Wed Nov 14 17:17:39 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000383.html">[Chan-sccp-users] Has the fix for re-dial/invalid number been incorporated into chan_sccp-b?
+</A></li>
+        <LI>Next message: <A HREF="000385.html">[Chan-sccp-users] Possible to dial user at domain addresses?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#384">[ date ]</a>
+              <a href="thread.html#384">[ thread ]</a>
+              <a href="subject.html#384">[ subject ]</a>
+              <a href="author.html#384">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Martin,
+
+yes, we included the patch dealing with the invalid number condition,  
+and I can't remember any problems related to it to occuring since then.
+
+In the meantime, I also received the router and just started to make  
+myself familiar with it. Many thanks again for that generous  
+donation, and hopefully we will soon be able to resolve the remaining  
+(protocol based) issues with its help.
+
+By the way -- does the installed CME 4 support meetme conferences?  
+Marcello and I would like to have a look at those in the near future.
+
+But now, to the end of debugging, it would also be very if you could  
+run asterisk from gdb and reproduce the problem.
+
+This is done as follows:
+
+1. Shut down your asterisk task
+2. Run asterisk in gdb:
+
+gdb asterisk
+(gdb) set args -vf
+(gdb) run
+Starting program: /usr/sbin/asterisk -vf
+
+....
+Asterisk crashes
+...
+
+(gdb) bt
+
+Then, please mail the backtrace that follows as well as the firmware  
+version you're running on your phone.
+
+I post this procedure once more to both lists even though you and  
+many others may be familiar with it. However, there had been some  
+requests as how to do these traces, so I think it might be helpful.
+
+Regards and many thanks again,
+-David.
+
+On 14.11.2007, at 10:58, Martin Sutherland wrote:
+
+&gt;<i> Dear David,
+</I>&gt;<i>
+</I>&gt;<i> Once again my biggest customer's system has crashed caused by an  
+</I>&gt;<i> invalid number situation on the Cisco wireless handset. I do  
+</I>&gt;<i> remember reading that someone on this list had solved these  
+</I>&gt;<i> problems by not allowing a line/channel to be set to a invalid  
+</I>&gt;<i> number/re-dial status. Do you remember incorporating any patch that  
+</I>&gt;<i> deals with this?
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i>
+</I>&gt;<i> Martin
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000383.html">[Chan-sccp-users] Has the fix for re-dial/invalid number been incorporated into chan_sccp-b?
+</A></li>
+	<LI>Next message: <A HREF="000385.html">[Chan-sccp-users] Possible to dial user at domain addresses?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#384">[ date ]</a>
+              <a href="thread.html#384">[ thread ]</a>
+              <a href="subject.html#384">[ subject ]</a>
+              <a href="author.html#384">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

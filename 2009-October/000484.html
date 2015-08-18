@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Chan-sccp-users Digest, Vol 31, Issue 3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Chan-sccp-users%20Digest%2C%20Vol%2031%2C%20Issue%203&In-Reply-To=%3C00A24AA921915B4D99E90311BC1632F00D4404%40exchange2k3.five-fifteen.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000483.html">
+   <LINK REL="Next"  HREF="000485.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Chan-sccp-users Digest, Vol 31, Issue 3</H1>
+    <B>Juan A. Quintana</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Chan-sccp-users%20Digest%2C%20Vol%2031%2C%20Issue%203&In-Reply-To=%3C00A24AA921915B4D99E90311BC1632F00D4404%40exchange2k3.five-fifteen.local%3E"
+       TITLE="[Chan-sccp-users] Chan-sccp-users Digest, Vol 31, Issue 3">jquintana at simplifieditsolutions.com
+       </A><BR>
+    <I>Fri Oct 23 15:33:57 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000483.html">[Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+</A></li>
+        <LI>Next message: <A HREF="000485.html">[Chan-sccp-users] Cisco 7921 Wireless Phone on Asterisk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#484">[ date ]</a>
+              <a href="thread.html#484">[ thread ]</a>
+              <a href="subject.html#484">[ subject ]</a>
+              <a href="author.html#484">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks again for the help. I have made more progress in the past 24 hours with the help of all you guys than I have in the past month!
+
+After I added autologin = 6000 my phone now registers with asterisk!!!!!!
+
+NAME             ADDRESS         MAC              Reg. State
+================ =============== ================ ==========
+TEST             10.0.0.100      SEP00136090A798  Ok
+    -- SCCP: Channel '3' freed by schedule.
+trixbox*CLI&gt; sccp show lines
+trixbox*CLI&gt;
+NAME             DEVICE           MWI  Chs  Active Channel
+================ ================ ==== ==== =================================================
+6000             SEP00136090A798  OFF  0    --         
+
+Now I am unable to dial from this phone. Maybe this is a dialplan issue now? When I dial a number this is what is show on my console while running asterisk -r:
+
+
+Connected to Asterisk 1.4.22-4 RPM by <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">vc-rpms at voipconsulting.nl</A> currently running on trixbox (pid = 7104)
+Verbosity is at least 3
+    -- SEP00136090A798: Accessory 'Speaker' is 'OffHook' (0)
+    -- SEP00136090A798: Cisco Digit: 00000008 (8) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000003 (3) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000002 (2) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000007 (7) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000009 (9) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000008 (8) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000005 (5) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000009 (9) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000008 (8) on line 6000
+    -- SEP00136090A798: Cisco Digit: 00000009 (9) on line 6000
+ SCCP: Timeout for callid '7'. Going to dial '8327985989'
+    -- SCCP: Unable to cancel schedule ID 49.
+    -- SEP00136090A798: (sccp_pbx_softswitch) New call on line 6000
+    -- SEP00136090A798: Ending call 7 on line 6000
+    -- SCCP: Asterisk request to hangup channel SCCP/6000-00000007
+    -- SCCP: Request to schedule delete for channel '7' in 10 seconds
+    -- SEP00136090A798: Accessory 'Speaker' is 'OnHook' (0)
+    -- SCCP: Channel '7' freed by schedule.
+
+Thanks again for all the help -- you guys are awesome!!!!
+
+Juan A. Quintana 
+www.simplifieditsolutions.com
+Simplified IT Solutions
+Network Consultant 
+8002 Thorncroft Manor Ln
+Richmond, TX 77407
+&#160;
+&#160;
+E-mail:
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jquintana at simplifieditsolutions.com</A> 
+
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Office: 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 832.798.5989 
+We do IT right.
+
+
+
+The information contained in this E-mail message is privileged, confidential, and may be protected from disclosure; please be aware that any other use, printing, copying, disclosure or dissemination of this communication may be subject to legal restriction or sanction. If you think that you have received this e-mail message in error, please reply to the sender.
+
+This E-mail message and any attachments hereto have been scanned for viruses and are believed to be free of any virus or other defect that might affect any computer system into which it is received and opened. However, it is the responsibility of the recipient to ensure that it is virus free and no responsibility is accepted by Simplified IT Solutions for any loss or damage arising in any way from its use.
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-request at lists.berlios.de</A>
+Sent: Friday, October 23, 2009 3:05 AM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Chan-sccp-users Digest, Vol 31, Issue 3
+
+Send Chan-sccp-users mailing list submissions to
+	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+
+To subscribe or unsubscribe via the World Wide Web, visit
+	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+or, via email, send a message with subject or body 'help' to
+	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-request at lists.berlios.de</A>
+
+You can reach the person managing the list at
+	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-owner at lists.berlios.de</A>
+
+When replying, please edit your Subject line so it is more specific
+than &quot;Re: Contents of Chan-sccp-users digest...&quot;
+
+
+Today's Topics:
+
+   1. Re: FW: Cisco 7960 with SCCP and asterisk (Federico Santulli)
+
+
+----------------------------------------------------------------------
+
+Message: 1
+Date: Fri, 23 Oct 2009 09:57:55 +0200
+From: &quot;Federico Santulli&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">mobile at nhm.it</A>&gt;
+Subject: Re: [Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Message-ID: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">C3BB8673C38B4AC1BD96042FBCCE46A0 at NewYork</A>&gt;
+Content-Type: text/plain; charset=&quot;iso-8859-1&quot;
+
+try adding into device section
+autologin=6000
+
+Cheers.
+
+Federico
+
+
+From: Juan A. Quintana 
+Sent: Friday, October 23, 2009 7:45 AM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A> 
+Subject: [Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+
+
+Thanks to all who have replied to my question.
+
+ 
+
+I think I may have made some progress in my situation. Below is the output I get now.
+
+ 
+
+NAME             DEVICE           MWI  Chs  Active Channel
+
+================ ================ ==== ==== =================================================
+
+6000             --               OFF  0    --                                  
+
+trixbox*CLI&gt; sccp show devices
+
+trixbox*CLI&gt;
+
+NAME             ADDRESS         MAC              Reg. State
+
+================ =============== ================ ==========
+
+TEST             10.0.0.100      SEP00136090A798  Ok
+
+ 
+
+If I understand this correctly the phone is registering with asterisk but the phone isn't configured to use extension 6000?
+
+ 
+
+Thanks in advance for any help, it is truly appreciated!
+
+ 
+
+      Juan A. Quintana 
+     www.simplifieditsolutions.com
+     
+      Simplified IT Solutions
+      Network Consultant 
+     8002 Thorncroft Manor Ln
+      Richmond, TX 77407
+       
+       
+     
+      E-mail:
+      <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jquintana at simplifieditsolutions.com</A> 
+                                     Office: 
+
+                                     832.798.5989 
+     
+      We do IT right.
+     
+
+ 
+
+
+
+ 
+
+The information contained in this E-mail message is privileged, confidential, and may be protected from disclosure; please be aware that any other use, printing, copying, disclosure or dissemination of this communication may be subject to legal restriction or sanction. If you think that you have received this e-mail message in error, please reply to the sender.
+
+This E-mail message and any attachments hereto have been scanned for viruses and are believed to be free of any virus or other defect that might affect any computer system into which it is received and opened. However, it is the responsibility of the recipient to ensure that it is virus free and no responsibility is accepted by Simplified IT Solutions for any loss or damage arising in any way from its use.
+
+ 
+
+From: Juan A. Quintana 
+Sent: Thursday, October 22, 2009 5:25 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Cisco 7960 with SCCP and asterisk
+
+ 
+
+Hello, all.
+
+ 
+
+I am trying to configure some Cisco 7960G phones to work with sccp and asterisk. I have successfully loaded the sccp driver on the asterisk machine. I have also loaded the sccp firmware on the phone. My problem is that the phone is not registering with the asterisk machine.
+
+ 
+
+I have tried asking for help on the trixbox forums and pbxinaflash forums as well but have not gotten the help I need.
+
+ 
+
+You can see the two links here: <A HREF="http://pbxinaflash.com/forum/showthread.php?t=5807">http://pbxinaflash.com/forum/showthread.php?t=5807</A> and <A HREF="http://trixbox.org/forums/trixbox-forums/jobs-board/need-cisco-7960-work-sccp">http://trixbox.org/forums/trixbox-forums/jobs-board/need-cisco-7960-work-sccp</A> 
+
+ 
+
+I am willing to pay for this if someone can help me out. I am desperately trying to get it work.
+
+
+Thanks!
+
+ 
+
+      Juan A. Quintana 
+     www.simplifieditsolutions.com
+     
+      Simplified IT Solutions
+      Network Consultant 
+     8002 Thorncroft Manor Ln
+      Richmond, TX 77407
+       
+       
+     
+      E-mail:
+      <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jquintana at simplifieditsolutions.com</A> 
+                                     Office: 
+
+                                     832.798.5989 
+     
+      We do IT right.
+     
+
+ 
+
+
+
+ 
+
+The information contained in this E-mail message is privileged, confidential, and may be protected from disclosure; please be aware that any other use, printing, copying, disclosure or dissemination of this communication may be subject to legal restriction or sanction. If you think that you have received this e-mail message in error, please reply to the sender.
+
+This E-mail message and any attachments hereto have been scanned for viruses and are believed to be free of any virus or other defect that might affect any computer system into which it is received and opened. However, it is the responsibility of the recipient to ensure that it is virus free and no responsibility is accepted by Simplified IT Solutions for any loss or damage arising in any way from its use.
+
+ 
+
+
+
+--------------------------------------------------------------------------------
+
+
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/8f6b1774/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/8f6b1774/attachment.html</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: image/png
+Size: 20527 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/8f6b1774/attachment.png">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20091023/8f6b1774/attachment.png</A> 
+
+------------------------------
+
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+
+End of Chan-sccp-users Digest, Vol 31, Issue 3
+**********************************************
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000483.html">[Chan-sccp-users] FW: Cisco 7960 with SCCP and asterisk
+</A></li>
+	<LI>Next message: <A HREF="000485.html">[Chan-sccp-users] Cisco 7921 Wireless Phone on Asterisk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#484">[ date ]</a>
+              <a href="thread.html#484">[ thread ]</a>
+              <a href="subject.html#484">[ subject ]</a>
+              <a href="author.html#484">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

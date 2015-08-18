@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Asterisk crashes while parking is done and remote	party hangs up
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%20crashes%20while%20parking%20is%20done%20and%20remote%0A%09party%20hangs%20up&In-Reply-To=%3C47B580A7.2000101%40lusiewicz.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000442.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Asterisk crashes while parking is done and remote	party hangs up</H1>
+    <B>Damian Lusiewicz</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%20crashes%20while%20parking%20is%20done%20and%20remote%0A%09party%20hangs%20up&In-Reply-To=%3C47B580A7.2000101%40lusiewicz.de%3E"
+       TITLE="[Chan-sccp-users] Asterisk crashes while parking is done and remote	party hangs up">chan-sccp.berlios.de at lusiewicz.de
+       </A><BR>
+    <I>Fri Feb 15 13:08:07 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000442.html">[Chan-sccp-users] Asterisk crashes while parking is done and	remote party hangs up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#441">[ date ]</a>
+              <a href="thread.html#441">[ thread ]</a>
+              <a href="subject.html#441">[ subject ]</a>
+              <a href="author.html#441">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello.
+
+We found, that asterisk crashes in following situation:
+
+- internal call between two sccp phones is done
+- user A presses &quot;park&quot; softkey and hears &quot;seven zero one&quot;
+- in this moment user B hangs up
+- after the message &quot;seven zero one&quot; is spoken the asterisk crashes.
+- in log we found:
+
+res_features.c: Whoa, failed to remove the extension!
+
+Our configuration:
+
+asterisk 1.4.10
+chan-sccp 20070825
+
+Please could somebody verify this behaviour?
+
+Best regards.
+Damian Lusiewicz
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000442.html">[Chan-sccp-users] Asterisk crashes while parking is done and	remote party hangs up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#441">[ date ]</a>
+              <a href="thread.html#441">[ thread ]</a>
+              <a href="subject.html#441">[ subject ]</a>
+              <a href="author.html#441">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

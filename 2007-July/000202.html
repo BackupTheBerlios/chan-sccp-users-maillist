@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Ring Indications
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Ring%20Indications&In-Reply-To=%3C006901c7cc51%24988f3d90%24c9adb8b0%24%40at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000199.html">
+   <LINK REL="Next"  HREF="000203.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Ring Indications</H1>
+    <B>Hakan Evirgen</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Ring%20Indications&In-Reply-To=%3C006901c7cc51%24988f3d90%24c9adb8b0%24%40at%3E"
+       TITLE="[Chan-sccp-users] Ring Indications">hakan at nets.at
+       </A><BR>
+    <I>Sun Jul 22 13:15:20 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000199.html">[Chan-sccp-users] Ring Indications
+</A></li>
+        <LI>Next message: <A HREF="000203.html">[Chan-sccp-users] Cisco 7910 Phone Off-Hook/Handset Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#202">[ date ]</a>
+              <a href="thread.html#202">[ thread ]</a>
+              <a href="subject.html#202">[ subject ]</a>
+              <a href="author.html#202">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+
+&gt;<i>-----Original Message-----
+</I>&gt;<i>From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:chan-sccp-users-
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">bounces at lists.berlios.de</A>] On Behalf Of Steve J. Walker
+</I>&gt;<i>Sent: Saturday, July 21, 2007 9:53 AM
+</I>&gt;<i>To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i>Subject: [Chan-sccp-users] Ring Indications
+</I>&gt;<i>
+</I>&gt;<i>Morning all,
+</I>&gt;<i>
+</I>&gt;<i>Anyone here know or had any luck changing the ring and busy and dial
+</I>&gt;<i>indications for 79x0s series phones with SCCP at all?
+</I>
+Yes.
+
+&gt;<i>I know they load a US tones XML file - and I know CCME has during setup;
+</I>&gt;<i>choose a country for ring indications which I guess sends the correct
+</I>&gt;<i>file? or information to the phone(s)?
+</I>
+You can download from Cisco appropriate language files, which includes
+language definition for the phone itself as well as sounds.
+
+&gt;<i>Is there a way to do this outside of CCM/E? I like the 'US' sounds but
+</I>&gt;<i>we have people here who would like it to sound British!
+</I>
+The language file is a package, which you must define in the XML.
+
+&gt;<i>I assume that the network locale in the conf file must match the locale
+</I>&gt;<i>you want to use as by default they all seem to be United_States which I
+</I>&gt;<i>guess should be United_Kingdom????!
+</I>
+The phone loads the language file as stated in the XML.
+
+Cheers,
+Hakan
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000199.html">[Chan-sccp-users] Ring Indications
+</A></li>
+	<LI>Next message: <A HREF="000203.html">[Chan-sccp-users] Cisco 7910 Phone Off-Hook/Handset Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#202">[ date ]</a>
+              <a href="thread.html#202">[ thread ]</a>
+              <a href="subject.html#202">[ subject ]</a>
+              <a href="author.html#202">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

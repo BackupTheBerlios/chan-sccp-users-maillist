@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] chan_sccp and Big Endian
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%20Big%20Endian&In-Reply-To=%3C32365037.241185995010143.JavaMail.root%40ubuntubert%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000260.html">
+   <LINK REL="Next"  HREF="000265.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] chan_sccp and Big Endian</H1>
+    <B>peder at networkoblivion.com</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20chan_sccp%20and%20Big%20Endian&In-Reply-To=%3C32365037.241185995010143.JavaMail.root%40ubuntubert%3E"
+       TITLE="[Chan-sccp-users] chan_sccp and Big Endian">peder at networkoblivion.com
+       </A><BR>
+    <I>Wed Aug  1 21:03:30 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000260.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+        <LI>Next message: <A HREF="000265.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#261">[ date ]</a>
+              <a href="thread.html#261">[ thread ]</a>
+              <a href="subject.html#261">[ subject ]</a>
+              <a href="author.html#261">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>What is the server?  I use tftp on Windows XP, Vista, and several versions of linux and I haven't seen any issues like that (I've even had a Cisco router do tftp).
+
+
+----- Original Message -----
+From: &quot;Jonathan Zuber&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>&gt;
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Sent: Wednesday, August 1, 2007 2:01:10 PM (GMT-0600) America/Chicago
+Subject: [Chan-sccp-users] chan_sccp and Big Endian
+
+Ok, so I think I finally found the problem that has been holding me up for
+the past couple weeks; the TFTPBOOT server I was using was BIG endian
+format.  Well I guess I could be wrong, but I ended up taking a regular PC
+and setting an asterisk server up on there (Little endian), and all the same
+files that were not working now worked!
+
+Basically what was happening is that I could not 'dial' out, I could
+speedial, no problem, but dialing would not connect.  
+
+When the phone connects with asterisk, it gives the following error:
+
+ERROR[15006]: sccp_actions.c:543 sccp_handle_line_number: SEPXXXXXXXXXXXX:
+requested a line configuration for unknown line 0
+
+This was causing me to have no line to connect the phone to the asterisk
+server.  I started noticing it might be a problem with the lines when I
+tried to 'autolog' into 3 different lines, and got 3 of the above messages.
+I double, triple, quadruple, etc etc.... checked my configs and all seemed
+well (and in fact was), yet nothing worked.  
+
+I was having this error with the Cisco 7970 and 7971 IP phones.
+
+Don't know yet if there is a fix for this, I am going to keep looking into
+it to see if it is 100% for sure the BIG Endian vs Little Endian that is
+causing the problem.
+
+Any feedback would be awesome!
+
+
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000260.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+	<LI>Next message: <A HREF="000265.html">[Chan-sccp-users] chan_sccp and Big Endian
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#261">[ date ]</a>
+              <a href="thread.html#261">[ thread ]</a>
+              <a href="subject.html#261">[ subject ]</a>
+              <a href="author.html#261">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

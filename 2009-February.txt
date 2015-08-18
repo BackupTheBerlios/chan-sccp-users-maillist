@@ -1,0 +1,128 @@
+From samtam888 at gmail.com  Fri Feb  6 18:00:53 2009
+From: samtam888 at gmail.com (Sam Tam)
+Date: Sat, 7 Feb 2009 01:00:53 +0800
+Subject: [Chan-sccp-users] $100 bounty
+Message-ID: <000701c9887c$789eb900$0c01a8c0@samavww62a3fb7>
+
+I need someone to help me to config chan_sccpb into elastix and get it
+running with Cisco IP Conference phone 7937.
+If you can do it then please email me back
+
+
+Thanks
+
+I can be contacted on sam__tam AT hotmail DOT com via msn
+
+
+Sam 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090207/4c1a4e74/attachment.html>
+
+From mobile at nhm.it  Sat Feb  7 10:12:33 2009
+From: mobile at nhm.it (Federico Santulli)
+Date: Sat, 7 Feb 2009 10:12:33 +0100
+Subject: [Chan-sccp-users] $100 bounty
+In-Reply-To: <000701c9887c$789eb900$0c01a8c0@samavww62a3fb7>
+References: <000701c9887c$789eb900$0c01a8c0@samavww62a3fb7>
+Message-ID: <79007E2F8A014B12AF050DAD5092086A@London>
+
+going to help you. I added you to msn
+
+  ----- Original Message ----- 
+  From: Sam Tam 
+  To: chan-sccp-users at lists.berlios.de 
+  Sent: Friday, February 06, 2009 6:00 PM
+  Subject: [Chan-sccp-users] $100 bounty
+
+
+  I need someone to help me to config chan_sccpb into elastix and get it running with Cisco IP Conference phone 7937.
+  If you can do it then please email me back
+
+
+  Thanks
+
+  I can be contacted on sam__tam AT hotmail DOT com via msn
+
+
+  Sam 
+
+
+
+------------------------------------------------------------------------------
+
+
+  _______________________________________________
+  Chan-sccp-users mailing list
+  Chan-sccp-users at lists.berlios.de
+  https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090207/414f5840/attachment.html>
+
+From samtam888 at gmail.com  Sat Feb  7 11:06:08 2009
+From: samtam888 at gmail.com (Sam Tam)
+Date: Sat, 7 Feb 2009 18:06:08 +0800
+Subject: [Chan-sccp-users] $100 bounty
+In-Reply-To: <79007E2F8A014B12AF050DAD5092086A@London>
+References: <000701c9887c$789eb900$0c01a8c0@samavww62a3fb7>
+	<79007E2F8A014B12AF050DAD5092086A@London>
+Message-ID: <003701c9890b$b24e20c0$0c01a8c0@samavww62a3fb7>
+
+Can't see u online what is ur msn name
+
+ 
+
+  _____  
+
+From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-bounces at lists.berlios.de] On Behalf Of Federico
+Santulli
+Sent: Saturday, February 07, 2009 5:13 PM
+To: chan-sccp-users at lists.berlios.de
+Subject: Re: [Chan-sccp-users] $100 bounty
+
+ 
+
+going to help you. I added you to msn
+
+ 
+
+----- Original Message ----- 
+
+From: Sam Tam <mailto:samtam888 at gmail.com>  
+
+To: chan-sccp-users at lists.berlios.de 
+
+Sent: Friday, February 06, 2009 6:00 PM
+
+Subject: [Chan-sccp-users] $100 bounty
+
+ 
+
+I need someone to help me to config chan_sccpb into elastix and get it
+running with Cisco IP Conference phone 7937.
+If you can do it then please email me back
+
+
+Thanks
+
+I can be contacted on sam__tam AT hotmail DOT com via msn
+
+
+Sam 
+
+
+  _____  
+
+
+_______________________________________________
+Chan-sccp-users mailing list
+Chan-sccp-users at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090207/6b057450/attachment.html>
+

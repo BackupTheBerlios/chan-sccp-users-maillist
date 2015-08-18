@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Paging Help
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Paging%20Help&In-Reply-To=%3C32F3FA7C22BD84489775DA82ED529D9C02C65AB6%40exchange.corporate.networkoutsource.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000476.html">
+   <LINK REL="Next"  HREF="000478.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Paging Help</H1>
+    <B>Sean Sellars</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Paging%20Help&In-Reply-To=%3C32F3FA7C22BD84489775DA82ED529D9C02C65AB6%40exchange.corporate.networkoutsource.com%3E"
+       TITLE="[Chan-sccp-users] Paging Help">SeanS at networkoutsource.com
+       </A><BR>
+    <I>Tue Apr 28 01:59:01 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000476.html">[Chan-sccp-users] Paging Help
+</A></li>
+        <LI>Next message: <A HREF="000478.html">[Chan-sccp-users] Paging Help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#477">[ date ]</a>
+              <a href="thread.html#477">[ thread ]</a>
+              <a href="subject.html#477">[ subject ]</a>
+              <a href="author.html#477">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Tom,
+
+ 
+
+aa=1w is only going to give you one way paging .  If you want full
+duplex you will need to change that to aa=2w.  Are you getting the phone
+to auto answer at all?
+
+ 
+
+Sean
+
+ 
+
+Sean Sellars
+
+Project Manager
+NetworkOutsource
+135 Denton Avenue
+New Hyde Park, NY 11040 
+(P) 516-488-5888 
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">seans at networkoutsource.com</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">seans at networkoutsource.com</A>&gt; 
+
+ 
+
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of Thomas
+Earl
+Sent: Monday, April 27, 2009 7:54 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: [Chan-sccp-users] Paging Help
+
+ 
+
+Greetings to all, 
+
+I have a small 10 person office that needs 1 to 1 paging w/ full duplex,
+auto answer and barge if the target user is on the phone. I have
+reviewed some other posts and I'm using ...
+
+
+exten =&gt; _X.,n,Dial(SCCP/${EXTEN}/aa=1w/ringer=inside, 120)
+
+...in my extensions_additional.conf. I have also tried replacing the
+variables with actual extensions like I saw in a few other posts, but
+nothing... 
+
+I'm using Trixbox 2.6.2.2 with SCCP version 20071213... It looks like
+I'm way behind in versions too, maybe this was addressed in a more
+recent version?
+
+Thanks, 
+
+Tom
+
+-- 
+Thomas Earl
+Sr. Network Engineer
+CSC/General Dynamics Land Systems
++1.248.705.7408 (cell)
++1.248.751.6050 (fax) *NEW NUMBER*
+Nextel DC: 131*744174*30
+
+&quot;Human-kind cannot gain anything without first giving something in
+return. To obtain something of equal value must be lost. That is
+alchemy's first law of Equivalent Exchange.&quot; - Antoine Lavoisier's law
+of conservation of matter,
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090427/a988e9b3/attachment.html">https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20090427/a988e9b3/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000476.html">[Chan-sccp-users] Paging Help
+</A></li>
+	<LI>Next message: <A HREF="000478.html">[Chan-sccp-users] Paging Help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#477">[ date ]</a>
+              <a href="thread.html#477">[ thread ]</a>
+              <a href="subject.html#477">[ subject ]</a>
+              <a href="author.html#477">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] bt full of dying asterisk with chan_sccp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20bt%20full%20of%20dying%20asterisk%20with%20chan_sccp&In-Reply-To=%3C6F3A45F7-2F82-40BD-90C1-538FAA6879C5%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000337.html">
+   <LINK REL="Next"  HREF="000339.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] bt full of dying asterisk with chan_sccp</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20bt%20full%20of%20dying%20asterisk%20with%20chan_sccp&In-Reply-To=%3C6F3A45F7-2F82-40BD-90C1-538FAA6879C5%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] bt full of dying asterisk with chan_sccp">davidded at davidded.de
+       </A><BR>
+    <I>Fri Oct 26 23:26:17 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000337.html">[Chan-sccp-users] bt full of dying asterisk with chan_sccp
+</A></li>
+        <LI>Next message: <A HREF="000339.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#338">[ date ]</a>
+              <a href="thread.html#338">[ thread ]</a>
+              <a href="subject.html#338">[ subject ]</a>
+              <a href="author.html#338">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Damian,
+
+I've had a look at the gdb output but it leaves me clueless I'm  
+afraid. The reason for that it doesn't tell me which thread(s) were  
+last active when the crash occured.
+
+Maybe you should try debugging asterisk in the foreground by stopping  
+it first and then running
+
+ &gt; gdb asterisk
+(gdb) args -vf
+(gdb) run
+
+during business hours. I hope it won't get to slow that way.
+
+That kind of debugging method could prove more fruitful, or can we  
+also get the active thread from the log (maybe I overlooked it), or  
+with another command attaching to gdb? Maybe a simple backtrace call  
+would do?
+
+Regards,
+-David.
+
+
+P.S. I also feel it neccessary to make chan_sccp more stable to make  
+it survive and accepted amongs people. We must try hard to push that  
+work to that end.
+
+On Oct 26, 2007, at 5:21 PM, Damian Lusiewicz wrote:
+
+&gt;<i> Hallo.
+</I>&gt;<i>
+</I>&gt;<i> Our problems with hanging asterisk persists and now there is a new  
+</I>&gt;<i> word
+</I>&gt;<i> born in our company &quot;dreeeecksanlage&quot;.  :-(
+</I>&gt;<i>
+</I>&gt;<i> But now seriously:
+</I>&gt;<i>
+</I>&gt;<i> Today I was able to make some debuggings of the dying asterisk, please
+</I>&gt;<i> see attached file. Maybe someone can take a look and say, what the
+</I>&gt;<i> reason could be.
+</I>&gt;<i>
+</I>&gt;<i> Many thanks in advance
+</I>&gt;<i> Damian
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &lt;ast-bt-full.txt.gz&gt;
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000337.html">[Chan-sccp-users] bt full of dying asterisk with chan_sccp
+</A></li>
+	<LI>Next message: <A HREF="000339.html">[Chan-sccp-users] Blind transfer crashes fixed?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#338">[ date ]</a>
+              <a href="thread.html#338">[ thread ]</a>
+              <a href="subject.html#338">[ subject ]</a>
+              <a href="author.html#338">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

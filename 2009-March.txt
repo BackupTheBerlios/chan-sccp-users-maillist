@@ -1,0 +1,145 @@
+From allan316 at gmail.com  Mon Mar  2 07:42:39 2009
+From: allan316 at gmail.com (Allan Pinto)
+Date: Mon, 2 Mar 2009 12:12:39 +0530
+Subject: [Chan-sccp-users] video support for cisco video advantage
+Message-ID: <e4792abb0903012242o47ccaa46ma721f74fc0550f2d@mail.gmail.com>
+
+hi , i have sent this mail to the chan-sccp-discussion,
+im actually a bit confused as to where i might help for my issue, so
+im sending it here too.
+i have downloaded the branch v2 version, and am able to make audio calls,
+have tested with 2 ip communicators and one 7945,
+i also have cisco video advantage,
+i was hoping to get the video working, but there seems to be no video
+support in sccp.conf like in sip .conf.
+is this a missing feature or am i doing something wrong.
+
+-- 
+Thanx and regd's.
+
+Allan.
+http://www.in2dwok.com
+
+
+From mobile at nhm.it  Mon Mar  2 09:09:31 2009
+From: mobile at nhm.it (Federico Santulli)
+Date: Mon, 2 Mar 2009 09:09:31 +0100
+Subject: [Chan-sccp-users] video support for cisco video advantage
+In-Reply-To: <e4792abb0903012242o47ccaa46ma721f74fc0550f2d@mail.gmail.com>
+References: <e4792abb0903012242o47ccaa46ma721f74fc0550f2d@mail.gmail.com>
+Message-ID: <D8BBB28163564069BCF5FD7E3A65F1F4@London>
+
+Hello Allan,
+
+video support is not yet ready. We should troubleshoot something before 
+adding it.
+
+Could you wait a while ?
+
+Best regards
+
+Federico
+
+----- Original Message ----- 
+From: "Allan Pinto" <allan316 at gmail.com>
+To: <Chan-sccp-users at lists.berlios.de>
+Sent: Monday, March 02, 2009 7:42 AM
+Subject: [Chan-sccp-users] video support for cisco video advantage
+
+
+> hi , i have sent this mail to the chan-sccp-discussion,
+> im actually a bit confused as to where i might help for my issue, so
+> im sending it here too.
+> i have downloaded the branch v2 version, and am able to make audio calls,
+> have tested with 2 ip communicators and one 7945,
+> i also have cisco video advantage,
+> i was hoping to get the video working, but there seems to be no video
+> support in sccp.conf like in sip .conf.
+> is this a missing feature or am i doing something wrong.
+>
+> -- 
+> Thanx and regd's.
+>
+> Allan.
+> http://www.in2dwok.com
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+> 
+
+
+
+From allan316 at gmail.com  Mon Mar  2 09:25:42 2009
+From: allan316 at gmail.com (Allan Pinto)
+Date: Mon, 2 Mar 2009 13:55:42 +0530
+Subject: [Chan-sccp-users] video support for cisco video advantage
+In-Reply-To: <D8BBB28163564069BCF5FD7E3A65F1F4@London>
+References: <e4792abb0903012242o47ccaa46ma721f74fc0550f2d@mail.gmail.com>
+	<D8BBB28163564069BCF5FD7E3A65F1F4@London>
+Message-ID: <e4792abb0903020025o5524c7a2re2b379f5fbe56575@mail.gmail.com>
+
+hi frederico,
+thanx for your reply,
+of course i could wait, also if needed i could troubleshoot.
+but having it right now would have been just super
+im no programmer, but if needed i could help out with other stuff,
+docs etc. if you need anything tell me.
+
+thanx again.
+
+On Mon, Mar 2, 2009 at 1:39 PM, Federico Santulli <mobile at nhm.it> wrote:
+> Hello Allan,
+>
+> video support is not yet ready. We should troubleshoot something before
+> adding it.
+>
+> Could you wait a while ?
+>
+> Best regards
+>
+> Federico
+>
+> ----- Original Message -----
+> From: "Allan Pinto" <allan316 at gmail.com>
+> To: <Chan-sccp-users at lists.berlios.de>
+> Sent: Monday, March 02, 2009 7:42 AM
+> Subject: [Chan-sccp-users] video support for cisco video advantage
+>
+>
+>> hi , i have sent this mail to the chan-sccp-discussion,
+>> im actually a bit confused as to where i might help for my issue, so
+>> im sending it here too.
+>> i have downloaded the branch v2 version, and am able to make audio calls,
+>> have tested with 2 ip communicators and one 7945,
+>> i also have cisco video advantage,
+>> i was hoping to get the video working, but there seems to be no video
+>> support in sccp.conf like in sip .conf.
+>> is this a missing feature or am i doing something wrong.
+>>
+>> --
+>> Thanx and regd's.
+>>
+>> Allan.
+>> http://www.in2dwok.com
+>> _______________________________________________
+>> Chan-sccp-users mailing list
+>> Chan-sccp-users at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>>
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+
+
+
+-- 
+Thanx and regd's.
+
+Allan.
+http://www.in2dwok.com
+
+

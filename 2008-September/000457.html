@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7921 max lines &amp; speed dials
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20max%20lines%20%26%20speed%20dials&In-Reply-To=%3C75FED65405B63042BA25F3F6E9230C1F6E851A%40msexch.bnsnet.co.uk%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000455.html">
+   <LINK REL="Next"  HREF="000458.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7921 max lines &amp; speed dials</H1>
+    <B>Steve J. Walker</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20max%20lines%20%26%20speed%20dials&In-Reply-To=%3C75FED65405B63042BA25F3F6E9230C1F6E851A%40msexch.bnsnet.co.uk%3E"
+       TITLE="[Chan-sccp-users] 7921 max lines &amp; speed dials">SteveW at bucks.net
+       </A><BR>
+    <I>Sat Sep 13 01:07:24 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000455.html">[Chan-sccp-users] 7921 max lines &amp; speed dials
+</A></li>
+        <LI>Next message: <A HREF="000458.html">[Chan-sccp-users] 7921 max lines &amp; speed dials
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#457">[ date ]</a>
+              <a href="thread.html#457">[ thread ]</a>
+              <a href="subject.html#457">[ subject ]</a>
+              <a href="author.html#457">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I think the issue is &quot;Skinny Phone Type  : unknow(365)&quot; - what version
+of chan_sccp are you using? The latest set from SVN has the 7921
+supported and listed - I think that the issue is that chan_sccp does not
+know the 7921 thus is only allows one line.
+
+The bits below say it is unknown (type 365 is a 7921):
+
+-- SEP001BD457F8B1: Building button template unknow(365), user config
+7921
+-- SEP001BD457F8B1: Phone available lines 1
+
+Try a later build and see what happens then.
+
+Regards,
+
+Steve 
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> 
+</I>&gt;<i> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf 
+</I>&gt;<i> Of OCG Technical Support
+</I>&gt;<i> Sent: 12 September 2008 22:52
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] 7921 max lines &amp; speed dials
+</I>&gt;<i> 
+</I>&gt;<i> I reloaded the chan_sccp with a debug of 10 and here's what I 
+</I>&gt;<i> see (below).
+</I>&gt;<i> I see that that phone says &quot;Phone Available lines 1&quot;...I have 
+</I>&gt;<i> no idea where this is coming from.  (Perhaps the channel 
+</I>&gt;<i> driver doesn't know of this phone's capabilities?).
+</I>&gt;<i> 
+</I>&gt;<i> I tried chan_skinny and the speed dial keys appear 
+</I>&gt;<i> nicely...but the multiple lines don't work right.  To bad the 
+</I>&gt;<i> speed dials don't work at all for asterisk...seem like a nice 
+</I>&gt;<i> feature.  But multiple lines is much more important.
+</I>&gt;<i> 
+</I>&gt;<i> Ideas?
+</I>&gt;<i> 
+</I>&gt;<i> Thanks!
+</I>&gt;<i> MD
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>    -- SCCP: Accepted connection from 172.31.254.102
+</I>&gt;<i>     -- SCCP: Using ip 172.31.253.4
+</I>&gt;<i>     -- SCCP: &gt;&gt; Got message AlarmMessage
+</I>&gt;<i>     -- SCCP: Alarm Message: Severity: Informational (2),
+</I>&gt;<i> Name=SEP001BD457F8B1 Load= Last=CM-aborted-TCP [67584/1727930284]
+</I>&gt;<i>     -- SCCP: &gt;&gt; Got message RegisterMessage
+</I>&gt;<i>     -- SEP001BD457F8B1: is registering, Instance: 1, Type: 
+</I>&gt;<i> unknow (365),
+</I>&gt;<i> Version: 11
+</I>&gt;<i>     -- SEP001BD457F8B1: Allocating device to session (25) 
+</I>&gt;<i> 172.31.254.102
+</I>&gt;<i>     -- SEP001BD457F8B1: Building button template unknow(365), 
+</I>&gt;<i> user config
+</I>&gt;<i> 7921
+</I>&gt;<i>     -- SEP001BD457F8B1: Phone available lines 1
+</I>&gt;<i>     -- SEP001BD457F8B1: Auto logging into 235
+</I>&gt;<i>     -- SCCP: Looking for line 235
+</I>&gt;<i>     -- SCCP: found line 235
+</I>&gt;<i>     -- SEP001BD457F8B1: Attaching line 235 to this device
+</I>&gt;<i>     -- SEP001BD457F8B1: Auto logging into 299
+</I>&gt;<i>     -- SCCP: Looking for line 299
+</I>&gt;<i>     -- SCCP: found line 299
+</I>&gt;<i>     -- SEP001BD457F8B1: Attaching line 299 to this device 
+</I>&gt;<i> [Sep 12 17:35:28] WARNING[5453]: sccp_actions.c:185 
+</I>&gt;<i> sccp_handle_register:
+</I>&gt;<i> SEP001BD457F8B1: Failed to autolog into 299: Max available 
+</I>&gt;<i> lines phone limit reached 299
+</I>&gt;<i>     -- SEP001BD457F8B1: Ask the phone to send keepalive 
+</I>&gt;<i> message every 30 seconds
+</I>&gt;<i>     -- SEP001BD457F8B1: Display notify with timeout 5
+</I>&gt;<i>     -- SEP001BD457F8B1: Send speaker mode 2
+</I>&gt;<i>     -- SEP001BD457F8B1: Clear the status prompt on line 0 and callid 0
+</I>&gt;<i>     -- SEP001BD457F8B1: Restoring device status (dnd, cfwd*) 
+</I>&gt;<i> from the asterisk db
+</I>&gt;<i>     -- SCCP: Looking for line 235
+</I>&gt;<i>     -- SEP001BD457F8B1: found line 235
+</I>&gt;<i>     -- SEP001BD457F8B1: found line 235
+</I>&gt;<i>     -- SCCP: Asterisk asked for the state (1) of the line 235
+</I>&gt;<i>     -- SEP001BD457F8B1: &gt;&gt; Got message HeadsetStatusMessage
+</I>&gt;<i>     -- handle headset
+</I>&gt;<i>     -- SEP001BD457F8B1: &gt;&gt; Got message CapabilitiesResMessage
+</I>&gt;<i>     -- SEP001BD457F8B1: Device has 7 Capabilities
+</I>&gt;<i>     -- SEP001BD457F8B1: CISCO:     4 G.711 u-law 64k          
+</I>&gt;<i>  AST:     4
+</I>&gt;<i> G.711 u-law
+</I>&gt;<i>     -- SEP001BD457F8B1: CISCO:     2 G.711 A-law 64k          
+</I>&gt;<i>  AST:     8
+</I>&gt;<i> G.711 A-law
+</I>&gt;<i>     -- SEP001BD457F8B1: CISCO:    11 G.729                    
+</I>&gt;<i>  AST:     0
+</I>&gt;<i> unknown
+</I>&gt;<i>     -- SEP001BD457F8B1: CISCO:    12 G.729 Annex A            
+</I>&gt;<i>  AST:   256
+</I>&gt;<i> G.729A
+</I>&gt;<i>     -- SEP001BD457F8B1: CISCO:    15 G.729 Annex B            
+</I>&gt;<i>  AST:     0
+</I>&gt;<i> unknown
+</I>&gt;<i>     -- SEP001BD457F8B1: CISCO:    16 G.729 Annex A + B        
+</I>&gt;<i>  AST:     0
+</I>&gt;<i> unknown
+</I>&gt;<i>     -- SEP001BD457F8B1: CISCO:    25 Wideband 256k            
+</I>&gt;<i>  AST:     0
+</I>&gt;<i> unknown
+</I>&gt;<i>     -- SEP001BD457F8B1: &gt;&gt; Got message ButtonTemplateReqMessage
+</I>&gt;<i>     -- SEP001BD457F8B1: Building button template unknow(365), 
+</I>&gt;<i> user config
+</I>&gt;<i> 7921
+</I>&gt;<i>     -- SEP001BD457F8B1: Looking for a line button place 235 (1)
+</I>&gt;<i>     -- SEP001BD457F8B1: Configured Phone Button [01] = LINE 
+</I>&gt;<i> (235), temporary instance (1)
+</I>&gt;<i>     -- SEP001BD457F8B1: Looking for a speeddial button place G&amp;G (1)
+</I>&gt;<i>     -- SEP001BD457F8B1: removing unused speedial 
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">240 at internalextensions</A>,G&amp;G
+</I>&gt;<i>     -- SEP001BD457F8B1: Button Template [01] = Line (9), instance 1
+</I>&gt;<i>     -- SEP001BD457F8B1: &gt;&gt; Got message SoftKeyTemplateReqMessage
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(0)[ 1] = Redial
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(1)[ 2] = NewCall
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(2)[ 3] = Hold
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(3)[ 4] = Transfer
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(4)[ 5] = CFwdALL
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(5)[ 6] = CFwdBusy
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(6)[ 7] = CFwdNoAnswer
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(7)[ 8] = &lt;&lt;
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(8)[ 9] = EndCall
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(9)[10] = Resume
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(10)[11] = Answer
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(11)[12] = Info
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(12)[13] = Confrn
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(13)[14] = Park
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(14)[15] = Join
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(15)[16] = MeetMe
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(16)[17] = PickUp
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(17)[18] = GPickUp
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(18)[19] = RmLstC
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(19)[20] = CallBack
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(20)[21] = Barge
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(21)[22] = DND
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(22)[23] = No Park Number Available
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(23)[24] = CallPark Reversion
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(24)[25] = Service is not Active
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(25)[26] = Empty
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(26)[27] = ConfList
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(27)[28] = Select
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(28)[29] = Private
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(29)[30] = TrnsfVM
+</I>&gt;<i>     -- SEP001BD457F8B1: Button(30)[31] = DirTrfr
+</I>&gt;<i>     -- SEP001BD457F8B1: &gt;&gt; Got message SoftKeySetReqMessage
+</I>&gt;<i>     -- SEP001BD457F8B1: TRANSFER    is enabled
+</I>&gt;<i>     -- SEP001BD457F8B1: DND         is Reject
+</I>&gt;<i>     -- SEP001BD457F8B1: PRIVATE     is disabled
+</I>&gt;<i>     -- SEP001BD457F8B1: PARK        is  enabled
+</I>&gt;<i>     -- SEP001BD457F8B1: CFWDALL     is  disabled
+</I>&gt;<i>     -- SEP001BD457F8B1: CFWDBUSY    is  disabled
+</I>&gt;<i>     -- SEP001BD457F8B1: TRNSFVM     is  disabled
+</I>&gt;<i>     -- SEP001BD457F8B1: PICKUPGROUP is  disabled
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[0 ]= 0 :Redial     1 :NewCall    
+</I>&gt;<i> 2 :DND        
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[1 ]= 0 :Hold       1 :EndCall    
+</I>&gt;<i> 2 :Park       3
+</I>&gt;<i> :Select     
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[2 ]= 0 :Resume     1 :NewCall    
+</I>&gt;<i> 2 :EndCall    3
+</I>&gt;<i> :Transfer   4 :Select     5 :DirTrfr    
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[3 ]= 0 :Answer     1 :EndCall    
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[4 ]= 0 :Redial     1 :EndCall    
+</I>&gt;<i> 6 :DND        
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[5 ]= 0 :Hold       1 :EndCall    
+</I>&gt;<i> 2 :Transfer   3
+</I>&gt;<i> :Park       4 :Select     5 :DirTrfr    
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[6 ]= 0 :&lt;&lt;   1 :EndCall    
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[7 ]= 0 :Empty      
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[8 ]= 0 :EndCall    1 :Transfer   
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[9 ]= 0 :Redial     1 :EndCall    
+</I>&gt;<i>     -- SEP001BD457F8B1: Set[10]= 0 :NewCall    
+</I>&gt;<i>     -- There are 11 SoftKeySets.
+</I>&gt;<i>     -- SEP001BD457F8B1: Send softkeyset to OnHook(0) on line 
+</I>&gt;<i> 0  and call 0
+</I>&gt;<i>     -- SEP001BD457F8B1: &gt;&gt; Got message LineStatReqMessage
+</I>&gt;<i>     -- SEP001BD457F8B1: Configuring line number 1
+</I>&gt;<i>     -- SEP001BD457F8B1: Looking for line by instance 1
+</I>&gt;<i>     -- SEP001BD457F8B1: Found line 235
+</I>&gt;<i>     -- SEP001BD457F8B1: Send Forward Status.  Line: 235
+</I>&gt;<i>     -- SCCP: Looking for line 235
+</I>&gt;<i>     -- SEP001BD457F8B1: found line 235
+</I>&gt;<i>     -- SEP001BD457F8B1: found line 235
+</I>&gt;<i>     -- SCCP: Asterisk asked for the state (1) of the line 235
+</I>&gt;<i>     -- SEP001BD457F8B1: &gt;&gt; Got message RegisterAvailableLinesMessage
+</I>&gt;<i>     -- SEP001BD457F8B1: &gt;&gt; Got message TimeDateReqMessage
+</I>&gt;<i>     -- SEP001BD457F8B1: Send date/time
+</I>&gt;<i>     -- SEP001BD457F8B1: Post registration process
+</I>&gt;<i>     -- SEP001BD457F8B1: Clear the status prompt on line 0 and callid 0
+</I>&gt;<i>     -- SEP001BD457F8B1: Display prompt on line 0, callid 0, timeout 0
+</I>&gt;<i>     -- SEP001BD457F8B1: Send softkeyset to OnHook(0) on line 
+</I>&gt;<i> 0  and call 0
+</I>&gt;<i>     -- SEP001BD457F8B1: Post registration process... done!
+</I>&gt;<i> pbx*CLI&gt; sccp show device SEP001BD457F8B1 Current settings 
+</I>&gt;<i> for selected Device
+</I>&gt;<i> ------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> MAC-Address        : SEP001BD457F8B1
+</I>&gt;<i> Protocol Version   : phone=11, channel=3
+</I>&gt;<i> Keepalive          : 30
+</I>&gt;<i> Registration state : Ok(3)
+</I>&gt;<i> State              : OnHook(0)
+</I>&gt;<i> MWI handset light  : OFF
+</I>&gt;<i> Description        : Portable Cisco
+</I>&gt;<i> Config Phone Type  : 7921
+</I>&gt;<i> Skinny Phone Type  : unknow(365)
+</I>&gt;<i> Softkey support    : Yes
+</I>&gt;<i> Autologin          : 235,299
+</I>&gt;<i> Image Version      : 
+</I>&gt;<i> Timezone Offset    : 0
+</I>&gt;<i> Capabilities       : 0x10c (ulaw|alaw|g729)
+</I>&gt;<i> Codecs preference  : ()
+</I>&gt;<i> Can DND            : Reject
+</I>&gt;<i> Can Transfer       : Yes
+</I>&gt;<i> Can Park           : Yes
+</I>&gt;<i> Private softkey    : Disabled
+</I>&gt;<i> Can CFWDALL        : No
+</I>&gt;<i> Can CFWBUSY        : No
+</I>&gt;<i> Dtmf mode          : In-Band
+</I>&gt;<i> Trust phone ip     : No
+</I>&gt;<i> Early RTP          : No
+</I>&gt;<i> pbx*CLI&gt;
+</I>&gt;<i> Lines
+</I>&gt;<i> id  : name                 label               
+</I>&gt;<i> ------------------------------------
+</I>&gt;<i>    1: 235                  OCG              
+</I>&gt;<i> 
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf 
+</I>&gt;<i> Of Steve J.
+</I>&gt;<i> Walker
+</I>&gt;<i> Sent: September 12, 2008 5:15 PM
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject: Re: [Chan-sccp-users] 7921 max lines &amp; speed dials
+</I>&gt;<i> 
+</I>&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> I think that the 7921 has a 6 (real) line limit. So that 
+</I>&gt;<i> should not be an issue with the phone. Here is an example of 
+</I>&gt;<i> a running 7921 conf BUT chan_sccp never loads the speeddials 
+</I>&gt;<i> to the 7921 or the phone never requests or ignores them - 
+</I>&gt;<i> they just don't appear and this is a common comment from 
+</I>&gt;<i> people with *, sccp and these phones.
+</I>&gt;<i> 
+</I>&gt;<i> From the code the 7921 is handled differently to the 7920 as 
+</I>&gt;<i> for the lines setup when it registers, the sccp debug 10 
+</I>&gt;<i> should show how many lines sccp &quot;thinks&quot; you should have vs 
+</I>&gt;<i> what you are using.
+</I>&gt;<i> 
+</I>&gt;<i> Do you see anything using &quot;sccp debug 10&quot; as the console when 
+</I>&gt;<i> it registers?
+</I>&gt;<i> 
+</I>&gt;<i> -- conf --
+</I>&gt;<i> 
+</I>&gt;<i> type        = 7921
+</I>&gt;<i> description = 7921WiFi
+</I>&gt;<i> autologin   = 801
+</I>&gt;<i> speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">805,805,805 at from-internal</A>
+</I>&gt;<i> speeddial   = <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">806,806,806 at from-internal</A>
+</I>&gt;<i> private     = off
+</I>&gt;<i> device =&gt; SEPetcetcetc
+</I>&gt;<i> 
+</I>&gt;<i> line =&gt; 801
+</I>&gt;<i> id            = 801
+</I>&gt;<i> pin           = 1234
+</I>&gt;<i> label         = 801
+</I>&gt;<i> description   = Tech WiFi
+</I>&gt;<i> context       = from-internal
+</I>&gt;<i> callwaiting   = 1
+</I>&gt;<i> incominglimit = 2
+</I>&gt;<i> mailbox       = 801
+</I>&gt;<i> vmnum         = *97
+</I>&gt;<i> cid_name      = Tech WiFi
+</I>&gt;<i> cid_num       = 801
+</I>&gt;<i> line =&gt; 801
+</I>&gt;<i> 
+</I>&gt;<i> Regards,
+</I>&gt;<i> 
+</I>&gt;<i> Steve
+</I>&gt;<i> 
+</I>&gt;<i> &gt; -----Original Message-----
+</I>&gt;<i> &gt; From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+</I>&gt;<i> &gt; [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of OCG 
+</I>&gt;<i> &gt; Technical Support
+</I>&gt;<i> &gt; Sent: 12 September 2008 20:22
+</I>&gt;<i> &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; Subject: [Chan-sccp-users] 7921 max lines &amp; speed dials
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm setting up a Cisco 7921 and now want to add a second 
+</I>&gt;<i> line to the 
+</I>&gt;<i> &gt; phone.
+</I>&gt;<i> &gt; In my SCCP.conf file I have:
+</I>&gt;<i> &gt; autologin   = 235,299
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; However, on reloading SCCP the phone fails to login to the 
+</I>&gt;<i> second line 
+</I>&gt;<i> &gt; with this error:
+</I>&gt;<i> &gt; [Sep 12 12:46:49] WARNING[12224]: sccp_actions.c:185
+</I>&gt;<i> &gt; sccp_handle_register:
+</I>&gt;<i> &gt; SEP001BD457F8B1: Failed to autolog into 299: Max available 
+</I>&gt;<i> lines phone 
+</I>&gt;<i> &gt; limit reached 299
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; How do I set the max number of lines?  As well, I want to add speed 
+</I>&gt;<i> &gt; dials to the phone, but they don't appear on the phone.
+</I>&gt;<i> &gt;  I have added lines like
+</I>&gt;<i> &gt; this:
+</I>&gt;<i> &gt; speeddial   = 123,test
+</I>&gt;<i> &gt; speeddial   = 260,Bob
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; in the [device] section for my 7921, but the speed dials do 
+</I>&gt;<i> NOT appear 
+</I>&gt;<i> &gt; on the menu (click right from the main screen).
+</I>&gt;<i> &gt; Am I missing something obvious here?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks,
+</I>&gt;<i> &gt; MD
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Chan-sccp-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i> 
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000455.html">[Chan-sccp-users] 7921 max lines &amp; speed dials
+</A></li>
+	<LI>Next message: <A HREF="000458.html">[Chan-sccp-users] 7921 max lines &amp; speed dials
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#457">[ date ]</a>
+              <a href="thread.html#457">[ thread ]</a>
+              <a href="subject.html#457">[ subject ]</a>
+              <a href="author.html#457">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,799 @@
+From sccp-list at puzzled.xs4all.nl  Mon Sep 10 17:19:27 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Mon, 10 Sep 2007 17:19:27 +0200
+Subject: [Chan-sccp-users] Patch for chan_sccp 20060408 & Asterisk 1.2.24
+Message-ID: <1189437567.2814.7.camel@localhost.localdomain>
+
+Hi all,
+
+I upgraded my Asterisk box to 1.2.24 and noticed that chan_sccp 20060408
+no longer works with outgoing calls. The error message I see is: Asked
+to transmit frame type 0, while native formats is 8 (read/write = 8/8)
+
+I found some references on www.ip-phone.de about this problem and
+someone suggested some changes in channel.c in the asterisk source. I
+tested those changes and it solved the issue for me. So I thought I
+share it so others can benefit too.
+
+Perhaps this issue should be fixed in chan_sccp instead of messing with
+asterisk's channel.c. My C voodoo is certainly not up to that challenge.
+In case anyone else has a fix for chan_sccp I would love to hear it.
+
+Regards,
+Patrick
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: asterisk-1.2.24-channel.c-sccp-fix.patch
+Type: text/x-patch
+Size: 552 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070910/7d326d4c/attachment.bin>
+
+From chan-sccp.berlios.de at lusiewicz.de  Tue Sep 11 10:40:52 2007
+From: chan-sccp.berlios.de at lusiewicz.de (Damian Lusiewicz)
+Date: Tue, 11 Sep 2007 10:40:52 +0200
+Subject: [Chan-sccp-users] Patch for chan_sccp 20060408 & Asterisk 1.2.24
+In-Reply-To: <1189437567.2814.7.camel@localhost.localdomain>
+References: <1189437567.2814.7.camel@localhost.localdomain>
+Message-ID: <46E65494.1000002@lusiewicz.de>
+
+Patrick schrieb:
+> Hi all,
+> 
+> I upgraded my Asterisk box to 1.2.24 and noticed that chan_sccp 20060408
+> no longer works with outgoing calls. The error message I see is: Asked
+> to transmit frame type 0, while native formats is 8 (read/write = 8/8)
+> 
+> I found some references on www.ip-phone.de about this problem and
+> someone suggested some changes in channel.c in the asterisk source. I
+> tested those changes and it solved the issue for me. So I thought I
+> share it so others can benefit too.
+
+Hello Patric.
+
+Thanks for using and testing my patch which I posted on the
+www.ip-phone-forum.de in the post
+
+  http://www.ip-phone-forum.de/showthread.php?p=930402#post930402
+
+on August 28th 2007 at 09:37!
+
+What are your experiences with it?
+
+> Perhaps this issue should be fixed in chan_sccp instead of messing with
+> asterisk's channel.c. My C voodoo is certainly not up to that challenge.
+> In case anyone else has a fix for chan_sccp I would love to hear it.
+> 
+> Regards,
+> Patrick
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From martin at linkdc.co.uk  Tue Sep 11 15:20:10 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Tue, 11 Sep 2007 14:20:10 +0100
+Subject: [Chan-sccp-users] Error compiling latest chan-sccp against Asterisk
+	1.2.24
+Message-ID: <31785378.1189516810902.JavaMail.root@mail.linkdc.co.uk>
+
+Dear List members,
+
+I am getting this message when trying to compile chan_sccp-20070826:
+
+chan_sccp.c: 1600: error: incompatible type for argument 1 of 'ast_inet_ntoa'
+chan_sccp.c: 1600: erorr: too few arguments to function 'ast_inet_ntoa'
+
+It this because this version of chan_sccp will only compile against Asterisk 1.4.x?
+
+Regards,
+
+Martin
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070911/f2903d01/attachment.html>
+
+From martin at linkdc.co.uk  Tue Sep 11 15:11:01 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Tue, 11 Sep 2007 14:11:01 +0100
+Subject: [Chan-sccp-users] Asked to transmit frame type 0,
+	while native formats is 8 (read/write = 8/8)
+Message-ID: <32772060.1189516261917.JavaMail.root@mail.linkdc.co.uk>
+
+I have the same messages, but I don't think it is actually causing a problem. I think chan-sccp is ignoring the request.
+
+Regards,
+
+Martin
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070911/d516bc4f/attachment.html>
+
+From sccp-list at puzzled.xs4all.nl  Tue Sep 11 15:40:23 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Tue, 11 Sep 2007 15:40:23 +0200
+Subject: [Chan-sccp-users] Error compiling latest chan-sccp
+	against	Asterisk 1.2.24
+In-Reply-To: <31785378.1189516810902.JavaMail.root@mail.linkdc.co.uk>
+References: <31785378.1189516810902.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <1189518023.2862.2.camel@localhost.localdomain>
+
+On Tue, 2007-09-11 at 14:20 +0100, Martin Sutherland wrote:
+> Dear List members,
+> 
+> I am getting this message when trying to compile chan_sccp-20070826:
+> 
+> chan_sccp.c: 1600: error: incompatible type for argument 1 of
+> 'ast_inet_ntoa'
+> chan_sccp.c: 1600: erorr: too few arguments to function
+> 'ast_inet_ntoa'
+> 
+> It this because this version of chan_sccp will only compile against
+> Asterisk 1.4.x?
+
+Yes, I saw someone with a similar problem on www.ip-phone.de and someone
+else mentioned that that chan_sccp version is for 1.4 only.
+
+Regards,
+Patrick
+
+
+
+From sccp-list at puzzled.xs4all.nl  Tue Sep 11 15:41:18 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Tue, 11 Sep 2007 15:41:18 +0200
+Subject: [Chan-sccp-users] Patch for chan_sccp 20060408 & Asterisk	1.2.24
+In-Reply-To: <46E65494.1000002@lusiewicz.de>
+References: <1189437567.2814.7.camel@localhost.localdomain>
+	<46E65494.1000002@lusiewicz.de>
+Message-ID: <1189518078.2862.3.camel@localhost.localdomain>
+
+On Tue, 2007-09-11 at 10:40 +0200, Damian Lusiewicz wrote:
+> Patrick schrieb:
+> > Hi all,
+> > 
+> > I upgraded my Asterisk box to 1.2.24 and noticed that chan_sccp 20060408
+> > no longer works with outgoing calls. The error message I see is: Asked
+> > to transmit frame type 0, while native formats is 8 (read/write = 8/8)
+> > 
+> > I found some references on www.ip-phone.de about this problem and
+> > someone suggested some changes in channel.c in the asterisk source. I
+> > tested those changes and it solved the issue for me. So I thought I
+> > share it so others can benefit too.
+> 
+> Hello Patric.
+> 
+> Thanks for using and testing my patch which I posted on the
+> www.ip-phone-forum.de in the post
+> 
+>   http://www.ip-phone-forum.de/showthread.php?p=930402#post930402
+> 
+> on August 28th 2007 at 09:37!
+> 
+> What are your experiences with it?
+
+Works fine. I have made about 20 calls and received about 10 without any
+issues. Thanks for the patch.
+
+Regards,
+Patrick
+
+
+
+From Marcello.Ceschia at gmx.net  Tue Sep 11 20:16:17 2007
+From: Marcello.Ceschia at gmx.net (Marcello Ceschia)
+Date: Tue, 11 Sep 2007 20:16:17 +0200
+Subject: [Chan-sccp-users] Error compiling latest chan-sccp against
+ Asterisk	1.2.24
+In-Reply-To: <31785378.1189516810902.JavaMail.root@mail.linkdc.co.uk>
+References: <31785378.1189516810902.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <20070911181617.12440@gmx.net>
+
+Hi,
+
+yes, this version is for 1.4 only. At the moment I' m developing on a 1.4 machine. 
+See http://sourceforge.net/projects/chan-sccp-b/ for a beta version of 1.2 (without realtime functionality)
+
+ Marcello 
+
+
+-------- Original-Nachricht --------
+> Datum: Tue, 11 Sep 2007 14:20:10 +0100
+> Von: "Martin Sutherland" <martin at linkdc.co.uk>
+> An: chan-sccp-users at lists.berlios.de
+> Betreff: [Chan-sccp-users] Error compiling latest chan-sccp against Asterisk	1.2.24
+
+> Dear List members,
+> 
+> I am getting this message when trying to compile chan_sccp-20070826:
+> 
+> chan_sccp.c: 1600: error: incompatible type for argument 1 of
+> 'ast_inet_ntoa'
+> chan_sccp.c: 1600: erorr: too few arguments to function 'ast_inet_ntoa'
+> 
+> It this because this version of chan_sccp will only compile against
+> Asterisk 1.4.x?
+> 
+> Regards,
+> 
+> Martin
+> 
+
+-- 
+GMX FreeMail: 1 GB Postfach, 5 E-Mail-Adressen, 10 Free SMS.
+Alle Infos und kostenlose Anmeldung: http://www.gmx.net/de/go/freemail
+
+
+From deon at wurley.net  Thu Sep 13 13:28:05 2007
+From: deon at wurley.net (Deon George)
+Date: Thu, 13 Sep 2007 21:28:05 +1000
+Subject: [Chan-sccp-users] Connecting asterisk to CCM? Is it possible?
+Message-ID: <46E91EC5.4060009@wurley.net>
+
+Hi,
+
+Hope somebody can either set me straight or give me some tips...
+
+I have a Cisco Softphone (Cisco Communicator?) that I use to connect to
+work while I'm mobile (it enables me to call internal extensions and
+make land line calls from hotels, and from home, etc).
+
+I would like to use my home asterisk server to connect to the work CCM
+(as my softphone), so that when people call my softphone number, my
+asterisk server gets the call (and in turn rings my VOIP phones or
+leaves a message on my home voicemail).
+
+My reason for doing this is two fold:
+
+* I run linux, and the softphone is only windows - so I need to have a
+windows pc to make/receive calls. I want to avoid running windows just
+to use the office phone.
+
+* I want to be able to make and receive office internal calls using my
+phones at home:)
+
+I have no control over the CCM at work (dont even know how it is
+configured), but Im hoping  I can get all the config I need from the
+softphone.
+
+Is it possible?
+
+...deon
+
+
+From aspendora at gmail.com  Thu Sep 13 21:21:11 2007
+From: aspendora at gmail.com (Lacy Moore - Aspendora)
+Date: Thu, 13 Sep 2007 14:21:11 -0500
+Subject: [Chan-sccp-users] Connecting asterisk to CCM? Is it possible?
+In-Reply-To: <46E91EC5.4060009@wurley.net>
+References: <46E91EC5.4060009@wurley.net>
+Message-ID: <56a990d20709131221n29106304gb5f2daab708cb5a6@mail.gmail.com>
+
+On 9/13/07, Deon George <deon at wurley.net> wrote:
+>
+> Hi,
+>
+> Hope somebody can either set me straight or give me some tips...
+>
+> I have a Cisco Softphone (Cisco Communicator?) that I use to connect to
+> work while I'm mobile (it enables me to call internal extensions and
+> make land line calls from hotels, and from home, etc).
+>
+> I would like to use my home asterisk server to connect to the work CCM
+> (as my softphone), so that when people call my softphone number, my
+> asterisk server gets the call (and in turn rings my VOIP phones or
+> leaves a message on my home voicemail).
+>
+> My reason for doing this is two fold:
+>
+> * I run linux, and the softphone is only windows - so I need to have a
+> windows pc to make/receive calls. I want to avoid running windows just
+> to use the office phone.
+>
+> * I want to be able to make and receive office internal calls using my
+> phones at home:)
+>
+> I have no control over the CCM at work (dont even know how it is
+> configured), but Im hoping  I can get all the config I need from the
+> softphone.
+>
+> Is it possible?
+>
+> ...deon
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+>
+
+I don't think so.  I was going to suggest kind of a hack, but since you have
+no access to CCM, it won't work.  The hack I was going to suggest was to use
+a Cisco ATA connected to CCM and some other ATA or analog card connected to
+the Asterisk server.  Not a pretty solution, though.  The other solution
+might be to use SIP between CCM and Asterisk.
+
+WHat you are looking for is a SCCP client for Asterisk.  chan-sccp would be
+considered a Skinny server, not a Skinny client.
+
+-- 
+Lacy Moore
+Somewhere I wish I wasn't
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070913/977e73e2/attachment.html>
+
+From deon at wurley.net  Sun Sep 16 11:06:32 2007
+From: deon at wurley.net (Deon George)
+Date: Sun, 16 Sep 2007 19:06:32 +1000
+Subject: [Chan-sccp-users] Connecting asterisk to CCM? Is it possible?
+In-Reply-To: <56a990d20709131221n29106304gb5f2daab708cb5a6@mail.gmail.com>
+References: <46E91EC5.4060009@wurley.net>
+	<56a990d20709131221n29106304gb5f2daab708cb5a6@mail.gmail.com>
+Message-ID: <46ECF218.8000605@wurley.net>
+
+Lacy Moore - Aspendora wrote:
+> WHat you are looking for is a SCCP client for Asterisk.  chan-sccp would
+> be considered a Skinny server, not a Skinny client.
+
+
+Bummer.... Thanks Lacy...
+
+...deon
+
+
+From SteveW at bucks.net  Wed Sep 26 12:16:36 2007
+From: SteveW at bucks.net (Steve J. Walker)
+Date: Wed, 26 Sep 2007 11:16:36 +0100
+Subject: [Chan-sccp-users] Shared lines implementation
+References: <17523796.1185565114041.JavaMail.root@mail.linkdc.co.uk><20070728083016.257720@gmx.net>
+	<46AB981F.3050300@c-net.it>
+Message-ID: <792897337FC81944BA4097ABD708977103CADBC6@pdc.bnsnet.co.uk>
+
+Afternoon Sergio, all.
+
+I would be very interested in seeing how the local driver can be used to
+emulate a shared line. Would this mean that say 7940's with two lines
+can have one shared between users and one as the local ext?
+
+An example configuration for the Asterisk local driver and chan_sccp
+would be nice - maybe someone could post it then to one of the WIKI's
+that's about which deals with SCCP and Asterisk?
+
+If it can emulate it properly it might be a better bet than fudging the
+sccp driver to work as SLA?
+
+Regards,
+
+Steve 
+
+> -----Original Message-----
+> From: chan-sccp-users-bounces at lists.berlios.de
+[mailto:chan-sccp-users-
+> bounces at lists.berlios.de] On Behalf Of Sergio Chersovani
+> Sent: 28 July 2007 20:25
+> To: chan-sccp-users at lists.berlios.de
+> Cc: chan-sccp-b-discussion at lists.sourceforge.net
+> Subject: Re: [Chan-sccp-users] Shared lines implementation
+> 
+> Marcello Ceschia ha scritto:
+> > I started implementing shared line functionality to chan_sccp a few
+> month ago.
+> >
+> 
+> shared line feature can be emulated with the asterisk local channel
+> driver
+> 
+> http://www.voip-info.org/wiki/view/Asterisk+local+channels
+> 
+> I'm running it in my office environment with no problems
+> 
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+From martin at linkdc.co.uk  Thu Sep 27 00:28:25 2007
+From: martin at linkdc.co.uk (Martin Sutherland)
+Date: Wed, 26 Sep 2007 23:28:25 +0100
+Subject: [Chan-sccp-users] Please can we co-ordinate improvements to
+	chan_sccp/7914 woes
+Message-ID: <1506718.1190845705456.JavaMail.root@mail.linkdc.co.uk>
+
+Dear List Members,
+
+I know that there are several members out there kindly providing web space for the latest chan_sccp, and amendments have been made here and there. I am now very confused about which version contains the most trusted fixes and what those fixes are. It would be fantastic if we could all agree on which is the best version and have a definitive list of changes made since 20060408. The Asterisk 1.2 version that I have found the best is 20070620 which was emailed to me by dmitry at makuha.kiev.ua back in July. I am about to try Asterisk 1.4 but simply don't know if all the changes made in 20070620 are incorporated into the current Asterisk 1.4 version.
+
+I have however had problems which all seem to stem from using 7914 side-cars. I have two 7960 phones with two 7914s each. For some reason the 7960s behave differently with 7914s attached. One real problem concerned having dial timeouts or invalid extensions. Either the phone or chan_sccp does not detect the hangup message after the handset is put down after a redial tone (and the number dialled remains on the display). When the phone is picked up again, the channel/line is still active and nothing works. Re-setting the phone then caused Asterisk to die, presumably because a phone is registering but still has an active channel. Even worse, Asterisk doesn't actually exit, but is stuck in memory and requires a server re-boot to fix. I managed to patch my version in the off-hook event to detect a channel/line in the redial state and issue a on-hook message. The user just finds that nothing happens and needs to on-hook and then off-hook again and saves an Asterisk crash. Note that this problem? does not happen if the 7914 is disconnected!
+
+Is there anyone else out there using 7914s with 7960s? I have 7940s, 7960s and one 7961 with different versions of sccp and my protocol version on the server is still set to 3. Should this be set to 4? What firmware is working best out there on 7960/7940 and 7941/7961?
+
+I have recently purchased a used 1721 router with Call Manager Express loaded so that I can capture packets between the router and handset, but understanding sccp packets is going to be tough for me.
+
+I look forward to any comments.
+
+Regards,
+
+Martin
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070926/af2aaedb/attachment.html>
+
+From sccp-list at puzzled.xs4all.nl  Thu Sep 27 01:19:36 2007
+From: sccp-list at puzzled.xs4all.nl (Patrick)
+Date: Thu, 27 Sep 2007 01:19:36 +0200
+Subject: [Chan-sccp-users] Please can we co-ordinate improvements
+	to	chan_sccp/7914 woes
+In-Reply-To: <1506718.1190845705456.JavaMail.root@mail.linkdc.co.uk>
+References: <1506718.1190845705456.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <1190848776.6489.38.camel@luna.puzzled.xs4all.nl>
+
+Hi Martin,
+
+On Wed, 2007-09-26 at 23:28 +0100, Martin Sutherland wrote:
+> Dear List Members,
+> 
+> I know that there are several members out there kindly providing web
+> space for the latest chan_sccp, and amendments have been made here and
+> there. I am now very confused about which version contains the most
+> trusted fixes and what those fixes are. It would be fantastic if we
+> could all agree on which is the best version and have a definitive
+> list of changes made since 20060408.
+
+Definitely a good idea. +1!
+
+>  The Asterisk 1.2 version that I have found the best is 20070620 which
+> was emailed to me by dmitry at makuha.kiev.ua back in July. 
+
+I wasn't even aware that this version existed. Is it for 1.2?
+
+> I am about to try Asterisk 1.4 but simply don't know if all the
+> changes made in 20070620 are incorporated into the current Asterisk
+> 1.4 version.
+
+Neither do I. I have seen chan_sccp versions pop up on the forum at
+www.ip-phone.de but I think those are for Asterisk 1.4.
+
+> I have however had problems which all seem to stem from using 7914
+> side-cars. I have two 7960 phones with two 7914s each. For some reason
+> the 7960s behave differently with 7914s attached. One real problem
+> concerned having dial timeouts or invalid extensions. Either the phone
+> or chan_sccp does not detect the hangup message after the handset is
+> put down after a redial tone (and the number dialled remains on the
+> display). When the phone is picked up again, the channel/line is still
+> active and nothing works. Re-setting the phone then caused Asterisk to
+> die, presumably because a phone is registering but still has an active
+> channel. Even worse, Asterisk doesn't actually exit, but is stuck in
+> memory and requires a server re-boot to fix. I managed to patch my
+> version in the off-hook event to detect a channel/line in the redial
+> state and issue a on-hook message. The user just finds that nothing
+> happens and needs to on-hook and then off-hook again and saves an
+> Asterisk crash. Note that this problem  does not happen if the 7914 is
+> disconnected!
+> 
+> Is there anyone else out there using 7914s with 7960s?
+
+Not me.
+
+>  I have 7940s, 7960s and one 7961 with different versions of sccp and
+> my protocol version on the server is still set to 3. Should this be
+> set to 4? What firmware is working best out there on 7960/7940 and
+> 7941/7961?
+
+I use a couple of 7961 phones with factory default firmware, Asterisk
+1.2 and chan_sccp 20060408. I use the following fixes for this chan_sccp
+release:
+- chan_sccp-20060408-MeetMe_crash.patch
+- chan_sccp-20060408-Gpickup_crash.patch
+- chan_sccp-20060408-placed_calls.patch
+
+My 7961 says it has the following firmware versions:
+
+App Load ID:  Jar41.2-9-1-45.sbn
+JVM Load ID:  CVM41.2-0-1-45.sbn
+OS Load ID:   cnu41.2-7-5-50.sbn
+Boot Load ID: 7961G_64-020704128Amd64meg.bin
+
+The limited functionality that I use work fine: Redial, DND, SendtoVM
+and Transfer. Not sure if GPickup works since I don't use it. I've seen
+requests in the past for the conference functionality which is absent in
+this config. Would be nice if that were available in a chan_sccp version
+for 1.2.
+> 
+> I have recently purchased a used 1721 router with Call Manager Express
+> loaded so that I can capture packets between the router and handset,
+> but understanding sccp packets is going to be tough for me.
+
+You can use Wireshark (or even tcpdump iirc) to capture the packets,
+save them to a file and make the file available for download. This way
+others who are interested in helping out can get easy access to this
+information.
+
+> I look forward to any comments.
+> 
+> Regards,
+> Martin
+
+Regards,
+Patrick
+
+
+
+From davidded at davidded.de  Thu Sep 27 02:24:56 2007
+From: davidded at davidded.de (David Dederscheck)
+Date: Thu, 27 Sep 2007 02:24:56 +0200
+Subject: [Chan-sccp-users] Please can we co-ordinate improvements
+	to	chan_sccp/7914 woes
+In-Reply-To: <1190848776.6489.38.camel@luna.puzzled.xs4all.nl>
+References: <1506718.1190845705456.JavaMail.root@mail.linkdc.co.uk>
+	<1190848776.6489.38.camel@luna.puzzled.xs4all.nl>
+Message-ID: <EDBC2B1B-6003-4C0E-A8D9-C9A6B0BC6C38@davidded.de>
+
+Hi,
+
+as Marcello and I already promised there will be a release of our  
+current 1.4 chan_sccp tree soon. However, we are currently both short  
+on time, and we also wish to take care of a few things:
+
+- That as many as possible useful and robustifying patches around are  
+included
+- That the release should work using both 1.2 and 1.4 (requires some  
+ifdef work)
+- Some minor yet important issues have still to be tested.
+
+The tests are best done _after_ releasing, but we would like to  
+include all other stuff first, so that we don't get so many forks  
+again, even in our own trees.
+
+We believe that our 1.4 tree is quite stable and very complete in  
+terms of features now. As there of course has been a lot work by  
+other people as well, a discussion of the available trees and patches  
+would be in order.
+
+Therefore, I suggest that _everybody_ who has ever released a  
+chan_sccp tree on this list or submitted a notable patch should write  
+a report on that. This report should include all relevant information  
+to ease the effort of merging.
+
+To start off with our own work, I'd like to comment briefly what  
+Marcello and I have done.
+
+We have working support for * 1.4 (most work afaik by Marcello) as  
+follows:
+- It now includes fixes for newer firmware received calls issues, we  
+also know that there is a locking problem, which I had discovered but  
+not yet added to Marcello's main tree. It should crashes when hanging  
+up in some cases.
+- We also have full working support to add service url entries to  
+speeddial buttons. This is directly calling any xml page like using  
+the services menu by the push of a speeddial button.
+- We have found out how to use 7914 buttons as busy lamp fields so  
+that the busy party can still be called by pressing the new call key  
+on the busy line callplane.
+- Marcello has working asterisk realtime support and some other nice  
+and handy features he might best announce himself.
+
+What we have under development:
+- I managed to find out how distinctive ringing (per line ringtones)  
+works for the newer sccp protocol versions. Marcello has already  
+implemented something for testing.
+- I implemented a hack to append the # for terminating a variable- 
+length number explicitly (neccessary for dialing in Germany) to the  
+call history lists where applicable. Already works fine for a long  
+time, but lacks a config option.
+- There is sometimes an issue where the phone doesn't show the digits  
+entered before the proceeding state. Still unclear when and why it  
+occurs. Doesn't happen often though if ever.
+- When using auto-answer in connection to the page() extension, I  
+sometimes get crashes upon frequent dial/hangup conditions. Needs  
+further investigation.
+
+Below follow some comments on the original message. Just keep on  
+looking down there.
+
+Regards,
+-David.
+
+
+On 27.09.2007, at 01:19, Patrick wrote:
+
+> Hi Martin,
+>
+> On Wed, 2007-09-26 at 23:28 +0100, Martin Sutherland wrote:
+>> Dear List Members,
+>>
+>> I know that there are several members out there kindly providing web
+>> space for the latest chan_sccp, and amendments have been made here  
+>> and
+>> there. I am now very confused about which version contains the most
+>> trusted fixes and what those fixes are. It would be fantastic if we
+>> could all agree on which is the best version and have a definitive
+>> list of changes made since 20060408.
+>
+> Definitely a good idea. +1!
+>
+>>  The Asterisk 1.2 version that I have found the best is 20070620  
+>> which
+>> was emailed to me by dmitry at makuha.kiev.ua back in July.
+>
+> I wasn't even aware that this version existed. Is it for 1.2?
+>
+>> I am about to try Asterisk 1.4 but simply don't know if all the
+>> changes made in 20070620 are incorporated into the current Asterisk
+>> 1.4 version.
+>
+> Neither do I. I have seen chan_sccp versions pop up on the forum at
+> www.ip-phone.de but I think those are for Asterisk 1.4.
+>
+>> I have however had problems which all seem to stem from using 7914
+>> side-cars. I have two 7960 phones with two 7914s each. For some  
+>> reason
+>> the 7960s behave differently with 7914s attached. One real problem
+>> concerned having dial timeouts or invalid extensions. Either the  
+>> phone
+>> or chan_sccp does not detect the hangup message after the handset is
+>> put down after a redial tone (and the number dialled remains on the
+>> display). When the phone is picked up again, the channel/line is  
+>> still
+>> active and nothing works. Re-setting the phone then caused  
+>> Asterisk to
+>> die, presumably because a phone is registering but still has an  
+>> active
+>> channel. Even worse, Asterisk doesn't actually exit, but is stuck in
+>> memory and requires a server re-boot to fix. I managed to patch my
+>> version in the off-hook event to detect a channel/line in the redial
+>> state and issue a on-hook message. The user just finds that nothing
+>> happens and needs to on-hook and then off-hook again and saves an
+>> Asterisk crash. Note that this problem  does not happen if the  
+>> 7914 is
+>> disconnected!
+>>
+>> Is there anyone else out there using 7914s with 7960s?
+>
+> Not me.
+
+I have a number of 7914 and could easily manage to replicate your  
+scenario. What firmware do you use? Btw, I didn't ever witness such a  
+behaviour. But I definitely want to understand why that happens in  
+your case.
+
+>
+>>  I have 7940s, 7960s and one 7961 with different versions of sccp and
+>> my protocol version on the server is still set to 3. Should this be
+>> set to 4? What firmware is working best out there on 7960/7940 and
+>> 7941/7961?
+>
+> I use a couple of 7961 phones with factory default firmware, Asterisk
+> 1.2 and chan_sccp 20060408. I use the following fixes for this  
+> chan_sccp
+> release:
+> - chan_sccp-20060408-MeetMe_crash.patch
+> - chan_sccp-20060408-Gpickup_crash.patch
+> - chan_sccp-20060408-placed_calls.patch
+
+The placed calls patch, was that mine, or from somebody else? Just  
+curious as I'm not sure if I issued a patch for that or not.
+
+>
+> My 7961 says it has the following firmware versions:
+>
+> App Load ID:  Jar41.2-9-1-45.sbn
+> JVM Load ID:  CVM41.2-0-1-45.sbn
+> OS Load ID:   cnu41.2-7-5-50.sbn
+> Boot Load ID: 7961G_64-020704128Amd64meg.bin
+>
+> The limited functionality that I use work fine: Redial, DND, SendtoVM
+> and Transfer. Not sure if GPickup works since I don't use it. I've  
+> seen
+> requests in the past for the conference functionality which is  
+> absent in
+> this config. Would be nice if that were available in a chan_sccp  
+> version
+> for 1.2.
+>>
+>> I have recently purchased a used 1721 router with Call Manager  
+>> Express
+>> loaded so that I can capture packets between the router and handset,
+>> but understanding sccp packets is going to be tough for me.
+>
+> You can use Wireshark (or even tcpdump iirc) to capture the packets,
+> save them to a file and make the file available for download. This way
+> others who are interested in helping out can get easy access to this
+> information.
+
+Absolutely. Wireshare also comes with a nice skinny parser module.
+
+
+
+>
+>> I look forward to any comments.
+>>
+>> Regards,
+>> Martin
+>
+> Regards,
+> Patrick
+>
+> _______________________________________________
+> Chan-sccp-users mailing list
+> Chan-sccp-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/chan-sccp-users
+
+
+
+From SteveW at bucks.net  Thu Sep 27 09:29:25 2007
+From: SteveW at bucks.net (Steve J. Walker)
+Date: Thu, 27 Sep 2007 08:29:25 +0100
+Subject: [Chan-sccp-users] Please can we co-ordinate improvements
+	tochan_sccp/7914 woes
+References: <1506718.1190845705456.JavaMail.root@mail.linkdc.co.uk>
+Message-ID: <792897337FC81944BA4097ABD708977103CADC32@pdc.bnsnet.co.uk>
+
+Hello Martin,
+
+> I know that there are several members out there kindly providing web
+> space for the latest chan_sccp, and amendments have been made here and
+> there. I am now very confused about which version contains the most
+> trusted fixes and what those fixes are. It would be fantastic if we
+> could all agree on which is the best version and have a definitive
+list
+> of changes made since 20060408. The Asterisk 1.2 version that I have
+> found the best is 20070620 which was emailed to me by
+> dmitry at makuha.kiev.ua back in July. I am about to try Asterisk 1.4 but
+> simply don't know if all the changes made in 20070620 are incorporated
+> into the current Asterisk 1.4 version.
+
+Do you have a list of fixes that 20070620 contains over the last version
+in 2006? Do you find it stable under 1.2? I think that your right and a
+mini FAQ or patch / fix list needs to appear somewhere. We have a 2006
+build we have changed to suit our needs and it works very well. But I
+assume people who know chan_sccp better than we do have probably fixed
+or extended it properly :-)
+
+But could you place that sccp version somewhere? url?
+ 
+> I have however had problems which all seem to stem from using 7914
+> side-cars. I have two 7960 phones with two 7914s each. For some reason
+> the 7960s behave differently with 7914s attached. One real problem
+> concerned having dial timeouts or invalid extensions. Either the phone
+> or chan_sccp does not detect the hangup message after the handset is
+> put down after a redial tone (and the number dialled remains on the
+> display). When the phone is picked up again, the channel/line is still
+> active and nothing works. Re-setting the phone then caused Asterisk to
+> die, presumably because a phone is registering but still has an active
+> channel. Even worse, Asterisk doesn't actually exit, but is stuck in
+> memory and requires a server re-boot to fix. I managed to patch my
+> version in the off-hook event to detect a channel/line in the redial
+> state and issue a on-hook message. The user just finds that nothing
+> happens and needs to on-hook and then off-hook again and saves an
+> Asterisk crash. Note that this problem  does not happen if the 7914 is
+> disconnected!
+
+We found that the firmware used for the 7960 and 7914 make a huge
+difference to its performance.
+
+We use P00307020300 for the 7940/60s and S00105000200 for the 7914s and
+do not have any of the issues you are describing. Maybe trying that
+firmware with your current config should solve the issues. I asked here
+and someone recommended those versions to me for our setup and it is
+very stable. 
+
+So I am just passing on what they say :-) YMMV
+ 
+Regards,
+
+Steve 
+
+
+
+

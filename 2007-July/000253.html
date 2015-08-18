@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] R: chan_sccp and 7970
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20R%3A%20chan_sccp%20and%207970&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E85%40THEBRAIN1.drs.ca%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000251.html">
+   <LINK REL="Next"  HREF="000254.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] R: chan_sccp and 7970</H1>
+    <B>Zuber, Jonathan</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20R%3A%20chan_sccp%20and%207970&In-Reply-To=%3C03FDC7A639326744925F8EB885247BAF861E85%40THEBRAIN1.drs.ca%3E"
+       TITLE="[Chan-sccp-users] R: chan_sccp and 7970">jzuber at drs.ca
+       </A><BR>
+    <I>Tue Jul 31 18:17:19 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000251.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+        <LI>Next message: <A HREF="000254.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#253">[ date ]</a>
+              <a href="thread.html#253">[ thread ]</a>
+              <a href="subject.html#253">[ subject ]</a>
+              <a href="author.html#253">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Is this similar to your output for a 7970 or 7971 phone upon startup?? I see
+there is an error near the end, could that be the reason for me being unable
+to dial?
+
+ -- GLOBAL: Preferred capability (ulaw)
+    -- Added speeddial 1: sccp-2603 (2603)
+    -- Added speeddial 2: sccp-2603 (2603)
+    -- Added device 'SEP0019563DD448' (7970)
+    -- Added speeddial 1: sccp-2602 (2602)
+    -- Added speeddial 2: sccp-2604 (2604)
+    -- Added device 'SEP0019305D3EF3' (7970)
+    -- Added speeddial 1: speeddial-2602 (2602)
+    -- Added speeddial 2: speeddial-2603 (2603)
+    -- Added device 'SEP001BD52D0885' (7971)
+    -- SCCP: Looking for line 2602
+    -- Added line '2602'
+    -- SCCP: Looking for line 2603
+    -- Added line '2603'
+    -- SCCP: Looking for line 2604
+    -- Added line '2604'
+    -- SCCP channel driver up and running on 10.3.3.235:2000
+    -- SCCP listening on 10.3.3.235:2000
+  == Registered channel type 'SCCP' (Skinny Client Control Protocol (SCCP))
+  == Registered application 'SetCalledParty'
+chan_sccp.so =&gt; (Skinny Client Control Protocol (SCCP). Release: 20070428)
+  == Registered channel type 'Feature' (Feature Proxy Channel Driver)
+chan_features.so =&gt; (Feature Proxy Channel)
+Asterisk Ready.
+*CLI&gt;     -- SCCP: Accepted connection from 10.3.3.247
+    -- SCCP: Using ip 10.3.3.235
+    -- SCCP: &gt;&gt; Got message AlarmMessage
+    -- SCCP: Alarm Message: Severity: Informational (2), 14:
+Name=SEP001BD52D0885 Load= term71.default Last=CM-closed-TCP [0/0]
+    -- SCCP: &gt;&gt; Got message RegisterMessage
+    -- SEP001BD52D0885: is registering, Instance: 0, Type: Cisco7971 (119),
+Version: 12
+    -- SEP001BD52D0885: Allocating device to session (17) 10.3.3.247
+    -- SEP001BD52D0885: Building button template Cisco7971(119), user config
+7971
+    -- SEP001BD52D0885: Phone available lines 8
+    -- SEP001BD52D0885: Auto logging into 2604
+    -- SCCP: Looking for line 2604
+    -- SEP001BD52D0885: Attaching line 2604 to this device
+    -- SEP001BD52D0885: Ask the phone to send keepalive message every 60
+seconds
+    -- SEP001BD52D0885: Display notify with timeout 5
+    -- SEP001BD52D0885: Send speaker mode 2
+    -- SEP001BD52D0885: Clear the status prompt on line 0 and callid 0
+    -- SEP001BD52D0885: Restoring device status (dnd, cfwd*) from the
+asterisk db
+    -- SCCP: Looking for line 2604
+    -- SEP001BD52D0885: found line 2604
+    -- SCCP: Asterisk asked for the state (1) of the line 2604
+    -- SEP001BD52D0885: &gt;&gt; Got message IpPortMessage
+    -- SEP001BD52D0885: &gt;&gt; Got message ButtonTemplateReqMessage
+    -- SEP001BD52D0885: Building button template Cisco7971(119), user config
+7971
+    -- SEP001BD52D0885: Looking for a line button place 2604 (1)
+    -- SEP001BD52D0885: Configured Phone Button [01] = LINE (2604),
+temporary instance (1)
+    -- SEP001BD52D0885: Looking for a speeddial button place speeddial-2602
+(1)
+    -- SEP001BD52D0885: Configured Phone Button [02] = SPEEDIAL
+(speeddial-2602) temporary instance (2)
+    -- SEP001BD52D0885: Looking for a speeddial button place speeddial-2603
+(2)
+    -- SEP001BD52D0885: Configured Phone Button [03] = SPEEDIAL
+(speeddial-2603) temporary instance (3)
+    -- SEP001BD52D0885: Button Template [01] = Line (9), instance 1
+    -- SEP001BD52D0885: Button Template [02] = SpeedDial (2), instance 1
+    -- SEP001BD52D0885: Button Template [03] = SpeedDial (2), instance 2
+    -- SEP001BD52D0885: &gt;&gt; Got message SoftKeyTemplateReqMessage
+    -- SEP001BD52D0885: Button(0)[ 1] = Redial
+    -- SEP001BD52D0885: Button(1)[ 2] = NewCall
+    -- SEP001BD52D0885: Button(2)[ 3] = Hold
+    -- SEP001BD52D0885: Button(3)[ 4] = Transfer
+    -- SEP001BD52D0885: Button(4)[ 5] = CFwdALL
+    -- SEP001BD52D0885: Button(5)[ 6] = CFwdBusy
+    -- SEP001BD52D0885: Button(6)[ 7] = CFwdNoAnswer
+    -- SEP001BD52D0885: Button(7)[ 8] = &lt;&lt;
+    -- SEP001BD52D0885: Button(8)[ 9] = EndCall
+    -- SEP001BD52D0885: Button(9)[10] = Resume
+    -- SEP001BD52D0885: Button(10)[11] = Answer
+    -- SEP001BD52D0885: Button(11)[12] = Private
+    -- SEP001BD52D0885: Button(12)[13] = TrnsfVM
+    -- SEP001BD52D0885: Button(13)[14] = DND
+    -- SEP001BD52D0885: &gt;&gt; Got message SoftKeySetReqMessage
+    -- SEP001BD52D0885: TRANSFER    is enabled
+    -- SEP001BD52D0885: DND         is disabled
+    -- SEP001BD52D0885: PRIVATE     is disabled
+    -- SEP001BD52D0885: CFWDALL     is  enabled
+    -- SEP001BD52D0885: CFWDBUSY    is  disabled
+    -- SEP001BD52D0885: TRNSFVM     is  disabled
+    -- SEP001BD52D0885: Set[0 ]= 0 :Redial     1 :NewCall
+    -- SEP001BD52D0885: Set[1 ]= 0 :Hold       1 :EndCall    2 :Transfer   3
+:<i>CFwdALL
+</I>    -- SEP001BD52D0885: Set[2 ]= 0 :Resume     1 :NewCall    2 :EndCall    3
+:<i>Transfer
+</I>    -- SEP001BD52D0885: Set[3 ]= 0 :Answer     1 :EndCall
+    -- SEP001BD52D0885: Set[4 ]= 0 :Redial     1 :EndCall    3 :CFwdALL
+    -- SEP001BD52D0885: Set[5 ]= 0 :Hold       1 :EndCall    2 :Transfer   3
+:<i>CFwdALL
+</I>    -- SEP001BD52D0885: Set[6 ]= 0 :&lt;&lt;   1 :EndCall
+    -- SEP001BD52D0885: Set[7 ]=
+    -- SEP001BD52D0885: Set[8 ]= 1 :EndCall    2 :Transfer   3 :CFwdALL
+    -- SEP001BD52D0885: Set[9 ]= 0 :Redial     1 :EndCall
+    -- SEP001BD52D0885: Set[10]=
+    -- There are 11 SoftKeySets.
+    -- SEP001BD52D0885: Send softkeyset to OnHook(0) on line 0  and call 0
+    -- SEP001BD52D0885: &gt;&gt; Got message ConfigStatReqMessage
+    -- SEP001BD52D0885: Sending ConfigStatMessage, lines 1, speeddials 2
+    -- SEP001BD52D0885: &gt;&gt; Got message HeadsetStatusMessage
+    -- SEP001BD52D0885: &gt;&gt; Got message CapabilitiesResMessage
+    -- SEP001BD52D0885: Device has 8 Capabilities
+    -- SEP001BD52D0885: CISCO:    25 Wideband 256k             AST:     0
+unknown
+    -- SEP001BD52D0885: CISCO:     4 G.711 u-law 64k           AST:     4
+G.711 u-law
+    -- SEP001BD52D0885: CISCO:     2 G.711 A-law 64k           AST:     8
+G.711 A-law
+    -- SEP001BD52D0885: CISCO:    15 G.729 Annex B             AST:     0
+unknown
+    -- SEP001BD52D0885: CISCO:    16 G.729 Annex A + B         AST:     0
+unknown
+    -- SEP001BD52D0885: CISCO:    11 G.729                     AST:     0
+unknown
+    -- SEP001BD52D0885: CISCO:    12 G.729 Annex A             AST:   256
+G.729A
+    -- SEP001BD52D0885: CISCO:     1 Non-standard codec        AST:     0
+unknown
+    -- SEP001BD52D0885: &gt;&gt; Got message LineStatReqMessage
+    -- SEP001BD52D0885: Configuring line number 0
+    -- SEP001BD52D0885: Looking for line by instance 0
+    -- SEP001BD52D0885: searching for index 0 and type 9
+[Jul 31 16:02:23] ERROR[13443]: sccp_actions.c:540 sccp_handle_line_number:
+SEP001BD52D0885: requested a line configuration for unknown line 0
+    -- SEP001BD52D0885: &gt;&gt; Got message ForwardStatReqMessage
+    -- SEP001BD52D0885: Got Forward Status Request.  Line: 1
+    -- SEP001BD52D0885: Looking for line by instance 0
+    -- SEP001BD52D0885: Send Forward Status.  Instance: 1
+    -- SEP001BD52D0885: &gt;&gt; Got message SpeedDialStatReqMessage
+    -- SEP001BD52D0885: Speed Dial Request for Button 1
+    -- SEP001BD52D0885: searching for index 1 and type 2
+    -- SEP001BD52D0885: found name: speeddial-2602, ext: 2602, index: 1,
+type: 2
+    -- SEP001BD52D0885: &gt;&gt; Got message SpeedDialStatReqMessage
+    -- SEP001BD52D0885: Speed Dial Request for Button 2
+    -- SEP001BD52D0885: searching for index 2 and type 2
+    -- SEP001BD52D0885: found name: speeddial-2603, ext: 2603, index: 2,
+type: 2
+    -- SEP001BD52D0885: &gt;&gt; Got message TimeDateReqMessage
+    -- SEP001BD52D0885: Send date/time
+    -- SEP001BD52D0885: &gt;&gt; Got message RegisterAvailableLinesMessage
+    -- SEP001BD52D0885: Post registration process
+    -- SEP001BD52D0885: Clear the status prompt on line 0 and callid 0
+    -- SEP001BD52D0885: Display prompt on line 0, callid 0, timeout 0
+    -- SEP001BD52D0885: Send softkeyset to OnHook(0) on line 0  and call 0
+    -- SEP001BD52D0885: Post registration process... done!
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From:	Lacy Moore - Aspendora [SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">aspendora at gmail.com</A>]
+</I>&gt;<i> Sent:	Monday, July 30, 2007 5:05 PM
+</I>&gt;<i> To:	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Subject:	Re: [Chan-sccp-users] R: chan_sccp and 7970
+</I>&gt;<i> 
+</I>&gt;<i> As long as you have the include statement for the
+</I>&gt;<i> extensions_additional.conf file, all that should be correct.
+</I>&gt;<i>  
+</I>&gt;<i> Hmm...  in the modules.conf file, do you have a line that reads
+</I>&gt;<i>  
+</I>&gt;<i> noload =&gt; chan_skinny.so
+</I>&gt;<i>  
+</I>&gt;<i> or if you are not autoloading, make sure that you do not have a load =&gt;
+</I>&gt;<i> chan_skinny.so.
+</I>&gt;<i>  
+</I>&gt;<i> I'm just guessing at different possibilities at this point.  
+</I>&gt;<i>  
+</I>&gt;<i> I just reread your original message.  Still not sure why speeddials work
+</I>&gt;<i> and manual dialing doesn't.  I know it's different parts of either the
+</I>&gt;<i> phone firmware or sccp that handles that.  You can put text in the
+</I>&gt;<i> speeddials and it sends the text to asterisk, but you can't dial a number
+</I>&gt;<i> from missed calls with the text included. 
+</I>&gt;<i>  
+</I>&gt;<i> This makes me think something is messed up in your chan_sccp.  I can't see
+</I>&gt;<i> a difference between your sccp.conf and mine that would cause these
+</I>&gt;<i> issues.
+</I>&gt;<i>  
+</I>&gt;<i> On 7/30/07, Zuber, Jonathan &lt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>&gt;&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 	I have this...
+</I>&gt;<i> 	
+</I>&gt;<i> 	[default]
+</I>&gt;<i> 	
+</I>&gt;<i> 	include =&gt; ext-local
+</I>&gt;<i> 	
+</I>&gt;<i> 	then under extensions_additional.conf I have my 
+</I>&gt;<i> 	exten =&gt; 2001,1,Dial(SCCP/2001,10,r)
+</I>&gt;<i> 	exten =&gt; 2001,n,Hangup()
+</I>&gt;<i> 	exten =&gt; 2002,1,Dial(SCCP/2002,10,r)   ....
+</I>&gt;<i> 	
+</I>&gt;<i> 	under the [ext-local]
+</I>&gt;<i> 	
+</I>&gt;<i> 	Which I believe is set up correctly
+</I>&gt;<i> 	
+</I>&gt;<i> 	
+</I>&gt;<i> 	
+</I>&gt;<i> 	&gt; -----Original Message----- 
+</I>&gt;<i> 	&gt; From: Lacy Moore - Aspendora [ SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">aspendora at gmail.com</A>
+</I>&gt;<i> &lt;mailto:SMTP:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">aspendora at gmail.com</A>&gt;]
+</I>&gt;<i> 	&gt; Sent: Monday, July 30, 2007 4:13 PM
+</I>&gt;<i> 	&gt; To:   <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;<i> 	&gt; Subject:      Re: [Chan-sccp-users] R: chan_sccp and 7970
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt; On 7/30/07, Zuber, Jonathan &lt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>&gt;
+</I>&gt;<i> &lt;mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>  &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">jzuber at drs.ca</A>&gt;&gt;&gt; wrote:
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;       Ok here is sccp.conf (general and 1 phone and 1 line)
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt; Ok, first question...  Are you using static IPs for the phones?
+</I>&gt;<i> You've
+</I>&gt;<i> 	&gt; told it in sccp.conf that the phone can only be the IP address you
+</I>&gt;<i> have
+</I>&gt;<i> 	&gt; listed.
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt; Second, I'm assuming this is a Trixbox and/or FreePBX system.  I
+</I>&gt;<i> believe
+</I>&gt;<i> 	&gt; the default context for the extensions is from-internal.  The
+</I>&gt;<i> context 
+</I>&gt;<i> 	&gt; named default in extensions.conf may not be referencing
+</I>&gt;<i> (including) the
+</I>&gt;<i> 	&gt; corresponding context in extensions_additional.conf.
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt; Make sure you have something similar to this:
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt; extensions.conf :
+</I>&gt;<i> 	&gt; #include extensions_additional.conf
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt; [default]
+</I>&gt;<i> 	&gt; include =&gt; additional_default
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt; ...
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt; extensions_additional.conf
+</I>&gt;<i> 	&gt; [additional_default]
+</I>&gt;<i> 	&gt; exten =&gt; 2001 ... and so on as you posted before 
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;
+</I>&gt;<i> 	&gt;   &lt;&lt; File: ATT395276.txt &gt;&gt;
+</I>&gt;<i> 	_______________________________________________
+</I>&gt;<i> 	Chan-sccp-users mailing list
+</I>&gt;<i> 	<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>&gt;
+</I>&gt;<i> 	&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>&gt;
+</I>&gt;<i> 	
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Lacy Moore
+</I>&gt;<i> Somewhere I wish I wasn't  &lt;&lt; File: ATT395652.txt &gt;&gt; 
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000251.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+	<LI>Next message: <A HREF="000254.html">[Chan-sccp-users] R: chan_sccp and 7970
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#253">[ date ]</a>
+              <a href="thread.html#253">[ thread ]</a>
+              <a href="subject.html#253">[ subject ]</a>
+              <a href="author.html#253">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

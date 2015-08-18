@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Handset/Offhook issue while configuring	chan_sccp with Cisco 7910 phones
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Handset/Offhook%20issue%20while%20configuring%0A%09chan_sccp%20with%20Cisco%207910%20phones&In-Reply-To=%3C96DDA244-D0AC-4231-9003-021C1E921403%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000195.html">
+   <LINK REL="Next"  HREF="000198.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Handset/Offhook issue while configuring	chan_sccp with Cisco 7910 phones</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Handset/Offhook%20issue%20while%20configuring%0A%09chan_sccp%20with%20Cisco%207910%20phones&In-Reply-To=%3C96DDA244-D0AC-4231-9003-021C1E921403%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Handset/Offhook issue while configuring	chan_sccp with Cisco 7910 phones">davidded at davidded.de
+       </A><BR>
+    <I>Sat Jul 21 15:07:35 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000195.html">[Chan-sccp-users] Handset/Offhook issue while configuring chan_sccp	with Cisco 7910 phones
+</A></li>
+        <LI>Next message: <A HREF="000198.html">[Chan-sccp-users] Good News on 7935 Conference Station
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#201">[ date ]</a>
+              <a href="thread.html#201">[ thread ]</a>
+              <a href="subject.html#201">[ subject ]</a>
+              <a href="author.html#201">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Darrell,
+
+a common problem with the first version of all 7900 series Cisco IP  
+Phones is in fact a malfunctioning hook. These first version phones  
+are easily identified by the two vertical arrows on the volume switch  
+as opposed to a long horizontal wedge.
+
+If the phones are used at all, i.e. not almost new, it is very likely  
+that this is your problem. You won't be able to tell from the outer  
+look of the phone.
+
+You might try taking the receiver off-hook first, then depressing the  
+hook manually to let it pop out quickly afterwards. This sometimes  
+helps trigger the off-hook switch in case of the version 1 phones.
+
+A workaround for using these phones would be to disassemble them and  
+to clean the contacts of the off-hook switch. I have been  
+successfully repairing a number of such phones.
+
+
+Kind Regards,
+-David
+
+
+On 20.07.2007, at 03:10, Darrell Benvenuto wrote:
+
+&gt;<i> Hi, Everyone.
+</I>&gt;<i>
+</I>&gt;<i> I am encountering serious difficulties in setting up approximately  
+</I>&gt;<i> 20 Cisco
+</I>&gt;<i> 7910G+SW phones using Asterisk, FreePBX and chan_sccp.
+</I>&gt;<i>
+</I>&gt;<i> All of the phones are using Firmware version P00405000600.
+</I>&gt;<i>
+</I>&gt;<i> Setup and configuration of the phones, Asterisk and chan_sccp is  
+</I>&gt;<i> complete.
+</I>&gt;<i>
+</I>&gt;<i> All of the phones work perfectly using the Speaker button,  
+</I>&gt;<i> producing a dial
+</I>&gt;<i> tone, and even dialing out.
+</I>&gt;<i>
+</I>&gt;<i> However, only 4 out of 20 go &quot;off hook&quot; when their handsets are  
+</I>&gt;<i> picked up.
+</I>&gt;<i>
+</I>&gt;<i> Can this unusual behavior be corrected through a software setting  
+</I>&gt;<i> under
+</I>&gt;<i> sccp.conf?
+</I>&gt;<i>
+</I>&gt;<i> Or is this a hardware issue on the phones?  It seems unlikely so  
+</I>&gt;<i> many phones
+</I>&gt;<i> would behave the same way, especially as they are all in excellent  
+</I>&gt;<i> physical
+</I>&gt;<i> condition.
+</I>&gt;<i>
+</I>&gt;<i> Hitting each of the phones' internal web servers show no difference  
+</I>&gt;<i> in their
+</I>&gt;<i> internal configuration.  Each of them had their Configuration  
+</I>&gt;<i> reset, and
+</I>&gt;<i> have the Asterisk box set as their TFTP server.
+</I>&gt;<i>
+</I>&gt;<i> Any advice would be greatly appreciated.
+</I>&gt;<i>
+</I>&gt;<i> -- Darrell
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000195.html">[Chan-sccp-users] Handset/Offhook issue while configuring chan_sccp	with Cisco 7910 phones
+</A></li>
+	<LI>Next message: <A HREF="000198.html">[Chan-sccp-users] Good News on 7935 Conference Station
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#201">[ date ]</a>
+              <a href="thread.html#201">[ thread ]</a>
+              <a href="subject.html#201">[ subject ]</a>
+              <a href="author.html#201">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

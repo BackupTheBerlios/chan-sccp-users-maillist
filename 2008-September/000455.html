@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7921 max lines &amp; speed dials
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20max%20lines%20%26%20speed%20dials&In-Reply-To=%3C015c01c91521%24d9dfb2b0%248d9f1810%24%40ca%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000453.html">
+   <LINK REL="Next"  HREF="000457.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7921 max lines &amp; speed dials</H1>
+    <B>OCG Technical Support</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207921%20max%20lines%20%26%20speed%20dials&In-Reply-To=%3C015c01c91521%24d9dfb2b0%248d9f1810%24%40ca%3E"
+       TITLE="[Chan-sccp-users] 7921 max lines &amp; speed dials">support at ocg.ca
+       </A><BR>
+    <I>Fri Sep 12 23:52:28 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000453.html">[Chan-sccp-users] 7921 max lines &amp; speed dials
+</A></li>
+        <LI>Next message: <A HREF="000457.html">[Chan-sccp-users] 7921 max lines &amp; speed dials
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#455">[ date ]</a>
+              <a href="thread.html#455">[ thread ]</a>
+              <a href="subject.html#455">[ subject ]</a>
+              <a href="author.html#455">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I reloaded the chan_sccp with a debug of 10 and here's what I see (below).
+I see that that phone says &quot;Phone Available lines 1&quot;...I have no idea where
+this is coming from.  (Perhaps the channel driver doesn't know of this
+phone's capabilities?).
+
+I tried chan_skinny and the speed dial keys appear nicely...but the multiple
+lines don't work right.  To bad the speed dials don't work at all for
+asterisk...seem like a nice feature.  But multiple lines is much more
+important.
+
+Ideas?
+
+Thanks!
+MD
+
+
+   -- SCCP: Accepted connection from 172.31.254.102
+    -- SCCP: Using ip 172.31.253.4
+    -- SCCP: &gt;&gt; Got message AlarmMessage
+    -- SCCP: Alarm Message: Severity: Informational (2),
+Name=SEP001BD457F8B1 Load= Last=CM-aborted-TCP [67584/1727930284]
+    -- SCCP: &gt;&gt; Got message RegisterMessage
+    -- SEP001BD457F8B1: is registering, Instance: 1, Type: unknow (365),
+Version: 11
+    -- SEP001BD457F8B1: Allocating device to session (25) 172.31.254.102
+    -- SEP001BD457F8B1: Building button template unknow(365), user config
+7921
+    -- SEP001BD457F8B1: Phone available lines 1
+    -- SEP001BD457F8B1: Auto logging into 235
+    -- SCCP: Looking for line 235
+    -- SCCP: found line 235
+    -- SEP001BD457F8B1: Attaching line 235 to this device
+    -- SEP001BD457F8B1: Auto logging into 299
+    -- SCCP: Looking for line 299
+    -- SCCP: found line 299
+    -- SEP001BD457F8B1: Attaching line 299 to this device
+[Sep 12 17:35:28] WARNING[5453]: sccp_actions.c:185 sccp_handle_register:
+SEP001BD457F8B1: Failed to autolog into 299: Max available lines phone limit
+reached 299
+    -- SEP001BD457F8B1: Ask the phone to send keepalive message every 30
+seconds
+    -- SEP001BD457F8B1: Display notify with timeout 5
+    -- SEP001BD457F8B1: Send speaker mode 2
+    -- SEP001BD457F8B1: Clear the status prompt on line 0 and callid 0
+    -- SEP001BD457F8B1: Restoring device status (dnd, cfwd*) from the
+asterisk db
+    -- SCCP: Looking for line 235
+    -- SEP001BD457F8B1: found line 235
+    -- SEP001BD457F8B1: found line 235
+    -- SCCP: Asterisk asked for the state (1) of the line 235
+    -- SEP001BD457F8B1: &gt;&gt; Got message HeadsetStatusMessage
+    -- handle headset
+    -- SEP001BD457F8B1: &gt;&gt; Got message CapabilitiesResMessage
+    -- SEP001BD457F8B1: Device has 7 Capabilities
+    -- SEP001BD457F8B1: CISCO:     4 G.711 u-law 64k           AST:     4
+G.711 u-law
+    -- SEP001BD457F8B1: CISCO:     2 G.711 A-law 64k           AST:     8
+G.711 A-law
+    -- SEP001BD457F8B1: CISCO:    11 G.729                     AST:     0
+unknown
+    -- SEP001BD457F8B1: CISCO:    12 G.729 Annex A             AST:   256
+G.729A
+    -- SEP001BD457F8B1: CISCO:    15 G.729 Annex B             AST:     0
+unknown
+    -- SEP001BD457F8B1: CISCO:    16 G.729 Annex A + B         AST:     0
+unknown
+    -- SEP001BD457F8B1: CISCO:    25 Wideband 256k             AST:     0
+unknown
+    -- SEP001BD457F8B1: &gt;&gt; Got message ButtonTemplateReqMessage
+    -- SEP001BD457F8B1: Building button template unknow(365), user config
+7921
+    -- SEP001BD457F8B1: Looking for a line button place 235 (1)
+    -- SEP001BD457F8B1: Configured Phone Button [01] = LINE (235), temporary
+instance (1)
+    -- SEP001BD457F8B1: Looking for a speeddial button place G&amp;G (1)
+    -- SEP001BD457F8B1: removing unused speedial <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">240 at internalextensions</A>,G&amp;G
+    -- SEP001BD457F8B1: Button Template [01] = Line (9), instance 1
+    -- SEP001BD457F8B1: &gt;&gt; Got message SoftKeyTemplateReqMessage
+    -- SEP001BD457F8B1: Button(0)[ 1] = Redial
+    -- SEP001BD457F8B1: Button(1)[ 2] = NewCall
+    -- SEP001BD457F8B1: Button(2)[ 3] = Hold
+    -- SEP001BD457F8B1: Button(3)[ 4] = Transfer
+    -- SEP001BD457F8B1: Button(4)[ 5] = CFwdALL
+    -- SEP001BD457F8B1: Button(5)[ 6] = CFwdBusy
+    -- SEP001BD457F8B1: Button(6)[ 7] = CFwdNoAnswer
+    -- SEP001BD457F8B1: Button(7)[ 8] = &lt;&lt;
+    -- SEP001BD457F8B1: Button(8)[ 9] = EndCall
+    -- SEP001BD457F8B1: Button(9)[10] = Resume
+    -- SEP001BD457F8B1: Button(10)[11] = Answer
+    -- SEP001BD457F8B1: Button(11)[12] = Info
+    -- SEP001BD457F8B1: Button(12)[13] = Confrn
+    -- SEP001BD457F8B1: Button(13)[14] = Park
+    -- SEP001BD457F8B1: Button(14)[15] = Join
+    -- SEP001BD457F8B1: Button(15)[16] = MeetMe
+    -- SEP001BD457F8B1: Button(16)[17] = PickUp
+    -- SEP001BD457F8B1: Button(17)[18] = GPickUp
+    -- SEP001BD457F8B1: Button(18)[19] = RmLstC
+    -- SEP001BD457F8B1: Button(19)[20] = CallBack
+    -- SEP001BD457F8B1: Button(20)[21] = Barge
+    -- SEP001BD457F8B1: Button(21)[22] = DND
+    -- SEP001BD457F8B1: Button(22)[23] = No Park Number Available
+    -- SEP001BD457F8B1: Button(23)[24] = CallPark Reversion
+    -- SEP001BD457F8B1: Button(24)[25] = Service is not Active
+    -- SEP001BD457F8B1: Button(25)[26] = Empty
+    -- SEP001BD457F8B1: Button(26)[27] = ConfList
+    -- SEP001BD457F8B1: Button(27)[28] = Select
+    -- SEP001BD457F8B1: Button(28)[29] = Private
+    -- SEP001BD457F8B1: Button(29)[30] = TrnsfVM
+    -- SEP001BD457F8B1: Button(30)[31] = DirTrfr
+    -- SEP001BD457F8B1: &gt;&gt; Got message SoftKeySetReqMessage
+    -- SEP001BD457F8B1: TRANSFER    is enabled
+    -- SEP001BD457F8B1: DND         is Reject
+    -- SEP001BD457F8B1: PRIVATE     is disabled
+    -- SEP001BD457F8B1: PARK        is  enabled
+    -- SEP001BD457F8B1: CFWDALL     is  disabled
+    -- SEP001BD457F8B1: CFWDBUSY    is  disabled
+    -- SEP001BD457F8B1: TRNSFVM     is  disabled
+    -- SEP001BD457F8B1: PICKUPGROUP is  disabled
+    -- SEP001BD457F8B1: Set[0 ]= 0 :Redial     1 :NewCall    2 :DND        
+    -- SEP001BD457F8B1: Set[1 ]= 0 :Hold       1 :EndCall    2 :Park       3
+:<i>Select     
+</I>    -- SEP001BD457F8B1: Set[2 ]= 0 :Resume     1 :NewCall    2 :EndCall    3
+:<i>Transfer   4 :Select     5 :DirTrfr    
+</I>    -- SEP001BD457F8B1: Set[3 ]= 0 :Answer     1 :EndCall    
+    -- SEP001BD457F8B1: Set[4 ]= 0 :Redial     1 :EndCall    6 :DND        
+    -- SEP001BD457F8B1: Set[5 ]= 0 :Hold       1 :EndCall    2 :Transfer   3
+:<i>Park       4 :Select     5 :DirTrfr    
+</I>    -- SEP001BD457F8B1: Set[6 ]= 0 :&lt;&lt;   1 :EndCall    
+    -- SEP001BD457F8B1: Set[7 ]= 0 :Empty      
+    -- SEP001BD457F8B1: Set[8 ]= 0 :EndCall    1 :Transfer   
+    -- SEP001BD457F8B1: Set[9 ]= 0 :Redial     1 :EndCall    
+    -- SEP001BD457F8B1: Set[10]= 0 :NewCall    
+    -- There are 11 SoftKeySets.
+    -- SEP001BD457F8B1: Send softkeyset to OnHook(0) on line 0  and call 0
+    -- SEP001BD457F8B1: &gt;&gt; Got message LineStatReqMessage
+    -- SEP001BD457F8B1: Configuring line number 1
+    -- SEP001BD457F8B1: Looking for line by instance 1
+    -- SEP001BD457F8B1: Found line 235
+    -- SEP001BD457F8B1: Send Forward Status.  Line: 235
+    -- SCCP: Looking for line 235
+    -- SEP001BD457F8B1: found line 235
+    -- SEP001BD457F8B1: found line 235
+    -- SCCP: Asterisk asked for the state (1) of the line 235
+    -- SEP001BD457F8B1: &gt;&gt; Got message RegisterAvailableLinesMessage
+    -- SEP001BD457F8B1: &gt;&gt; Got message TimeDateReqMessage
+    -- SEP001BD457F8B1: Send date/time
+    -- SEP001BD457F8B1: Post registration process
+    -- SEP001BD457F8B1: Clear the status prompt on line 0 and callid 0
+    -- SEP001BD457F8B1: Display prompt on line 0, callid 0, timeout 0
+    -- SEP001BD457F8B1: Send softkeyset to OnHook(0) on line 0  and call 0
+    -- SEP001BD457F8B1: Post registration process... done!
+pbx*CLI&gt; sccp show device SEP001BD457F8B1
+Current settings for selected Device
+------------------------------------
+
+MAC-Address        : SEP001BD457F8B1
+Protocol Version   : phone=11, channel=3
+Keepalive          : 30
+Registration state : Ok(3)
+State              : OnHook(0)
+MWI handset light  : OFF
+Description        : Portable Cisco
+Config Phone Type  : 7921
+Skinny Phone Type  : unknow(365)
+Softkey support    : Yes
+Autologin          : 235,299
+Image Version      : 
+Timezone Offset    : 0
+Capabilities       : 0x10c (ulaw|alaw|g729)
+Codecs preference  : ()
+Can DND            : Reject
+Can Transfer       : Yes
+Can Park           : Yes
+Private softkey    : Disabled
+Can CFWDALL        : No
+Can CFWBUSY        : No
+Dtmf mode          : In-Band
+Trust phone ip     : No
+Early RTP          : No
+pbx*CLI&gt; 
+Lines
+id  : name                 label               
+------------------------------------
+   1: 235                  OCG              
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of Steve J.
+Walker
+Sent: September 12, 2008 5:15 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Re: [Chan-sccp-users] 7921 max lines &amp; speed dials
+
+Hi,
+
+I think that the 7921 has a 6 (real) line limit. So that should not be
+an issue with the phone. Here is an example of a running 7921 conf BUT
+chan_sccp never loads the speeddials to the 7921 or the phone never
+requests or ignores them - they just don't appear and this is a common
+comment from people with *, sccp and these phones.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000453.html">[Chan-sccp-users] 7921 max lines &amp; speed dials
+</A></li>
+	<LI>Next message: <A HREF="000457.html">[Chan-sccp-users] 7921 max lines &amp; speed dials
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#455">[ date ]</a>
+              <a href="thread.html#455">[ thread ]</a>
+              <a href="subject.html#455">[ subject ]</a>
+              <a href="author.html#455">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

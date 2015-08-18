@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp	-20071004-DD
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%20is%20hanging%20with%20iax2%0A%09and%09chan_sccp%09-20071004-DD&In-Reply-To=%3C7D191A1D-27C3-43E9-BFAA-8B97E1E32766%40davidded.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000316.html">
+   <LINK REL="Next"  HREF="000318.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp	-20071004-DD</H1>
+    <B>David Dederscheck</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%20Asterisk%20is%20hanging%20with%20iax2%0A%09and%09chan_sccp%09-20071004-DD&In-Reply-To=%3C7D191A1D-27C3-43E9-BFAA-8B97E1E32766%40davidded.de%3E"
+       TITLE="[Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp	-20071004-DD">davidded at davidded.de
+       </A><BR>
+    <I>Wed Oct 10 18:13:02 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000316.html">[Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp	-20071004-DD
+</A></li>
+        <LI>Next message: <A HREF="000318.html">[Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp -20071004-DD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#317">[ date ]</a>
+              <a href="thread.html#317">[ thread ]</a>
+              <a href="subject.html#317">[ subject ]</a>
+              <a href="author.html#317">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi folks,
+
+I'm not sure why this happens. Does it only occur after a transfer?  
+My guess would be that there could be some problems with the handling  
+of audio transcoding. This has been a problem with IAX2 and Zap with  
+asterisk &gt; 1.4.6 (@Marcello, was it right that version?), which we  
+solved Q&amp;D, i.e. ignore it when possible. Just look at the comments  
+ending with (DD) or (-DD).
+
+Sorry that I can't go into more details now -- just fell ill with my  
+Tonsils aching badly.
+
+Regards,
+-David.
+
+On 10.10.2007, at 16:18, Marcus Robichon wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> it is hanging with asterisk version 1.4.11 and the newest  
+</I>&gt;<i> chan_sccp. If you downgrade to asterisk 1.4.6 everything works fine.
+</I>&gt;<i>
+</I>&gt;<i> This is what we have done.
+</I>&gt;<i>
+</I>&gt;<i> Marcus Robichon
+</I>&gt;<i>
+</I>&gt;<i> -----Urspr&#252;ngliche Nachricht-----
+</I>&gt;<i> Von: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A> [mailto:chan-sccp- 
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">users-bounces at lists.berlios.de</A>] Im Auftrag von Patrick
+</I>&gt;<i> Gesendet: Dienstag, 9. Oktober 2007 15:48
+</I>&gt;<i> An: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> Betreff: Re: [Chan-sccp-users] Asterisk is hanging with iax2 and  
+</I>&gt;<i> chan_sccp-20071004-DD
+</I>&gt;<i>
+</I>&gt;<i> On Tue, 2007-10-09 at 15:38 +0200, Damian Lusiewicz wrote:
+</I>&gt;<i> [snip]
+</I>&gt;<i> &gt; Hello David,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; after a while we have got a hanging asterisk. Following we see on  
+</I>&gt;<i> the CLI:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     -- SEP0016Cxxxxxxx: Answer the channel 211-642
+</I>&gt;<i> &gt;     -- SCCP: Outgoing call has been answered SCCP/250-00000281 on
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">250 at SEP0016Cxxxxxxx-641</A>
+</I>&gt;<i> &gt;     -- SEP0016Cxxxxxxx: Complete transfer from 250-641
+</I>&gt;<i> &gt;     -- SEP0016Cxxxxxxx: Transfer confirmation destination on channel
+</I>&gt;<i> &gt; SCCP/211-00000282
+</I>&gt;<i> &gt;     -- SCCP: Asterisk request to hangup channel SCCP/250-00000280
+</I>&gt;<i> &gt;     -- SCCP: Asterisk request to hangup channel IAX2/pbx_e1-1&lt;MASQ&gt;
+</I>&gt;<i> &gt;     -- SEP0016Cxxxxxxx: Statistics from 211 callid: 641 Packets  
+</I>&gt;<i> sent:
+</I>&gt;<i> &gt; 474 rcvd:
+</I>&gt;<i> &gt; 461 lost: 0 jitter: 0 latency: 3
+</I>&gt;<i> &gt; [Oct  9 13:18:53] NOTICE[27089]: chan_iax2.c:6375 socket_read:  
+</I>&gt;<i> Out of
+</I>&gt;<i> &gt; idle IAX2
+</I>&gt;<i> &gt; threads for I/O, pausing!
+</I>&gt;<i> [snip]
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; @David: maybe you have got an further idea, how to solve this? Many
+</I>&gt;<i> &gt; thanks for your help so far.
+</I>&gt;<i>
+</I>&gt;<i> Just a wild guess but are you perhaps running out of filedescriptors?
+</I>&gt;<i> Try setting the FD limit higher with ulimit. Alternatively try  
+</I>&gt;<i> switching
+</I>&gt;<i> to SIP (if you can) and see if you can make it work that way.
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Patrick
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000316.html">[Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp	-20071004-DD
+</A></li>
+	<LI>Next message: <A HREF="000318.html">[Chan-sccp-users] Asterisk is hanging with iax2	and	chan_sccp -20071004-DD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#317">[ date ]</a>
+              <a href="thread.html#317">[ thread ]</a>
+              <a href="subject.html#317">[ subject ]</a>
+              <a href="author.html#317">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

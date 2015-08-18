@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Chan-sccp-users] 7970 Backlight
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/chan-sccp-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207970%20Backlight&In-Reply-To=%3C0ddf01c76772%2473966fc0%244400000a%40phil%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000088.html">
+   <LINK REL="Next"  HREF="000090.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Chan-sccp-users] 7970 Backlight</H1>
+    <B>(&#164;Phil&#164;)</B> 
+    <A HREF="mailto:chan-sccp-users%40lists.berlios.de?Subject=Re%3A%20%5BChan-sccp-users%5D%207970%20Backlight&In-Reply-To=%3C0ddf01c76772%2473966fc0%244400000a%40phil%3E"
+       TITLE="[Chan-sccp-users] 7970 Backlight">phil at ingineerix.com
+       </A><BR>
+    <I>Fri Mar 16 03:26:06 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000088.html">[Chan-sccp-users] 7970 Upgrade
+</A></li>
+        <LI>Next message: <A HREF="000090.html">[Chan-sccp-users] 7970 Backlight
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#89">[ date ]</a>
+              <a href="thread.html#89">[ thread ]</a>
+              <a href="subject.html#89">[ subject ]</a>
+              <a href="author.html#89">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Let me ask you a question, does your backlight stay on all day until 8pm, 
+then turn off?   If you turn it on, does it go off again in 10?
+
+Mine was going off in 10 all day, so it seemed like it was effectively 
+ignoring the &quot;force on&quot; of the parameters.
+
+-Phil
+----- Original Message ----- 
+From: &quot;Paul&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">root at nizon.ca</A>&gt;
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Sent: Thursday, March 15, 2007 7:19 PM
+Subject: Re: [Chan-sccp-users] 7970 Upgrade
+
+
+Wow... that was easy. :P
+Went through the entire process with the backlight on... then again I have
+mine set to a 10 minute time out, on until 8pm.
+
+I'm curious about the .tlv file the phone requests, any idea what it's for?
+
+Thanks again
+
+-Paul
+
+-----Original Message-----
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>
+[mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users-bounces at lists.berlios.de</A>] On Behalf Of (&#164;Phil&#164;)
+Sent: Thursday, March 15, 2007 8:54 PM
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>
+Subject: Re: [Chan-sccp-users] 7970 Upgrade
+
+Put  all the files contained in the archive in the root of your TFTP server.
+
+In your SEPxx~.cnf.xml file, make sure you have this (rooted as far as I
+know, mine is somewhere in the middle):
+
+ &lt;loadInformation&gt;SCCP70.8-0-4SR3AS&lt;/loadInformation&gt;
+
+Make sure the version matches your current firmware files.
+
+I also usually put it in the sccp.conf file for the device:
+
+imageversion = SCCP70.8-0-4SR3AS
+
+Just put it right before the device =&gt; SEPxx~ line.
+
+When the phone reboots, it will fetch the version and will begin visibly
+doing the load.  It's very good at reporting what's going on compared to the
+
+older models.  If you have a backlight setting that is not always on, you
+may discover (as I did) that the backlight stays off during the upgrade
+process.  You cannot turn it on manually, even though the LED on the lower
+right button is lit.   A bright flashlight aimed at the screen will reveal
+what is happening.
+
+Obviously yet another bug!
+
+I advise you to watch the log of your TFTP server for case problems if you
+can, as sometimes the files have mixed up case that Cisco supplies.   If
+there is an option to disable case sensitivity in your TFTP server, do so.
+
+I saw this problem occur in the most recent version, so it WILL FAIL if your
+
+TFTP server is case sensitive unless you fix the case to match what the
+phone is seeking.
+
+If these steps don't work let me know, I have other tips but I doubt you'll
+have trouble.
+
+The 7060/40 is way less picky!
+
+-Phil
+----- Original Message ----- 
+From: &quot;Paul&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">root at nizon.ca</A>&gt;
+To: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">chan-sccp-users at lists.berlios.de</A>&gt;
+Sent: Thursday, March 15, 2007 6:36 PM
+Subject: [Chan-sccp-users] 7970 Upgrade
+
+
+&gt;<i>
+</I>&gt;<i> Well I had hoped to find a 7970 upgrade how to somewhere online, but no
+</I>&gt;<i> luck.
+</I>&gt;<i>
+</I>&gt;<i> Tinkering around didn't really get me anywhere either.
+</I>&gt;<i>
+</I>&gt;<i> Can anyone lend a hand?
+</I>&gt;<i>
+</I>&gt;<i> Thanks
+</I>&gt;<i>
+</I>&gt;<i> -Paul
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Chan-sccp-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+</I>&gt;<i>
+</I>
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+_______________________________________________
+Chan-sccp-users mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">Chan-sccp-users at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">https://lists.berlios.de/mailman/listinfo/chan-sccp-users</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000088.html">[Chan-sccp-users] 7970 Upgrade
+</A></li>
+	<LI>Next message: <A HREF="000090.html">[Chan-sccp-users] 7970 Backlight
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#89">[ date ]</a>
+              <a href="thread.html#89">[ thread ]</a>
+              <a href="subject.html#89">[ subject ]</a>
+              <a href="author.html#89">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/chan-sccp-users">More information about the Chan-sccp-users
+mailing list</a><br>
+</body></html>

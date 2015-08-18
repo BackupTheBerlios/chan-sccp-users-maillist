@@ -1,0 +1,472 @@
+From ml at reda-systems.at  Tue Jun 12 13:26:09 2007
+From: ml at reda-systems.at (Daniel Schlager)
+Date: Tue, 12 Jun 2007 13:26:09 +0200
+Subject: [Chan-sccp-users] some problems with chan_sccp
+Message-ID: <FC5105E5-019C-44AC-94BE-2C4BC544EC66@reda-systems.at>
+
+Hello,
+
+i have some problems with chan_sccp
+
+Asterisk 1.2.13 + chan_sccp version 20060408
+
+ > 30 Cisco 7970G in the office
+
+the phone always registering...
+
+that message i got before
+
+---
+Jun 12 13:12:13 WARNING[17706]: sccp_socket.c:312 sccp_socket_thread:  
+SEP001818BF3B7F: Dead device does not send a keepalive message in 60  
+seconds. Will be removed
+     -- SCCP: Accepted connection from 192.168.103.123
+     -- SCCP: Using ip 192.168.103.2
+     -- SCCP: Alarm Message: Severity: Informational (2), 14:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S Letzte=TCP-Verb. durch  
+CM gesch [0/0]
+     -- SEP001956A69FC2: New call on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000000 (0) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000000 (0) on line 120
+     -- SEP001956A69FC2: Cisco Digit: 00000006 (6) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000005 (5) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000004 (4) on line 120
+     -- SEP001956A69FC2: Cisco Digit: 00000002 (2) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000005 (5) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000006 (6) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000007 (7) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000007 (7) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SEP001956A69FC2: Cisco Digit: 00000004 (4) on line 120
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+     -- SCCP: Alarm Message: Severity: Critical (0), 32:  
+Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP  
+message! : Inval [0/0]
+vis*CLI>
+
+----
+
+
+
+greetings,
+Daniel
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070612/05120dae/attachment.html>
+
+From lmele at INFOCLIP.FR  Tue Jun 12 13:54:55 2007
+From: lmele at INFOCLIP.FR (Laurent MELE)
+Date: Tue, 12 Jun 2007 13:54:55 +0200
+Subject: [Chan-sccp-users] some problems with chan_sccp
+References: <FC5105E5-019C-44AC-94BE-2C4BC544EC66@reda-systems.at>
+Message-ID: <01459B225347E04A9896E75D1CE20411010FCFF0@hermes.ifc.local>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi.
+
+ 
+
+How did you configured your 7970 ? May you post a sample block of an device in your sccp.conf ? 
+
+ 
+
+Maybe device + line should be helpful
+
+ 
+
+- --
+
+Laurent Mele
+
+ 
+
+De : chan-sccp-users-bounces at lists.berlios.de [mailto:chan-sccp-users-bounces at lists.berlios.de] De la part de Daniel Schlager
+Envoy? : mardi 12 juin 2007 13:26
+? : chan-sccp-users at lists.berlios.de
+Objet : [Chan-sccp-users] some problems with chan_sccp
+
+ 
+
+Hello,
+
+ 
+
+i have some problems with chan_sccp
+
+ 
+
+Asterisk 1.2.13 + chan_sccp version 20060408
+
+ 
+
+> 30 Cisco 7970G in the office
+
+ 
+
+the phone always registering...
+
+ 
+
+that message i got before
+
+ 
+
+- ---
+
+Jun 12 13:12:13 WARNING[17706]: sccp_socket.c:312 sccp_socket_thread: SEP001818BF3B7F: Dead device does not send a keepalive message in 60 seconds. Will be removed
+
+    -- SCCP: Accepted connection from 192.168.103.123
+
+    -- SCCP: Using ip 192.168.103.2
+
+    -- SCCP: Alarm Message: Severity: Informational (2), 14: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S Letzte=TCP-Verb. durch CM gesch [0/0]
+
+    -- SEP001956A69FC2: New call on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000000 (0) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000000 (0) on line 120
+
+    -- SEP001956A69FC2: Cisco Digit: 00000006 (6) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000005 (5) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000004 (4) on line 120
+
+    -- SEP001956A69FC2: Cisco Digit: 00000002 (2) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000005 (5) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000006 (6) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000007 (7) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000007 (7) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SEP001956A69FC2: Cisco Digit: 00000004 (4) on line 120
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+    -- SCCP: Alarm Message: Severity: Critical (0), 32: Name=SEP001818BF3B7F Laden= SCCP70.8-0-4SR1S : Invalid SCCP message! : Inval [0/0]
+
+vis*CLI> 
+
+ 
+
+- ----
+
+ 
+
+ 
+
+ 
+
+greetings,
+
+
+
+Daniel
+
+ 
+
+ 
+
+ 
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: 9.6.1 (Build 1012)
+
+wj8DBQFGbomPYQLM6r0zcxoRAnmgAJ4i21J3Fg/11c5xKsu2zX/JOsjYggCghY6u
+78M/zRDhkL4Y6y3bQ+10yOU=
+=9/8l
+-----END PGP SIGNATURE-----
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: PGPexch.htm.pgp
+Type: application/octet-stream
+Size: 3172 bytes
+Desc: PGPexch.htm.pgp
+URL: <https://lists.berlios.de/pipermail/chan-sccp-users/attachments/20070612/d8ba6d1a/attachment.obj>
+
+From frey at UDel.Edu  Wed Jun 20 19:38:28 2007
+From: frey at UDel.Edu (Jeffrey Frey)
+Date: Wed, 20 Jun 2007 13:38:28 -0400
+Subject: [Chan-sccp-users] chan_sccp and dead devices, revisited
+Message-ID: <60071C39-4940-4785-ABDE-88D10D37ACB6@udel.edu>
+
+Good afternoon,
+
+
+I noticed a thread from May re: a "dead device" message being  
+reported and leading subsequently to the removal of ALL SCCP devices,  
+though Asterisk continues to run.  Since upgrading to Asterisk 1.4  
+and the newest chan_sccp driver I've been having the same issue on  
+our system.  There are no console or debug messages to indicate that  
+anything is wrong with Asterisk.  Oddly enough, netstat shows all of  
+the remote phones to still be connected to the Asterisk system, but  
+in the SYN_ACK state -- waiting for Asterisk to talk to them.
+
+
+Has anything developed on this issue since early May?
+
+
+-Jeff
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::
+   Jeffrey T. Frey, Ph.D.
+   Systems Programmer III / Cluster Management
+   Network & Systems Services / College of Engineering
+   University of Delaware, Newark DE  19716
+   Office: (302) 831-6034  Mobile: (302) 275-3143
+   http://turin.nss.udel.edu/
+
+   99 A1 7F 5E 71 70 8A 38  3C 4A A2 B1 4D 0A B2 49
+::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+
